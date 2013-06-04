@@ -76,7 +76,7 @@ function zimap(title,data,divn){
 //по кодам узнаём карту (желательно)
 
 //вставляем карту. видимо таки аякс
-var mapadr = '/zimap/russia.svg';
+var mapadr = 'zimap/russia.svg';
 $.ajax({
 url: mapadr,
 dataType:'xml',
