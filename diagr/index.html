@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>
+My Highcharts diagrams test
+</title>
+<script src="js/jquery.min.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="zimap/ziun.js"></script>
+</head>
+<body>
+
+
+<table>
+<tr><td><b>Название диаграммы:</b><br>
+   <input type="text" size="40" id="nam" value="Название"><br/>
+   <input type="file" name="file" id="file" value="DataFile"><br/>
+   <!--input type="button" value="Write svg" onclick="writeSVG()"><br/-->
+</td>
+<td><b>Данные:</b><br><textarea rows="10" cols="45" id="dat">Something;2000;2001;2002
+TOM;6;7;10
+SA;7;8;9
+KRS;4;5;6
+KHM;9;6;6</textarea></td>
+<td><input type="button" value="Построить" onclick="doit()"></td>
+<td>
+<input type="radio" name="vtype" value="diag">Диаграмма<br/>
+<input type="radio" name="vtype" value="tab">Таблица<br/>
+<input type="radio" name="vtype" value="map" checked>Карта
+</td>
+</tr>
+</table><br/>
+<div id="container" style="width:800px; height:500px;">
+</div>
+<script>
+document.getElementById('file').addEventListener('change',filesel,false);
+function doit() {
+	var vts = document.getElementsByName('vtype');
+	var vtype;
+	for(var i = 0; i< vts.length; i++){
+		if(vts[i].checked){
+			vtype = vts[i].value;
+			break;	
+		}
+	}
+	var data = dat.value;
+	var title = nam.value;
+	var divn = 'container';
+	if(vtype == 'diag'){
+		zidiag(title,data,divn);
+	}else if(vtype == 'tab'){
+		zitab(title,data,divn);
+	}else if(vtype == 'map'){
+		zimap(title,data,divn);
+	}
+	
+}
+function filesel(evt){
+	var f = evt.target.files[0];
+	var rdr = new FileReader();
+	rdr.onload = (function(ff){
+		return function(e){
+			dat.innerHTML = e.target.result;
+		};
+	})(f);
+	rdr.readAsBinaryString(f);
+
+}
+function rr(fs){
+	alert("rr!");
+}
+function writeSVG(){
+	//document.body.innerHTML = document.getElementById('container').innerHTML;
+}
+</script>
+<br/>
+<hr>
+<footer>
+Автор - Зайцев И.Д. (zaycev.ivan@gmail.com)
+</footer>
+</body>
+</html>
