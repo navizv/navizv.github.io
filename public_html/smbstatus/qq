@@ -1,0 +1,32 @@
+<? header('Content-type: text/html; charset=windows-1251'); ?>
+<html>
+ <head>
+  <title>smbstatus</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+  <link rel="stylesheet" type="text/css" href="../style.css">
+ </head>
+ <body>
+  <h1 align="center">smbstatus</h1><hr/>
+  <table align="center" border="1px" cellpadding="5px">
+   <tr bgcolor="silver">
+    <th>Username
+    <th>Computer
+    <th>Info
+   </tr>
+<!-- PHP -->
+<?
+
+$fp = fopen('http://ccfit.nsu.ru/~romankov/smbstatus/smb.cgi', 'r');
+while ($buf = fgets($fp, 1024))
+{
+	$buf = explode(':', $buf);
+	$pw = posix_getpwnam($buf[0]);
+	echo '<tr><td>'.$buf[0].'<td>'.$buf[2].'<td>'.$pw['gecos'].', '.$buf[1]."</tr>\n";
+}
+fclose($fp);
+
+?>
+<!-- ~PHP -->
+  </table>
+ </body>
+</html>

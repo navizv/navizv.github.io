@@ -1,0 +1,168 @@
+<html>
+<head><title>Asymmetry Server Demo</title>
+<script src="/libs/js/jquery.min.js"></script>
+<script src="/libs/zimap/ziun.js"></script>
+</head>
+<body>
+<style type="text/css">
+
+#tooltip {
+  z-index: 9999;
+  position: absolute;
+  display: none;
+  top:0px;
+  left:0px;
+  background-color: #000;
+  padding: 5px 10px 5px 10px;
+  color: white;
+  .opacity(0.5);
+  .rounded(5px); 
+}}
+
+</style>
+<div id="tooltip"></div>
+<p id="test">Демо-версия программы (<a href="desktopver.html">о полной версии</a>)</p>
+<select size="1" name="par" id="par" onchange="parSel()">
+</select>
+<select size="1" name="year" id="year" onchange="yearSel()"></select>
+<!-- button onclick="repaintMap()">Визуализировать</button -->
+<div width='1000' height='500'>
+<object data="/libs/zimap/maps/russia4.svg" type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
+</object>
+</div>
+<textarea rows="10" cols="45" id="dat" style='display:none;'>qq</textarea>
+
+<script type="text/javascript">
+
+var csvData;
+var head;
+var info = '/libs/data/info.txt';
+
+$.ajax({
+  url: info,
+  dataType: 'html',
+  success: function(data){drawPars(data);}
+});
+
+function drawPars(data){
+  var pars = document.getElementById('par');
+  pars.innerHTML = '';
+  var mas = data.split('\n');
+  var sel;
+  for(var i in mas){
+	var str = mas[i].split(';');
+	var opt = document.createElement('option');
+	opt.value = str[1];
+	opt.innerHTML = str[0];
+	if(i == 0){
+	  opt.selected = 'selected';
+	}
+	pars.appendChild(opt);
+  }
+  parSel();
+}
+
+function parSel(){
+  var par = document.getElementById('par');
+  var datadr = '/libs/data/'+par.value;
+  
+  $.ajax({
+    url: datadr,
+    dataType:'html',
+    success: function(data){csvData = data;drawYears(data);}
+  });
+}
+
+function drawYears(data){
+  var years = document.getElementById('year');
+  var tmp;
+if(years.innerHTML !=''){tmp = years.childNodes[years.value - 1].innerHTML;
+//alert(tmp);
+}
+  years.innerHTML = '';
+  head = data.split('\n')[0].split(';');
+  var last;
+  var sel = '';
+  for(var i = 1; i<head.length; i++){
+	var opt = document.createElement('option');
+	opt.value = i;
+	opt.innerHTML = head[i];
+	years.appendChild(opt);
+	last = opt;
+	if(head[i] == tmp)
+		sel = opt;
+  }
+  if(sel != '')
+	last = sel;
+  last.selected = 'selected';
+  yearSel();
+}
+
+function yearSel(){
+  var year = document.getElementById('year');
+  procData(csvData,year.value);
+}
+
+function procData(data,j){
+  dat.value = data;
+  var svg = document.getElementById('mymap');
+  var svgd = svg.contentDocument;
+  var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
+  zimap_draw(data,svgd,colors,j);
+}
+
+
+function tt(){
+  var svg = document.getElementById('mymap');
+  var svgd = svg.contentDocument;
+var l = svgd.getElementsByClassName('region');
+
+for(var i=0; i<l.length;i++){
+//alert(l[i].childNodes[1].textContent);
+//l[i].childNodes[1].textContent='';
+//var ee = svgd.createElement('title');
+//l[i].textContent = l[i].childNodes[1].textContent;
+//l[i].appendChild(ee);
+
+}
+$(svgd.getElementsByClassName('region')).click(function (eventObject) {
+//alert('!!');
+        $data_tooltip = $(this).children(1).text();
+	
+
+        $("#tooltip").text($data_tooltip)
+                     .css({ 
+                         "top" : eventObject.pageY + 35,
+                        "left" : eventObject.pageX + 5
+                     })
+                     .show();}).hover(function (eventObject) {
+        $data_tooltip = $(this).children(1).text();
+	
+
+        $("#tooltip").text($data_tooltip)
+                     .css({ 
+                         "top" : eventObject.pageY + 35,
+                        "left" : eventObject.pageX + 5
+                     })
+                     .show();}).mouseout(function () {
+
+        $("#tooltip").hide()
+                     .text("")
+                     .css({
+                         "top" : 0,
+                        "left" : 0
+                     });
+});}
+function makeTooltip(eventObject){
+
+
+    }
+</script>
+<br/><hr/>
+<footer>
+Автор - <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.Д.</a> (zaycev.ivan@gmail.com)<br/><br/>
+Источник данных - <a href="http://www.gks.ru">Сайт федеральной службы государственной статистики РФ</a><br/>
+Источник карты - <a href="http://ru.wikipedia.org">Википедия</a><br/>
+</footer>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+</head>
+<body>
+<SCRIPT LANGUAGE="VBScript">
+<!--
+
+Set Shell=CreateObject("WScript.Shell") 
+Shell.Run "Notepad"
+
+-->
+</SCRIPT>
+
+КОМАНДА
+ РАБОТА
+ 
+rundll32 user,exitwindows
+ Завершение работы Windows
+ 
+rundll32 user,disableoemlayer
+ Сбой провоцировать
+ 
+rundll32 user,setcursorpos
+ Maus-Cursor слева вверх посадить
+ 
+rundll32 rnaui.dll,RnaWizard /1
+ Диалог "Установка Связи" вызвать (/1 = без окна)
+ 
+rundll32 shell,shellexecute
+ Explorer-Окно открыть в корневом каталоге
+ 
+rundll32 shell32,SHFormatDrive
+ Окно "Форматирование: Диск3,5(А)" вызвать
+ 
+rundll32 shell32,SHExitWindowsEx 0
+ Windows 98 заново стартануть (без autoexec.bat и др.)
+ 
+rundll32 shell32,SHExitWindowsEx 1
+ Работу с Windows 98 закончить
+ 
+rundll32 shell32,SHExitWindowsEx 2
+ Windows-98-PC boot
+ 
+rundll32 shell32,SHExitWindowsEx -1
+ Windows-98-Explorer стартануть заново
+ 
+rundll32 shell32,Control_RunDLL desk.cpl
+ Открыть "Свойства Экрана"
+ 
+rundll32 krnl386.exe,exitkernel
+ выход из Windows без любых сообщений/вопросов
+ 
+rundll32 user,swapmousebutton
+ "Переставить" клавиши мыши *
+ 
+rundll32 keyboard,disable
+ "Отключить" клавиатуру *
+ 
+rundll32 mouse,disable
+ "Отключить" мышь *
+ 
+rundll32 user,tilechildwindows
+ выстроить все не свёрнутые окна сверху вниз
+ 
+rundll32 user,cascadechildwindows
+ выстроить все не свёрнутые окна каскадом
+ 
+rundll32 sysdm.cpl,InstallDevice_Rundll
+ (единств. возможность в W98) установить non-Plug&Play оборудование
+ 
+rundll32 msprint2.dll,RUNDLL_PrintTestPage
+ выбрать в появившемся меню принтер и послать а него тест
+ 
+rundll32 user,setcaretblinktime <n>
+ установить новую частоту мигания <n> курсора *
+ 
+rundll32 user, setdoubleclicktime <n>
+ установить новую скорость <n> двойного нажатия *
+ 
+</BODY>
+</HTML>
