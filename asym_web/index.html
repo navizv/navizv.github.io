@@ -33,16 +33,9 @@
 <textarea rows="10" cols="45" id="dat" style='display:none;'>qq</textarea>
 
 <script type="text/javascript">
-
 var csvData;
 var head;
-var info = '/libs/data/info.txt';
 
-$.ajax({
-  url: info,
-  dataType: 'html',
-  success: function(data){drawPars(data);}
-});
 
 function drawPars(data){
   var pars = document.getElementById('par');
@@ -113,6 +106,16 @@ function procData(data,j){
 
 
 function tt(){
+var info = '/libs/data/info.txt';
+
+$.ajax({
+  url: info,
+  dataType: 'html',
+  success: function(data){drawPars(data);}
+});
+
+
+
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
 var l = svgd.getElementsByClassName('region');
