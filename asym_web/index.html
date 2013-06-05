@@ -125,7 +125,7 @@ for(var i=0; i<l.length;i++){
 //l[i].appendChild(ee);
 
 }
-$(svgd.getElementsByClassName('region')).click(function (eventObject) {
+$(svgd.getElementsByClassName('region')).mousedown(function (eventObject) {
 //alert('!!');
         $data_tooltip = $(this).children(1).text();
 	
@@ -145,13 +145,13 @@ $(svgd.getElementsByClassName('region')).click(function (eventObject) {
                         "left" : eventObject.pageX + 5
                      })
                      .show();}).mouseout(function () {
-
+if ( $.browser.msie ) {}else{
         $("#tooltip").hide()
                      .text("")
                      .css({
                          "top" : 0,
                         "left" : 0
-                     });
+                     });}
 });}
 function makeTooltip(eventObject){
 
