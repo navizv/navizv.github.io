@@ -108,8 +108,13 @@ function   zimap_draw(data,svgd,colors,j){
   var max = 0;
 
   for(var i = 1; i< rn; i++){
-	var c = mas[i].split(';')[j];
+	var row = mas[i].split(';');
+	var reg = row[0];
+	var c = row[j];
 	if(c == '')
+		continue;
+	var el = svgd.getElementById(reg);
+	if(el == undefined)
 		continue;
 	var cur = parseFloat(c);
 	if(i == 1){
@@ -128,6 +133,7 @@ scl[0] = parseFloat(min);
 for(var i=1; i<=cn; i++){
 	scl[i]=scl[i-1]+step;
 }
+scl[cn] = max;
 
   var i = 0;
   var cury = 200;

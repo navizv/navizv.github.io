@@ -56,6 +56,7 @@ function drawPars(data){
 }
 
 function parSel(){
+  hide_tooltip();
   var par = document.getElementById('par');
   var datadr = '/libs/data/'+par.value;
   
@@ -92,6 +93,7 @@ if(years.innerHTML !=''){tmp = years.childNodes[years.value - 1].innerHTML;
 }
 
 function yearSel(){
+  hide_tooltip();
   var year = document.getElementById('year');
   procData(csvData,year.value);
 }
@@ -149,16 +151,16 @@ $(svgd.getElementsByClassName('region')).mousedown(function (eventObject) {
                      })
                      .show();}).mouseout(function () {
 if ( $.browser.msie ) {}else{
-        $("#tooltip").hide()
+hide_tooltip();
+        }
+});}
+function hide_tooltip(eventObject){
+$("#tooltip").hide()
                      .text("")
                      .css({
                          "top" : 0,
                         "left" : 0
-                     });}
-});}
-function makeTooltip(eventObject){
-
-
+                     });
     }
 </script>
 <br/><hr/>
