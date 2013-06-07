@@ -56,10 +56,10 @@ function drawPars(data){
 }
 
 function parSel(){
+  $("#mapdiv").css({ "opacity" : "0.5" });
   hide_tooltip();
   var par = document.getElementById('par');
   var datadr = '/libs/data/'+par.value;
-  
   $.ajax({
     url: datadr,
     dataType:'html',
@@ -70,9 +70,10 @@ function parSel(){
 function drawYears(data){
   var years = document.getElementById('year');
   var tmp;
-if(years.innerHTML !=''){tmp = years.childNodes[years.value - 1].innerHTML;
+  if(years.innerHTML !=''){
+	tmp = years.childNodes[years.value - 1].innerHTML;
 //alert(tmp);
-}
+  }
   years.innerHTML = '';
   head = data.split('\n')[0].split(';');
   var last;
@@ -99,8 +100,6 @@ function yearSel(){
 }
 
 function procData(data,j){
-  $("#mapdiv").css({ "opacity" : "0.5" });
-
   dat.value = data;
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
@@ -111,60 +110,41 @@ function procData(data,j){
 
 
 function tt(){
-var info = '/libs/data/info.txt';
-
-$.ajax({
-  url: info,
-  dataType: 'html',
-  success: function(data){drawPars(data);}
-});
-
-
+  var info = '/libs/data/info.txt';
+  $("#mapdiv").css({ "opacity" : "0.5" });
+  $.ajax({
+    url: info,
+    dataType: 'html',
+    success: function(data){drawPars(data);}
+  });
 
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
-var l = svgd.getElementsByClassName('region');
 
-for(var i=0; i<l.length;i++){
-//alert(l[i].childNodes[1].textContent);
-//l[i].childNodes[1].textContent='';
-//var ee = svgd.createElement('title');
-//l[i].textContent = l[i].childNodes[1].textContent;
-//l[i].appendChild(ee);
-
+  $(svgd.getElementsByClassName('region')).mousedown(function (eventObject) {
+	$title = $(this).children(1).text();
+	show_tooltip($title,eventObject);
+  }).hover(function (eventObject) {
+	$title = $(this).children(1).text();
+	show_tooltip($title,eventObject);
+  }).mouseout(function () {
+	if ( $.browser.msie ) {}else{
+		hide_tooltip();
+	}
+  });
 }
-$(svgd.getElementsByClassName('region')).mousedown(function (eventObject) {
-//alert('!!');
-        $data_tooltip = $(this).children(1).text();
-	
 
-        $("#tooltip").text($data_tooltip)
-                     .css({ 
-                         "top" : eventObject.pageY + 35,
-                        "left" : eventObject.pageX + 5
-                     })
-                     .show();}).hover(function (eventObject) {
-        $data_tooltip = $(this).children(1).text();
-	
 
-        $("#tooltip").text($data_tooltip)
-                     .css({ 
-                         "top" : eventObject.pageY + 35,
-                        "left" : eventObject.pageX + 5
-                     })
-                     .show();}).mouseout(function () {
-if ( $.browser.msie ) {}else{
-hide_tooltip();
-        }
-});}
+function show_tooltip($title,eventObject){
+  $("#tooltip").text($title).css({ 
+	"top" : eventObject.pageY + 35,
+	"left" : eventObject.pageX + 5
+  }).show();
+}
+
 function hide_tooltip(eventObject){
-$("#tooltip").hide()
-                     .text("")
-                     .css({
-                         "top" : 0,
-                        "left" : 0
-                     });
-    }
+  $("#tooltip").hide().text("").css({"top" : 0,"left" : 0});
+}
 </script>
 <br/><hr/>
 <footer>

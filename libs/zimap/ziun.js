@@ -69,37 +69,31 @@ function zidiag(title,data,divn){
 }
 
 function zimap(title,data,divn){
-	var cont = document.getElementById(divn);
-	cont.innerHTML = title;//'Здесь будет карта! Честно-честно!';
+  var cont = document.getElementById(divn);
+  cont.innerHTML = title;//'Здесь будет карта! Честно-честно!';
 //по регионам узнаём коды (пока необязательно)
 
 //по кодам узнаём карту (желательно)
 
 //вставляем карту. видимо таки аякс
-var mapadr = '/libs/zimap/maps/russia3.svg';
-var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
-var j = 1;//столбец с данными
-$.ajax({
-url: mapadr,
-dataType:'xml',
-success: function(svgf){
-//cont.innerHTML = svgf;
-//cont.innerHTML = '<object data=\"'+mapadr+'\" type="image/svg+xml" id="mymap"></object>';
-//вычисляем легенду. скопипастить из http_test
-svgf.viewBow = "0 0 200 200";
-  zimap_draw(data,svgf,colors,j);
+  var mapadr = '/libs/zimap/maps/russia3.svg';
+  var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
+  var j = 1;//столбец с данными
+  $.ajax({
+	url: mapadr,
+	dataType:'xml',
+	success: function(svgf){
+		svgf.viewBow = "0 0 200 200";
 
-cont.innerHTML += svgf.xml ? svgf.xml : (new
-XMLSerializer()).serializeToString(svgf);
+		zimap_draw(data,svgf,colors,j);
 
-//var map = cont.childNodes[1];
-//map.setAttribute('width','100%');
-//map.setAttribute('height','100%');
-svgf.setAttribute('viewBox',"0 0 1200 610");
-}});
+		cont.innerHTML += svgf.xml ? svgf.xml : (new XMLSerializer()).serializeToString(svgf);
+		svgf.setAttribute('viewBox',"0 0 1200 610");
+  }});
 }
 
-function   zimap_draw(data,svgd,colors,j){
+function zimap_draw(data,svgd,colors,j){
+//Вычисляем шкалу для цветов
   var mas = data.split('\n');
   var rn = mas.length;
   if(rn <= 0)
@@ -126,21 +120,20 @@ function   zimap_draw(data,svgd,colors,j){
 	}
   }
 
-var cn = colors.length;
-var step = (max-min)/cn;
-var scl = new Array();
-scl[0] = parseFloat(min);
-for(var i=1; i<=cn; i++){
+  var cn = colors.length;
+  var step = (max-min)/cn;
+  var scl = new Array();
+  scl[0] = parseFloat(min);
+  for(var i=1; i<=cn; i++){
 	scl[i]=scl[i-1]+step;
-}
-scl[cn] = max;
+  }
+  scl[cn] = max;
 
+//Рисуем легенду
   var i = 0;
   var cury = 200;
   for(i = 0; i < 4; i++){
     var rec = svgd.getElementById('leg'+i);
-//alert(svgd)
-//alert(rec)
     rec.setAttribute('x','1100');
     rec.setAttribute('y',cury);
     rec.setAttribute('width','60');
@@ -153,47 +146,47 @@ scl[cn] = max;
     txt.textContent = ziformat(scl[4-i]);
     cury+=75;
   }
-var txt = svgd.getElementById('tcol'+i);
-    txt.setAttribute('x','1165');
-    txt.setAttribute('y',cury);
-    txt.textContent = ziformat(scl[4-i]);
-    cury+=75;
-var regs = svgd.getElementsByClassName('region');
-//alert(max+"*"+min);
-for(var i =0;i<regs.length;i++){
-  var el = regs[i];
-  el.setAttribute('fill','#808080');
-  var tit = el.childNodes[1];
-  tit.textContent = tit.textContent.split(':')[0];
-}
+  var txt = svgd.getElementById('tcol'+i);
+  txt.setAttribute('x','1165');
+  txt.setAttribute('y',cury);
+  txt.textContent = ziformat(scl[4-i]);
+  cury+=75;
+
+//Чистим старые данные и цвета регионов
+  var regs = svgd.getElementsByClassName('region');
+  for(var i =0;i<regs.length;i++){
+	var el = regs[i];
+	el.setAttribute('fill','#808080');
+	var tit = el.childNodes[1];
+	tit.textContent = tit.textContent.split(':')[0];
+  }
+
+
 //бежим по данным, вычисляем цвета и раскрашиваем
-for(var i = 1; i< rn; i++){
-  var tmr = mas[i].split(';');
-  var reg = tmr[0];
-  var c = tmr[j];
-if(c == '')
-	continue;
-var cur = parseFloat(c);
-    var el = svgd.getElementById(reg);
+  for(var i = 1; i< rn; i++){
+	var tmr = mas[i].split(';');
+	var reg = tmr[0];
+	var c = tmr[j];
+	if(c == '')
+		continue;
+	var cur = parseFloat(c);
+	var el = svgd.getElementById(reg);
 
-
-
-    if(el != null){
-
-	var k = 0;
-	for(k = 0; k<cn;k++){
-		if(cur <= scl[k+1]){
-			break;}}
-      el.setAttribute('fill',colors[cn-k-1]);
+	if(el != null){
+	  var k = 0;
+	  for(k = 0; k<cn;k++){
+		if(cur <= scl[k+1])
+			break;
+	  }
+          el.setAttribute('fill',colors[cn-k-1]);
     
-      var tit = el.childNodes[1];
+	  var tit = el.childNodes[1];
 //параллельно - дописываем данные в тайтлы, чтоб всплывали
-      tit.textContent = tit.textContent + ': ' + cur;
-    //alert(reg+":"+el.childNodes[1].textContent);
-    }
+	  tit.textContent = tit.textContent + ': ' + cur;
+	}
   }
 }
 
 function ziformat(f){
-return Math.round (f*100) / 100;
+  return Math.round(f*100)/100;
 }
