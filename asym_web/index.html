@@ -26,7 +26,7 @@
 </select>
 <select size="1" name="year" id="year" onchange="yearSel()"></select>
 <!-- button onclick="repaintMap()">Визуализировать</button -->
-<div width='1000' height='500'>
+<div width='1000' height='500' id='mapdiv'>
 <object data="/libs/zimap/maps/russia4.svg" type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
 </object>
 </div>
@@ -99,11 +99,14 @@ function yearSel(){
 }
 
 function procData(data,j){
+  $("#mapdiv").css({ "opacity" : "0.5" });
+
   dat.value = data;
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
   zimap_draw(data,svgd,colors,j);
+  $("#mapdiv").css({ "opacity" : "1" });
 }
 
 
