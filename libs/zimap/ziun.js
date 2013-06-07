@@ -100,7 +100,7 @@ function zimap_draw(data,svgd,colors,j){
     return;
   var min = 0;
   var max = 0;
-
+  var first = true;
   for(var i = 1; i< rn; i++){
 	var row = mas[i].split(';');
 	var reg = row[0];
@@ -111,15 +111,16 @@ function zimap_draw(data,svgd,colors,j){
 	if(el == undefined || el == null)
 		continue;
 	var cur = parseFloat(c);
-	if(i == 1){
+	if(first){
 		max = min = cur;
+		first = false;
 	}else if(cur > max){
 		max = cur;
 	}else if(cur < min){
 		min = cur;
 	}
   }
-
+alert(max+'*'+min);
   var cn = colors.length;
   var step = (max-min)/cn;
   var scl = new Array();
