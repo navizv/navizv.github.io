@@ -108,7 +108,7 @@ function zimap_draw(data,svgd,colors,j){
 	if(c == '')
 		continue;
 	var el = svgd.getElementById(reg);
-	if(el == undefined)
+	if(el == undefined || el == null)
 		continue;
 	var cur = parseFloat(c);
 	if(i == 1){
