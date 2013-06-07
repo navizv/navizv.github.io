@@ -120,7 +120,7 @@ function zimap_draw(data,svgd,colors,j){
 		min = cur;
 	}
   }
-alert(max+'*'+min);
+//alert(max+'*'+min);
   var cn = colors.length;
   var step = (max-min)/cn;
   var scl = new Array();
