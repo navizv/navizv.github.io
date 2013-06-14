@@ -26,6 +26,9 @@
 </select>
 <select size="1" name="year" id="year" onchange="yearSel()"></select>
 <!-- button onclick="repaintMap()">Визуализировать</button -->
+Раскрашивание:
+<input type="radio" name="coltype" value="Block" checked onchange="ctSel(this)">Блоками
+<input type="radio" name="coltype" value="Gradient" onchange="ctSel(this)">Непрерывное
 <div width='1000' height='500' id='mapdiv'>
 <object data="/libs/zimap/maps/russia.svg" type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
 </object>
@@ -35,7 +38,7 @@
 <script type="text/javascript">
 var csvData;
 var head;
-
+var grad = false;
 
 function drawPars(data){
   var pars = document.getElementById('par');
@@ -105,7 +108,7 @@ function procData(data,j){
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
-  zimap_draw(data,svgd,colors,j);
+  zimap_draw_x(data,svgd,colors,j,';',1,grad);
   $("#mapdiv").css({ "opacity" : "1" });
 }
 
@@ -162,6 +165,11 @@ function show_tooltip($title,eventObject){
 
 function hide_tooltip(eventObject){
   $("#tooltip").hide().text("").css({"top" : 0,"left" : 0});
+}
+
+function ctSel(ra){
+  grad = (ra.value == 'Gradient');
+  yearSel();
 }
 </script>
 <br/><hr/>

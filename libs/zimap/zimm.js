@@ -34,6 +34,8 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad){
   }
 
   var cn = colors.length;
+if(grad)
+cn=4;
   var step = (max-min)/cn;
   var scl = new Array();
   scl[0] = parseFloat(min);
@@ -51,16 +53,36 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad){
     var rec = svgd.getElementById('leg'+i);
     rec.setAttribute('width','0');
     rec.setAttribute('height','0');
+    rec.setAttribute('style','');
     var txt = svgd.getElementById('tcol'+i);
     txt.textContent = '';        
   }
 if(grad){
-    var rec = svgd.getElementById('leg9');
+    var rec = svgd.getElementById('leg0');
     rec.setAttribute('x','1100');
     rec.setAttribute('y',cury);
     rec.setAttribute('width','60');
     rec.setAttribute('height','300');
     rec.setAttribute('fill','url(#grad1)');
+  for(i = 0; i < cn; i++){
+    var rec = svgd.getElementById('leg'+(i+1));
+    rec.setAttribute('x','1100');
+    rec.setAttribute('y',cury);
+    rec.setAttribute('width','60');
+    rec.setAttribute('height',h);
+    rec.setAttribute('style',"fill:none;stroke:black;");
+
+    var txt = svgd.getElementById('tcol'+i);
+    txt.setAttribute('x','1165');
+    txt.setAttribute('y',cury);
+    txt.textContent = ziformat(scl[cn-i]);
+    cury+=h;
+  }
+  var txt = svgd.getElementById('tcol'+i);
+  txt.setAttribute('x','1165');
+  txt.setAttribute('y',cury);
+  txt.textContent = ziformat(scl[cn-i]);
+  cury+=75;
 //Grid!!!
 }else{
   for(i = 0; i < cn; i++){
