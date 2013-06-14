@@ -76,7 +76,7 @@ function zimap(title,data,divn){
 //по кодам узнаём карту (желательно)
 
 //вставляем карту. видимо таки аякс
-  var mapadr = '/libs/zimap/maps/russia3.svg';
+  var mapadr = '/libs/zimap/maps/russia4.svg';
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
   var j = 1;//столбец с данными
   $.ajax({
@@ -87,107 +87,11 @@ function zimap(title,data,divn){
 
 		zimap_draw(data,svgf,colors,j);
 
-		cont.innerHTML += svgf.xml ? svgf.xml : (new XMLSerializer()).serializeToString(svgf);
-		svgf.setAttribute('viewBox',"0 0 1200 610");
+		cont.innerHTML += xml_to_text(svgf);
+		//svgf.setAttribute('viewBox',"0 0 1200 610");
   }});
 }
 
-function zimap_draw(data,svgd,colors,j){
-//Вычисляем шкалу для цветов
-  var mas = data.split('\n');
-  var rn = mas.length;
-  if(rn <= 0)
-    return;
-  var min = 0;
-  var max = 0;
-  var first = true;
-  for(var i = 1; i< rn; i++){
-	var row = mas[i].split(';');
-	var reg = row[0];
-	var c = row[j];
-	if(c == '')
-		continue;
-	var el = svgd.getElementById(reg);
-	if(el == undefined || el == null)
-		continue;
-	var cur = parseFloat(c);
-	if(first){
-		max = min = cur;
-		first = false;
-	}else if(cur > max){
-		max = cur;
-	}else if(cur < min){
-		min = cur;
-	}
-  }
-//alert(max+'*'+min);
-  var cn = colors.length;
-  var step = (max-min)/cn;
-  var scl = new Array();
-  scl[0] = parseFloat(min);
-  for(var i=1; i<=cn; i++){
-	scl[i]=scl[i-1]+step;
-  }
-  scl[cn] = max;
-
-//Рисуем легенду
-  var i = 0;
-  var cury = 200;
-  for(i = 0; i < 4; i++){
-    var rec = svgd.getElementById('leg'+i);
-    rec.setAttribute('x','1100');
-    rec.setAttribute('y',cury);
-    rec.setAttribute('width','60');
-    rec.setAttribute('height','75');
-    rec.setAttribute('fill',colors[i]);
-
-    var txt = svgd.getElementById('tcol'+i);
-    txt.setAttribute('x','1165');
-    txt.setAttribute('y',cury);
-    txt.textContent = ziformat(scl[4-i]);
-    cury+=75;
-  }
-  var txt = svgd.getElementById('tcol'+i);
-  txt.setAttribute('x','1165');
-  txt.setAttribute('y',cury);
-  txt.textContent = ziformat(scl[4-i]);
-  cury+=75;
-
-//Чистим старые данные и цвета регионов
-  var regs = svgd.getElementsByClassName('region');
-  for(var i =0;i<regs.length;i++){
-	var el = regs[i];
-	el.setAttribute('fill','#808080');
-	var tit = el.childNodes[1];
-	tit.textContent = tit.textContent.split(':')[0];
-  }
-
-
-//бежим по данным, вычисляем цвета и раскрашиваем
-  for(var i = 1; i< rn; i++){
-	var tmr = mas[i].split(';');
-	var reg = tmr[0];
-	var c = tmr[j];
-	if(c == '')
-		continue;
-	var cur = parseFloat(c);
-	var el = svgd.getElementById(reg);
-
-	if(el != null){
-	  var k = 0;
-	  for(k = 0; k<cn;k++){
-		if(cur <= scl[k+1])
-			break;
-	  }
-          el.setAttribute('fill',colors[cn-k-1]);
-    
-	  var tit = el.childNodes[1];
-//параллельно - дописываем данные в тайтлы, чтоб всплывали
-	  tit.textContent = tit.textContent + ': ' + cur;
-	}
-  }
-}
-
-function ziformat(f){
-  return Math.round(f*100)/100;
+function xml_to_text(svgf){
+  return svgf.xml ? svgf.xml : (new XMLSerializer()).serializeToString(svgf);
 }

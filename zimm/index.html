@@ -1,0 +1,139 @@
+<html>
+<head>
+<title>
+ZiMapMaker - csv data to svg map
+</title>
+<script src="/libs/js/jquery.min.js"></script>
+<script src="/libs/js/FileSaver.min.js"></script>
+<script src="/libs/zimap/ziun.js"></script>
+<script src="/libs/zimap/zimm.js"></script>
+</head>
+<body>
+
+
+<table border='1'>
+<tr>
+<td><div id="datadiv" title="Data input">
+<input type="file" name="file" id="file" value="DataFile"><br/>
+<b>Data:</b><br><textarea rows="10" cols="45" id="dat">Something;2000;2001;2002
+TOM;6;7;10
+SA;7;8;9
+KRS;4;5;6
+KHM;9;6;6</textarea><br/>
+Data column number:<input tipe="text" id="colnum" value="1"/><br/>
+Data first row number:<input tipe="text" id="rownum" value="1"/><br/>
+Column separator:<input tipe="text" id="colsep" value=";"/></div></td>
+<td>
+<div id="visdiv" title="Visualization settings">
+<div id="coltabdiv">
+<input type="button" value="Insert" onclick="add()"/><br/>
+<table id='coltab' border="1"></table>
+</div>
+</div>
+</td>
+<td><div id="outdiv" title="Export settings"><input type="button" value="Build" onclick="doit()"><br/>
+<label xmlns="http://www.w3.org/1999/xhtml">Filename: <input type="text" id="filename" value="map" />.svg</label><br/>
+<input type="button" value="Save" onclick="save()">
+</td>
+</tr>
+</table><br/>
+<div id="container" style="width:800px; height:500px;">
+<object data="/libs/zimap/maps/russia.svg" type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
+</object>
+</div>
+<script>
+document.getElementById('file').addEventListener('change',filesel,false);
+
+var pmr = '<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
+'<td><input type="button" value="-" onclick="remHere(this)"/></td>';
+var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
+setColors();
+
+function setColors(){
+  for(var i in colors){
+    var c = colors[i];
+    var r = document.createElement('tr');
+    var d = document.createElement('td');
+    d.innerHTML = '<input type="color" value="'+c+'"/>';
+    r.appendChild(d);
+    r.innerHTML += pmr;
+    coltab.insertBefore(r,coltab.childNodes[0]);
+  }
+}
+
+function getColors(){
+var cn = coltab.childNodes.length;
+var j = 0;
+  colors = new Array();
+  for(var i =cn-1; i>=0;i--){
+    var tr = coltab.childNodes[i];
+    if(tr.innerHTML == undefined) 
+	continue;
+    var c = tr.childNodes[0].childNodes[0].value;
+
+    colors[j++]=c;
+  }
+}
+
+function add(){
+  var r = document.createElement('tr');
+  var d = document.createElement('td');
+  d.innerHTML = '<input type="color" />';
+  r.appendChild(d);
+  r.innerHTML += pmr;
+  coltab.insertBefore(r,coltab.childNodes[0]);
+}
+
+function addHere(evt){
+var tr = evt.parentNode.parentNode;
+  var r = document.createElement('tr');
+  var d = document.createElement('td');
+  d.innerHTML = '<input type="color" />';
+  r.appendChild(d);
+  r.innerHTML += pmr;
+tr.parentNode.insertBefore(r,tr.nextSibling || null);
+}
+
+function remHere(evt){
+var tr = evt.parentNode.parentNode;
+tr.parentNode.removeChild(tr);
+}
+
+function doit() {
+  getColors();
+  var data = dat.value;
+  var j = parseInt(colnum.value);//столбец с данными
+  var svg = document.getElementById('mymap');
+  var svgd = svg.contentDocument;
+  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value));
+}
+
+function filesel(evt){
+	var f = evt.target.files[0];
+	var rdr = new FileReader();
+	rdr.onload = (function(ff){
+		return function(e){
+			dat.innerHTML = e.target.result;
+		};
+	})(f);
+	rdr.readAsBinaryString(f);
+
+}
+function tt(){
+	//alert("rr!");
+}
+function save(){
+  var svg = document.getElementById('mymap');
+  var svgd = svg.contentDocument;
+  var blob = new Blob([xml_to_text(svgd)], {type: "image/svg+xml;charset=utf-8"});
+  saveAs(blob, ""+filename.value+".svg");
+  	//document.body.innerHTML = document.getElementById('container').innerHTML;
+}
+</script>
+<br/>
+<hr>
+<footer>
+Copyright - Zaytsev I.D. (zaycev.ivan@gmail.com)
+</footer>
+</body>
+</html>

@@ -1,9 +1,7 @@
-﻿<html>
-<head>
-<meta http-equiv="Content-type: text/html; charset=UTF-8">
-<title>Asymmetry Server Demo</title>
+﻿<html><meta http-equiv="Content-type: text/html; charset=UTF-8">
+<head><title>Asymmetry Server Demo</title>
 <script src="/libs/js/jquery.min.js"></script>
-<script src="/libs/zimap/ziun.js"></script>
+<script src="/libs/zimap/zimm.js"></script>
 </head>
 <body>
 <style type="text/css">
@@ -29,7 +27,7 @@
 <select size="1" name="year" id="year" onchange="yearSel()"></select>
 <!-- button onclick="repaintMap()">Визуализировать</button -->
 <div width='1000' height='500' id='mapdiv'>
-<object data="/libs/zimap/maps/russia4.svg" type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
+<object data="/libs/zimap/maps/russia.svg" type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
 </object>
 </div>
 <textarea rows="10" cols="45" id="dat" style='display:none;'>qq</textarea>
@@ -102,6 +100,7 @@ function yearSel(){
 }
 
 function procData(data,j){
+  $("#mapdiv").css({ "opacity" : "0.5" });
   dat.value = data;
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
@@ -112,16 +111,18 @@ function procData(data,j){
 
 
 function tt(){
-  var info = '/libs/data/info.txt';
   $("#mapdiv").css({ "opacity" : "0.5" });
+  var svg = document.getElementById('mymap');
+  var svgd = svg.contentDocument;
+  tutle(svgd);
+  var info = '/libs/data/info.txt';
   $.ajax({
     url: info,
     dataType: 'html',
     success: function(data){drawPars(data);}
   });
 
-  var svg = document.getElementById('mymap');
-  var svgd = svg.contentDocument;
+  
 
   $(svgd.getElementsByClassName('region')).mousedown(function (eventObject) {
 	$title = $(this).children(1).text();
@@ -134,6 +135,21 @@ function tt(){
 		hide_tooltip();
 	}
   });
+}
+
+function tutle(svgd){
+  var ts = svgd.getElementsByTagName('title');
+  for(var i=ts.length-1;i>=0;i--){
+    var tl = ts[i];
+    var tu = svgd.createElement('tutle');
+    tu.textContent = tl.textContent;
+    var reg = tl.parentNode;
+    //if(reg == null || reg == undefined)
+      //alert(""+tl.textContent+"@"+reg);
+    reg.insertBefore(tu,tl);
+    reg.removeChild(tl);
+  }
+
 }
 
 
@@ -151,7 +167,7 @@ function hide_tooltip(eventObject){
 <br/><hr/>
 <footer>
 Автор - <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.Д.</a> (zaycev.ivan@gmail.com)<br/><br/>
-Источник данных - <a href="http://www.gks.ru">Сайт федеральной службы государственной статистики РФ</a><br/>
+Источник данных - <a href="http://www.gks.ru">Сайт Федеральной службы государственной статистики РФ</a><br/>
 Источник карты - <a href="http://commons.wikimedia.org/wiki/File%3AMap_of_Russian_districts%2C_2008-03-01.svg"/>Википедия</a><br/>
 </footer>
 </body>
