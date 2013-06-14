@@ -1,8 +1,8 @@
 function zimap_draw(data,svgd,colors,j){
-  zimap_draw_x(data,svgd,colors,j,';',1);
+  zimap_draw_x(data,svgd,colors,j,';',1,false);
 }
 
-function zimap_draw_x(data,svgd,colors,j,colsep,strow){
+function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad){
 //Вычисляем шкалу для цветов
   var mas = data.split('\n');
   var rn = mas.length;
@@ -54,7 +54,15 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow){
     var txt = svgd.getElementById('tcol'+i);
     txt.textContent = '';        
   }
-
+if(grad){
+    var rec = svgd.getElementById('leg9');
+    rec.setAttribute('x','1100');
+    rec.setAttribute('y',cury);
+    rec.setAttribute('width','60');
+    rec.setAttribute('height','300');
+    rec.setAttribute('fill','url(#grad1)');
+//Grid!!!
+}else{
   for(i = 0; i < cn; i++){
     var rec = svgd.getElementById('leg'+i);
     rec.setAttribute('x','1100');
@@ -74,7 +82,7 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow){
   txt.setAttribute('y',cury);
   txt.textContent = ziformat(scl[cn-i]);
   cury+=75;
-
+}
 //Чистим старые данные и цвета регионов
   var regs = svgd.getElementsByClassName('region');
   for(var i =0;i<regs.length;i++){
@@ -96,13 +104,32 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow){
 	var el = svgd.getElementById(reg);
 
 	if(el != null){
+if(grad){
+var pr = (cur-min)/(max-min);
+var strcol;
+if(pr<=0.5){
+var col = Math.round(2*pr*255);
+var s1 = col.toString(16);
+if(s1.length == 1)
+	s1='0'+s1;
+strcol='#ff'+s1+'00';
+}else{
+var col = Math.round(2*(1-pr)*255);
+var s1 = col.toString(16);
+if(s1.length == 1)
+	s1='0'+s1;
+strcol='#'+s1+'ff00';
+}
+//alert(strcol);
+          el.setAttribute('fill',strcol);
+}else{
 	  var k = 0;
 	  for(k = 0; k<cn;k++){
 		if(cur <= scl[k+1])
 			break;
 	  }
           el.setAttribute('fill',colors[cn-k-1]);
-    
+    }
 	  //var tit = el.childNodes[0];
 	  //if(tit.textContent == '\n')
 		tit = el.childNodes[1];

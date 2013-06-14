@@ -20,11 +20,15 @@ TOM;6;7;10
 SA;7;8;9
 KRS;4;5;6
 KHM;9;6;6</textarea><br/>
-Data column number:<input tipe="text" id="colnum" value="1"/><br/>
-Data first row number:<input tipe="text" id="rownum" value="1"/><br/>
-Column separator:<input tipe="text" id="colsep" value=";"/></div></td>
+Data column number:<input type="number" id="colnum" value="1"/><br/>
+Data first row number:<input type="number" id="rownum" value="1"/><br/>
+Column separator:<input type="text" id="colsep" value=";"/></div></td>
 <td>
 <div id="visdiv" title="Visualization settings">
+<select id='coltype'>
+<option value="Block">Block</option>
+<option value="Gradient" selected>Gradient</option>
+</select>
 <div id="coltabdiv">
 <input type="button" value="Insert" onclick="add()"/><br/>
 <table id='coltab' border="1"></table>
@@ -105,7 +109,7 @@ function doit() {
   var j = parseInt(colnum.value);//столбец с данными
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
-  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value));
+  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value),coltype.value=='Gradient');
 }
 
 function filesel(evt){
