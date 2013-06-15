@@ -26,6 +26,7 @@
 </select>
 <select size="1" name="year" id="year" onchange="yearSel()"></select>
 <!-- button onclick="repaintMap()">Визуализировать</button -->
+<button onclick="play(0)">Воспроизвести</button>
 Раскрашивание:
 <input type="radio" name="coltype" value="Block" checked onchange="ctSel(this)">Блоками
 <input type="radio" name="coltype" value="Gradient" onchange="ctSel(this)">Непрерывное
@@ -39,6 +40,19 @@
 var csvData;
 var head;
 var grad = false;
+
+function play(n){
+  var ys = document.getElementById('year').childNodes;
+  if(n == ys.length)
+    return;
+  for(var i in ys){
+    if(ys[i].tagName == 'OPTION'){
+      ys[i].removeAttribute('selected');}
+  }
+  ys[n].selected = 'selected';
+  yearSel();
+  setTimeout('play('+(n+1)+')', 500);
+}
 
 function drawPars(data){
   var pars = document.getElementById('par');
