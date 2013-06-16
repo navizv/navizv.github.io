@@ -46,6 +46,13 @@ Column separator:<input type="text" id="colsep" value=";"/></div></td>
 </object>
 </div>
 <script>
+var isos='';
+  var datadr = '/libs/zimap/maps/russia.csv';
+  $.ajax({
+    url: datadr,
+    dataType:'html',
+    success: function(data){isos = data;}
+  });
 document.getElementById('file').addEventListener('change',filesel,false);
 
 var pmr = '<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
@@ -109,7 +116,7 @@ function doit() {
   var j = parseInt(colnum.value);//столбец с данными
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
-  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value),coltype.value=='Gradient');
+  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value),coltype.value=='Gradient',isos);
 }
 
 function filesel(evt){

@@ -40,6 +40,14 @@
 var csvData;
 var head;
 var grad = false;
+var isos='';
+  var datadr = '/libs/zimap/maps/russia.csv';
+  $.ajax({
+    url: datadr,
+    dataType:'html',
+    success: function(data){isos = data;}
+  });
+
 
 function play(n){
   var ys = document.getElementById('year').childNodes;
@@ -123,7 +131,7 @@ function procData(data,j){
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
-  zimap_draw_x(data,svgd,colors,j,';',1,grad);
+  zimap_draw_x(data,svgd,colors,j,';',1,grad,isos);
   $("#mapdiv").css({ "opacity" : "1" });
 }
 

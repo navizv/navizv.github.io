@@ -1,28 +1,66 @@
 function zimap_draw(data,svgd,colors,j){
-  zimap_draw_x(data,svgd,colors,j,';',1,false);
+  zimap_draw_x(data,svgd,colors,j,';',1,false,'');
 }
 
-function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad){
+function zim_make_ilib(isos){
+  var rs = isos.split('\r\n');
+  var arr = new Array();
+  for(var i in rs){
+    arr[i] = rs[i].split(';');
+  }
+  return arr;
+}
+
+function zim_find_iso(reg,ilib){
+  for(var i in ilib){
+    var r = ilib[i];
+    for(var j in r){
+if(j==0){if(reg==r[j])
+	  return reg;}else{
+//if(reg=='RU-BEL')
+//alert('|'+reg+'|'+r[j]+'|');
+	if(reg.search(new RegExp(r[j],'i'))>=0)
+	  return r[0];}
+    }
+  }
+  return reg;
+}
+
+function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
 //¬ычисл€ем шкалу дл€ цветов
-  var mas = data.split('\n');
+  var mas = data.split('\r\n');
   var rn = mas.length;
   if(rn <= 0)
     return;
+  if(rn==1){
+  	var mas = data.split('\n');
+rn = mas.length;}
   var min = 0;
   var max = 0;
+  var ids = new Array();
+  var ilib;
+  if(isos != ''){
+    ilib = zim_make_ilib(isos)
+  }
 
   var first = true;
   for(var i = strow; i< rn; i++){
 	var row = mas[i].split(colsep);
 //alert(mas[i]+colsep+row.length);
 	var reg = row[0];
+	if(isos!=''){
+	  reg = zim_find_iso(reg,ilib);
+	}
+        ids[i]=reg;
 	var c = row[j];
-	if(c == '')
+	if(c == ''||reg=='')
 		continue;
 	var el = svgd.getElementById(reg);
 	if(el == undefined || el == null)
 		continue;
 	var cur = parseFloat(c);
+	if(cur == NaN)
+		continue;
 	if(first){
 		max = min = cur;
 		first = false;
@@ -83,7 +121,6 @@ if(grad){
   txt.setAttribute('y',cury);
   txt.textContent = ziformat(scl[cn-i]);
   cury+=75;
-//Grid!!!
 }else{
   for(i = 0; i < cn; i++){
     var rec = svgd.getElementById('leg'+i);
@@ -118,11 +155,13 @@ if(grad){
 //бежим по данным, вычисл€ем цвета и раскрашиваем
   for(var i = strow; i< rn; i++){
 	var tmr = mas[i].split(colsep);
-	var reg = tmr[0];
+	var reg = ids[i];//tmr[0];
 	var c = tmr[j];
-	if(c == '')
+	if(c == ''||reg=='')
 		continue;
 	var cur = parseFloat(c);
+	if(isNaN(cur))
+		continue;
 	var el = svgd.getElementById(reg);
 
 	if(el != null){
@@ -154,7 +193,7 @@ strcol='#'+s1+'ff00';
     }
 	  //var tit = el.childNodes[0];
 	  //if(tit.textContent == '\n')
-		tit = el.childNodes[1];
+		var tit = el.childNodes[1];
 //параллельно - дописываем данные в тайтлы, чтоб всплывали
 	  tit.textContent = tit.textContent + ': ' + cur;
 	}
