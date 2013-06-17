@@ -3,6 +3,37 @@
 <title>
 ZiMapMaker - csv data to svg map
 </title>
+<style>
+.header div{
+  display: inline;
+  background: #aaa;
+  cursor: pointer;
+  padding: 3;
+  border:solid;
+  border-width: 1 1 0 1;
+  border-color: white;
+}
+.header{
+  background: gray;
+  border:solid;
+  border-width: 5 5 0 5;
+  border-color: gray;
+}
+#seld{
+  background: white;
+  padding-bottom: 5; 
+}
+.content {
+  background: white;
+  border: solid;
+  border-width: 0 5 5 5;
+  border-color: gray;
+}
+.pages{
+  display: inline;
+}
+</style>
+
 <script src="/libs/js/jquery.min.js"></script>
 <script src="/libs/js/FileSaver.min.js"></script>
 <script src="/libs/zimap/ziun.js"></script>
@@ -10,55 +41,148 @@ ZiMapMaker - csv data to svg map
 </head>
 <body>
 
+<div class="header">
+  <div id="seld" onclick="tab(this,'datadiv')">Input data</div>
+  <div onclick="tab(this,'visdiv')">Visualization settings</div>
+ 
+  <input type="button" value="Visualize" onclick="doit()">
+  <label xmlns="http://www.w3.org/1999/xhtml">Filename: <input type="text" id="filename" value="map" />.svg</label>
+  <input type="button" value="Save" onclick="save()">
 
-<table border='1'>
-<tr>
-<td><div id="datadiv" title="Data input">
-<input type="file" name="file" id="file" value="DataFile"><br/>
-<b>Data:</b><br><textarea rows="10" cols="45" id="dat">Something;2000;2001;2002
+  <div onclick="tab(this,'abodiv')" style="margin-left:300;">About</div>
+</div>
+
+<div class="content">
+  <div id="datadiv" class="pages" style="display:block;">
+  <table><tr><td>
+    <input type="file" name="file" id="file" value="DataFile"><br/>
+    <b>Data:</b><br><textarea rows="10" cols="45" id="dat">Something;2000;2001;2002
 RU-TOM;6;7;10
 RU-SA;7;8;9
 RU-KRS;4;5;6
-RU-KHM;9;6;6</textarea><br/>
-Data column number:<input type="number" id="colnum" value="1"/><br/>
-Data first row number:<input type="number" id="rownum" value="1"/><br/>
-Column separator:<input type="text" id="colsep" value=";"/></div></td>
-<td>
-<div id="visdiv" title="Visualization settings">
-<select id='coltype'>
-<option value="Block">Block</option>
-<option value="Gradient" selected>Gradient</option>
-</select>
-<div id="coltabdiv">
-<input type="button" value="Insert" onclick="add()"/><br/>
-<table id='coltab' border="1"></table>
-</div>
-</div>
-</td>
-<td><div id="outdiv" title="Export settings"><input type="button" value="Build" onclick="doit()"><br/>
-<label xmlns="http://www.w3.org/1999/xhtml">Filename: <input type="text" id="filename" value="map" />.svg</label><br/>
-<input type="button" value="Save" onclick="save()">
-</td>
-</tr>
-</table><br/>
+RU-KHM;9;6;6</textarea>
+  </td><td valign="top">
+    Data column number:<input type="number" id="colnum" value="2"/><br/>
+    Data first row number:<input type="number" id="rownum" value="2"/><br/>
+    Column separator:<input type="text" id="colsep" value=";"/></td>
+  </tr></table>
+  </div>
+  <div id="visdiv" class="pages" style="display:none;">
+    <table><tr><td>
+      <select id='coltype' onchange='ctSel()'>
+	<option value="Gradient" selected>Gradient</option>
+	<option value="Block">Block</option>
+      </select>
+      <div id="coltabdiv" style="display:none;">
+	<input type="button" value="Insert" onclick="add()"/><br/>
+	<table id='coltab' border="1"></table>
+      </div>
+      <div id="gradtabdiv">
+	<input type="button" value="Insert" disabled/><br/>
+	<table id='gradtab' border="1">
+<tr><td><input type="color" value="#ff0000" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
+<tr><td><input type="color" value="#ffff00" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
+<tr><td><input type="color" value="#00ff00" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
+        </table>
+      </div>
+    </td><td valign="top">Map:<br/>
+	<select size="1" name="maps" id="maps" onchange="mapSel()"></select>
+    </td></tr></table><br/>
+Sorry, it's impossible to choose colors for gradient manually yet. But it's possible for block, you can try it!:)
+  </div>
+  <div id="abodiv" class="pages" style="display:none;">
+There'll be 'about' here! Very soon!
+  </div>
+  </div><br/>
+
 <div id="container" style="width:800px; height:500px;">
-<object data="/libs/zimap/maps/russia.svg" type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
-</object>
+  <object type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
+  </object>
 </div>
 <script>
-var isos='';
-  var datadr = '/libs/zimap/maps/russia.csv';
+  //maps select
+  var isos='';
+  var info = '/libs/zimap/maps/maps.txt';
   $.ajax({
-    url: datadr,
-    dataType:'html',
-    success: function(data){isos = data;}
+    url: info,
+    dataType: 'html',
+    success: function(data){drawMaps(data);}
   });
-document.getElementById('file').addEventListener('change',filesel,false);
 
-var pmr = '<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
+  //save file
+  document.getElementById('file').addEventListener('change',filesel,false);
+
+  //colors
+  var pmr = '<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
 '<td><input type="button" value="-" onclick="remHere(this)"/></td>';
-var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
-setColors();
+  //Default colors  
+  var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
+  setColors();
+
+//color type
+function ctSel(){
+  if(coltype.value == 'Block'){
+coltabdiv.style.display = 'block';
+gradtabdiv.style.display = 'none';
+  }else{
+coltabdiv.style.display = 'none';
+gradtabdiv.style.display = 'block';
+  }
+}
+
+//tabs
+function tab(el,pageId) {
+  var sh = document.getElementById(pageId);
+  var cont = document.getElementsByClassName('pages');
+  for (var i in cont)
+    if(cont[i].tagName=='DIV')
+      cont[i].style.display = 'none';
+    sh.style.display = 'block';
+  document.getElementById('seld').id='';
+  el.id = 'seld';
+}
+
+function drawMaps(data){
+  //var maps = document.getElementById('par');
+  maps.innerHTML = '';
+  var mas = data.split('\n');
+  var sel;
+  for(var i in mas){
+	var str = mas[i].split(';');
+	var opt = document.createElement('option');
+	opt.value = str[1];
+	opt.innerHTML = str[0];
+	if(i == 0){
+	  opt.selected = 'selected';
+	}
+	maps.appendChild(opt);
+  }
+  mapSel();
+}
+
+function mapSel(){
+  var adr = '/libs/zimap/maps/'+maps.value;
+  var svg = adr + '.svg';
+  var csv = adr + '.csv';
+  $.ajax({
+    url: csv,
+    dataType:'html',
+    success: function(data){isos = data;},
+    error: function(){isos='';}
+  });
+
+//change map
+var mm = document.getElementById('mymap');
+var nm = document.createElement('object');
+var ma = mm.attributes;
+for(var i in ma)
+  nm.setAttribute(ma[i].name,ma[i].value);
+
+nm.data = svg;
+mm.parentNode.insertBefore(nm,mm);
+mm.parentNode.removeChild(mm);
+  
+}
 
 function setColors(){
   for(var i in colors){
@@ -111,12 +235,14 @@ tr.parentNode.removeChild(tr);
 }
 
 function doit() {
-  getColors();
   var data = dat.value;
-  var j = parseInt(colnum.value);//столбец с данными
+  var j = parseInt(colnum.value)-1;//столбец с данными
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
-  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value),coltype.value=='Gradient',isos);
+  getColors();
+  if(colsep.value == ';' && data.search(/;/)<0)
+    colsep.value=',';
+  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,coltype.value=='Gradient',isos);
 }
 
 function filesel(evt){
@@ -132,6 +258,26 @@ function filesel(evt){
 }
 function tt(){
 	//alert("rr!");
+//Так не работает. Но можно 1 раз вставить тайтлы и сохранить карту
+/*  if(isos !=''){
+    var svg = document.getElementById('mymap');
+    var svgd = svg.contentDocument;
+    var rs = svgd.getElementsByClassName('region');
+    var b = rs[0].childNodes.length;
+    if(b == 0){
+      var mas = isos.split('\r\n');
+      for(var i in mas){
+var rw = mas[i].split(';');
+	var reg = svgd.getElementById(rw[0]);
+alert(reg+ '-'+ rw[0]);
+if(reg==null||reg==undefined)
+continue;
+	var t = svgd.createElement('title');
+	t.textContent = rw[1];
+	reg.appendChild(t);
+      }
+    }
+  }*/
 }
 function save(){
   var svg = document.getElementById('mymap');

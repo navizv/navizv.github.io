@@ -342,4 +342,24 @@
 <path id="greece" d="M506.71,217.6l-0.11,1.33l4.63,2.33l2.21,0.85l-1.16,1.22l-2.58,0.26l-0.37,1.17l0.89,2.01l2.89,1.54l1.26,0.11l0.16-3.45l1.89-2.28l-5.16-6.1l0.68-2.07l1.21-0.05l1.84,1.48l1.16-0.58l0.37-2.07l5.42,0.05l0.21-3.18l-2.26,1.59l-6.63-0.16l-4.31,2.23L506.71,217.6L506.71,217.6z"/>
 <path id="thrace" d="M523.02,209.7l-0.16,3.55l3.1-0.95l1.42-0.95l-0.42-1.54l-1.47-1.17L523.02,209.7L523.02,209.7z"/>
 <path id="crete" d="M516.76,230.59l1.63,0.05l0.68,1.01h2.37l1.58-0.58l0.53,0.64l-1.05,1.38l-4.63,0.16l-0.84-1.11l-0.89-0.53L516.76,230.59L516.76,230.59z"/>
+<rect id="leg0" width="0" height="0"/>
+<rect id="leg1" width="0" height="0"/>
+<rect id="leg2" width="0" height="0"/>
+<rect id="leg3" width="0" height="0"/>
+<rect id="leg4" width="0" height="0"/>
+<rect id="leg5" width="0" height="0"/>
+<rect id="leg6" width="0" height="0"/>
+<rect id="leg7" width="0" height="0"/>
+<rect id="leg8" width="0" height="0"/>
+<rect id="leg9" width="0" height="0"/>
+<text style="font-size:20px" id="tcol0"/>
+<text style="font-size:20px" id="tcol1"/>
+<text style="font-size:20px" id="tcol2"/>
+<text style="font-size:20px" id="tcol3"/>
+<text style="font-size:20px" id="tcol4"/>
+<text style="font-size:20px" id="tcol5"/>
+<text style="font-size:20px" id="tcol6"/>
+<text style="font-size:20px" id="tcol7"/>
+<text style="font-size:20px" id="tcol8"/>
+<text style="font-size:20px" id="tcol9"/>
 </svg>

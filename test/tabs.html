@@ -1,0 +1,55 @@
+<html>
+  <head>
+<style>
+.header div{
+  display: inline;
+  background: gray;
+  cursor: pointer;
+}
+.header{
+  background: gray;
+  border:solid;
+  border-width: 5 5 0 5;
+  border-color: gray;
+}
+#seld{
+  background: white;
+  padding-bottom: 5; 
+}
+.content {
+  background: white;
+  border: solid;
+  border-width: 0 5 5 5;
+  border-color: gray;
+}
+</style>
+  </head>
+  <body>
+<div class="header">
+<div onclick="tab(this,'page1')">Tab 1</div>
+<div id="seld" onclick="tab(this,'page2')">Tab 2</div>
+<input type="button" value="PushMe!"/>
+</div>
+    <div class="content">
+      <div id="page1" class="pages" style='display:none;'>Page 1</div>
+      <div id="page2" class="pages" style='display:block;'>Page 2</div>
+    </div>
+
+
+    <script type="text/javascript">
+
+      function tab(el,pageId) {
+          var sh = document.getElementById(pageId);
+          var cont = document.getElementsByClassName('pages');
+          for (var i in cont)
+		if(cont[i].tagName=='DIV')
+              cont[i].style.display = 'none';
+          sh.style.display = 'block';
+
+document.getElementById('seld').id='';
+el.id = 'seld';
+}
+
+    </script>
+  </body>
+</html>

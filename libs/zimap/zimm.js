@@ -81,7 +81,6 @@ cn=4;
 	scl[i]=scl[i-1]+step;
   }
   scl[cn] = max;
-
 //Рисуем легенду
   var i = 0;
   var cury = 200;
@@ -147,10 +146,13 @@ if(grad){
   for(var i =0;i<regs.length;i++){
 	var el = regs[i];
 	el.setAttribute('fill','#808080');
-	var tit = el.childNodes[1];
+	var tit = el.getElementsByTagName('title')[0];
+if(tit==undefined||tit==null){
+var tit = el.getElementsByTagName('tutle')[0];
+if(tit==undefined||tit==null)
+  continue;}
 	tit.textContent = tit.textContent.split(':')[0];
   }
-
 
 //бежим по данным, вычисляем цвета и раскрашиваем
   for(var i = strow; i< rn; i++){
@@ -193,7 +195,11 @@ strcol='#'+s1+'ff00';
     }
 	  //var tit = el.childNodes[0];
 	  //if(tit.textContent == '\n')
-		var tit = el.childNodes[1];
+		var tit = el.getElementsByTagName('title')[0];//childNodes[0];
+if(tit==undefined||tit==null){
+var tit = el.getElementsByTagName('tutle')[0];
+if(tit==undefined||tit==null)
+  continue;}
 //параллельно - дописываем данные в тайтлы, чтоб всплывали
 	  tit.textContent = tit.textContent + ': ' + cur;
 	}

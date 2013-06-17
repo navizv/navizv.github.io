@@ -1,0 +1,3 @@
+USA;usa
+Russian Federation;russia
+World;world
