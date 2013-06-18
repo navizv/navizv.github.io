@@ -14,29 +14,29 @@ ZiMapMaker - csv data to svg map
   border-color: white;
 }
 .header{
-  background: gray;
+  background: #2a2;
   border:solid;
   border-width: 5 5 0 5;
-  border-color: gray;
+  border-color: #2a2;
 }
 #seld{
-  background: white;
+  background: #fffffe;
   padding-bottom: 5; 
 }
 .content {
-  background: white;
+  background: #fffffe;
   border: solid;
   border-width: 0 5 5 5;
-  border-color: gray;
+  border-color: #2a2;
 }
 .pages{
   display: inline;
+  background: #fffffe;
 }
 </style>
 
 <script src="/libs/js/jquery.min.js"></script>
 <script src="/libs/js/FileSaver.min.js"></script>
-<script src="/libs/zimap/ziun.js"></script>
 <script src="/libs/zimap/zimm.js"></script>
 </head>
 <body>
@@ -72,9 +72,9 @@ US-IL;9;7;10</textarea>
     Column separator:<input type="text" id="colsep" value=";"/><br/>
     <input type="button" value="Load example data" onclick="loadExample()"/></td>
   <td>
-    <b>Parsed:</b><br/><textarea rows="10" cols="20" id="parsed"></textarea></td>
+    <b>Parsed:</b><br/><textarea readonly rows="10" cols="20" id="parsed"></textarea></td>
   <td>
-    <b>Not parsed:</b><br/><textarea rows="10" cols="15" id="not_parsed"></textarea></td>
+    <b>Not parsed:</b><br/><textarea readonly rows="10" cols="15" id="not_parsed"></textarea></td>
   </tr></table>
   </div>
   <div id="visdiv" class="pages" style="display:none;">
