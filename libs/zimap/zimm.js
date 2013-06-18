@@ -16,6 +16,7 @@ zim_parsed = zim_not_parsed = '';
 }
 
 function zim_find_iso(reg,ilib){
+alert(reg+';'+ilib.length);
 reg = reg.toUpperCase();
   for(var i in ilib){
     var r = ilib[i];
@@ -44,6 +45,7 @@ alert('?'+zim_not_parsed);
 }
 
 function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
+alert(isos);
 //Вычисляем шкалу для цветов
   var mas = data.split('\r\n');
   var rn = mas.length;
