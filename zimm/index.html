@@ -181,7 +181,7 @@ function mapSel(){
     url: csv,
     dataType:'html',
     success: function(data){isos = data;},
-    error: function(){isos='';}
+    error: function(){isos='';alert('isos not loaded!'+csv)}
   });
 
 //change map
@@ -255,6 +255,7 @@ function doit() {
   getColors();
   if(colsep.value == ';' && data.search(/;/)<0)
     colsep.value=',';
+alert('isos='+isos);
   zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,coltype.value=='Gradient',isos);
   //alert(zim_parsed);
   parsed.innerHTML = zim_parsed;
