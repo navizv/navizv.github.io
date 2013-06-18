@@ -8,6 +8,9 @@ function zimap_draw(data,svgd,colors,j){
 function zim_make_ilib(isos){
 zim_parsed = zim_not_parsed = '';
   var rs = isos.split('\r\n');
+if(rs.length==1)
+  var rs = isos.split('\n');
+
   var arr = new Array();
   for(var i in rs){
     arr[i] = rs[i].split(';');
@@ -16,16 +19,16 @@ zim_parsed = zim_not_parsed = '';
 }
 
 function zim_find_iso(reg,ilib){
-alert(reg+';'+ilib.length);
+//alert(reg+';'+ilib.length);
 reg = reg.toUpperCase();
   for(var i in ilib){
     var r = ilib[i];
     for(var j in r){
       if(j==0){ 
-alert('|'+reg+'|'+r[j]+'|');
+//alert('|'+reg+'|'+r[j]+'|');
 	if(reg==r[j]){
           zim_parsed+=reg+';'+r[0]+'\r\n';
-          alert('!'+zim_parsed);
+//          alert('!'+zim_parsed);
 	  return reg;
         }
       }else{
@@ -33,19 +36,19 @@ alert('|'+reg+'|'+r[j]+'|');
 //alert('|'+reg+'|'+r[j]+'|');
 	if(reg.search(new RegExp(r[j],'i'))>=0){
           zim_parsed+=reg+';'+r[0]+'\r\n';
-          alert('!'+zim_parsed);
+          //alert('!'+zim_parsed);
 	  return r[0];
         }
       }
     }
   }
   zim_not_parsed+=reg+'\r\n';
-alert('?'+zim_not_parsed);
+//alert('?'+zim_not_parsed);
   return reg;
 }
 
 function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
-alert(isos);
+//alert(isos);
 //Вычисляем шкалу для цветов
   var mas = data.split('\r\n');
   var rn = mas.length;
