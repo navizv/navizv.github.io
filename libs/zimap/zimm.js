@@ -202,13 +202,14 @@ var s1 = col.toString(16);
 if(s1.length == 1)
 	s1='0'+s1;
 strcol='#ff'+s1+'00';
-}else{
+}else if(pr>=0.5){
 var col = Math.round(2*(1-pr)*255);
 var s1 = col.toString(16);
 if(s1.length == 1)
 	s1='0'+s1;
 strcol='#'+s1+'ff00';
-}
+}else
+strcol='#ffff00';
 //alert(strcol);
           el.setAttribute('fill',strcol);
 }else{
