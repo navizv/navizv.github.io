@@ -21,6 +21,7 @@ reg = reg.toUpperCase();
     var r = ilib[i];
     for(var j in r){
       if(j==0){ 
+alert('|'+reg+'|'+r[j]+'|');
 	if(reg==r[j]){
           zim_parsed+=reg+';'+r[0]+'\r\n';
           alert('!'+zim_parsed);
@@ -56,7 +57,7 @@ rn = mas.length;}
   var ids = new Array();
   var ilib;
   if(isos != ''){
-    ilib = zim_make_ilib(isos)
+    ilib = zim_make_ilib(isos);
   }
 
   var first = true;
