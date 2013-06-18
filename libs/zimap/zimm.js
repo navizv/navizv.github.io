@@ -22,8 +22,8 @@ reg = reg.toUpperCase();
     for(var j in r){
       if(j==0){ 
 	if(reg==r[j]){
-          alert('!'+zim_parsed);
           zim_parsed+=reg+';'+r[0]+'\r\n';
+          alert('!'+zim_parsed);
 	  return reg;
         }
       }else{
@@ -37,8 +37,8 @@ reg = reg.toUpperCase();
       }
     }
   }
-alert('?'+zim_not_parsed);
   zim_not_parsed+=reg+'\r\n';
+alert('?'+zim_not_parsed);
   return reg;
 }
 
