@@ -22,22 +22,22 @@ reg = reg.toUpperCase();
     for(var j in r){
       if(j==0){ 
 	if(reg==r[j]){
-          alert('!'+zim_parsed);
+          //alert('!'+zim_parsed);
           zim_parsed+=reg+';'+r[0]+'\r\n';
 	  return reg;
         }
       }else{
 //if(reg=='RU-BEL')
-alert('|'+reg+'|'+r[j]+'|');
+//alert('|'+reg+'|'+r[j]+'|');
 	if(reg.search(new RegExp(r[j],'i'))>=0){
           zim_parsed+=reg+';'+r[0]+'\r\n';
-          alert('!'+zim_parsed);
+          //alert('!'+zim_parsed);
 	  return r[0];
         }
       }
     }
   }
-alert('?'+zim_not_parsed);
+//alert('?'+zim_not_parsed);
   zim_not_parsed+=reg+'\r\n';
   return reg;
 }
