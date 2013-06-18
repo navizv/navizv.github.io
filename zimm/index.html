@@ -49,22 +49,32 @@ ZiMapMaker - csv data to svg map
   <label xmlns="http://www.w3.org/1999/xhtml">Filename: <input type="text" id="filename" value="map" />.svg</label>
   <input type="button" value="Save" onclick="save()">
 
-  <div onclick="tab(this,'abodiv')" style="margin-left:300;">About</div>
+  <div onclick="tab(this,'hiddiv')" style="margin-left:100;">Hide</div>
+  <div onclick="tab(this,'hlpdiv')">Help</div>
+  <div onclick="tab(this,'abodiv')">About</div>
 </div>
 
 <div class="content">
   <div id="datadiv" class="pages" style="display:block;">
   <table><tr><td>
     <input type="file" name="file" id="file" value="DataFile"><br/>
-    <b>Data:</b><br><textarea rows="10" cols="45" id="dat">Something;2000;2001;2002
-RU-TOM;6;7;10
-RU-SA;7;8;9
-RU-KRS;4;5;6
-RU-KHM;9;6;6</textarea>
+    <b>Data:</b><br/><textarea rows="10" cols="45" id="dat">Something;2000;2001;2002
+RU;9;7;10
+UA;7;8;9
+US;4;5;6
+RU-KHM;9;6;6
+RU-SA;4;5;6
+US-CA;7;8;9
+US-IL;9;7;10</textarea>
   </td><td valign="top">
     Data column number:<input type="number" id="colnum" value="2"/><br/>
     Data first row number:<input type="number" id="rownum" value="2"/><br/>
-    Column separator:<input type="text" id="colsep" value=";"/></td>
+    Column separator:<input type="text" id="colsep" value=";"/><br/>
+    <input type="button" value="Load example data" onclick="loadExample()"/></td>
+  <td>
+    <b>Parsed:</b><br/><textarea rows="10" cols="20" id="parsed"></textarea></td>
+  <td>
+    <b>Not parsed:</b><br/><textarea rows="10" cols="15" id="not_parsed"></textarea></td>
   </tr></table>
   </div>
   <div id="visdiv" class="pages" style="display:none;">
@@ -90,11 +100,14 @@ RU-KHM;9;6;6</textarea>
     </td></tr></table><br/>
 Sorry, it's impossible to choose colors for gradient manually yet. But it's possible for block, you can try it!:)
   </div>
+  <div id="hiddiv" class="pages" style="display:none;"></div>
+  <div id="hlpdiv" class="pages" style="display:none;">
+There'll be 'help' here! Very soon!
+  </div>
   <div id="abodiv" class="pages" style="display:none;">
 There'll be 'about' here! Very soon!
   </div>
   </div><br/>
-
 <div id="container" style="width:800px; height:500px;">
   <object type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
   </object>
@@ -243,17 +256,29 @@ function doit() {
   if(colsep.value == ';' && data.search(/;/)<0)
     colsep.value=',';
   zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,coltype.value=='Gradient',isos);
+  //alert(zim_parsed);
+  parsed.innerHTML = zim_parsed;
+  not_parsed.innerHTML = zim_not_parsed;
+}
+
+function loadExample(){
+  var fname = 'gdp.csv';
+  $.ajax({
+    url: fname,
+    dataType:'html',
+    success: function(data){dat.innerHTML = data;},
+  });
 }
 
 function filesel(evt){
-	var f = evt.target.files[0];
-	var rdr = new FileReader();
-	rdr.onload = (function(ff){
-		return function(e){
-			dat.innerHTML = e.target.result;
-		};
-	})(f);
-	rdr.readAsBinaryString(f);
+  var f = evt.target.files[0];
+  var rdr = new FileReader();
+  rdr.onload = (function(ff){
+    return function(e){
+      dat.innerHTML = e.target.result;
+    };
+  })(f);
+  rdr.readAsBinaryString(f);
 
 }
 function tt(){
@@ -278,6 +303,19 @@ continue;
       }
     }
   }*/
+ /*   var svg = document.getElementById('mymap');
+    var svgd = svg.contentDocument;
+var s = svgd.getElementById('Subjects_Outline').childNodes;
+//alert(s.length);
+for(i in s){
+if(s[i].id==undefined)
+continue;
+s[i].setAttribute('class','region');
+s[i].id = s[i].id.toUpperCase();
+//alert(s[i].id + '-'+s[i].class);
+}
+var aq = svgd.getElementById('AQ');
+aq.parentNode.removeChild(aq);*/
 }
 function save(){
   var svg = document.getElementById('mymap');

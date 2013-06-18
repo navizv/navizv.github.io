@@ -1,8 +1,12 @@
+var zim_parsed;
+var zim_not_parsed;
+
 function zimap_draw(data,svgd,colors,j){
   zimap_draw_x(data,svgd,colors,j,';',1,false,'');
 }
 
 function zim_make_ilib(isos){
+zim_parsed = zim_not_parsed = '';
   var rs = isos.split('\r\n');
   var arr = new Array();
   for(var i in rs){
@@ -12,17 +16,28 @@ function zim_make_ilib(isos){
 }
 
 function zim_find_iso(reg,ilib){
+reg = reg.toUpperCase();
   for(var i in ilib){
     var r = ilib[i];
     for(var j in r){
-if(j==0){if(reg==r[j])
-	  return reg;}else{
+      if(j==0){ 
+	if(reg==r[j]){
+          //alert('!'+zim_parsed);
+          zim_parsed+=reg+';'+r[0]+'\r\n';
+	  return reg;
+        }
+      }else{
 //if(reg=='RU-BEL')
 //alert('|'+reg+'|'+r[j]+'|');
-	if(reg.search(new RegExp(r[j],'i'))>=0)
-	  return r[0];}
+	if(reg.search(new RegExp(r[j],'i'))>=0){
+          zim_parsed+=reg+';'+r[0]+'\r\n';
+          //alert('!'+zim_parsed);
+	  return r[0];
+        }
+      }
     }
   }
+  zim_not_parsed+=reg+'\r\n';
   return reg;
 }
 
@@ -83,8 +98,12 @@ cn=4;
   scl[cn] = max;
 //Рисуем легенду
   var i = 0;
-  var cury = 200;
+  var cury = parseInt(svgd.getElementById('leg0').getAttribute('y'));
+if(cury!=cury)//awesome chech for NaN. isNaN() doesn't work here
+  cury=100;
+
   var h = Math.round(75*4 / cn);
+
 //clear
   for(i = 0; i < 10; i++){
     var rec = svgd.getElementById('leg'+i);
@@ -111,13 +130,13 @@ if(grad){
 
     var txt = svgd.getElementById('tcol'+i);
     txt.setAttribute('x','1165');
-    txt.setAttribute('y',cury);
+    txt.setAttribute('y',cury+5);
     txt.textContent = ziformat(scl[cn-i]);
     cury+=h;
   }
   var txt = svgd.getElementById('tcol'+i);
   txt.setAttribute('x','1165');
-  txt.setAttribute('y',cury);
+  txt.setAttribute('y',cury+5);
   txt.textContent = ziformat(scl[cn-i]);
   cury+=75;
 }else{
@@ -131,13 +150,13 @@ if(grad){
 
     var txt = svgd.getElementById('tcol'+i);
     txt.setAttribute('x','1165');
-    txt.setAttribute('y',cury);
+    txt.setAttribute('y',cury+5);
     txt.textContent = ziformat(scl[cn-i]);
     cury+=h;
   }
   var txt = svgd.getElementById('tcol'+i);
   txt.setAttribute('x','1165');
-  txt.setAttribute('y',cury);
+  txt.setAttribute('y',cury+5);
   txt.textContent = ziformat(scl[cn-i]);
   cury+=75;
 }
