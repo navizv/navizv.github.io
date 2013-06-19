@@ -113,6 +113,16 @@ There'll be 'about' here! Very soon!
   </object>
 </div>
 <script>
+  $.ajax({
+    url: 'about.html',
+    dataType: 'html',
+    success: function(data){abodiv.innerHTML = data;}
+  });
+  $.ajax({
+    url: 'help.html',
+    dataType: 'html',
+    success: function(data){hlpdiv.innerHTML = data;}
+  });
   //maps select
   var isos='';
   var info = '/libs/zimap/maps/maps.txt';
@@ -248,6 +258,7 @@ tr.parentNode.removeChild(tr);
 }
 
 function doit() {
+$("#mymap").css({ "opacity" : "0.5" });
   var data = dat.value;
   var j = parseInt(colnum.value)-1;//столбец с данными
   var svg = document.getElementById('mymap');
@@ -260,6 +271,7 @@ function doit() {
   //alert(zim_parsed);
   parsed.innerHTML = zim_parsed;
   not_parsed.innerHTML = zim_not_parsed;
+$("#mymap").css({ "opacity" : "1" });
 }
 
 function loadExample(){
@@ -329,7 +341,8 @@ function save(){
 <br/>
 <hr>
 <footer>
-Copyright - Zaytsev I.D. (zaycev.ivan@gmail.com)
+Copyright (c) 2013 Ivan Zaytsev (zaycev.ivan@gmail.com)<br/>
+(see 'about' tab for more information)
 </footer>
 <script>
 if(location.href.split('/')[2]!='127.0.0.1'){

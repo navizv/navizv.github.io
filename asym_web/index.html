@@ -4,23 +4,7 @@
 <script src="/libs/zimap/zimm.js"></script>
 </head>
 <body>
-<style type="text/css">
-
-#tooltip {
-  z-index: 9999;
-  position: absolute;
-  display: none;
-  top:0px;
-  left:0px;
-  background-color: #000;
-  padding: 5px 10px 5px 10px;
-  color: white;
-  .opacity(0.5);
-  .rounded(5px); 
-}}
-
-</style>
-<div id="tooltip"></div>
+<div>
 <p id="test">Демо-версия программы (<a href="desktopver.html">о полной версии</a>)</p>
 <select size="1" name="par" id="par" onchange="parSel()">
 </select>
@@ -30,7 +14,12 @@
 Раскрашивание:
 <input type="radio" name="coltype" value="Block" checked onchange="ctSel(this)">Блоками
 <input type="radio" name="coltype" value="Gradient" onchange="ctSel(this)">Непрерывное
+
+</div>
 <div width='1000' height='500' id='mapdiv'>
+<div id="tooltip" style="z-index:9999;position:absolute;opacity:0.8;
+border:solid;border-color:black;border-width:2;padding:3 3 3 3;
+display:none;background-color:white;color:black;"></div>
 <object data="/libs/zimap/maps/russia.svg" type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
 </object>
 </div>
@@ -81,7 +70,7 @@ function drawPars(data){
 }
 
 function parSel(){
-  $("#mapdiv").css({ "opacity" : "0.5" });
+  mapdiv.style.opacity = '0.5';
   hide_tooltip();
   var par = document.getElementById('par');
   var datadr = '/libs/data/'+par.value;
@@ -126,18 +115,18 @@ function yearSel(){
 }
 
 function procData(data,j){
-  $("#mapdiv").css({ "opacity" : "0.5" });
+  mapdiv.style.opacity = '0.5';
   dat.value = data;
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
   zimap_draw_x(data,svgd,colors,j,';',1,grad,isos);
-  $("#mapdiv").css({ "opacity" : "1" });
+  mapdiv.style.opacity = '1';
 }
 
 
 function tt(){
-  $("#mapdiv").css({ "opacity" : "0.5" });
+  mapdiv.style.opacity = '0.5';
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
   tutle(svgd);
@@ -150,12 +139,12 @@ function tt(){
 
   
 
-  $(svgd.getElementsByClassName('region')).mousedown(function (eventObject) {
-	$title = $(this).children(1).text();
-	show_tooltip($title,eventObject);
-  }).hover(function (eventObject) {
-	$title = $(this).children(1).text();
-	show_tooltip($title,eventObject);
+  $(svgd.getElementsByClassName('region')).mousedown(function (evt) {
+	tit = this.getElementsByTagName('tutle')[0].textContent;
+	show_tooltip(tit,evt);
+  }).hover(function (evt) {
+	tit = this.getElementsByTagName('tutle')[0].textContent;
+	show_tooltip(tit,evt);
   }).mouseout(function () {
 	if ( $.browser.msie ) {}else{
 		hide_tooltip();
@@ -179,15 +168,16 @@ function tutle(svgd){
 }
 
 
-function show_tooltip($title,eventObject){
-  $("#tooltip").text($title).css({ 
-	"top" : eventObject.pageY + 35,
-	"left" : eventObject.pageX + 5
-  }).show();
+function show_tooltip(tit,evt){
+  tooltip.innerHTML = tit;
+//alert(evt.clientY);
+  tooltip.style.left = evt.pageX + 5;
+  tooltip.style.top = evt.pageY + 35;
+  tooltip.style.display = "inline";
 }
 
-function hide_tooltip(eventObject){
-  $("#tooltip").hide().text("").css({"top" : 0,"left" : 0});
+function hide_tooltip(){
+  tooltip.style.display = "none";
 }
 
 function ctSel(ra){
@@ -197,9 +187,9 @@ function ctSel(ra){
 </script>
 <br/><hr/>
 <footer>
-Автор - <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.Д.</a> (zaycev.ivan@gmail.com)<br/><br/>
+Copyright (c) 2013 <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.Д.</a> (zaycev.ivan@gmail.com)<br/>
 Источник данных - <a href="http://www.gks.ru">Сайт Федеральной службы государственной статистики РФ</a><br/>
-Источник карты - <a href="http://commons.wikimedia.org/wiki/File%3AMap_of_Russian_districts%2C_2008-03-01.svg"/>Википедия</a><br/>
+Источник карты - <a href="http://commons.wikimedia.org/wiki/File%3AMap_of_Russian_districts%2C_2008-03-01.svg"/>Викимедия</a><br/>
 </footer>
 <script>
 if(location.href.split('/')[2]!='127.0.0.1'){

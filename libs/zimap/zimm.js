@@ -1,3 +1,14 @@
+/* zimm.js - javascript library for coloring
+svg document with data provided in csv format.
+2013-06-19
+
+Copyright (c) 2013 Ivan Zaytsev (zaycev.ivan@gmail.com)
+
+This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License. 
+To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/ or send a letter 
+to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
+*/
+
 var zim_parsed;
 var zim_not_parsed;
 
