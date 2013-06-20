@@ -1,0 +1,52 @@
+<html><head><title>
+ZiMapMakerPro - csv data to map chart
+</title>
+<script src="/libs/js/jquery.min.js"></script>
+<script src="/libs/zimap/zimm.js"></script>
+</head>
+<body>
+
+<div id="container" style="width:800px; height:500px;">
+</div>
+
+
+<script>
+
+var cont = document.getElementById('container');
+
+zimp_make_chart({
+  data : 'gdp.csv',
+  datatype: 'url',  
+},{
+  colors: ["#ff0000","#ffff00","#00ff00"],
+  colscheme: 'block',
+  map: 'world'
+},cont);
+
+function zimp_make_chart(datax,options,cont){
+//data,datatype,colsep,rowsep,colors,colscheme,map,maptype){
+var datatype = datax.datatype || 'plain';
+if(datatype == 'url'){
+  $.ajax({
+    url: data,
+    dataType: 'html',
+    success: function(data){
+       datax.datatype = null;
+       datax.data = data;
+       zimp_make_chart(datax,options,cont);
+    }
+  });
+  return; 
+}
+var maptype = options.maptype || 'code';
+if(maptype == 'code'){
+  options.maptype = maptype = 'url';
+  options.map = '/libs/zimap/maps'+options.map;
+}
+var colsep datax.colsep || ';';
+
+cont.innerHTML = 'hello!';
+}
+</script>
+</body>
+</html>
