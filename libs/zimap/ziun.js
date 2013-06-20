@@ -70,25 +70,35 @@ function zidiag(title,data,divn){
 
 function zimap(title,data,divn){
   var cont = document.getElementById(divn);
-  cont.innerHTML = title;//'Здесь будет карта! Честно-честно!';
+  cont.innerHTML = title;
 //по регионам узнаём коды (пока необязательно)
 
 //по кодам узнаём карту (желательно)
 
 //вставляем карту. видимо таки аякс
   var mapadr = '/libs/zimap/maps/russia.svg';
+  var isoadr = '/libs/zimap/maps/russia.csv';
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
   var j = 1;//столбец с данными
+zim_make_chart(data,j,mapadr,isoadr,colors,cont);
+
+}
+
+function zim_make_chart(data,j,mapadr,isoadr,colors,cont){
   $.ajax({
 	url: mapadr,
 	dataType:'xml',
 	success: function(svgf){
 		svgf.viewBow = "0 0 200 200";
-
-		zimap_draw(data,svgf,colors,j);
+  $.ajax({
+	url: isoadr,
+	dataType:'html',
+	success: function(isos){
+		zimap_draw(data,svgf,colors,j,isos);
 
 		cont.innerHTML += xml_to_text(svgf);
 		//svgf.setAttribute('viewBox',"0 0 1200 610");
+    }});
   }});
 }
 

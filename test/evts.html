@@ -1,0 +1,48 @@
+<html><head><title>
+ZiMapMakerPro - csv data to map chart
+</title>
+<script src="/libs/js/jquery.min.js"></script>
+<script src="/libs/zimap/zimm.js"></script>
+</head>
+<body>
+
+<div id="c1" style="width:80;height:50;background:grey;">rtnw</div>
+<div id="c2" style="width:80;height:50;background:red;">febv</div>
+</div>
+
+
+<script>
+var s1 = new Object();
+var s2 = new Object();
+
+var d = document.createElement('div');
+d.id = 'c3';
+//d.
+d.setAttribute('style',"width:80;height:50;background:green;");
+d.dat = s1;
+d.onclick = function(){test(this.dat);};
+d.innerHTML = 'eded';
+set(s1,c1);
+set(s2,c2);
+document.getElementsByTagName('body')[0].appendChild(d);
+
+
+s1.data1 = ["qq","ew"];
+s1.data2 = ["wa","ed"];
+s2.data1 = ["qq","ew"];
+s2.data2 = ["ws","ed"];
+
+//c1.onclick = 'alert(\'qaz\')';
+c2.data = s2;
+
+function set(data,c){
+ var y = data;
+  c.onclick = function(){test(y);};
+}
+
+function test(s){
+alert(s.data2[0]);
+}
+</script>
+</body>
+</html>
