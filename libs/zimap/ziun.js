@@ -101,7 +101,3 @@ function zim_make_chart(data,j,mapadr,isoadr,colors,cont){
     }});
   }});
 }
-
-function xml_to_text(svgf){
-  return svgf.xml ? svgf.xml : (new XMLSerializer()).serializeToString(svgf);
-}

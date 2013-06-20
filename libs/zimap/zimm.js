@@ -251,3 +251,8 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
 function ziformat(f){
     return Math.round(f*100)/100;
 }
+
+
+function xml_to_text(svgf){
+  return svgf.xml ? svgf.xml : (new XMLSerializer()).serializeToString(svgf);
+}
