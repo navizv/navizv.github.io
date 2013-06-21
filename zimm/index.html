@@ -95,8 +95,11 @@ US-IL;9;7;10</textarea>
 <tr><td><input type="color" value="#00ff00" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
         </table>
       </div>
-    </td><td valign="top">Map:<br/>
+    </td><td valign="top">
+<input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales<br/>
+Map:<br/>
 	<select size="1" name="maps" id="maps" onchange="mapSel()"></select>
+        
     </td></tr></table><br/>
 Sorry, it's impossible to choose colors for gradient manually yet. But it's possible for block, you can try it!:)
   </div>
@@ -136,11 +139,15 @@ There'll be 'about' here! Very soon!
   document.getElementById('file').addEventListener('change',filesel,false);
 
   //colors
-  var pmr = '<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
+  var pmr = 
+'<td><input type="text" value="" size="8" title="from" class="scales" disabled/></td>'+
+'<td><input type="text" value="" size="8" title="to" class="scales" disabled/></td>'+
+'<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
 '<td><input type="button" value="-" onclick="remHere(this)"/></td>';
   //Default colors  
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
   setColors();
+  var scs;
 
 //color type
 function ctSel(){
@@ -151,6 +158,16 @@ gradtabdiv.style.display = 'none';
 coltabdiv.style.display = 'none';
 gradtabdiv.style.display = 'block';
   }
+}
+
+function setscales(){
+  var cols = document.getElementsByClassName('scales');
+  for(var i in cols){
+if(i>0 && cols[i].title=="from")
+  continue;
+    cols[i].disabled=!scales.checked;
+}
+
 }
 
 //tabs
@@ -223,12 +240,17 @@ function getColors(){
 var cn = coltab.childNodes.length;
 var j = 0;
   colors = new Array();
-  for(var i =cn-1; i>=0;i--){
+  scs = new Array();
+  for(var i = 0;i<cn;i++){
     var tr = coltab.childNodes[i];
     if(tr.innerHTML == undefined) 
 	continue;
     var c = tr.childNodes[0].childNodes[0].value;
-
+    if(j==0)
+      scs[j] = tr.childNodes[1].childNodes[0].value;
+    else
+      tr.childNodes[1].childNodes[0].value = scs[j];
+    scs[j+1] = tr.childNodes[2].childNodes[0].value;
     colors[j++]=c;
   }
 }
@@ -267,7 +289,9 @@ $("#mymap").css({ "opacity" : "0.5" });
   if(colsep.value == ';' && data.search(/;/)<0)
     colsep.value=',';
 //alert('isos='+isos);
-  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,coltype.value=='Gradient',isos);
+if(!scales.checked)
+  scs=null;
+  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,coltype.value=='Gradient',isos,scs);
   //alert(zim_parsed);
   parsed.innerHTML = zim_parsed;
   not_parsed.innerHTML = zim_not_parsed;

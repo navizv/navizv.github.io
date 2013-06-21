@@ -59,7 +59,7 @@ function zim_find_iso(reg,ilib){
     return reg;
 }
 
-function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
+function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos,scs){
     //alert(isos);
     //Вычисляем шкалу для цветов
     var mas = data.split('\r\n');
@@ -111,11 +111,15 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
         cn=4;
     var step = (max-min)/cn;
     var scl = new Array();
+    if(scs != null && !grad){
+scl = scs;
+}else{
     scl[0] = parseFloat(min);
     for(var i=1; i<=cn; i++){
         scl[i]=scl[i-1]+step;
     }
     scl[cn] = max;
+}
     //Рисуем легенду
     var i = 0;
     var cury = parseInt(svgd.getElementById('leg0').getAttribute('y'));
@@ -137,25 +141,25 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
         var rec = svgd.getElementById('leg0');
         rec.setAttribute('x','1100');
         rec.setAttribute('y',cury);
-        rec.setAttribute('width','60');
+        rec.setAttribute('width','30');
         rec.setAttribute('height','300');
         rec.setAttribute('fill','url(#grad1)');
         for(i = 0; i < cn; i++){
             var rec = svgd.getElementById('leg'+(i+1));
             rec.setAttribute('x','1100');
             rec.setAttribute('y',cury);
-            rec.setAttribute('width','60');
+            rec.setAttribute('width','30');
             rec.setAttribute('height',h);
             rec.setAttribute('style',"fill:none;stroke:black;");
 
             var txt = svgd.getElementById('tcol'+i);
-            txt.setAttribute('x','1165');
+            txt.setAttribute('x','1135');
             txt.setAttribute('y',cury+5);
             txt.textContent = ziformat(scl[cn-i]);
             cury+=h;
         }
         var txt = svgd.getElementById('tcol'+i);
-        txt.setAttribute('x','1165');
+        txt.setAttribute('x','1135');
         txt.setAttribute('y',cury+5);
         txt.textContent = ziformat(scl[cn-i]);
         cury+=75;
@@ -164,18 +168,18 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
             var rec = svgd.getElementById('leg'+i);
             rec.setAttribute('x','1100');
             rec.setAttribute('y',cury);
-            rec.setAttribute('width','60');
+            rec.setAttribute('width','30');
             rec.setAttribute('height',h);
-            rec.setAttribute('fill',colors[i]);
+            rec.setAttribute('fill',colors[cn-i-1]);
 
             var txt = svgd.getElementById('tcol'+i);
-            txt.setAttribute('x','1165');
+            txt.setAttribute('x','1135');
             txt.setAttribute('y',cury+5);
             txt.textContent = ziformat(scl[cn-i]);
             cury+=h;
         }
         var txt = svgd.getElementById('tcol'+i);
-        txt.setAttribute('x','1165');
+        txt.setAttribute('x','1135');
         txt.setAttribute('y',cury+5);
         txt.textContent = ziformat(scl[cn-i]);
         cury+=75;
@@ -232,7 +236,7 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
                     if(cur <= scl[k+1])
                         break;
                 }
-                el.setAttribute('fill',colors[cn-k-1]);
+                el.setAttribute('fill',colors[k]);
             }
             //var tit = el.childNodes[0];
             //if(tit.textContent == '\n')
@@ -243,13 +247,30 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos){
                     continue;
             }
             //параллельно - дописываем данные в тайтлы, чтоб всплывали
-            tit.textContent = tit.textContent + ': ' + cur;
+            tit.textContent = tit.textContent + ': ' + zim_format(""+cur);
         }
     }
 }
 
 function ziformat(f){
-    return Math.round(f*100)/100;
+    return zim_format(""+Math.round(f*100)/100);
+}
+
+function zim_format(f){
+  var k = f.indexOf('.')-1;
+  if(k<0)
+    k = f.length-1;
+var lim = 0;
+if(f.charAt(0)=='-')
+  lim++;
+  var b = 1;
+  for(;k>lim;k--){
+    if(b++==3){
+      b=1;
+      f = f.slice(0,k)+' ' + f.slice(k,f.length);
+    }
+  }
+  return f;
 }
 
 function xml_to_text(svgf){
