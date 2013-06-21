@@ -43,9 +43,9 @@ US-TN;Tennessee
 US-TX;Texas
 US-UT;Utah
 US-VT;Vermont
-US-VA;Virginia
-US-WA;Washington
 US-WV;West Virginia
+US-VA;^Virginia
+US-WA;Washington
 US-WI;Wisconsin
 US-WY;Wyoming
 US-DC;District of Columbia
