@@ -93,7 +93,7 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos,scs){
         var el = svgd.getElementById(reg);
         if(el == undefined || el == null)
             continue;
-        var cur = parseFloat(c);
+        var cur = parseFloat(c.replace(',','.'));
         if(cur == NaN)
             continue;
         if(first){
@@ -205,7 +205,7 @@ scl = scs;
         var c = tmr[j];
         if(c == ''||reg=='')
             continue;
-        var cur = parseFloat(c);
+        var cur = parseFloat(c.replace(',','.'));
         if(isNaN(cur))
             continue;
         var el = svgd.getElementById(reg);

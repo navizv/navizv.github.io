@@ -164,7 +164,8 @@ function setscales(){
   var cols = document.getElementsByClassName('scales');
   for(var i in cols){
 if(i>0 && cols[i].title=="from")
-  continue;
+  cols[i].disabled=true;
+else
     cols[i].disabled=!scales.checked;
 }
 
@@ -262,6 +263,7 @@ function add(){
   r.appendChild(d);
   r.innerHTML += pmr;
   coltab.insertBefore(r,coltab.childNodes[0]);
+setscales();
 }
 
 function addHere(evt){
@@ -272,11 +274,13 @@ var tr = evt.parentNode.parentNode;
   r.appendChild(d);
   r.innerHTML += pmr;
 tr.parentNode.insertBefore(r,tr.nextSibling || null);
+setscales();
 }
 
 function remHere(evt){
 var tr = evt.parentNode.parentNode;
 tr.parentNode.removeChild(tr);
+setscales();
 }
 
 function doit() {
