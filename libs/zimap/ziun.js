@@ -31,7 +31,9 @@ function zitab(title,data,divn){
 }
 
 function zidiag(title,data,divn){
-	var mas = data.split('\n');
+	var mas = data.split('\r\n');
+if(mas.length == 0)
+	mas = data.split('\n');
 	var rn = mas.length;
 	if(rn <= 0)
 		return;
@@ -41,13 +43,23 @@ function zidiag(title,data,divn){
 	for(var i = 1; i< rn; i++){
 		var tmp = new Object();
 		var row = mas[i].split(';');
+		if(mas[i] == '' || mas[i] == '\r')
+			continue;
 		tmp.name = row[0];
 		tmp.data = new Array();
+
 		for(var j=1;j<cn;j++){
-			tmp.data[j-1]=parseFloat(row[j].replace(',','.'));
+if(row[j]==undefined || row[j]==null || row[j]=='')
+	continue;//row[j]='0';
+tmp.data[j-1] = new Array();
+			tmp.data[j-1][0]=parseFloat(hed[j].replace(',','.'));
+			tmp.data[j-1][1]=parseFloat(row[j].replace(',','.'));
 		}
 		ser[i-1] = tmp;
 	}
+Highcharts.setOptions({lang: {
+thousandsSep : ''}
+});
 	var tmp = new Highcharts.Chart({
         chart: {
 	    renderTo: divn,
@@ -56,16 +68,18 @@ function zidiag(title,data,divn){
         title: {
             text: title
         },
-        xAxis: {
-            categories: hed.slice(1,cn)//['Apples', 'Bananas', 'Oranges']
-        },
+        //xAxis: {
+        //    categories: hed.slice(1,cn)//['Apples', 'Bananas', 'Oranges']
+        //},
         yAxis: {
             title: {
                 text: hed[0]//'Fruit eaten'
             }
         },
+	
         series: ser
     });
+
 }
 
 function zimap(title,data,divn){
