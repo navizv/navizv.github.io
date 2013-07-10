@@ -117,7 +117,7 @@ function yearSel(){
 
 function procData(data,j){
   mapdiv.style.opacity = '0.5';
-  dat.value = data;
+  dat.innerHTML = data;
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
   var colors = ['#ccccff','#6666ff','#0000ff','#330099'];
