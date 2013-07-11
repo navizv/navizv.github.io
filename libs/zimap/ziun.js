@@ -47,13 +47,15 @@ if(mas.length == 0)
 			continue;
 		tmp.name = row[0];
 		tmp.data = new Array();
-
+var jj=0;
 		for(var j=1;j<cn;j++){
-if(row[j]==undefined || row[j]==null || row[j]=='')
+if(row[j]==undefined || row[j]==null || row[j]==''){
+//alert(row[0]);
 	continue;//row[j]='0';
-tmp.data[j-1] = new Array();
-			tmp.data[j-1][0]=parseFloat(hed[j].replace(',','.'));
-			tmp.data[j-1][1]=parseFloat(row[j].replace(',','.'));
+}
+tmp.data[jj] = new Array();
+			tmp.data[jj][0]=parseFloat(hed[j].replace(',','.'));
+			tmp.data[jj++][1]=parseFloat(row[j].replace(',','.'));
 		}
 		ser[i-1] = tmp;
 	}
