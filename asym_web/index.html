@@ -29,7 +29,7 @@ display:none;background-color:white;color:black;"></div>
 <script type="text/javascript">
 var csvData;
 var head;
-var grad = false;
+var gradd = false;
 var isos='';
   var datadr = '/libs/zimap/maps/russia.csv';
   $.ajax({
@@ -121,7 +121,7 @@ function procData(data,j){
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
   var colors = ['#ccccff','#6666ff','#0000ff','#330099'];
-  zimap_draw_x(data,svgd,colors,j,';',1,grad,isos);
+  zimap_draw_x(data,svgd,colors,j,';',1,gradd ? {coltype:'Gradient'} : {coltype:'Block'},isos);
   mapdiv.style.opacity = '1';
 }
 
@@ -182,7 +182,7 @@ function hide_tooltip(){
 }
 
 function ctSel(ra){
-  grad = (ra.value == 'Gradient');
+  gradd = (ra.value == 'Gradient');
   yearSel();
 }
 </script>

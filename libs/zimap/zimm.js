@@ -14,7 +14,7 @@ var zim_not_parsed;
 
 function zimap_draw(data,svgd,colors,j,isos){
     var isosp = isos || '';
-    zimap_draw_x(data,svgd,colors,j,';',1,false,isosp);
+    zimap_draw_x(data,svgd,colors,j,';',1,{coltype:'Block'},isosp);
 }
 
 function zim_make_ilib(isos){
@@ -59,7 +59,7 @@ function zim_find_iso(reg,ilib){
     return reg;
 }
 
-function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos,scs){
+function zimap_draw_x(data,svgd,colors,j,colsep,strow,opts,isos,scs){
     //alert(isos);
     //Вычисляем шкалу для цветов
     var mas = data.split('\r\n');
@@ -107,11 +107,11 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,grad,isos,scs){
     }
 
     var cn = colors.length;
-    if(grad)
+    if(opts.coltype=='Gradient')
         cn=4;
     var step = (max-min)/cn;
     var scl = new Array();
-    if(scs != null && !grad){
+    if(scs != null && opts.coltype != 'Gradient'){
 scl = scs;
 }else{
     scl[0] = parseFloat(min);
@@ -121,9 +121,11 @@ scl = scs;
     scl[cn] = max;
 }
     //Рисуем легенду
+if(opts.showLegend == null) opts.showLegend = true;
+
     var i = 0;
     var cury = parseInt(svgd.getElementById('leg0').getAttribute('y'));
-    if(cury!=cury)//awesome chech for NaN. isNaN() doesn't work here
+    if(cury!=cury)//awesome check for NaN. isNaN() doesn't work here
         cury=100;
 
     var h = Math.round(75*4 / cn);
@@ -137,7 +139,8 @@ scl = scs;
         var txt = svgd.getElementById('tcol'+i);
         txt.textContent = '';        
     }
-    if(grad){
+if(opts.showLegend){
+    if(opts.coltype=='Gradient'){
         var rec = svgd.getElementById('leg0');
         rec.setAttribute('x','1100');
         rec.setAttribute('y',cury);
@@ -163,7 +166,7 @@ scl = scs;
         txt.setAttribute('y',cury+5);
         txt.textContent = ziformat(scl[cn-i]);
         cury+=75;
-    }else{
+    }else if(opts.coltype=='Block'){
         for(i = 0; i < cn; i++){
             var rec = svgd.getElementById('leg'+i);
             rec.setAttribute('x','1100');
@@ -183,7 +186,26 @@ scl = scs;
         txt.setAttribute('y',cury+5);
         txt.textContent = ziformat(scl[cn-i]);
         cury+=75;
+     }else if(opts.coltype=='Category'){
+if(h>=45)
+h=45;
+        for(i = 0; i < cn; i++){
+            var rec = svgd.getElementById('leg'+i);
+            rec.setAttribute('x','1100');
+            rec.setAttribute('y',cury);
+            rec.setAttribute('width','30');
+            rec.setAttribute('height',h);
+            rec.setAttribute('fill',colors[cn-i-1]);
+
+            var txt = svgd.getElementById('tcol'+i);
+            txt.setAttribute('x','1135');
+            txt.setAttribute('y',cury+5+h/2);
+            txt.textContent = scl[cn-i-1];
+            cury+=h;
+        }
     }
+
+}
     //Чистим старые данные и цвета регионов
     var regs = svgd.getElementsByClassName('region');
     for(var i =0;i<regs.length;i++){
@@ -206,12 +228,15 @@ scl = scs;
         if(c == ''||reg=='')
             continue;
         var cur = parseFloat(c.replace(',','.'));
-        if(isNaN(cur))
-            continue;
+if(opts.coltype=='Category'){
+cur = c;
+//alert(c);
+}else if(isNaN(cur))
+  continue;
         var el = svgd.getElementById(reg);
 
         if(el != null){
-            if(grad){
+            if(opts.coltype=='Gradient'){
                 var pr = (cur-min)/(max-min);
                 var strcol;
                 if(pr<=0.5){
@@ -230,6 +255,14 @@ scl = scs;
                     strcol='#ffff00';
                 //alert(strcol);
                 el.setAttribute('fill',strcol);
+            }else if(opts.coltype=='Category'){
+                var k = 0;
+                for(k = 0; k<cn;k++){
+//alert(""+cur+" - "+scl[k]);
+                    if(cur == scl[k])
+                        break;
+                }
+                el.setAttribute('fill',colors[k]);
             }else{
                 var k = 0;
                 for(k = 0; k<cn;k++){

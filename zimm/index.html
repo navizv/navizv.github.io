@@ -82,10 +82,15 @@ US-IL;9;7;10</textarea>
       <select id='coltype' onchange='ctSel()'>
 	<option value="Gradient" selected>Gradient</option>
 	<option value="Block">Block</option>
+	<option value="Category">Category</option>
       </select>
       <div id="coltabdiv" style="display:none;">
 	<input type="button" value="Insert" onclick="add()"/><br/>
 	<table id='coltab' border="1"></table>
+      </div>
+      <div id="cattabdiv" style="display:none;">
+	<input type="button" value="Insert" onclick="add()"/><br/>
+	<table id='cattab' border="1"></table>
       </div>
       <div id="gradtabdiv">
 	<input type="button" value="Insert" disabled/><br/>
@@ -97,6 +102,7 @@ US-IL;9;7;10</textarea>
       </div>
     </td><td valign="top">
 <input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales<br/>
+<input type="checkbox" id="showLeg" name="showLeg" checked/>Show legend<br/>
 Map:<br/>
 	<select size="1" name="maps" id="maps" onchange="mapSel()"></select>
         
@@ -144,6 +150,11 @@ There'll be 'about' here! Very soon!
 '<td><input type="text" value="" size="8" title="to" class="scales" disabled/></td>'+
 '<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
 '<td><input type="button" value="-" onclick="remHere(this)"/></td>';
+  //colors
+  var pmrCat = 
+'<td><input type="text" value="" size="8" title="category" class="scales" disabled/></td>'+
+'<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
+'<td><input type="button" value="-" onclick="remHere(this)"/></td>';
   //Default colors  
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
   setColors();
@@ -154,9 +165,15 @@ function ctSel(){
   if(coltype.value == 'Block'){
 coltabdiv.style.display = 'block';
 gradtabdiv.style.display = 'none';
-  }else{
+cattabdiv.style.display = 'none';
+  }else if(coltype.value == 'Gradient'){
 coltabdiv.style.display = 'none';
 gradtabdiv.style.display = 'block';
+cattabdiv.style.display = 'none';
+  }else if(coltype.value == 'Category'){
+coltabdiv.style.display = 'none';
+gradtabdiv.style.display = 'none';
+cattabdiv.style.display = 'block';
   }
 }
 
@@ -234,24 +251,37 @@ function setColors(){
     r.appendChild(d);
     r.innerHTML += pmr;
     coltab.insertBefore(r,coltab.childNodes[0]);
+    r = document.createElement('tr');
+    d = document.createElement('td');
+    d.innerHTML = '<input type="color" value="'+c+'"/>';
+    r.appendChild(d);
+    r.innerHTML += pmrCat;
+    cattab.insertBefore(r,cattab.childNodes[0]);
   }
 }
 
 function getColors(){
 var cn = coltab.childNodes.length;
+if(coltype.value=='Category')cn = cattab.childNodes.length;
 var j = 0;
   colors = new Array();
   scs = new Array();
   for(var i = 0;i<cn;i++){
     var tr = coltab.childNodes[i];
+if(coltype.value=='Category')tr = cattab.childNodes[i];
     if(tr.innerHTML == undefined) 
 	continue;
     var c = tr.childNodes[0].childNodes[0].value;
+if(coltype.value=='Category'){
+        scs[j] = tr.childNodes[1].childNodes[0].value;
+}
+else{
     if(j==0)
       scs[j] = tr.childNodes[1].childNodes[0].value;
     else
       tr.childNodes[1].childNodes[0].value = scs[j];
     scs[j+1] = tr.childNodes[2].childNodes[0].value;
+}
     colors[j++]=c;
   }
 }
@@ -295,7 +325,11 @@ $("#mymap").css({ "opacity" : "0.5" });
 //alert('isos='+isos);
 if(!scales.checked)
   scs=null;
-  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,coltype.value=='Gradient',isos,scs);
+  options = {
+    coltype : coltype.value,
+    showLegend : showLeg.checked
+  }
+  zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,options,isos,scs);
   //alert(zim_parsed);
   parsed.innerHTML = zim_parsed;
   not_parsed.innerHTML = zim_not_parsed;
