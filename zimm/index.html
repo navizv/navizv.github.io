@@ -291,8 +291,14 @@ function add(){
   var d = document.createElement('td');
   d.innerHTML = '<input type="color" />';
   r.appendChild(d);
+if(coltype.value=='Block'){
   r.innerHTML += pmr;
   coltab.insertBefore(r,coltab.childNodes[0]);
+}else{
+  r.innerHTML += pmrCat;
+  cattab.insertBefore(r,cattab.childNodes[0]);
+}
+
 setscales();
 }
 
@@ -302,7 +308,11 @@ var tr = evt.parentNode.parentNode;
   var d = document.createElement('td');
   d.innerHTML = '<input type="color" />';
   r.appendChild(d);
+if(coltype.value=='Block'){
   r.innerHTML += pmr;
+}else{
+  r.innerHTML += pmrCat;
+}
 tr.parentNode.insertBefore(r,tr.nextSibling || null);
 setscales();
 }
