@@ -104,8 +104,9 @@ US-IL;9;7;10</textarea>
 <input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales<br/>
 <input type="checkbox" id="showLeg" name="showLeg" checked/>Show legend<br/>
 Map:<br/>
-	<select size="1" name="maps" id="maps" onchange="mapSel()"></select>
-        
+	<select size="1" name="maps" id="maps" onchange="mapSel()"></select><br/>
+Color for 'no data':
+	<input type="color" id="noDataColor" value="#808080">       
     </td></tr></table><br/>
 Sorry, it's impossible to choose colors for gradient manually yet. But it's possible for block, you can try it!:)
   </div>
@@ -337,7 +338,8 @@ if(!scales.checked)
   scs=null;
   options = {
     coltype : coltype.value,
-    showLegend : showLeg.checked
+    showLegend : showLeg.checked,
+    noDataColor : noDataColor.value
   }
   zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,options,isos,scs);
   //alert(zim_parsed);

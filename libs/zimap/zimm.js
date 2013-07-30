@@ -207,10 +207,11 @@ h=45;
 
 }
     //„истим старые данные и цвета регионов
+var ndc = (opts.noDataColor != null) ? opts.noDataColor : '#808080';
     var regs = svgd.getElementsByClassName('region');
     for(var i =0;i<regs.length;i++){
         var el = regs[i];
-        el.setAttribute('fill','#808080');
+        el.setAttribute('fill',ndc);
         var tit = el.getElementsByTagName('title')[0];
         if(tit==undefined||tit==null){
             var tit = el.getElementsByTagName('tutle')[0];
@@ -280,7 +281,11 @@ cur = c;
                     continue;
             }
             //параллельно - дописываем данные в тайтлы, чтоб всплывали
+if(opts.coltype=='Category'){
+	    tit.textContent = tit.textContent + ': ' + cur;
+}else{
             tit.textContent = tit.textContent + ': ' + zim_format(""+cur);
+}
         }
     }
 }
