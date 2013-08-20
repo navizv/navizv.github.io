@@ -425,7 +425,7 @@ function save(){
 function setssave(){
   var txt = "";
 getColors();
-txt += coltype.value + ";" + colors.length +'\r\n';
+txt += coltype.value + ";" + colors.length + ";" + noDataColor.value + '\r\n';
 for(var i in colors){
 txt += colors[i]+'\r\n';
 }
@@ -443,7 +443,8 @@ function setsset(evt){
       var lins = e.target.result.split('\r\n');
       var head = lins[0].split(';');
       coltype.value = head[0];
-
+if(head[2] != undefined)
+	noDataColor.value = head[2];
       colors = new Array();
       for(var i = 0; i < head[1]; i++){
 	colors[head[1]-i-1] = lins[i+1];
