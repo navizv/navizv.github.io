@@ -107,7 +107,17 @@ Map:<br/>
 	<select size="1" name="maps" id="maps" onchange="mapSel()"></select><br/>
 Color for 'no data':
 	<input type="color" id="noDataColor" value="#808080">       
-    </td></tr></table><br/>
+    </td>
+<td valign="top">
+
+Color settings file:<br/>
+<input type="button" value="Save" onclick="setssave()">
+<input type="text" value="settings" id="setsfilename" size="9">.csv<br/>
+<input type="file" name="setsfile" id="setsfile" value="SettingsFile"><br/>
+
+
+</td>
+</tr></table><br/>
 Sorry, it's impossible to choose colors for gradient manually yet. But it's possible for block, you can try it!:)
   </div>
   <div id="hiddiv" class="pages" style="display:none;"></div>
@@ -144,7 +154,7 @@ There'll be 'about' here! Very soon!
 
   //save file
   document.getElementById('file').addEventListener('change',filesel,false);
-
+  document.getElementById('setsfile').addEventListener('change',setsset,false);
   //colors
   var pmr = 
 '<td><input type="text" value="" size="8" title="from" class="scales" disabled/></td>'+
@@ -411,6 +421,41 @@ function save(){
   saveAs(blob, ""+filename.value+".svg");
   	//document.body.innerHTML = document.getElementById('container').innerHTML;
 }
+
+function setssave(){
+  var txt = "";
+getColors();
+txt += coltype.value + ";" + colors.length +'\r\n';
+for(var i in colors){
+txt += colors[i]+'\r\n';
+}
+  var blob = new Blob([txt], {type: "text/csv;charset=utf-8"});
+  saveAs(blob, "" + setsfilename.value + ".csv");
+  	//document.body.innerHTML = document.getElementById('container').innerHTML;
+}
+
+
+function setsset(evt){
+  var f = evt.target.files[0];
+  var rdr = new FileReader();
+  rdr.onload = (function(ff){
+    return function(e){
+      var lins = e.target.result.split('\r\n');
+      var head = lins[0].split(';');
+      coltype.value = head[0];
+
+      colors = new Array();
+      for(var i = 0; i < head[1]; i++){
+	colors[head[1]-i-1] = lins[i+1];
+      }
+ctSel();
+cattab.innerHTML = coltab.innerHTML = '';
+      setColors();
+    };
+  })(f);
+  rdr.readAsBinaryString(f);
+}
+
 </script>
 <br/>
 <hr>
