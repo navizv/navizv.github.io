@@ -1,0 +1,539 @@
+<html>
+<head>
+<title>
+ZiMapMaker - csv data to svg map
+</title>
+<style>
+.header div{
+  display: inline;
+  background: #aaa;
+  cursor: pointer;
+  padding: 3;
+  border:solid;
+  border-width: 1 1 0 1;
+  border-color: white;
+}
+.header{
+  background: #2a2;
+  border:solid;
+  border-width: 5 5 0 5;
+  border-color: #2a2;
+}
+#seld{
+  background: #fffffe;
+  padding-bottom: 5; 
+}
+.content {
+  background: #fffffe;
+  border: solid;
+  border-width: 0 5 5 5;
+  border-color: #2a2;
+}
+.pages{
+  display: inline;
+  background: #fffffe;
+}
+</style>
+
+<script src="/libs/js/jquery.min.js"></script>
+<script src="/libs/js/FileSaver.min.js"></script>
+<script src="/libs/zimap/zimap.js"></script>
+<!-- script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script -->
+<!-- script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script -->
+</head>
+<body>
+
+<div class="header">
+  <div id="seld" onclick="tab(this,'datadiv')">Input data</div>
+  <div onclick="tab(this,'visdiv')">Visualization settings</div>
+ 
+  <input type="button" value="Visualize" onclick="doit()">
+  <label xmlns="http://www.w3.org/1999/xhtml">Filename: <input type="text" id="filename" value="map" />.svg</label>
+  <input type="button" value="Save" onclick="save()">
+  <input type="button" value="Save As JPG" id="savejpg">
+
+  <div onclick="tab(this,'hiddiv')" style="margin-left:100;">Hide</div>
+  <div onclick="tab(this,'hlpdiv')">Help</div>
+  <div onclick="tab(this,'abodiv')">About</div>
+</div>
+
+<div class="content">
+  <div id="datadiv" class="pages" style="display:block;">
+  <table><tr><td>
+    <input type="file" name="file" id="file" value="DataFile"><br/>
+    <b>Data:</b><br/><textarea rows="10" cols="45" id="dat">Something;2000;2001;2002
+RU;9;7;10
+UA;7;8;9
+US;4;5;6
+RU-KHM;9;6;6
+RU-SA;4;5;6
+US-CA;7;8;9
+US-IL;9;7;10</textarea>
+  </td><td valign="top">
+    Data column number:<input type="number" id="colnum" value="2"/><br/>
+    Data first row number:<input type="number" id="rownum" value="2"/><br/>
+    Column separator:<input type="text" id="colsep" value=";"/><br/>
+    <input type="button" value="Load example data" onclick="loadExample()"/></td>
+  <td>
+    <b>Parsed:</b><br/><textarea readonly rows="10" cols="20" id="parsed"></textarea></td>
+  <td>
+    <b>Not parsed:</b><br/><textarea readonly rows="10" cols="15" id="not_parsed"></textarea></td>
+  </tr></table>
+  </div>
+  <div id="visdiv" class="pages" style="display:none;">
+    <table><tr><td>
+      <select id='coltype' onchange='ctSel()'>
+	<option value="Gradient" selected>Gradient</option>
+	<option value="Block">Block</option>
+	<option value="Category">Category</option>
+      </select>
+      <div id="coltabdiv" style="display:none;">
+	<input type="button" value="Insert" onclick="add()"/><br/>
+	<table id='coltab' border="1"></table>
+      </div>
+      <div id="cattabdiv" style="display:none;">
+	<input type="button" value="Insert" onclick="add()"/><br/>
+	<table id='cattab' border="1"></table>
+      </div>
+      <div id="gradtabdiv">
+	<input type="button" value="Insert" disabled/><br/>
+	<table id='gradtab' border="1">
+<tr><td><input type="color" value="#ff0000" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
+<tr><td><input type="color" value="#ffff00" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
+<tr><td><input type="color" value="#00ff00" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
+        </table>
+      </div>
+    </td><td valign="top">
+<input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales<br/>
+<input type="checkbox" id="showLeg" name="showLeg" checked/>Show legend<br/>
+Map:<br/>
+	<select size="1" name="maps" id="maps" onchange="mapSel()"></select><br/>
+Color for 'no data':
+	<input type="color" id="noDataColor" value="#808080">       
+    </td>
+<td valign="top">
+
+Color settings file:<br/>
+<input type="button" value="Save" onclick="setssave()">
+<input type="text" value="settings" id="setsfilename" size="9">.csv<br/>
+<input type="file" name="setsfile" id="setsfile" value="SettingsFile"><br/>
+
+
+</td>
+</tr></table><br/>
+Sorry, it's impossible to choose colors for gradient manually yet. But it's possible for block, you can try it!:)
+  </div>
+  <div id="hiddiv" class="pages" style="display:none;">
+<textarea rows="10" cols="75" id="mycode"></textarea>
+</div>
+  <div id="hlpdiv" class="pages" style="display:none;">
+There'll be 'help' here! Very soon!
+  </div>
+  <div id="abodiv" class="pages" style="display:none;">
+There'll be 'about' here! Very soon!
+  </div>
+  </div><br/>
+<div id="container" style="width:800px; height:500px;">
+  <object type="image/svg+xml" id="mymap" width="1000" height="500" viewBox="0 0 1300 610" onload=tt()>
+  </object>
+</div>
+<script>
+  $.ajax({
+    url: 'about.html',
+    dataType: 'html',
+    success: function(data){abodiv.innerHTML = data;}
+  });
+  $.ajax({
+    url: 'help.html',
+    dataType: 'html',
+    success: function(data){hlpdiv.innerHTML = data;}
+  });
+  //maps select
+  var isos='';
+  var info = '/libs/zimap/maps/maps.txt';
+  $.ajax({
+    url: info,
+    dataType: 'html',
+    success: function(data){drawMaps(data);}
+  });
+
+  //save file
+  document.getElementById('file').addEventListener('change',filesel,false);
+  document.getElementById('setsfile').addEventListener('change',setsset,false);
+  //colors
+  var pmr = 
+'<td><input type="text" value="" size="8" title="from" class="scales" disabled/></td>'+
+'<td><input type="text" value="" size="8" title="to" class="scales" disabled/></td>'+
+'<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
+'<td><input type="button" value="-" onclick="remHere(this)"/></td>';
+  //colors
+  var pmrCat = 
+'<td><input type="text" value="" size="8" title="category" class="scales" disabled/></td>'+
+'<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
+'<td><input type="button" value="-" onclick="remHere(this)"/></td>';
+  //Default colors  
+  var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
+  setColors();
+  var scs;
+
+//color type
+function ctSel(){
+  if(coltype.value == 'Block'){
+coltabdiv.style.display = 'block';
+gradtabdiv.style.display = 'none';
+cattabdiv.style.display = 'none';
+  }else if(coltype.value == 'Gradient'){
+coltabdiv.style.display = 'none';
+gradtabdiv.style.display = 'block';
+cattabdiv.style.display = 'none';
+  }else if(coltype.value == 'Category'){
+coltabdiv.style.display = 'none';
+gradtabdiv.style.display = 'none';
+cattabdiv.style.display = 'block';
+  }
+}
+
+function setscales(){
+  var cols = document.getElementsByClassName('scales');
+  for(var i in cols){
+if(i>0 && cols[i].title=="from")
+  cols[i].disabled=true;
+else
+    cols[i].disabled=!scales.checked;
+}
+
+}
+
+//tabs
+function tab(el,pageId) {
+  var sh = document.getElementById(pageId);
+  var cont = document.getElementsByClassName('pages');
+  for (var i in cont)
+    if(cont[i].tagName=='DIV')
+      cont[i].style.display = 'none';
+    sh.style.display = 'block';
+  document.getElementById('seld').id='';
+  el.id = 'seld';
+}
+
+function drawMaps(data){
+  //var maps = document.getElementById('par');
+  maps.innerHTML = '';
+  var mas = data.split('\n');
+  var sel;
+  for(var i in mas){
+	var str = mas[i].split(';');
+	var opt = document.createElement('option');
+	opt.value = str[1];
+	opt.innerHTML = str[0];
+	if(i == 1){
+	  opt.selected = 'selected';
+	}
+	maps.appendChild(opt);
+  }
+  mapSel();
+}
+
+function mapSel(){
+  var adr = '/libs/zimap/maps/'+maps.value;
+  var svg = adr + '.svg';
+  var csv = adr + '.csv';
+  $.ajax({
+    url: csv,
+    dataType:'html',
+    success: function(data){isos = data;},
+    error: function(){isos='';}
+  });
+
+//change map
+var mm = document.getElementById('mymap');
+var nm = document.createElement('object');
+var ma = mm.attributes;
+for(var i in ma)
+  nm.setAttribute(ma[i].name,ma[i].value);
+
+nm.data = svg;
+mm.parentNode.insertBefore(nm,mm);
+mm.parentNode.removeChild(mm);
+  
+}
+
+function setColors(){
+  for(var i in colors){
+    var c = colors[i];
+    var r = document.createElement('tr');
+    var d = document.createElement('td');
+    d.innerHTML = '<input type="color" value="'+c+'"/>';
+    r.appendChild(d);
+    r.innerHTML += pmr;
+    coltab.insertBefore(r,coltab.childNodes[0]);
+    r = document.createElement('tr');
+    d = document.createElement('td');
+    d.innerHTML = '<input type="color" value="'+c+'"/>';
+    r.appendChild(d);
+    r.innerHTML += pmrCat;
+    cattab.insertBefore(r,cattab.childNodes[0]);
+  }
+}
+
+function getColors(){
+var cn = coltab.childNodes.length;
+if(coltype.value=='Category')cn = cattab.childNodes.length;
+var j = 0;
+  colors = new Array();
+  scs = new Array();
+  for(var i = 0;i<cn;i++){
+    var tr = coltab.childNodes[i];
+if(coltype.value=='Category')tr = cattab.childNodes[i];
+    if(tr.innerHTML == undefined) 
+	continue;
+    var c = tr.childNodes[0].childNodes[0].value;
+if(coltype.value=='Category'){
+        scs[j] = tr.childNodes[1].childNodes[0].value;
+}
+else{
+    if(j==0)
+      scs[j] = tr.childNodes[1].childNodes[0].value;
+    else
+      tr.childNodes[1].childNodes[0].value = scs[j];
+    scs[j+1] = tr.childNodes[2].childNodes[0].value;
+}
+    colors[j++]=c;
+  }
+}
+
+function add(){
+  var r = document.createElement('tr');
+  var d = document.createElement('td');
+  d.innerHTML = '<input type="color" />';
+  r.appendChild(d);
+if(coltype.value=='Block'){
+  r.innerHTML += pmr;
+  coltab.insertBefore(r,coltab.childNodes[0]);
+}else{
+  r.innerHTML += pmrCat;
+  cattab.insertBefore(r,cattab.childNodes[0]);
+}
+
+setscales();
+}
+
+function addHere(evt){
+var tr = evt.parentNode.parentNode;
+  var r = document.createElement('tr');
+  var d = document.createElement('td');
+  d.innerHTML = '<input type="color" />';
+  r.appendChild(d);
+if(coltype.value=='Block'){
+  r.innerHTML += pmr;
+}else{
+  r.innerHTML += pmrCat;
+}
+tr.parentNode.insertBefore(r,tr.nextSibling || null);
+setscales();
+}
+
+function remHere(evt){
+var tr = evt.parentNode.parentNode;
+tr.parentNode.removeChild(tr);
+setscales();
+}
+
+function doit() {
+  var data = dat.value;
+  var j = parseInt(colnum.value)-1;//столбец с данными
+  //var svg = document.getElementById('mymap');
+  //var svgd = svg.contentDocument;
+  getColors();
+  if(colsep.value == ';' && data.search(/;/)<0)
+    colsep.value=',';
+//alert('isos='+isos);
+if(!scales.checked)
+  scs=null;
+  options = {
+    coltype : coltype.value,
+    showLegend : showLeg.checked,
+    noDataColor : noDataColor.value
+  }
+  //zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,options,isos,scs);
+//container.innerHTML = "";
+  var mapChart = new Zimap(mymap,{
+	data:{
+		str : data,
+		colsep: colsep.value,
+		colnum : j,
+		rowstnum : parseInt(rownum.value)-1
+	},
+	settings:{
+		type : coltype.value,
+		showLegend : showLeg.checked,
+    		noDataColor : noDataColor.value,
+		scales : scs,
+		colors : colors
+	}
+});
+var dat2 = data.replace(/\n/g,"+");
+mycode.value =   "var mapChart = new Zimap(container,{ "+
+	"data:{"+
+		"str :\"" + dat2 +"\", "+
+		"colsep: \""+colsep.value+"\", "+
+		"rowsep: \"+\", "+
+		"colnum : "+j+","+
+		"rowstnum : "+(parseInt(rownum.value)-1)+
+	"},"+
+	"settings:{"+
+		"type : \""+coltype.value+"\","+
+		"showLegend : "+showLeg.checked+","+
+    		"noDataColor : \""+noDataColor.value+"\""+
+		//(scales.checked?"scales : "+arr_to_str(scs)+",":"")
+		//"colors:"arr_to_str(colors)
+	"}});";
+  //alert(zim_parsed);
+//!!po sobytiju!!
+  //parsed.innerHTML = zim_parsed;
+  //not_parsed.innerHTML = zim_not_parsed;
+}
+
+function arr_to_str(arr){
+}
+
+function loadExample(){
+  var fname = 'gdp.csv';
+  $.ajax({
+    url: fname,
+    dataType:'html',
+    success: function(data){dat.innerHTML = data;},
+  });
+}
+
+function filesel(evt){
+  var f = evt.target.files[0];
+  var rdr = new FileReader();
+  rdr.onload = (function(ff){
+    return function(e){
+      dat.innerHTML = e.target.result;
+    };
+  })(f);
+  rdr.readAsBinaryString(f);
+
+}
+function tt(){
+	//alert("rr!");
+//Так не работает. Но можно 1 раз вставить тайтлы и сохранить карту
+/*  if(isos !=''){
+    var svg = document.getElementById('mymap');
+    var svgd = svg.contentDocument;
+    var rs = svgd.getElementsByClassName('region');
+    var b = rs[0].childNodes.length;
+    if(b == 0){
+      var mas = isos.split('\r\n');
+      for(var i in mas){
+var rw = mas[i].split(';');
+	var reg = svgd.getElementById(rw[0]);
+alert(reg+ '-'+ rw[0]);
+if(reg==null||reg==undefined)
+continue;
+	var t = svgd.createElement('title');
+	t.textContent = rw[1];
+	reg.appendChild(t);
+      }
+    }
+  }*/
+ /*   var svg = document.getElementById('mymap');
+    var svgd = svg.contentDocument;
+var s = svgd.getElementById('Subjects_Outline').childNodes;
+//alert(s.length);
+for(i in s){
+if(s[i].id==undefined)
+continue;
+s[i].setAttribute('class','region');
+s[i].id = s[i].id.toUpperCase();
+//alert(s[i].id + '-'+s[i].class);
+}
+var aq = svgd.getElementById('AQ');
+aq.parentNode.removeChild(aq);*/
+}
+function save(){
+  var svg = document.getElementById('mymap');
+  var svgd = svg.contentDocument;
+  var blob = new Blob([xml_to_text(svgd)], {type: "image/svg+xml;charset=utf-8"});
+  saveAs(blob, ""+filename.value+".svg");
+  	//document.body.innerHTML = document.getElementById('container').innerHTML;
+}
+
+function setssave(){
+  var txt = "";
+getColors();
+txt += coltype.value + ";" + colors.length + ";" + noDataColor.value + '\r\n';
+for(var i in colors){
+txt += colors[i]+'\r\n';
+}
+  var blob = new Blob([txt], {type: "text/csv;charset=utf-8"});
+  saveAs(blob, "" + setsfilename.value + ".csv");
+  	//document.body.innerHTML = document.getElementById('container').innerHTML;
+}
+
+
+function setsset(evt){
+  var f = evt.target.files[0];
+  var rdr = new FileReader();
+  rdr.onload = (function(ff){
+    return function(e){
+      var lins = e.target.result.split('\r\n');
+      var head = lins[0].split(';');
+      coltype.value = head[0];
+if(head[2] != undefined)
+	noDataColor.value = head[2];
+      colors = new Array();
+      for(var i = 0; i < head[1]; i++){
+	colors[head[1]-i-1] = lins[i+1];
+      }
+ctSel();
+cattab.innerHTML = coltab.innerHTML = '';
+      setColors();
+    };
+  })(f);
+  rdr.readAsBinaryString(f);
+}
+
+
+function saveDaPicture(){
+    var img = document.getElementById('canvas').toDataURL("image/png");
+    //$('body').append('<img src="'+img+'"/>');
+	//var blob = document.getElementById('canvas').toBlob();//new Blob([img], {type: "image/png"});
+  var canvas = document.getElementById("canvas");
+  canvas.toBlob(function(blob) {
+  saveAs(blob, "" + setsfilename.value + ".png");
+});
+//  saveAs(blob, "" + setsfilename.value + ".png");
+  	//document.body.innerHTML = document.getElementById('container').innerHTML;
+}
+
+$('#savejpg').click(function(){
+    var svg = mymap.contentDocument;//.html().replace(/>\s+/g, ">").replace(/\s+</g, "<");
+                             // strips off all spaces between tags
+    //alert(svg);
+    canvg('canvas', svg, {renderCallback: saveDaPicture, ignoreMouse: true, ignoreAnimation: true});
+});
+
+</script>
+<p><canvas id="canvas" height="610" width="1300" hidden></canvas></p>
+<br/>
+<hr>
+<footer>
+Copyright (c) 2013 Ivan Zaytsev (zaycev.ivan@gmail.com, <a href="/main/">home page</a>)<br/>
+(see 'about' tab for more information)
+</footer>
+<script>
+if(location.href.split('/')[2]!='127.0.0.1'){
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41768406-1', 'navizv.github.io');
+  ga('send', 'pageview');
+}
+</script>
+</body>
+</html>
