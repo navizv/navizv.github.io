@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>
+input test
+</title>
+
+</head>
+<body>
+blablabla<br/>
+<div id="container" style="width: 500px; height: 300px; opacity: 1;">
+<span id="outp"></span><br/>
+<input type="text" id="inp" onkeypress="println(event)" />
+<script>
+function println(event){
+event = event || window.event;
+//alert("here!");
+	outp.innerHTML+=""+event.charCode;
+}
+</script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>
+ZiVis test
+</title>
+        <link type="text/css" href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet" />
+
+        <script src="/libs/js/jquery.min.js"></script>
+	<script src="/libs/js/highcharts.js"></script>
+       	<script src="js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+        <script src="/libs/js/FileSaver.min.js"></script>
+	<script src="/libs/zimap/zivis.js"></script>
+</head>
+<body>
+blablabla<br/>
+<div id="container" style="width: 500px; height: 300px; opacity: 1;">
+</div>
+blablabla2<br/>
+<div id="map2">
+</div>
+<script>
+$("#container").zivis({ data:{str :"Something;2000;2001;2002+RU;9;7;10+UA;7;8;9+US;4;5;6+RU-KHM;9;6;6+RU-SA;4;5;6+US-CA;7;8;9+US-IL;9;7;10", 
+colsep: ";", rowsep: "+", colnum : 1,rowstnum : 1},settings:{vistype:"Chart",chartType:"pie",type : "Gradient",showLegend : true,noDataColor : "#808080"}});
+
+</script>
+</body>
+</html>

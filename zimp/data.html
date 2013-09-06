@@ -1,0 +1,44 @@
+<table><tr><td>
+    <input type="file" name="file" id="file" value="DataFile"><br/>
+    <b>Data:</b><br/><textarea rows="10" cols="40" id="dat">Something;2000;2001;2002
+RU;9;7;10
+UA;7;8;9
+US;4;5;6
+RU-KHM;9;6;6
+RU-SA;4;5;6
+US-CA;7;8;9
+US-IL;9;7;10</textarea>
+  </td><td valign="top">
+    Data column number:<input type="number" id="colnum" value="2"/><br/>
+    Data first row number:<input type="number" id="rownum" value="2"/><br/>
+    Column separator:<input type="text" id="colsep" value=";"/><br/>
+    <input type="button" value="Load example data" onclick="loadExample()"/></td>
+  <td>
+    <b>Parsed:</b><br/><textarea readonly rows="10" cols="15" id="parsed"></textarea></td>
+  <td>
+    <b>Not parsed:</b><br/><textarea readonly rows="10" cols="15" id="not_parsed"></textarea></td>
+  </tr>
+</table>
+
+<script>
+document.getElementById('file').addEventListener('change',filesel,false);
+function filesel(evt){
+  var f = evt.target.files[0];
+  var rdr = new FileReader();
+  rdr.onload = (function(ff){
+    return function(e){
+      dat.innerHTML = e.target.result;
+    };
+  })(f);
+  rdr.readAsBinaryString(f);
+
+}
+function loadExample(){
+  var fname = 'gdp.csv';
+  $.ajax({
+    url: fname,
+    dataType:'html',
+    success: function(data){dat.innerHTML = data;},
+  });
+}
+</script>

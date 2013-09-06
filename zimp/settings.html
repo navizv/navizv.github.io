@@ -1,0 +1,279 @@
+    <table><tr><td>
+      <select id='coltype' onchange='ctSel()'>
+	<option value="Gradient" selected>Gradient</option>
+	<option value="Block">Block</option>
+	<option value="Category">Category</option>
+      </select>
+      <div id="coltabdiv" style="display:none;">
+	<input type="button" value="Insert" onclick="add()"/><br/>
+	<table id='coltab' border="1"></table>
+      </div>
+      <div id="cattabdiv" style="display:none;">
+	<input type="button" value="Insert" onclick="add()"/><br/>
+	<table id='cattab' border="1"></table>
+      </div>
+      <div id="gradtabdiv">
+	<input type="button" value="Insert" disabled/><br/>
+	<table id='gradtab' border="1">
+<tr><td><input type="color" value="#ff0000" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
+<tr><td><input type="color" value="#ffff00" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
+<tr><td><input type="color" value="#00ff00" disabled/></td><td><input type="button" value="+" disabled/></td><td><input type="button" value="-" disabled/></td></tr>
+        </table>
+      </div>
+    </td><td valign="top">
+<input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales<br/>
+<input type="checkbox" id="showLeg" name="showLeg" checked/>Show legend<br/>
+Map:<br/>
+	<select size="1" name="maps" id="maps" onchange="mapSel()"></select><br/>
+Color for 'no data':
+	<input type="color" id="noDataColor" value="#808080">       
+    </td>
+<td valign="top">
+
+Color settings file:<br/>
+<input type="button" value="Save" onclick="setssave()">
+<input type="text" value="settings" id="setsfilename" size="9">.csv<br/>
+<input type="file" name="setsfile" id="setsfile" value="SettingsFile"><br/>
+</td>
+</tr></table>
+
+<script>
+  $.ajax({
+    url: 'about.html',
+    dataType: 'html',
+    success: function(data){abodiv.innerHTML = data;}
+  });
+  $.ajax({
+    url: 'help.html',
+    dataType: 'html',
+    success: function(data){hlpdiv.innerHTML = data;}
+  });
+  //maps select
+  var isos='';
+  var info = '/libs/zimap/maps/maps.txt';
+  $.ajax({
+    url: info,
+    dataType: 'html',
+    success: function(data){drawMaps(data);}
+  });
+
+  //save file
+  document.getElementById('file').addEventListener('change',filesel,false);
+  document.getElementById('setsfile').addEventListener('change',setsset,false);
+  //colors
+  var pmr = 
+'<td><input type="text" value="" size="8" title="from" class="scales" disabled/></td>'+
+'<td><input type="text" value="" size="8" title="to" class="scales" disabled/></td>'+
+'<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
+'<td><input type="button" value="-" onclick="remHere(this)"/></td>';
+  //colors
+  var pmrCat = 
+'<td><input type="text" value="" size="8" title="category" class="scales" disabled/></td>'+
+'<td><input type="button" value="+" onclick="addHere(this)"/></td>'+
+'<td><input type="button" value="-" onclick="remHere(this)"/></td>';
+  //Default colors  
+  var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
+  setColors();
+  var scs;
+
+//color type
+function ctSel(){
+  if(coltype.value == 'Block'){
+coltabdiv.style.display = 'block';
+gradtabdiv.style.display = 'none';
+cattabdiv.style.display = 'none';
+  }else if(coltype.value == 'Gradient'){
+coltabdiv.style.display = 'none';
+gradtabdiv.style.display = 'block';
+cattabdiv.style.display = 'none';
+  }else if(coltype.value == 'Category'){
+coltabdiv.style.display = 'none';
+gradtabdiv.style.display = 'none';
+cattabdiv.style.display = 'block';
+  }
+}
+
+function setscales(){
+  var cols = document.getElementsByClassName('scales');
+  for(var i in cols){
+if(i>0 && cols[i].title=="from")
+  cols[i].disabled=true;
+else
+    cols[i].disabled=!scales.checked;
+}
+
+}
+
+//tabs
+function tab(el,pageId) {
+  var sh = document.getElementById(pageId);
+  var cont = document.getElementsByClassName('pages');
+  for (var i in cont)
+    if(cont[i].tagName=='DIV')
+      cont[i].style.display = 'none';
+    sh.style.display = 'block';
+  document.getElementById('seld').id='';
+  el.id = 'seld';
+}
+
+function drawMaps(data){
+  //var maps = document.getElementById('par');
+  maps.innerHTML = '';
+  var mas = data.split('\n');
+  var sel;
+  for(var i in mas){
+	var str = mas[i].split(';');
+	var opt = document.createElement('option');
+	opt.value = str[1];
+	opt.innerHTML = str[0];
+	if(i == 0){
+	  opt.selected = 'selected';
+	}
+	maps.appendChild(opt);
+  }
+  mapSel();
+}
+
+function mapSel(){
+  var adr = '/libs/zimap/maps/'+maps.value;
+  var svg = adr + '.svg';
+  var csv = adr + '.csv';
+  $.ajax({
+    url: csv,
+    dataType:'html',
+    success: function(data){isos = data;},
+    error: function(){isos='';}
+  });
+
+//change map
+var mm = document.getElementById('mymap');
+var nm = document.createElement('object');
+var ma = mm.attributes;
+for(var i in ma)
+  nm.setAttribute(ma[i].name,ma[i].value);
+
+nm.data = svg;
+mm.parentNode.insertBefore(nm,mm);
+mm.parentNode.removeChild(mm);
+  
+}
+
+function setColors(){
+  for(var i in colors){
+    var c = colors[i];
+    var r = document.createElement('tr');
+    var d = document.createElement('td');
+    d.innerHTML = '<input type="color" value="'+c+'"/>';
+    r.appendChild(d);
+    r.innerHTML += pmr;
+    coltab.insertBefore(r,coltab.childNodes[0]);
+    r = document.createElement('tr');
+    d = document.createElement('td');
+    d.innerHTML = '<input type="color" value="'+c+'"/>';
+    r.appendChild(d);
+    r.innerHTML += pmrCat;
+    cattab.insertBefore(r,cattab.childNodes[0]);
+  }
+}
+
+function getColors(){
+var cn = coltab.childNodes.length;
+if(coltype.value=='Category')cn = cattab.childNodes.length;
+var j = 0;
+  colors = new Array();
+  scs = new Array();
+  for(var i = 0;i<cn;i++){
+    var tr = coltab.childNodes[i];
+if(coltype.value=='Category')tr = cattab.childNodes[i];
+    if(tr.innerHTML == undefined) 
+	continue;
+    var c = tr.childNodes[0].childNodes[0].value;
+if(coltype.value=='Category'){
+        scs[j] = tr.childNodes[1].childNodes[0].value;
+}
+else{
+    if(j==0)
+      scs[j] = tr.childNodes[1].childNodes[0].value;
+    else
+      tr.childNodes[1].childNodes[0].value = scs[j];
+    scs[j+1] = tr.childNodes[2].childNodes[0].value;
+}
+    colors[j++]=c;
+  }
+}
+
+function add(){
+  var r = document.createElement('tr');
+  var d = document.createElement('td');
+  d.innerHTML = '<input type="color" />';
+  r.appendChild(d);
+if(coltype.value=='Block'){
+  r.innerHTML += pmr;
+  coltab.insertBefore(r,coltab.childNodes[0]);
+}else{
+  r.innerHTML += pmrCat;
+  cattab.insertBefore(r,cattab.childNodes[0]);
+}
+
+setscales();
+}
+
+function addHere(evt){
+var tr = evt.parentNode.parentNode;
+  var r = document.createElement('tr');
+  var d = document.createElement('td');
+  d.innerHTML = '<input type="color" />';
+  r.appendChild(d);
+if(coltype.value=='Block'){
+  r.innerHTML += pmr;
+}else{
+  r.innerHTML += pmrCat;
+}
+tr.parentNode.insertBefore(r,tr.nextSibling || null);
+setscales();
+}
+
+function remHere(evt){
+var tr = evt.parentNode.parentNode;
+tr.parentNode.removeChild(tr);
+setscales();
+}
+
+
+
+function setssave(){
+  var txt = "";
+getColors();
+txt += coltype.value + ";" + colors.length + ";" + noDataColor.value + '\r\n';
+for(var i in colors){
+txt += colors[i]+'\r\n';
+}
+  var blob = new Blob([txt], {type: "text/csv;charset=utf-8"});
+  saveAs(blob, "" + setsfilename.value + ".csv");
+  	//document.body.innerHTML = document.getElementById('container').innerHTML;
+}
+
+
+function setsset(evt){
+  var f = evt.target.files[0];
+  var rdr = new FileReader();
+  rdr.onload = (function(ff){
+    return function(e){
+      var lins = e.target.result.split('\r\n');
+      var head = lins[0].split(';');
+      coltype.value = head[0];
+if(head[2] != undefined)
+	noDataColor.value = head[2];
+      colors = new Array();
+      for(var i = 0; i < head[1]; i++){
+	colors[head[1]-i-1] = lins[i+1];
+      }
+ctSel();
+cattab.innerHTML = coltab.innerHTML = '';
+      setColors();
+    };
+  })(f);
+  rdr.readAsBinaryString(f);
+}
+
+</script>
