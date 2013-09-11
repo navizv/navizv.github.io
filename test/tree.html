@@ -1,0 +1,63 @@
+<html>
+<head>
+        <script src="/libs/js/jquery.min.js"></script>
+	<script src="/libs/jstree/jquery.jstree.js"></script>
+<link type="text/css" rel="stylesheet" href="/libs/jstree/_docs/!style.css"/>
+
+  </head>
+  <body>
+tree:<br/>
+<!-- div id="demo1" class="demo" style="height:100px;">
+<a href="#">Параметры</a>
+	<ul>
+		<li id="phtml_1">
+			<a href="#">Демография</a>
+			<ul>
+				<li id="phtml_2">
+					<a href="#">Численность населения</a>
+				</li>
+				<li id="phtml_3">
+					<a href="#">Рождаемость</a>
+				</li>
+			</ul>
+		</li>
+		<li id="phtml_4">
+			<a href="#">ВВП</a>
+		</li>
+	</ul>
+</div -->
+
+<table><tr><td><div id="partree" style="height:400px;width:300px;"></div></td><td valign="top">
+<textarea>File content</textarea></td></tr></table>
+<script type="text/javascript">
+function build(elt,path,name,end){
+$("<a href=\"#\"></a>").html(name).appendTo(elt);
+//alert(name + elt)
+$.ajax({
+	url : path + '/list.txt',
+	dataType : 'text',
+	async : false,
+	success : function(data){
+		var mas = data.split('\r\n');
+		if(data == '')
+			return;
+		var ul = $("<ul></ul>").appendTo(elt);
+		for(var i in mas){
+			var li = $("<li></li>").appendTo(ul);
+			build(li,path+'/'+mas[i],mas[i],null);
+		}
+		if(end!=null)end();
+	}
+});
+}
+
+$(function () {
+	$("#demo1").jstree();
+var path = '/libs/data/tree';
+var elt = $(partree);
+var name = 'Параметры';
+build(elt,path,name,function(){elt.jstree();});
+});
+</script>
+  </body>
+</html>

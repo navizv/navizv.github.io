@@ -29,7 +29,7 @@ ZiVis test (ZiVisMaker)
 
 <b>Data:</b><br/>
 <textarea rows="10" cols="40" id="dat">Something;2000;2001;2002
-Ненецкий;9;7;10
+RU-NEN;9;7;10
 UA;7;8;9
 US;4;5;6
 RU-KHM;9;6;6
@@ -67,6 +67,7 @@ Chart type:<br/>
 <div id="container" style="width: 500px; height: 300px; opacity: 1;"></div>
 <script>
 function doit(){
+//dat.value=location.search.substring(1);
 //alert(dat.value.replace(/\r\n/g,"\n"));
 $("#container").html("");
 $("<div></div>").appendTo("#container").zivis({
