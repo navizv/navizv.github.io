@@ -67,7 +67,8 @@ Chart type:<br/>
 <div id="container" style="width: 500px; height: 300px; opacity: 1;"></div>
 <script>
 function doit(){
-//dat.value=location.search.substring(1);
+if(location.search.length > 1)
+dat.value=decodeURIComponent(location.search.substring(1));
 //alert(dat.value.replace(/\r\n/g,"\n"));
 $("#container").html("");
 $("<div></div>").appendTo("#container").zivis({
