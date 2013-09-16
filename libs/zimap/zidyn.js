@@ -1,6 +1,6 @@
 /* zidyn.js - javascript library for making a svg
  map chart with zimap.js dynamically, with data provided
- in content of SCRIPT tag
+ in the content of SCRIPT tag
  2013-09-16
  
  Copyright (c) 2013 Ivan Zaytsev (zaycev.ivan@gmail.com)
