@@ -1,6 +1,6 @@
-/* zimm.js - javascript library for coloring
- svg document with data provided in csv format.
- 2013-06-19
+/* zimap.js - javascript library for making a svg
+ map chart.
+ 2013-09-16
  
  Copyright (c) 2013 Ivan Zaytsev (zaycev.ivan@gmail.com)
  
@@ -134,6 +134,7 @@ function Zimap(elt, opts, onload) {
 
     var calcScales = function() {
         //Вычисляем шкалу для цветов
+        
         var first = true;
         var tab = options.data.table;
         var j = options.data.colnum;
@@ -157,7 +158,6 @@ function Zimap(elt, opts, onload) {
                 min = cur;
             }
         }
-
         var cn = options.settings.colors.length;
         if (options.settings.type == 'Gradient')
             cn = 4;
@@ -355,9 +355,11 @@ function Zimap(elt, opts, onload) {
             return;
         }
         options.map.svgd = options.map.mapObject.contentDocument;
+        
         if (options.settings.scales === null ||
-            options.settings.setScales === true)
+            options.settings.setScales === true){
             calcScales();
+        }
         drawLegend();
         colorMap();
         element.style.opacity = "1";
@@ -437,4 +439,10 @@ function zim_format(f) {
         }
     }
     return f;
+}
+
+if(window.zimapfuns){
+    for(var i in window.zimapfuns)
+        window.zimapfuns[i]();
+    window.zimapfuns = null;
 }

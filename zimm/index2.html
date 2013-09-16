@@ -52,7 +52,8 @@ ZiMapMaker - csv data to svg map
   <input type="button" value="Save" onclick="save()">
   <input type="button" value="Save As JPG" id="savejpg">
 
-  <div onclick="tab(this,'hiddiv')" style="margin-left:100;">Hide</div>
+  <div onclick="tab(this,'expdiv')" style="margin-left:100;">Export</div>
+  <div onclick="tab(this,'hiddiv')">Hide</div>
   <div onclick="tab(this,'hlpdiv')">Help</div>
   <div onclick="tab(this,'abodiv')">About</div>
 </div>
@@ -123,8 +124,20 @@ Color settings file:<br/>
 </tr></table><br/>
 Sorry, it's impossible to choose colors for gradient manually yet. But it's possible for block, you can try it!:)
   </div>
+  <div id="expdiv" class="pages" style="display:none;">
+Export to html code:<br/>
+<table>
+<tr>
+<td>1) Statically (it's better wheh you manage your own site):<br/>
+<textarea rows="10" cols="75" id="codestat"></textarea>
+</td>
+<td>2) Dynamically (it's better wheh you just paste code in other site, e.g. for blog):<br/>
+<textarea rows="10" cols="75" id="codedyn"></textarea>
+</td>
+</tr>
+</table>
+</div>
   <div id="hiddiv" class="pages" style="display:none;">
-<textarea rows="10" cols="75" id="mycode"></textarea>
 </div>
   <div id="hlpdiv" class="pages" style="display:none;">
 There'll be 'help' here! Very soon!
@@ -357,7 +370,8 @@ if(!scales.checked)
   }
   //zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,options,isos,scs);
 //container.innerHTML = "";
-  var mapChart = new Zimap(mymap,{
+  var obj;
+  var mapChart = new Zimap(mymap,obj = {
 	data:{
 		str : data,
 		colsep: colsep.value,
@@ -373,21 +387,18 @@ if(!scales.checked)
 	}
 });
 var dat2 = data.replace(/\n/g,"+");
-mycode.value =   "var mapChart = new Zimap(container,{ "+
-	"data:{"+
-		"str :\"" + dat2 +"\", "+
-		"colsep: \""+colsep.value+"\", "+
-		"rowsep: \"+\", "+
-		"colnum : "+j+","+
-		"rowstnum : "+(parseInt(rownum.value)-1)+
-	"},"+
-	"settings:{"+
-		"type : \""+coltype.value+"\","+
-		"showLegend : "+showLeg.checked+","+
-    		"noDataColor : \""+noDataColor.value+"\""+
-		//(scales.checked?"scales : "+arr_to_str(scs)+",":"")
-		//"colors:"arr_to_str(colors)
-	"}});";
+var t = 'script';
+codestat.value = '<'+t+' src=\"//navizv.github.io/libs/zimap/zimap.js\">'
+	+'</'+t+'>\n\n'
+	+'<div id="mymap"></div>\n\n'
+	+ '<'+t+'>\n'
+	+ 'var mapChart = new Zimap(mymap,'+JSON.stringify(obj)+');\n'
+	+ '</'+t+'>\n';
+
+codedyn.value = '<'+t+' src="//navizv.github.io/libs/zimap/zidyn.js">';
+codedyn.value += JSON.stringify(obj);
+codedyn.value += '</'+t+'>\n';
+
   //alert(zim_parsed);
 //!!po sobytiju!!
   //parsed.innerHTML = zim_parsed;

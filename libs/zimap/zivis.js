@@ -1,4 +1,14 @@
-
+/* zivis.js - javascript library for jquery ui widger that provides
+ * visualization of data table in different forms (table, some type of chart, map chart).
+ * It uses Highcharts by Highsoft (see highcharts.com) for making charts.
+ 2013-09-16
+ 
+ Copyright (c) 2013 Ivan Zaytsev (zaycev.ivan@gmail.com)
+ 
+ This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License. 
+ To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/ or send a letter 
+ to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
+ */
 (function($) {
     $.widget("zid.zivis", {
         options: {
@@ -137,9 +147,15 @@
         },
         _prepareData: function() {
             var mas = this.options.data.str.split(this.options.data.rowsep);
+            var tab = this.options.data.table;
             for (var i = 0; i < mas.length; i++) {
                 var row = mas[i].split(this.options.data.colsep);
                 this.options.data.table[i] = row;
+                for (var j = 1; j < tab[i].length && i != 0; j++) {
+                    var tmp = parseFloat(tab[i][j].replace(',','.'));
+                    if(!isNaN(tmp))
+                        tab[i][j]=tmp;
+                }
             }
         },
         _drawTable: function() {
