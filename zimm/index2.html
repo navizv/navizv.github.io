@@ -107,6 +107,7 @@ US-IL;9;7;10</textarea>
     </td><td valign="top">
 <input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales<br/>
 <input type="checkbox" id="showLeg" name="showLeg" checked/>Show legend<br/>
+<input type="checkbox" id="nolink" name="nolink"/>Hide link<br/>
 Map:<br/>
 	<select size="1" name="maps" id="maps" onchange="mapSel()"></select><br/>
 Color for 'no data':
@@ -383,7 +384,9 @@ if(!scales.checked)
 		showLegend : showLeg.checked,
     		noDataColor : noDataColor.value,
 		scales : scs,
-		colors : colors
+		colors : colors,
+		map : maps.value,
+		noLink : nolink.checked
 	}
 });
 var dat2 = data.replace(/\n/g,"+");

@@ -103,21 +103,12 @@ US-IL;9;7;10</textarea>
     </td><td valign="top">
 <input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales<br/>
 <input type="checkbox" id="showLeg" name="showLeg" checked/>Show legend<br/>
+<input type="checkbox" id="nolink" name="nolink"/>Hide link<br/>
 Map:<br/>
 	<select size="1" name="maps" id="maps" onchange="mapSel()"></select><br/>
 Color for 'no data':
 	<input type="color" id="noDataColor" value="#808080">       
-    </td>
-<td valign="top">
-
-Color settings file:<br/>
-<input type="button" value="Save" onclick="setssave()">
-<input type="text" value="settings" id="setsfilename" size="9">.csv<br/>
-<input type="file" name="setsfile" id="setsfile" value="SettingsFile"><br/>
-
-
-</td>
-</tr></table><br/>
+    </td></tr></table><br/>
 Sorry, it's impossible to choose colors for gradient manually yet. But it's possible for block, you can try it!:)
   </div>
   <div id="hiddiv" class="pages" style="display:none;"></div>
@@ -154,7 +145,7 @@ There'll be 'about' here! Very soon!
 
   //save file
   document.getElementById('file').addEventListener('change',filesel,false);
-  document.getElementById('setsfile').addEventListener('change',setsset,false);
+
   //colors
   var pmr = 
 '<td><input type="text" value="" size="8" title="from" class="scales" disabled/></td>'+
@@ -344,13 +335,16 @@ $("#mymap").css({ "opacity" : "0.5" });
   if(colsep.value == ';' && data.search(/;/)<0)
     colsep.value=',';
 //alert('isos='+isos);
+
 if(!scales.checked)
   scs=null;
   options = {
     coltype : coltype.value,
     showLegend : showLeg.checked,
-    noDataColor : noDataColor.value
+    noDataColor : noDataColor.value,
+    noLink : nolink.checked
   }
+	
   zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,options,isos,scs);
   //alert(zim_parsed);
   parsed.innerHTML = zim_parsed;
@@ -421,42 +415,6 @@ function save(){
   saveAs(blob, ""+filename.value+".svg");
   	//document.body.innerHTML = document.getElementById('container').innerHTML;
 }
-
-function setssave(){
-  var txt = "";
-getColors();
-txt += coltype.value + ";" + colors.length + ";" + noDataColor.value + '\r\n';
-for(var i in colors){
-txt += colors[i]+'\r\n';
-}
-  var blob = new Blob([txt], {type: "text/csv;charset=utf-8"});
-  saveAs(blob, "" + setsfilename.value + ".csv");
-  	//document.body.innerHTML = document.getElementById('container').innerHTML;
-}
-
-
-function setsset(evt){
-  var f = evt.target.files[0];
-  var rdr = new FileReader();
-  rdr.onload = (function(ff){
-    return function(e){
-      var lins = e.target.result.split('\r\n');
-      var head = lins[0].split(';');
-      coltype.value = head[0];
-if(head[2] != undefined)
-	noDataColor.value = head[2];
-      colors = new Array();
-      for(var i = 0; i < head[1]; i++){
-	colors[head[1]-i-1] = lins[i+1];
-      }
-ctSel();
-cattab.innerHTML = coltab.innerHTML = '';
-      setColors();
-    };
-  })(f);
-  rdr.readAsBinaryString(f);
-}
-
 </script>
 <br/>
 <hr>

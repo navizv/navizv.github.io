@@ -121,7 +121,9 @@ function procData(data,j){
   var svg = document.getElementById('mymap');
   var svgd = svg.contentDocument;
   var colors = ['#ccccff','#6666ff','#0000ff','#330099'];
-  zimap_draw_x(data,svgd,colors,j,';',1,gradd ? {coltype:'Gradient'} : {coltype:'Block'},isos);
+  var opts = gradd ? {coltype:'Gradient'} : {coltype:'Block'};
+  opts.noLink = true;
+  zimap_draw_x(data,svgd,colors,j,';',1,opts,isos);
   mapdiv.style.opacity = '1';
 }
 

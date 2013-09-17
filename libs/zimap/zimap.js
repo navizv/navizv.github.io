@@ -54,7 +54,8 @@ function Zimap(elt, opts, onload) {
             map: "russia",
             mapFolder: "/libs/zimap/maps",
             showLegend: true,
-            noDataColor: '#808080'
+            noDataColor: '#808080',
+            noLink: false
         },
         map: {
             isos: "",
@@ -175,6 +176,14 @@ function Zimap(elt, opts, onload) {
         //Рисуем легенду
         var i = 0;
         var svgd = options.map.svgd;
+        
+        var el = svgd.getElementById('mylink');
+        if(el)
+            if(options.settings.noLink)
+                el.style.display = 'none';
+            else
+                el.style.display = 'block';
+        
         var cury = parseInt(svgd.getElementById('leg0').getAttribute('y'));
         if (cury != cury)
             cury = 100;

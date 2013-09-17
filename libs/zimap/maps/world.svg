@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" id="svg2985" version="1.1"
-viewBox="0 0 1300 610">
+viewBox="0 0 1300 610"
+xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>World Map</title>
   <defs id="defs4">
     <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -2931,5 +2932,8 @@ viewBox="0 0 1300 610">
 <text style="font-size:20px" id="tcol6"/>
 <text style="font-size:20px" id="tcol7"/>
 <text style="font-size:20px" id="tcol8"/>
-<text style="font-size:20px" id="tcol9"/> 
+<text style="font-size:20px" id="tcol9"/>
+<a xlink:href="http://navizv.github.io/zimm/" target="new">
+<text style="font-size:15px;fill:blue;text-decoration:underline" id="mylink" x="950" y="450">http://navizv.github.io/zimm/</text>
+</a> 
 </svg>

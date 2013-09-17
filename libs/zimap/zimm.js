@@ -120,6 +120,12 @@ scl = scs;
     }
     scl[cn] = max;
 }
+var elt = svgd.getElementById('mylink');
+if(elt)
+        if(opts.noLink){
+            elt.style.display = 'none';
+        }else
+        elt.style.display = 'block';
     //Рисуем легенду
 if(opts.showLegend == null) opts.showLegend = true;
 
