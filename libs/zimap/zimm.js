@@ -11,6 +11,7 @@ to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94
 
 var zim_parsed;
 var zim_not_parsed;
+var zim_no_data;
 
 function zimap_draw(data,svgd,colors,j,isos){
     var isosp = isos || '';
@@ -40,6 +41,7 @@ function zim_find_iso(reg,ilib){
                 //alert('|'+reg+'|'+r[j]+'|');
                 if(reg==r[j]){
                     zim_parsed+=reg+';'+r[0]+'\r\n';
+                    delete ilib[i];
                     //          alert('!'+zim_parsed);
                     return reg;
                 }
@@ -48,6 +50,7 @@ function zim_find_iso(reg,ilib){
                 //alert('|'+reg+'|'+r[j]+'|');
                 if(reg.search(new RegExp(r[j],'i'))>=0){
                     zim_parsed+=reg+';'+r[0]+'\r\n';
+                    delete ilib[i];
                     //alert('!'+zim_parsed);
                     return r[0];
                 }
@@ -58,6 +61,15 @@ function zim_find_iso(reg,ilib){
     //alert('?'+zim_not_parsed);
     return reg;
 }
+
+function zim_make_no_data(ilib){
+    zim_no_data = '';
+    for(var i in ilib){
+        var r = ilib[i];
+        zim_no_data+=r[0]+';'+r[1]+'\r\n';
+    }
+}
+
 
 function zimap_draw_x(data,svgd,colors,j,colsep,strow,opts,isos,scs){
     //alert(isos);
@@ -105,6 +117,7 @@ function zimap_draw_x(data,svgd,colors,j,colsep,strow,opts,isos,scs){
             min = cur;
         }
     }
+    zim_make_no_data(ilib);
 
     var cn = colors.length;
     if(opts.coltype=='Gradient')

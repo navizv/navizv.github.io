@@ -75,6 +75,8 @@ US-IL;9;7;10</textarea>
     <b>Parsed:</b><br/><textarea readonly rows="10" cols="20" id="parsed"></textarea></td>
   <td>
     <b>Not parsed:</b><br/><textarea readonly rows="10" cols="15" id="not_parsed"></textarea></td>
+  <td>
+    <b>No data:</b><br/><textarea readonly rows="10" cols="15" id="no_data"></textarea></td>
   </tr></table>
   </div>
   <div id="visdiv" class="pages" style="display:none;">
@@ -103,7 +105,7 @@ US-IL;9;7;10</textarea>
     </td><td valign="top">
 <input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales<br/>
 <input type="checkbox" id="showLeg" name="showLeg" checked/>Show legend<br/>
-<input type="checkbox" id="nolink" name="nolink"/>Hide link<br/>
+<input type="checkbox" id="nolink" name="nolink" checked/>Hide link<br/>
 Map:<br/>
 	<select size="1" name="maps" id="maps" onchange="mapSel()"></select><br/>
 Color for 'no data':
@@ -349,6 +351,7 @@ if(!scales.checked)
   //alert(zim_parsed);
   parsed.innerHTML = zim_parsed;
   not_parsed.innerHTML = zim_not_parsed;
+  no_data.innerHTML = zim_no_data;
 $("#mymap").css({ "opacity" : "1" });
 }
 

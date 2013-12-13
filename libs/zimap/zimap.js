@@ -8,8 +8,6 @@
  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/ or send a letter 
  to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
  */
-var zim_parsed;
-var zim_not_parsed;
 
 function splitRows(str) {
     var ret = str.split("\r\n");
@@ -385,6 +383,15 @@ function Zimap(elt, opts, onload) {
         options.data.colnum = j;
         element.style.opacity = "0.5";
         drawMap();
+    }
+    
+    this.parsed = function(){
+        alert("evwr");
+        return options.map.parsed;
+    }
+    
+    this.notParsed = function(){
+        return options.map.notParsed;
     }
 
     var readMap = function() {
