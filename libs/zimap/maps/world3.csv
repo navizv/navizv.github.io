@@ -38,7 +38,7 @@ BI;Burundi
 KH;Cambodia
 CM;Cameroon
 CA;Canada
-CV;Cape Verde
+CV;Cape Verde;Cabo Verde
 KY;Cayman Islands
 CF;Central African Republic
 TD;Chad
@@ -48,8 +48,8 @@ CX;Christmas Island
 CC;Cocos (Keeling) Islands
 CO;Colombia
 KM;Comoros
-CG;^Congo$;Congo REPUBLIC OF THE
-CD;Congo, the Democratic Republic of the; Congo;Congo DEMOCRATIC REPUBLIC OF THE
+CG;^Congo$;Congo, REPUBLIC OF THE
+CD;Congo, the Democratic Republic of the; Congo;Congo, DEMOCRATIC REPUBLIC OF THE
 CK;Cook Islands
 CR;Costa Rica
 CI;C?te d'Ivoire
@@ -115,8 +115,8 @@ JO;Jordan
 KZ;Kazakhstan
 KE;Kenya
 KI;Kiribati
-KP;DPRK;North Korea;Korea North
-KR;South Korea;Korea South;Korea, Republic
+KP;DPRK;North Korea;Korea, North
+KR;South Korea;Korea, South;Korea, Republic
 KW;Kuwait
 KG;Kyrgyz
 LA;Lao People's Democratic Republic;Lao PDR;Lao P.D.R.;Laos
