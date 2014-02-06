@@ -426,6 +426,10 @@ options.map.mapObject = obj;
                     parseData();
                     //set map
                     var mapObject = document.createElement('object');
+tmpObject.type = 'text/html';
+			options.map.mapObject = mapObject;
+                    mapObject.addEventListener("load", function(){alert(mapObject.innerHTML);drawMap();}, false);
+                    mapObject.addEventListener("load", finish, false);
                     if (element.tagName != "OBJECT") {
                         mapObject.data = svg;
                         element.appendChild(mapObject);
@@ -439,9 +443,7 @@ options.map.mapObject = obj;
                         element = mapObject;
                     }
 //mapObject.style.visibility="hidden";
-			options.map.mapObject = mapObject;
-                    mapObject.addEventListener("load", function(){alert(mapObject.innerHTML);drawMap();}, false);
-                    mapObject.addEventListener("load", finish, false);
+
                     
                     //alert("here");
                 //}
