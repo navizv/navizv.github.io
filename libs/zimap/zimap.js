@@ -400,7 +400,7 @@ alert(reg);
         element.innerHTML = "here will be map";
         var adr = 'http://navizv.github.io/libs/zimap/maps/' + options.settings.map;
         var svg = adr + '.svg';
-        var csv = adr + '.csv';
+        var csv = adr + '.html';
 
         //get iso codes
         //var xmlhttp = getXmlHttp();
