@@ -359,18 +359,21 @@ function Zimap(elt, opts, onload) {
     var drawMap = function() {
 
         var j = options.data.colnum;
-alert('here'+j);
         if(j===null || j=== undefined){
             return;
         }
+var obj = document.createElement('object');
+obj.innerHTML = options.map.mapObject.innerHTML;
+options.map.mapObject.insertBefore(options.map.mapObject, obj);
+//                        element.parentNode.removeChild(element);
+
+options.map.mapObject
         options.map.svgd = options.map.mapObject.contentDocument;
-        alert('here');
         if (options.settings.scales === null ||
             options.settings.setScales === true){
             calcScales();
         }
         drawLegend();
-alert('here');
         colorMap();
         element.style.opacity = "1";
         //finish();
@@ -389,7 +392,6 @@ alert('here');
     }
     
     this.parsed = function(){
-        alert("evwr");
         return options.map.parsed;
     }
     
@@ -418,13 +420,11 @@ alert('here');
 //alert('get addr\n'+csv);
             //if (xmlhttp.readyState == 4)
                 //if (xmlhttp.status == 200) {
-alert('hohoho');
                     options.map.isos = tmpObject.innerHTML;
                     readISO();
                     parseData();
                     //set map
                     var mapObject = document.createElement('object');
-                    alert(element.tagName);
                     if (element.tagName != "OBJECT") {
                         mapObject.data = svg;
                         element.appendChild(mapObject);
@@ -437,7 +437,7 @@ alert('hohoho');
                         element.parentNode.removeChild(element);
                         element = mapObject;
                     }
-alert('here');
+mapObject.style.visibility="hidden";
                     mapObject.addEventListener("load", drawMap, false);
                     mapObject.addEventListener("load", finish, false);
                     options.map.mapObject = mapObject;
