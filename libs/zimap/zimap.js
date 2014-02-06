@@ -364,11 +364,11 @@ function Zimap(elt, opts, onload) {
         }
 var obj = document.createElement('svg');
 obj.innerHTML = options.map.mapObject.innerHTML;
-alert(options.map.mapObject);
+alert(options.map.mapObject.innerHTML);
 options.map.mapObject.parentNode.append(obj);
 //                        element.parentNode.removeChild(element);
 
-options.map.mapObject
+options.map.mapObject = obj;
         options.map.svgd = options.map.mapObject.contentDocument;
         if (options.settings.scales === null ||
             options.settings.setScales === true){
