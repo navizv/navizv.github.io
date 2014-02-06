@@ -127,7 +127,6 @@ function Zimap(elt, opts, onload) {
         for (var i = 0; i < options.data.table.length; i++) {
             var reg = options.data.table[i][0];
             reg = findISO(reg);
-alert(reg);
             options.data.table[i][0] = reg;
         }
     };
@@ -409,10 +408,11 @@ alert(reg);
         var tmpObject = document.createElement('OBJECT');
 	tmpObject.data = csv;
 	tmpObject.type = 'text/html';
+	tmpObject.style.visibility="hidden";
 	element.appendChild(tmpObject);
         //xmlhttp.onreadystatechange = 
 	tmpObject.addEventListener("load", function() {
-alert('get addr\n'+csv);
+//alert('get addr\n'+csv);
             //if (xmlhttp.readyState == 4)
                 //if (xmlhttp.status == 200) {
                     options.map.isos = tmpObject.innerHTML;
