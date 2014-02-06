@@ -405,9 +405,9 @@ alert(reg);
         //get iso codes
         var xmlhttp = getXmlHttp();
         xmlhttp.open('GET', csv, true);
-alert('getting \n'+ csv);
+//alert('getting \n'+ csv);
         xmlhttp.onreadystatechange = function() {
-alert('get '+ xmlhttp.readyState+' '+xmlhttp.status);
+//alert('get '+ xmlhttp.readyState+' '+xmlhttp.status);
             if (xmlhttp.readyState == 4)
                 if (xmlhttp.status == 200) {
                     options.map.isos = xmlhttp.responseText;
@@ -415,7 +415,7 @@ alert('get '+ xmlhttp.readyState+' '+xmlhttp.status);
                     parseData();
                     //set map
                     var mapObject = document.createElement('object');
-                    alert(element.tagName);
+                    //alert(element.tagName);
                     if (element.tagName != "OBJECT") {
                         mapObject.data = svg;
                         element.appendChild(mapObject);
