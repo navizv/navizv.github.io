@@ -405,6 +405,7 @@ alert(reg);
         //get iso codes
         var xmlhttp = getXmlHttp();
         xmlhttp.open('GET', csv, true);
+alert('getting '+ csv);
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4)
                 if (xmlhttp.status == 200) {
@@ -413,7 +414,7 @@ alert(reg);
                     parseData();
                     //set map
                     var mapObject = document.createElement('object');
-                    //alert(element.tagName);
+                    alert(element.tagName);
                     if (element.tagName != "OBJECT") {
                         mapObject.data = svg;
                         element.appendChild(mapObject);
