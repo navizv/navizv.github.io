@@ -362,8 +362,9 @@ function Zimap(elt, opts, onload) {
         if(j===null || j=== undefined){
             return;
         }
-var obj = document.createElement('object');
+var obj = document.createElement('svg');
 obj.innerHTML = options.map.mapObject.innerHTML;
+alert(obj.innerHTML);
 options.map.mapObject.parent.insertBefore(options.map.mapObject, obj);
 //                        element.parentNode.removeChild(element);
 
