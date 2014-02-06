@@ -127,6 +127,7 @@ function Zimap(elt, opts, onload) {
         for (var i = 0; i < options.data.table.length; i++) {
             var reg = options.data.table[i][0];
             reg = findISO(reg);
+alert(reg);
             options.data.table[i][0] = reg;
         }
     };
@@ -418,11 +419,12 @@ options.map.mapObject = obj;
 	element.appendChild(tmpObject);
         //xmlhttp.onreadystatechange = 
 	tmpObject.addEventListener("load", function() {
-alert(tmpObject.innerHTML);
+
 //alert('get addr\n'+csv);
             //if (xmlhttp.readyState == 4)
                 //if (xmlhttp.status == 200) {
                     options.map.isos = tmpObject.innerHTML;
+alert("tt>" + options.map.isos);
                     readISO();
                     parseData();
                     //set map
