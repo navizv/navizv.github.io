@@ -423,7 +423,7 @@ alert('here');
                     parseData();
                     //set map
                     var mapObject = document.createElement('object');
-                    //alert(element.tagName);
+                    alert(element.tagName);
                     if (element.tagName != "OBJECT") {
                         mapObject.data = svg;
                         element.appendChild(mapObject);
