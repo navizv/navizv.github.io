@@ -127,7 +127,6 @@ function Zimap(elt, opts, onload) {
         for (var i = 0; i < options.data.table.length; i++) {
             var reg = options.data.table[i][0];
             reg = findISO(reg);
-//alert(reg);
             options.data.table[i][0] = reg;
         }
     };
@@ -358,19 +357,12 @@ function Zimap(elt, opts, onload) {
     }
 
     var drawMap = function() {
-
         var j = options.data.colnum;
         if(j===null || j=== undefined){
             return;
         }
-var obj = document.createElement('svg');
-obj.innerHTML = options.map.mapObject.innerHTML;
-alert(options.map.mapObject.contentWindow.document.body.childNodes[0].innerHTML);
-options.map.mapObject.parentNode.appendChild(obj);
-//                        element.parentNode.removeChild(element);
-
-options.map.mapObject = obj;
         options.map.svgd = options.map.mapObject.contentDocument;
+        
         if (options.settings.scales === null ||
             options.settings.setScales === true){
             calcScales();
@@ -394,6 +386,7 @@ options.map.mapObject = obj;
     }
     
     this.parsed = function(){
+        alert("evwr");
         return options.map.parsed;
     }
     
@@ -403,55 +396,42 @@ options.map.mapObject = obj;
 
     var readMap = function() {
 
-        element.innerHTML = "here will be map";
-        var adr = 'http://navizv.github.io/libs/zimap/maps/' + options.settings.map;
-        var svg = adr + '2.html';
-        var csv = adr + '.html';
+        //element.innerHTML = "here will be map";
+        var adr = '/libs/zimap/maps/' + options.settings.map;
+        var svg = adr + '.svg';
+        var csv = adr + '.csv';
 
         //get iso codes
-        //var xmlhttp = getXmlHttp();
-        //xmlhttp.open('GET', csv, true);
-//alert('getting \n'+ csv);
-        var tmpObject = document.createElement('iframe');
-	tmpObject.src = csv;
-	tmpObject.type = 'text/html';
-	//tmpObject.style.visibility="hidden";
-	element.appendChild(tmpObject);
-        //xmlhttp.onreadystatechange = 
-	tmpObject.addEventListener("load", function() {
-
-//alert('get addr\n'+csv);
-            //if (xmlhttp.readyState == 4)
-                //if (xmlhttp.status == 200) {
-                    options.map.isos = tmpObject.contentWindow.document.body.childNodes[0].innerHTML;
-alert("tt>" + options.map.isos);
+        var xmlhttp = getXmlHttp();
+        xmlhttp.open('GET', csv, true);
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4)
+                if (xmlhttp.status == 200) {
+                    options.map.isos = xmlhttp.responseText;
                     readISO();
                     parseData();
                     //set map
-                    var mapObject = document.createElement('iframe');
-tmpObject.type = 'text/html';
-			options.map.mapObject = mapObject;
-                    mapObject.addEventListener("load", function(){alert(mapObject.contentWindow.document.body.childNodes[0].innerHTML);drawMap();}, false);
-                    mapObject.addEventListener("load", finish, false);
+                    var mapObject = document.createElement('object');
+                    //alert(element.tagName);
                     if (element.tagName != "OBJECT") {
-                        mapObject.src = svg;
+                        mapObject.data = svg;
                         element.appendChild(mapObject);
                     } else {
                         var ma = element.attributes;
                         for (var i in ma)
                             mapObject.setAttribute(ma[i].name, ma[i].value);
-                        mapObject.src = svg;
+                        mapObject.data = svg;
                         element.parentNode.insertBefore(mapObject, element);
                         element.parentNode.removeChild(element);
                         element = mapObject;
                     }
-//mapObject.style.visibility="hidden";
-
-                    
+                    mapObject.addEventListener("load", drawMap, false);
+                    mapObject.addEventListener("load", finish, false);
+                    options.map.mapObject = mapObject;
                     //alert("here");
-                //}
-        }, false);
-        //xmlhttp.send(null);
+                }
+        };
+        xmlhttp.send(null);
     }
     readMap();
 }
