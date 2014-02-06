@@ -403,7 +403,6 @@ options.map.mapObject = obj;
     var readMap = function() {
 
         element.innerHTML = "here will be map";
-return;
         var adr = 'http://navizv.github.io/libs/zimap/maps/' + options.settings.map;
         var svg = adr + '2.html';
         var csv = adr + '.html';
