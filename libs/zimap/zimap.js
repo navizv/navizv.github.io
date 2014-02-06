@@ -362,7 +362,7 @@ function Zimap(elt, opts, onload) {
             return;
         }
         options.map.svgd = options.map.mapObject.contentDocument;
-        
+        alert('here');
         if (options.settings.scales === null ||
             options.settings.setScales === true){
             calcScales();
