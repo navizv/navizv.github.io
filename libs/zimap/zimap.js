@@ -411,7 +411,7 @@ alert('here');
         var tmpObject = document.createElement('OBJECT');
 	tmpObject.data = csv;
 	tmpObject.type = 'text/html';
-	tmpObject.style.visibility="hidden";
+	tmpObject.style.display="none";
 	element.appendChild(tmpObject);
         //xmlhttp.onreadystatechange = 
 	tmpObject.addEventListener("load", function() {
