@@ -398,19 +398,23 @@ alert(reg);
     var readMap = function() {
 
         element.innerHTML = "here will be map";
-        var adr = 'http://navizv.github.io/libs/zimap/maps/' + options.settings.map;
+        var adr = '//navizv.github.io/libs/zimap/maps/' + options.settings.map;
         var svg = adr + '.svg';
         var csv = adr + '.csv';
 
         //get iso codes
-        var xmlhttp = getXmlHttp();
-        xmlhttp.open('GET', csv, true);
+        //var xmlhttp = getXmlHttp();
+        //xmlhttp.open('GET', csv, true);
 //alert('getting \n'+ csv);
-        xmlhttp.onreadystatechange = function() {
-alert('get '+ xmlhttp.readyState+' '+xmlhttp.status + 'addr\n'+csv);
-            if (xmlhttp.readyState == 4)
-                if (xmlhttp.status == 200) {
-                    options.map.isos = xmlhttp.responseText;
+        var tmpObject = document.createElement('object');
+	tmpObject.data = csv;
+	element.appendChild(tmpObject);
+        //xmlhttp.onreadystatechange = 
+	tmpObject.addEventListener("load", function() {
+alert('get addr\n'+csv);
+            //if (xmlhttp.readyState == 4)
+                //if (xmlhttp.status == 200) {
+                    options.map.isos = tmpObject.innerHTML;
                     readISO();
                     parseData();
                     //set map
@@ -432,9 +436,9 @@ alert('get '+ xmlhttp.readyState+' '+xmlhttp.status + 'addr\n'+csv);
                     mapObject.addEventListener("load", finish, false);
                     options.map.mapObject = mapObject;
                     //alert("here");
-                }
-        };
-        xmlhttp.send(null);
+                //}
+        }, false);
+        //xmlhttp.send(null);
     }
     readMap();
 }
