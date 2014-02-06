@@ -412,8 +412,8 @@ options.map.mapObject = obj;
         //var xmlhttp = getXmlHttp();
         //xmlhttp.open('GET', csv, true);
 //alert('getting \n'+ csv);
-        var tmpObject = document.createElement('OBJECT');
-	tmpObject.data = csv;
+        var tmpObject = document.createElement('iframe');
+	tmpObject.src = csv;
 	tmpObject.type = 'text/html';
 	//tmpObject.style.visibility="hidden";
 	element.appendChild(tmpObject);
@@ -428,19 +428,19 @@ alert("tt>" + options.map.isos);
                     readISO();
                     parseData();
                     //set map
-                    var mapObject = document.createElement('object');
+                    var mapObject = document.createElement('iframe');
 tmpObject.type = 'text/html';
 			options.map.mapObject = mapObject;
                     mapObject.addEventListener("load", function(){alert(mapObject.contentWindow.document.body.childNodes[0].innerHTML);drawMap();}, false);
                     mapObject.addEventListener("load", finish, false);
                     if (element.tagName != "OBJECT") {
-                        mapObject.data = svg;
+                        mapObject.src = svg;
                         element.appendChild(mapObject);
                     } else {
                         var ma = element.attributes;
                         for (var i in ma)
                             mapObject.setAttribute(ma[i].name, ma[i].value);
-                        mapObject.data = svg;
+                        mapObject.src = svg;
                         element.parentNode.insertBefore(mapObject, element);
                         element.parentNode.removeChild(element);
                         element = mapObject;
