@@ -414,7 +414,7 @@ options.map.mapObject = obj;
         var tmpObject = document.createElement('OBJECT');
 	tmpObject.data = csv;
 	tmpObject.type = 'text/html';
-	tmpObject.style.visibility="hidden";
+	//tmpObject.style.visibility="hidden";
 	element.appendChild(tmpObject);
         //xmlhttp.onreadystatechange = 
 	tmpObject.addEventListener("load", function() {
