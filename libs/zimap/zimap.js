@@ -406,8 +406,8 @@ alert(reg);
         //var xmlhttp = getXmlHttp();
         //xmlhttp.open('GET', csv, true);
 //alert('getting \n'+ csv);
-        var tmpObject = document.createElement('object');
-	tmpObject.data = csv;
+        var tmpObject = document.createElement('iframe');
+	tmpObject.src = csv;
 	element.appendChild(tmpObject);
         //xmlhttp.onreadystatechange = 
 	tmpObject.addEventListener("load", function() {
