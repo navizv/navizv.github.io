@@ -368,6 +368,7 @@ function Zimap(elt, opts, onload) {
             calcScales();
         }
         drawLegend();
+alert('here');
         colorMap();
         element.style.opacity = "1";
         //finish();
@@ -433,6 +434,7 @@ function Zimap(elt, opts, onload) {
                         element.parentNode.removeChild(element);
                         element = mapObject;
                     }
+alert('here');
                     mapObject.addEventListener("load", drawMap, false);
                     mapObject.addEventListener("load", finish, false);
                     options.map.mapObject = mapObject;
