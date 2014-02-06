@@ -357,7 +357,9 @@ function Zimap(elt, opts, onload) {
     }
 
     var drawMap = function() {
+
         var j = options.data.colnum;
+alert('here'+j);
         if(j===null || j=== undefined){
             return;
         }
