@@ -397,7 +397,7 @@ alert(reg);
 
     var readMap = function() {
 
-        //element.innerHTML = "here will be map";
+        element.innerHTML = "here will be map";
         var adr = '//navizv.github.io/libs/zimap/maps/' + options.settings.map;
         var svg = adr + '.svg';
         var csv = adr + '.csv';
@@ -405,8 +405,9 @@ alert(reg);
         //get iso codes
         var xmlhttp = getXmlHttp();
         xmlhttp.open('GET', csv, true);
-alert('getting '+ csv);
+alert('getting \n'+ csv);
         xmlhttp.onreadystatechange = function() {
+alert('get');
             if (xmlhttp.readyState == 4)
                 if (xmlhttp.status == 200) {
                     options.map.isos = xmlhttp.responseText;
