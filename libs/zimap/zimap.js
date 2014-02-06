@@ -407,7 +407,7 @@ alert(reg);
         //xmlhttp.open('GET', csv, true);
 //alert('getting \n'+ csv);
         var tmpObject = document.createElement('OBJECT');
-	tmpObject.src = csv;
+	tmpObject.data = csv;
 	tmpObject.type = 'text/csv';
 	element.appendChild(tmpObject);
         //xmlhttp.onreadystatechange = 
