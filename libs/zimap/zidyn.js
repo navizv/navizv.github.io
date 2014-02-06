@@ -20,7 +20,7 @@ var obj = eval('('+s.innerHTML+')');
 //create div for map
 var div = document.createElement('div');
 s.parentNode.insertBefore(div,s);
-var fun = function(){var zimap = new Zimap(div,obj);};
+var fun = function(){alert('here');var zimap = new Zimap(div,obj);alert('done '+zimap);};
 
 if(!window.Zimap){
 //alert('1');
