@@ -398,7 +398,7 @@ alert(reg);
     var readMap = function() {
 
         element.innerHTML = "here will be map";
-        var adr = '//navizv.github.io/libs/zimap/maps/' + options.settings.map;
+        var adr = 'http://navizv.github.io/libs/zimap/maps/' + options.settings.map;
         var svg = adr + '.svg';
         var csv = adr + '.csv';
 
