@@ -372,7 +372,7 @@ if(!scales.checked)
   //zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,options,isos,scs);
 //container.innerHTML = "";
   var obj;
-  var mapChart = new Zimap(mymap,obj = {
+obj = {
 	data:{
 		str : data,
 		colsep: colsep.value,
@@ -388,7 +388,8 @@ if(!scales.checked)
 		map : maps.value,
 		noLink : nolink.checked
 	}
-});
+}
+//  var mapChart = new Zimap(mymap,obj);
 //parsed.innerHTML = mapChart.parsed();
 var dat2 = data.replace(/\n/g,"+");
 var t = 'script';
