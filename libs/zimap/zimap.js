@@ -364,7 +364,7 @@ function Zimap(elt, opts, onload) {
         }
 var obj = document.createElement('svg');
 obj.innerHTML = options.map.mapObject.innerHTML;
-alert(obj.innerHTML);
+alert(options.map.mapObject.innerHTML);
 options.map.mapObject.parent.insertBefore(options.map.mapObject, obj);
 //                        element.parentNode.removeChild(element);
 
@@ -438,7 +438,7 @@ options.map.mapObject
                         element.parentNode.removeChild(element);
                         element = mapObject;
                     }
-mapObject.style.visibility="hidden";
+//mapObject.style.visibility="hidden";
                     mapObject.addEventListener("load", drawMap, false);
                     mapObject.addEventListener("load", finish, false);
                     options.map.mapObject = mapObject;
