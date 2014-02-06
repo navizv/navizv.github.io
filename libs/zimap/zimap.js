@@ -364,7 +364,7 @@ function Zimap(elt, opts, onload) {
         }
 var obj = document.createElement('object');
 obj.innerHTML = options.map.mapObject.innerHTML;
-options.map.mapObject.insertBefore(options.map.mapObject, obj);
+options.map.mapObject.parent.insertBefore(options.map.mapObject, obj);
 //                        element.parentNode.removeChild(element);
 
 options.map.mapObject
