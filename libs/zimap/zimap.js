@@ -365,7 +365,7 @@ function Zimap(elt, opts, onload) {
 var obj = document.createElement('svg');
 obj.innerHTML = options.map.mapObject.innerHTML;
 alert(options.map.mapObject.innerHTML);
-options.map.mapObject.parentNode.append(obj);
+options.map.mapObject.parentNode.appendChild(obj);
 //                        element.parentNode.removeChild(element);
 
 options.map.mapObject = obj;
