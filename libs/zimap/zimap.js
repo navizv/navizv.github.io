@@ -407,7 +407,7 @@ alert(reg);
         xmlhttp.open('GET', csv, true);
 alert('getting \n'+ csv);
         xmlhttp.onreadystatechange = function() {
-alert('get');
+alert('get '+ xmlhttp.readyState+' '+xmlhttp.status);
             if (xmlhttp.readyState == 4)
                 if (xmlhttp.status == 200) {
                     options.map.isos = xmlhttp.responseText;
