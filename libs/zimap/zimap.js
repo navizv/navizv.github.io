@@ -404,7 +404,7 @@ options.map.mapObject
 
         element.innerHTML = "here will be map";
         var adr = 'http://navizv.github.io/libs/zimap/maps/' + options.settings.map;
-        var svg = adr + '.svg';
+        var svg = adr + '2.html';
         var csv = adr + '.html';
 
         //get iso codes
