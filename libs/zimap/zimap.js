@@ -127,6 +127,7 @@ function Zimap(elt, opts, onload) {
         for (var i = 0; i < options.data.table.length; i++) {
             var reg = options.data.table[i][0];
             reg = findISO(reg);
+alert(reg);
             options.data.table[i][0] = reg;
         }
     };
@@ -397,7 +398,7 @@ function Zimap(elt, opts, onload) {
     var readMap = function() {
 
         //element.innerHTML = "here will be map";
-        var adr = '/libs/zimap/maps/' + options.settings.map;
+        var adr = '//zimap.github.io/libs/zimap/maps/' + options.settings.map;
         var svg = adr + '.svg';
         var csv = adr + '.csv';
 
