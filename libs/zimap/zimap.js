@@ -418,6 +418,7 @@ options.map.mapObject = obj;
 	element.appendChild(tmpObject);
         //xmlhttp.onreadystatechange = 
 	tmpObject.addEventListener("load", function() {
+alert(tmpObject.innerHTML);
 //alert('get addr\n'+csv);
             //if (xmlhttp.readyState == 4)
                 //if (xmlhttp.status == 200) {
