@@ -440,7 +440,7 @@ options.map.mapObject = obj;
                     }
 //mapObject.style.visibility="hidden";
 			options.map.mapObject = mapObject;
-                    mapObject.addEventListener("load", drawMap, false);
+                    mapObject.addEventListener("load", function(){alert(mapObject.innerHTML);drawMap();}, false);
                     mapObject.addEventListener("load", finish, false);
                     
                     //alert("here");
