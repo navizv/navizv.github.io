@@ -408,7 +408,7 @@ alert(reg);
 //alert('getting \n'+ csv);
         var tmpObject = document.createElement('OBJECT');
 	tmpObject.src = csv;
-	tmpObject.type = 'text\csv';
+	tmpObject.type = 'text/csv';
 	element.appendChild(tmpObject);
         //xmlhttp.onreadystatechange = 
 	tmpObject.addEventListener("load", function() {
