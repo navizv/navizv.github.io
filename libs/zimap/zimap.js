@@ -411,13 +411,14 @@ alert('here');
         var tmpObject = document.createElement('OBJECT');
 	tmpObject.data = csv;
 	tmpObject.type = 'text/html';
-	tmpObject.style.display="none";
+	tmpObject.style.visibility="hidden";
 	element.appendChild(tmpObject);
         //xmlhttp.onreadystatechange = 
 	tmpObject.addEventListener("load", function() {
 //alert('get addr\n'+csv);
             //if (xmlhttp.readyState == 4)
                 //if (xmlhttp.status == 200) {
+alert('hohoho');
                     options.map.isos = tmpObject.innerHTML;
                     readISO();
                     parseData();
