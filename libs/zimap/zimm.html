@@ -1,9 +1,10 @@
-﻿<div id="mymap"></div>
+﻿<div id="mymap" style="height:100%;wigth:100%;"></div>
 <script src="/libs/zimap/zimap.js"></script>
 <script>
 var obj;
 var mapChart;
 //mymap.innerHTML = 'qq';
 eval('obj = ' + decodeURIComponent(location.search.substring(1)));
+obj.settings.noLink = false;
 mapChart = new Zimap(mymap,obj);
 </script>
