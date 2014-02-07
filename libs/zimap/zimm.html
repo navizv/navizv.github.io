@@ -2,5 +2,12 @@
 <script src="/libs/zimap/zimap.js"></script>
 <script>
 var obj;
-var mapChart = new Zimap(mymap,obj);
+var mapChart;
+function f(){
+	if(obj == 'undefined')
+		setTimeout(f,100);
+	else
+		mapChart = new Zimap(mymap,obj);
+}
+f();
 </script>
