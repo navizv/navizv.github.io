@@ -398,10 +398,10 @@ codestat.value = '<'+t+' src=\"//navizv.github.io/libs/zimap/zimap.js\">'
 	+ '<'+t+'>\n'
 	+ 'var mapChart = new Zimap(mymap,'+JSON.stringify(obj)+');\n'
 	+ '</'+t+'>\n';
-
-codedyn.value = '<'+t+' src="//navizv.github.io/libs/zimap/zidyn.js">';
-codedyn.value += JSON.stringify(obj);
-codedyn.value += '</'+t+'>\n';
+t = 'iframe';
+codedyn.value = '<'+t+' src="http://navizv.github.io/libs/zimap/zimm.html?';
+codedyn.value += encodeURIComponent(JSON.stringify(obj));
+codedyn.value += '"></'+t+'>';
 
   //alert(zim_parsed);
 //!!po sobytiju!!
