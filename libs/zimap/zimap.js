@@ -176,6 +176,7 @@ function Zimap(elt, opts, onload) {
         var svgd = options.map.svgd;
         
         var el = svgd.getElementById('mylink');
+	el.parentNode.setAttribute("xlink:href","http://navizv.github.io/zimm/index2.html?"+encodeURIComponent(JSON.stringify(opts)));
         if(el)
             if(options.settings.noLink)
                 el.style.display = 'none';

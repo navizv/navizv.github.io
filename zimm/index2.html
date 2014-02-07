@@ -187,8 +187,32 @@ There'll be 'about' here! Very soon!
 '<td><input type="button" value="-" onclick="remHere(this)"/></td>';
   //Default colors  
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
-  setColors();
   var scs;
+if(location.search != ''){
+	var objj;
+	eval('objj = '+decodeURIComponent(location.search.substring(1)));
+	dat.value = objj.data.str;
+	colsep.value = objj.data.colsep;
+	colnum.value = objj.data.colnum + 1;
+	rownum.value = objj.data.rowstnum + 1;
+	coltype.value = objj.settings.type;
+ctSel();
+	showLeg.checked = objj.settings.showLegend;
+	noDataColor.value = objj.settings.noDataColor;
+	colors = objj.settings.colors;
+setColors();
+	scs = objj.settings.scales;
+if(scs!=null){
+scales.checked=true;
+setscales();
+}
+	maps.value = objj.settings.map;
+	nolink.checked = objj.settings.noLink;
+
+}
+else
+  setColors();
+
 
 //color type
 function ctSel(){
@@ -209,11 +233,17 @@ cattabdiv.style.display = 'block';
 
 function setscales(){
   var cols = document.getElementsByClassName('scales');
+var k = 0;
   for(var i in cols){
 if(i>0 && cols[i].title=="from")
   cols[i].disabled=true;
-else
+else{
     cols[i].disabled=!scales.checked;
+if(scs!=null){
+cols[i].value = scs[k++];
+}
+//alert(cols[i].disabled);
+}
 }
 
 }
