@@ -211,8 +211,15 @@ There'll be 'about' here! Very soon!
 			scales.checked=true;
 			setscales();
 		}
-		//maps.value = objj.settings.map;
-		//mapSel();
+for(var i in maps.childNodes){
+	if( i.value == objj.settings.map)
+		i.selected = 'selected';
+	else
+i.selected = '';
+}
+		mapSel();
+		
+
 		nolink.checked = objj.settings.noLink;
 		doit();
 	}
