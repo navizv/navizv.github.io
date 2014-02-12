@@ -162,14 +162,6 @@ There'll be 'about' here! Very soon!
     dataType: 'html',
     success: function(data){hlpdiv.innerHTML = data;}
   });
-  //maps select
-  var isos='';
-  var info = '/libs/zimap/maps/maps.txt';
-  $.ajax({
-    url: info,
-    dataType: 'html',
-    success: function(data){drawMaps(data);}
-  });
 
   //save file
   document.getElementById('file').addEventListener('change',filesel,false);
@@ -188,30 +180,46 @@ There'll be 'about' here! Very soon!
   //Default colors  
   var colors = ['#330099','#0000ff','#6666ff','#ccccff'];
   var scs;
-if(location.search != ''){
-	var objj;
-	eval('objj = '+decodeURIComponent(location.search.substring(1)));
-	dat.value = objj.data.str;
-	colsep.value = objj.data.colsep;
-	colnum.value = objj.data.colnum + 1;
-	rownum.value = objj.data.rowstnum + 1;
-	coltype.value = objj.settings.type;
-ctSel();
-	showLeg.checked = objj.settings.showLegend;
-	noDataColor.value = objj.settings.noDataColor;
-	colors = objj.settings.colors;
-setColors();
-	scs = objj.settings.scales;
-if(scs!=null){
-scales.checked=true;
-setscales();
-}
-	maps.value = objj.settings.map;
-	nolink.checked = objj.settings.noLink;
-doit();
-}
-else
-  setColors();
+  if(location.search == ''){
+    setColors();
+    //setscales();
+  }
+
+  //maps select
+  var isos='';
+  var info = '/libs/zimap/maps/maps.txt';
+  $.ajax({
+    url: info,
+    dataType: 'html',
+    success: function(data){
+	drawMaps(data);
+	if(location.search != ''){
+		var objj;
+		eval('objj = '+decodeURIComponent(location.search.substring(1)));
+		dat.value = objj.data.str;
+		colsep.value = objj.data.colsep;
+		colnum.value = objj.data.colnum + 1;
+		rownum.value = objj.data.rowstnum + 1;
+		coltype.value = objj.settings.type;
+		ctSel();
+		showLeg.checked = objj.settings.showLegend;
+		noDataColor.value = objj.settings.noDataColor;
+		colors = objj.settings.colors;
+		setColors();
+		scs = objj.settings.scales;
+		if(scs!=null){
+			scales.checked=true;
+			setscales();
+		}
+		maps.value = objj.settings.map;
+		mapSel();
+		nolink.checked = objj.settings.noLink;
+		doit();
+	}
+    }
+  });
+
+
 
 
 //color type
@@ -384,6 +392,7 @@ setscales();
 }
 
 function doit() {
+//alert('doit!');
   var data = dat.value;
   var j = parseInt(colnum.value)-1;//столбец с данными
   //var svg = document.getElementById('mymap');
