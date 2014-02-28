@@ -238,6 +238,7 @@ var mm = document.getElementById('mymap');
 var nm = document.createElement('object');
 var ma = mm.attributes;
 for(var i in ma)
+if(ma[i].name!=undefined && ma[i].name.substr(0,2)!='@@')
   nm.setAttribute(ma[i].name,ma[i].value);
 
 nm.data = svg;
