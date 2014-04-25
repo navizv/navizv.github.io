@@ -18,7 +18,9 @@
                 rowsep: "\n",
                 table: [],
                 colnum: 1,
-                rowstnum: 1
+                rowstnum: 1,
+                title : "Title",
+                transpose: false
             },
             settings: {
                 vistype: "Table", //"Chart","Map",
@@ -84,7 +86,6 @@
         _drawChart: function() {
             var table = this.options.data.table;
             var series = new Array(table.length - 1);
-
             if (this.options.settings.chartType == "pie") {
                 this.element.attr("align", "center");
                 var d = document.createElement("div");
@@ -133,6 +134,9 @@
                 chart: {
                     type: this.options.settings.chartType
                 },
+                title: {
+                    text : this.options.data.title
+                },
                 yAxis: {
                     title: {
                         text: table[0][0]
@@ -147,14 +151,26 @@
         },
         _prepareData: function() {
             var mas = this.options.data.str.split(this.options.data.rowsep);
+            this.options.data.table = [];
             var tab = this.options.data.table;
             for (var i = 0; i < mas.length; i++) {
+                if(mas[i]=='')
+                    continue;
                 var row = mas[i].split(this.options.data.colsep);
-                this.options.data.table[i] = row;
+                tab[i] = row;
                 for (var j = 1; j < tab[i].length && i != 0; j++) {
                     var tmp = parseFloat(tab[i][j].replace(',','.'));
                     if(!isNaN(tmp))
                         tab[i][j]=tmp;
+                }
+            }
+            if(this.options.data.transpose){
+                this.options.data.table = new Array(tab[0].length);
+                var tab2 = this.options.data.table;
+                for(var j = 0; j < tab[0].length; j++){
+                    tab2[j] = new Array(tab.length);
+                    for(var i = 0; i < tab.length; i++)
+                        tab2[j][i] = tab[i][j];
                 }
             }
         },
