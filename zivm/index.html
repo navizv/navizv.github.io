@@ -12,7 +12,6 @@
         <script src="/libs/js/FileSaver.min.js"></script>
         <script src="/libs/zimap/zimap.js"></script>
         <script src="/libs/zimap/zivis.js"></script>
-
     </head>
     <body>
         <div id="tabs">
@@ -26,19 +25,24 @@
                 <input type="button" value="Visualize" onclick="doit()">
             </ul>
 
-            <div id="datadiv" class="pages" style="display:block;">
-
-                <b>Data:</b><br/>
-                <textarea rows="10" cols="40" id="dat">mln.glv.	1970	1980	1990	1995
+            <div id="datadiv" class="pages">
+                <div id="first_col_data" style="display: inline-table;">
+                    <label for="dat"><b>Data:</b><br/></label>
+                    <textarea rows="10" cols="40" id="dat" onclick="this.select();">mln.glv.	1970	1980	1990	1995
 korov	20,6	22,2	20,5	17,4
 svin	33,2	36	38,3	22,6
 ovikoz	67	65	58,2	28
-</textarea><br/>
-                Title: <input type="text" value="" size="18" id="title"/><br/>
-                <input type="checkbox" id="transpose"/> Transpose
+                    </textarea><br/>
+                </div>
+                <div id="second_col_data" style="display: inline-table;">
+                    <label for="title">Title: </label>
+                    <input type="text" value="" size="18" id="title"/><br/>
+                    <input type="checkbox" id="transpose"/> 
+                    <label for="transpose"> Transpose </label>
+                </div>
             </div>
 
-            <div id="visdiv" class="pages" style="display:none;">
+            <div id="visdiv" class="pages" style="display: inline;">
                 <select id="vistype">
                     <option value="Table">Table</option>
                     <option value="Chart" selected>Chart</option>
