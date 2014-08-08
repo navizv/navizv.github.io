@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>
+Test for RuStat
+</title>
+<link rel="stylesheet" href="st.css">
+<style>
+</style>
+</head>
+<body>
+<div id="buttons">
+<input type="button" value="Выбор данных" onclick="show('dbsel',this.value)"/>
+<input type="button" value="Настройки" onclick="show('sets',this.value)"/>
+<input type="button" value="Экспорт" onclick="show('export',this.value)"/>
+<input type="button" value="Помощь" onclick="show('help',this.value)"/>
+</div><br/>
+
+<div id="main">
+	<div id="vis"><img src="map.png"/></div>
+	<div id="header"><div id="headerText"></div>
+	<input type="button" style="position:inherit;top:0px;right:0px;" value="Закрыть" onclick="closee()"/></div>
+
+	<div id="dbsel" class="subwindow">
+vybor
+	<img src="seldb.png"/>
+	</div>
+
+	<div id="sets" class="subwindow">
+settings
+	<img src="seldb.png"/>
+	</div>
+
+	<div id="export" class="subwindow">
+export
+	<img src="seldb.png"/>
+	</div>
+
+	<div id="help" class="subwindow">
+help
+	<img src="seldb.png"/>
+	</div>
+</div>
+</body>
+
+<script>
+function show(dn,ht){
+headerText.innerHTML = ht;
+for(var i in main.childNodes){
+  var d = main.childNodes[i];
+  if(d.tagName == 'DIV'){
+    if(d.id == dn || d.id == 'header' || d.id == 'vis'){
+	d.style.visibility = "visible";
+    }else{
+	d.style.visibility = "hidden";	
+    }
+  }
+}
+}
+
+
+function closee(){
+for(var i in main.childNodes){
+  var d = main.childNodes[i];
+  if(d.tagName == 'DIV' && d.id != 'vis'){
+    d.style.visibility = "hidden";	
+  }
+}
+}
+</script>
+
+</html>

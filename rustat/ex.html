@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>z-index</title>
+  <style>
+   #layer1, #layer2, #layer3, #layer4 {
+    position: relative; /* Относительное позиционирование */
+   } 
+   #layer1, #layer3 {
+    font-size: 50px; /* Размер шрифта в пикселах */
+    color: #000080; /* Синий цвет текста */
+   }
+   #layer2, #layer4 {
+    top: -55px; /* Сдвигаем текст вверх */
+    left: 5px; /* Сдвигаем текст вправо */
+    color: #ffa500; /* Оранжевый цвет текста */
+    font-size:70px;  /* Размер шрифта в пикселах */
+   }
+   #layer1 { z-index: 2; }
+   #layer2 { z-index: 1; }
+   #layer3 { z-index: 3; }
+   #layer4 { z-index: 4; }
+  </style>
+ </head>
+ <body>
+  <p>Слой 1 наверху</p>
+  <div id="layer1">Слой 1</div>
+  <div id="layer2">Слой 2</div> 
+  <p>Слой 4 наверху</p>
+  <div id="layer3">Слой 3</div>
+  <div id="layer4">Слой 4</div> 
+ </body>
+</html>

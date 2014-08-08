@@ -1,0 +1,31 @@
+#main {
+  position: relative;
+}
+
+#vis {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}
+
+#header {
+  visibility: hidden;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  width: 600px;
+  height: 30px;
+  background: #fc0;
+}
+
+.subwindow {
+  visibility: hidden;
+  position: absolute;
+  top: 30px;
+  left: 0px;
+  z-index: 2;
+  width: 600px;
+  background: #f1f1f1;
+}
