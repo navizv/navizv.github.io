@@ -3,7 +3,7 @@
 }
 
 #vis {
-  position: absolute;
+  //position: absolute;
   top: 0px;
   left: 0px;
   z-index: 1;
@@ -12,10 +12,10 @@
 #header {
   visibility: hidden;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 10px;
+  left: 10px;
   z-index: 2;
-  width: 600px;
+  width: 800px;
   height: 30px;
   background: #fc0;
 }
@@ -23,9 +23,31 @@
 .subwindow {
   visibility: hidden;
   position: absolute;
-  top: 30px;
-  left: 0px;
+  top: 40px;
+  left: 10px;
   z-index: 2;
-  width: 600px;
+  width: 800px;
   background: #f1f1f1;
+}
+
+#parcol {
+  width: 300px;
+}
+
+#regcol {
+  width: 380px;
+}
+
+#yearcol {
+  width: 120px;
+}
+
+.xbutton {
+  float:right;
+}
+
+.seltree {
+  background: #ffffff;
+  height: 400px;
+  overflow: auto;
 }

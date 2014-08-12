@@ -1,71 +1,215 @@
 <html>
-<head>
-<title>
-Test for RuStat
-</title>
-<link rel="stylesheet" href="st.css">
-<style>
-</style>
-</head>
-<body>
-<div id="buttons">
-<input type="button" value="Выбор данных" onclick="show('dbsel',this.value)"/>
-<input type="button" value="Настройки" onclick="show('sets',this.value)"/>
-<input type="button" value="Экспорт" onclick="show('export',this.value)"/>
-<input type="button" value="Помощь" onclick="show('help',this.value)"/>
-</div><br/>
+    <head>
+        <title>
+            Test for RuStat
+        </title>
+        <link rel="stylesheet" href="st.css">
+        <link rel="stylesheet" href="/libs/jstree/themes/default/style.min.css" />
 
-<div id="main">
-	<div id="vis"><img src="map.png"/></div>
-	<div id="header"><div id="headerText"></div>
-	<input type="button" style="position:inherit;top:0px;right:0px;" value="Закрыть" onclick="closee()"/></div>
+        <script src="/libs/js/jquery.min.js"></script>
+        <script src="/libs/jstree/jstree.min.js"></script>
+        <script src="/libs/js/highcharts.js"></script>
+        <script src="/libs/js/exporting.js"></script>
+       	<script src="/libs/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="/libs/js/FileSaver.min.js"></script>
+        <script src="/libs/zimap/zimap.js"></script>
+        <script src="/libs/zimap/zivis.js"></script>
+        <script src="db.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="buttons">
+            <input type="button" value="Выбор данных" onclick="show('dbsel', this.value)"/>
+            <input type="button" value="Настройки" onclick="show('sets', this.value)"/>
+            <input type="button" value="Экспорт" onclick="show('export', this.value)"/>
+            <input type="button" value="Помощь" onclick="show('help', this.value)"/>
+        </div><br/>
 
-	<div id="dbsel" class="subwindow">
-vybor
-	<img src="seldb.png"/>
-	</div>
+        <div id="main">
+            <div id="vis">
+                <img src="map.png"/></div>
+            <div id="header"><div id="headerText"></div>
+                <input type="button" style="position:inherit;top:0px;right:0px;" value="Закрыть" onclick="closee()"/></div>
 
-	<div id="sets" class="subwindow">
-settings
-	<img src="seldb.png"/>
-	</div>
+            <div id="dbsel" class="subwindow">
+                <table id="seltab">
+                    <tr>
+                        <td id="parcol">Параметры<input type="button" value="x" class="xbutton"></td>
+                        <td id="regcol">Регионы<input type="button" value="x" class="xbutton"></td>
+                        <td id="yearcol">Годы<div class="xbutton"><input type="button" value="v" ><input type="button" value="x"></div></td>
+                    </tr>
+                    <tr id="seltrees">
+                        <td>
+                            <div id="partree" class="seltree">
+                            </div>
+                        </td>
+                        <td>
+                            <div id="regtree" class="seltree">
+                            </div>
+                        </td>
+                        <td>
+                            <div id="yeartree" class="seltree">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-	<div id="export" class="subwindow">
-export
-	<img src="seldb.png"/>
-	</div>
+            <div id="sets" class="subwindow">
+                settings
+                <img src="seldb.png"/>
+            </div>
 
-	<div id="help" class="subwindow">
-help
-	<img src="seldb.png"/>
-	</div>
-</div>
-</body>
+            <div id="export" class="subwindow">
+                export
+                <img src="seldb.png"/>
+            </div>
 
+            <div id="help" class="subwindow">
+                help
+                <img src="seldb.png"/>
+            </div>
+        </div>
+    </body>
+
+    <script>
+                function createParNodesFromFile(root, leaf, path) {
+                    $.ajax({
+                        url: path,
+                        dataType: 'text',
+                        success: function(data) {
+                            var mas = data.split("\r\n");
+                            for (var i in mas) {
+                                if (i == 0 || mas[i] == "")
+                                    continue;
+                                var str = mas[i].split(";");
+                                root.jstree(true).create_node(leaf, str[0]);
+                            }
+                        }
+                    });
+                }
+                function createParNodes(root, leaf, path) {
+                    $.ajax({
+                        url: path + 'list.csv',
+                        dataType: 'text',
+                        success: function(data) {
+                            var mas = data.split("\r\n");
+                            for (var i in mas) {
+                                if (mas[i] == "")
+                                    continue;
+                                var str = mas[i].split(";");
+                                var leafId = root.jstree(true).create_node(leaf, {text: str[1]});
+                                if (str[2] == "11") {
+                                    createParNodes(root, root.jstree(true).get_node(leafId), path + str[0] + "/");
+                                } else if (str[2] == "22") {
+                                    createParNodesFromFile(root, root.jstree(true).get_node(leafId), path + str[0] + ".csv");
+                                }
+                            }
+                        }
+                    });
+                }
+                function createRegNodes(root, leaf, list) {
+                    for (var i in  list) {
+                        var cur = list[i];
+                        var leafId = root.jstree(true).create_node(leaf, cur);
+                        if (cur.leaves != undefined) {
+                            createRegNodes(root, root.jstree(true).get_node(leafId), cur.leaves);
+                        }
+                    }
+                }
+
+                function createRegTree(rt) {
+                    var $root = $("#regtree").jstree({
+                        core: {
+                            check_callback: true
+                        },
+                        plugins: ["checkbox"]
+                    });
+                    createRegNodes($root, $root, rt);
+                }
+
+                $(function() {
+                    var $root = $("#partree").jstree({
+                        core: {
+                            check_callback: true
+                        },
+                        plugins: ["checkbox"]
+                    });
+                    createParNodes($root, $root, "db/pars/");
+
+                    var selector = new Selector();
+                    //alert(selector.getRegs()[1][1]);
+                    createRegTree(selector.getTree());
+                });
+
+
+                function show(dn, ht) {
+                    headerText.innerHTML = ht;
+                    for (var i in main.childNodes) {
+                        var d = main.childNodes[i];
+                        if (d.tagName == 'DIV') {
+                            if (d.id == dn || d.id == 'header' || d.id == 'vis') {
+                                d.style.visibility = "visible";
+                            } else {
+                                d.style.visibility = "hidden";
+                            }
+                        }
+                    }
+                    $("#vis").css({"opacity": "0.5"});
+                }
+
+
+                function closee() {
+                    for (var i in main.childNodes) {
+                        var d = main.childNodes[i];
+                        if (d.tagName == 'DIV' && d.id != 'vis') {
+                            d.style.visibility = "hidden";
+                        }
+                    }
+                    apply();
+                    $("#vis").css({"opacity": "1"});
+                }
+
+                function apply() {
+                    $("#vis").html("");
+                $("<div></div>").appendTo("#vis").zivis(obj = {
+                    data:{
+                        table: [[1,2,3],[0,1,2]]//,
+                        //rowstnum : 1
+                    }/*,
+                    settings:{
+                        vistype: vistype.value,
+                        chartType:charttype.value,
+                        type : "Gradient",
+                        showLegend : true,
+                        noDataColor : "#808080"
+                    }*/
+                });
+                }
+    </script>
+    <br/><hr/>
+    <footer>
+        Copyright (c) 2013 <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.Д.</a> (zaycev.ivan@gmail.com, <a href="/main/">home page</a>)<br/>
+        Источник данных - <a href="http://www.gks.ru">Сайт Федеральной службы государственной статистики РФ</a><br/>
+        Источник карты - <a href="http://commons.wikimedia.org/wiki/File%3AMap_of_Russian_districts%2C_2008-03-01.svg"/>Викимедия</a><br/>
+</footer>
 <script>
-function show(dn,ht){
-headerText.innerHTML = ht;
-for(var i in main.childNodes){
-  var d = main.childNodes[i];
-  if(d.tagName == 'DIV'){
-    if(d.id == dn || d.id == 'header' || d.id == 'vis'){
-	d.style.visibility = "visible";
-    }else{
-	d.style.visibility = "hidden";	
+    if (location.href.split('/')[2] != '127.0.0.1') {
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-41768406-1', 'navizv.github.io');
+        ga('send', 'pageview');
     }
-  }
-}
-}
-
-
-function closee(){
-for(var i in main.childNodes){
-  var d = main.childNodes[i];
-  if(d.tagName == 'DIV' && d.id != 'vis'){
-    d.style.visibility = "hidden";	
-  }
-}
-}
 </script>
-
 </html>
