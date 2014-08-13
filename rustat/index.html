@@ -22,24 +22,24 @@
     </head>
     <body>
         <div id="buttons">
-            <input type="button" value="Выбор данных" onclick="show('dbsel', this.value)"/>
-            <input type="button" value="Настройки" onclick="show('sets', this.value)"/>
-            <input type="button" value="Экспорт" onclick="show('export', this.value)"/>
-            <input type="button" value="Помощь" onclick="show('help', this.value)"/>
+            <input type="button" value="Р’С‹Р±РѕСЂ РґР°РЅРЅС‹С…" onclick="show('dbsel', this.value)"/>
+            <input type="button" value="РќР°СЃС‚СЂРѕР№РєРё" onclick="show('sets', this.value)"/>
+            <input type="button" value="Р­РєСЃРїРѕСЂС‚" onclick="show('export', this.value)"/>
+            <input type="button" value="РџРѕРјРѕС‰СЊ" onclick="show('help', this.value)"/>
         </div><br/>
 
         <div id="main">
             <div id="vis">
                 <img src="map.png"/></div>
             <div id="header"><div id="headerText"></div>
-                <input type="button" style="position:inherit;top:0px;right:0px;" value="Закрыть" onclick="closee()"/></div>
+                <input type="button" style="position:inherit;top:0px;right:0px;" value="Р—Р°РєСЂС‹С‚СЊ" onclick="closee()"/></div>
 
             <div id="dbsel" class="subwindow">
                 <table id="seltab">
                     <tr>
-                        <td id="parcol">Параметры<!--input type="button" value="x" class="xbutton"--></td>
-                        <td id="regcol">Регионы<!--input type="button" value="x" class="xbutton"--></td>
-                        <!-- td id="yearcol">Годы<div class="xbutton"><input type="button" value="v" ><input type="button" value="x"></div></td -->
+                        <td id="parcol">РџР°СЂР°РјРµС‚СЂС‹<!--input type="button" value="x" class="xbutton"--></td>
+                        <td id="regcol">Р РµРіРёРѕРЅС‹<!--input type="button" value="x" class="xbutton"--></td>
+                        <!-- td id="yearcol">Р“РѕРґС‹<div class="xbutton"><input type="button" value="v" ><input type="button" value="x"></div></td -->
                     </tr>
                     <tr id="seltrees">
                         <td>
@@ -59,17 +59,17 @@
             </div>
 
             <div id="sets" class="subwindow">
-                Ширина <input id="viswidth" type="number" value="800">
-                <!--Высота <input id="visheight" type="number" value="600"-->
+                РЁРёСЂРёРЅР° <input id="viswidth" type="number" value="800">
+                <!--Р’С‹СЃРѕС‚Р° <input id="visheight" type="number" value="600"-->
                 <hr>
                 <input id="radtab" type="radio" name="vistype" value="Table" checked/>
-                <label for="radtab">Таблица</label>
+                <label for="radtab">РўР°Р±Р»РёС†Р°</label>
                 <input id="radchart" type="radio" name="vistype" value="Chart" checked/>
-                <label for="radchart">Диаграмма</label>
+                <label for="radchart">Р”РёР°РіСЂР°РјРјР°</label>
                 <input id="radmap" type="radio" name="vistype" value="Map" checked/>
-                <label for="radmap">Картограмма</label>
+                <label for="radmap">РљР°СЂС‚РѕРіСЂР°РјРјР°</label>
                 <hr>
-                Здесь будут настройки визуализации, специфичные для выбранной формы.
+                Р—РґРµСЃСЊ Р±СѓРґСѓС‚ РЅР°СЃС‚СЂРѕР№РєРё РІРёР·СѓР°Р»РёР·Р°С†РёРё, СЃРїРµС†РёС„РёС‡РЅС‹Рµ РґР»СЏ РІС‹Р±СЂР°РЅРЅРѕР№ С„РѕСЂРјС‹.
             </div>
 
             <div id="export" class="subwindow">
@@ -236,9 +236,9 @@
     </script>
     <br/><hr/>
     <footer>
-        Copyright (c) 2013, 2014 <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.Д.</a> (zaycev.ivan@gmail.com, <a href="/main/">home page</a>)<br/>
-        Источник данных - <a href="http://www.gks.ru">Сайт Федеральной службы государственной статистики РФ</a><br/>
-        Источник карты - <a href="http://commons.wikimedia.org/wiki/File%3AMap_of_Russian_districts%2C_2008-03-01.svg"/>Викимедия</a><br/>
+        Copyright (c) 2013, 2014 <a href="mailto:zaycev.ivan@gmail.com">Р—Р°Р№С†РµРІ Р.Р”.</a> (zaycev.ivan@gmail.com, <a href="/main/">home page</a>)<br/>
+        РСЃС‚РѕС‡РЅРёРє РґР°РЅРЅС‹С… - <a href="http://www.gks.ru">РЎР°Р№С‚ Р¤РµРґРµСЂР°Р»СЊРЅРѕР№ СЃР»СѓР¶Р±С‹ РіРѕСЃСѓРґР°СЂСЃС‚РІРµРЅРЅРѕР№ СЃС‚Р°С‚РёСЃС‚РёРєРё Р Р¤</a><br/>
+        РСЃС‚РѕС‡РЅРёРє РєР°СЂС‚С‹ - <a href="http://commons.wikimedia.org/wiki/File%3AMap_of_Russian_districts%2C_2008-03-01.svg"/>Р’РёРєРёРјРµРґРёСЏ</a><br/>
 </footer>
 <script>
     if (location.href.split('/')[2] != '127.0.0.1') {
