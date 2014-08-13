@@ -5,6 +5,8 @@
         </title>
         <link rel="stylesheet" href="st.css">
         <link rel="stylesheet" href="/libs/jstree/themes/default/style.min.css" />
+        <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css"/>
+        
 
         <script src="/libs/js/jquery.min.js"></script>
         <script src="/libs/jstree/jstree.min.js"></script>
@@ -35,9 +37,9 @@
             <div id="dbsel" class="subwindow">
                 <table id="seltab">
                     <tr>
-                        <td id="parcol">Параметры<input type="button" value="x" class="xbutton"></td>
-                        <td id="regcol">Регионы<input type="button" value="x" class="xbutton"></td>
-                        <td id="yearcol">Годы<div class="xbutton"><input type="button" value="v" ><input type="button" value="x"></div></td>
+                        <td id="parcol">Параметры<!--input type="button" value="x" class="xbutton"--></td>
+                        <td id="regcol">Регионы<!--input type="button" value="x" class="xbutton"--></td>
+                        <!-- td id="yearcol">Годы<div class="xbutton"><input type="button" value="v" ><input type="button" value="x"></div></td -->
                     </tr>
                     <tr id="seltrees">
                         <td>
@@ -48,17 +50,26 @@
                             <div id="regtree" class="seltree">
                             </div>
                         </td>
-                        <td>
+                        <!--td>
                             <div id="yeartree" class="seltree">
                             </div>
-                        </td>
+                        </td-->
                     </tr>
                 </table>
             </div>
 
             <div id="sets" class="subwindow">
-                settings
-                <img src="seldb.png"/>
+                Ширина <input id="viswidth" type="number" value="800">
+                <!--Высота <input id="visheight" type="number" value="600"-->
+                <hr>
+                <input id="radtab" type="radio" name="vistype" value="Table" checked/>
+                <label for="radtab">Таблица</label>
+                <input id="radchart" type="radio" name="vistype" value="Chart" checked/>
+                <label for="radchart">Диаграмма</label>
+                <input id="radmap" type="radio" name="vistype" value="Map" checked/>
+                <label for="radmap">Картограмма</label>
+                <hr>
+                Здесь будут настройки визуализации, специфичные для выбранной формы.
             </div>
 
             <div id="export" class="subwindow">
@@ -84,7 +95,7 @@
                                 if (i == 0 || mas[i] == "")
                                     continue;
                                 var str = mas[i].split(";");
-                                root.jstree(true).create_node(leaf, str[0]);
+                                root.jstree(true).create_node(leaf, {id: path + ":" + str[0], text: str[0]});
                             }
                         }
                     });
@@ -94,13 +105,20 @@
                         url: path + 'list.csv',
                         dataType: 'text',
                         success: function(data) {
+                            //alert(data);
+                            //data.replace(/\r\n/g,'\n');
                             var mas = data.split("\r\n");
                             for (var i in mas) {
                                 if (mas[i] == "")
                                     continue;
                                 var str = mas[i].split(";");
-                                var leafId = root.jstree(true).create_node(leaf, {text: str[1]});
+                                var leafId;
+                                if (str[2] != "11")
+                                    leafId = root.jstree(true).create_node(leaf, {id: path + str[0] + ".csv", text: str[1]});
                                 if (str[2] == "11") {
+                                    leafId = root.jstree(true).create_node(leaf, {id: path + str[0] + ".csv", text: str[1], a_attr: {
+                                            class: "no_checkbox"
+                                        }});
                                     createParNodes(root, root.jstree(true).get_node(leafId), path + str[0] + "/");
                                 } else if (str[2] == "22") {
                                     createParNodesFromFile(root, root.jstree(true).get_node(leafId), path + str[0] + ".csv");
@@ -109,12 +127,13 @@
                         }
                     });
                 }
-                function createRegNodes(root, leaf, list) {
+                function createRegNodes(root, leaf, list, id) {
                     for (var i in  list) {
                         var cur = list[i];
+                        cur.id = cur.code + id;
                         var leafId = root.jstree(true).create_node(leaf, cur);
                         if (cur.leaves != undefined) {
-                            createRegNodes(root, root.jstree(true).get_node(leafId), cur.leaves);
+                            createRegNodes(root, root.jstree(true).get_node(leafId), cur.leaves, ":" + cur.id);
                         }
                     }
                 }
@@ -126,19 +145,23 @@
                         },
                         plugins: ["checkbox"]
                     });
-                    createRegNodes($root, $root, rt);
+                    createRegNodes($root, $root, rt, "");
                 }
-
+                var selector;
                 $(function() {
                     var $root = $("#partree").jstree({
                         core: {
-                            check_callback: true
+                            check_callback: true,
+                            multiple: false
+                        },
+                        checkbox: {
+                            three_state: false
                         },
                         plugins: ["checkbox"]
                     });
                     createParNodes($root, $root, "db/pars/");
 
-                    var selector = new Selector();
+                    selector = new Selector();
                     //alert(selector.getRegs()[1][1]);
                     createRegTree(selector.getTree());
                 });
@@ -168,29 +191,52 @@
                         }
                     }
                     apply();
-                    $("#vis").css({"opacity": "1"});
+
                 }
 
                 function apply() {
-                    $("#vis").html("");
-                $("<div></div>").appendTo("#vis").zivis(obj = {
-                    data:{
-                        table: [[1,2,3],[0,1,2]]//,
-                        //rowstnum : 1
-                    }/*,
-                    settings:{
-                        vistype: vistype.value,
-                        chartType:charttype.value,
-                        type : "Gradient",
-                        showLegend : true,
-                        noDataColor : "#808080"
-                    }*/
-                });
+                    selector.clearSelect();
+                    $.each($("#partree")
+                            .jstree("get_checked", true)
+                            , function(key, value) {
+                        if (value.children.length == 0)
+                            selector.spars.push({id: value.id, text: value.text});
+                    });
+                    $.each($("#regtree")
+                            .jstree("get_checked", true)
+                            , function(key, value) {
+                        if (value.children.length == 0)
+                            selector.sregs.push(value.id.split(":")[0]);
+                    });
+                    var vistype = $('input[name="vistype"]:checked').val();
+                    if (vistype == "Map")
+                        selector.iso = true;
+                    else
+                        selector.iso = false;
+                    $("#vis").css({width: viswidth.value});
+                    selector.select(function(result, title) {
+                        $("#vis").html("");
+                        $("<div></div>").appendTo("#vis").zivis(obj = {
+                            data: {
+                                table: result, //[[1, 2, 3], [0, 1, 2]]//,
+                                //rowstnum : 1
+                                title: title
+                            },
+                            settings: {
+                                vistype: vistype,
+                                //chartType:charttype.value,
+                                type: "Gradient",
+                                showLegend: true
+                            }
+                        });
+                        $("#vis").css({"opacity": "1"});
+                    });
+
                 }
     </script>
     <br/><hr/>
     <footer>
-        Copyright (c) 2013 <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.Д.</a> (zaycev.ivan@gmail.com, <a href="/main/">home page</a>)<br/>
+        Copyright (c) 2013, 2014 <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.Д.</a> (zaycev.ivan@gmail.com, <a href="/main/">home page</a>)<br/>
         Источник данных - <a href="http://www.gks.ru">Сайт Федеральной службы государственной статистики РФ</a><br/>
         Источник карты - <a href="http://commons.wikimedia.org/wiki/File%3AMap_of_Russian_districts%2C_2008-03-01.svg"/>Викимедия</a><br/>
 </footer>

@@ -7,6 +7,8 @@
   top: 0px;
   left: 0px;
   z-index: 1;
+  //height: 600;
+  width: 800;
 }
 
 #header {
@@ -31,15 +33,15 @@
 }
 
 #parcol {
-  width: 300px;
+  width: 400px;
 }
 
 #regcol {
-  width: 380px;
+  width: 400px;
 }
 
 #yearcol {
-  width: 120px;
+  width: 0px;
 }
 
 .xbutton {
@@ -50,4 +52,23 @@
   background: #ffffff;
   height: 400px;
   overflow: auto;
+}
+
+.no_checkbox>i.jstree-checkbox
+{
+    display:none
+}
+
+#radmap {
+  margin-left: 50
+}
+
+#radchart {
+  margin-left: 50
+}
+
+.title {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+  font-size:16px;
+  color:#274b6d;fill:#274b6d;
 }
