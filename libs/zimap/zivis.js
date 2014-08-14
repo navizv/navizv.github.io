@@ -133,7 +133,7 @@
                 series[i - 1].data = new Array(table[i].length - 1)
                 var jj = 0;
                 for (var j = 1; j < table[i].length; j++) {
-                    if (table[i][j] == undefined || table[i][j] == null || table[i][j] == '') {
+                    if (table[i][j] == undefined || table[i][j] == null || table[i][j] == '' || isNaN(table[i][j])) {
                         continue;
                     }
                     series[i - 1].data[jj] = new Array();
@@ -209,7 +209,7 @@
                 var tr = document.createElement('tr');
                 for (var j = 0; j < table[i].length; j++) {
                     var td = document.createElement('td');
-                    td.innerHTML = table[i][j];
+                    td.innerHTML = ( j>0 & isNaN(table[i][j]) )? "..." : table[i][j];
                     tr.appendChild(td);
                 }
                 tbbd.appendChild(tr);
