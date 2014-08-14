@@ -37,7 +37,7 @@ function Selector() {
             dataType: "text",
             success: function(data) {
                 var tab = [];
-                var mas = data.split("\r\n");
+                var mas = data.replace(/\r/g, '').split("\n");
                 var ii = 0;
                 for (var i in mas) {
                     if (mas[i] == "")
@@ -65,7 +65,7 @@ function Selector() {
         dataType: "text",
         async: false,
         success: function(data) {
-            var mas = data.split("\r\n");
+            var mas = data.replace(/\r/g, '').split("\n");
             for (var i in mas) {
                 if (mas[i] == "")
                     continue;
@@ -79,7 +79,7 @@ function Selector() {
         dataType: "text",
         async: false,
         success: function(data) {
-            var mas = data.split("\r\n");
+            var mas = data.replace(/\r/g, '').split("\n");
             var cur = null;
             var ii = 0;
             var jj = 0;

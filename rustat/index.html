@@ -91,7 +91,7 @@
                         dataType: 'text',
                         async: false,
                         success: function(data) {
-                            var mas = data.split("\r\n");
+                            var mas = data.replace(/\r/g, '').split("\n");
                             for (var i in mas) {
                                 if (i == 0 || mas[i] == "")
                                     continue;
@@ -108,8 +108,7 @@
                         async: false,
                         success: function(data) {
                             //alert(data);
-                            //data.replace(/\r\n/g,'\n');
-                            var mas = data.split("\r\n");
+                            var mas = data.replace(/\r/g, '').split("\n");
                             for (var i in mas) {
                                 if (mas[i] == "")
                                     continue;
