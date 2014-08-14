@@ -19,7 +19,7 @@
                 table: [],
                 colnum: 1,
                 rowstnum: 1,
-                title : "Title",
+                title: "Title",
                 transpose: false
             },
             settings: {
@@ -42,7 +42,8 @@
             }
         },
         _create: function() {
-            this._prepareData();
+            if (this.options.data.str != "")
+                this._prepareData();
             switch (this.options.settings.vistype) {
                 case "Table":
                     this._drawTable();
@@ -58,6 +59,9 @@
         _drawMap: function() {
             this.element.attr("align", "center");
             var table = this.options.data.table;
+            $("<div></div>").html(this.options.data.title)
+                    .css({"text-align":"center"})
+                    .addClass("title").appendTo(this.element);
             var d = document.createElement("div");
             $(d).appendTo(this.element);
             if (this.options.settings.scales === null)
@@ -71,12 +75,14 @@
             },
             function() {
                 var spn = $("<span></span>").appendTo(self.element);
+                var max = table[0].length - 1
                 $("<div></div>")
                         .slider({
                     min: 1,
-                    max: table[0].length - 1
+                    max: max,
+                    value: max
                 }).on("slide", function(event, ui) {
-                    var cur = ui ? ui.value : 1;
+                    var cur = ui ? ui.value : max;
                     spn.html(table[0][cur]);
                     zimap.setColumn(cur);
                 }).appendTo(self.element)
@@ -135,7 +141,7 @@
                     type: this.options.settings.chartType
                 },
                 title: {
-                    text : this.options.data.title
+                    text: this.options.data.title
                 },
                 yAxis: {
                     title: {
@@ -154,22 +160,22 @@
             this.options.data.table = [];
             var tab = this.options.data.table;
             for (var i = 0; i < mas.length; i++) {
-                if(mas[i]=='')
+                if (mas[i] == '')
                     continue;
                 var row = mas[i].split(this.options.data.colsep);
                 tab[i] = row;
                 for (var j = 1; j < tab[i].length && i != 0; j++) {
-                    var tmp = parseFloat(tab[i][j].replace(',','.'));
-                    if(!isNaN(tmp))
-                        tab[i][j]=tmp;
+                    var tmp = parseFloat(tab[i][j].replace(',', '.'));
+                    if (!isNaN(tmp))
+                        tab[i][j] = tmp;
                 }
             }
-            if(this.options.data.transpose){
+            if (this.options.data.transpose) {
                 this.options.data.table = new Array(tab[0].length);
                 var tab2 = this.options.data.table;
-                for(var j = 0; j < tab[0].length; j++){
+                for (var j = 0; j < tab[0].length; j++) {
                     tab2[j] = new Array(tab.length);
-                    for(var i = 0; i < tab.length; i++)
+                    for (var i = 0; i < tab.length; i++)
                         tab2[j][i] = tab[i][j];
                 }
             }
@@ -179,13 +185,21 @@
             var table = this.options.data.table;
             var tab = document.createElement('table');
             tab.border = '1';
+            $("<caption></caption>").html(this.options.data.title)
+                    .addClass("title").appendTo(tab);
+            //var cap = document.createElement('caption');
+            //cap.innerHTML = this.options.data.title;
+            //tab.appendChild(cap);
+            var tbhd = document.createElement('thead');
             var tbh = document.createElement('tr');
             for (var i = 0; i < table[0].length; i++) {
                 var th = document.createElement("th");
                 th.innerHTML = table[0][i];
                 tbh.appendChild(th);
             }
-            tab.appendChild(tbh);
+            tbhd.appendChild(tbh);
+            tab.appendChild(tbhd);
+            var tbbd = document.createElement('tbody');
             for (var i = 1; i < table.length; i++) {
                 var tr = document.createElement('tr');
                 for (var j = 0; j < table[i].length; j++) {
@@ -193,8 +207,9 @@
                     td.innerHTML = table[i][j];
                     tr.appendChild(td);
                 }
-                tab.appendChild(tr);
+                tbbd.appendChild(tr);
             }
+            tab.appendChild(tbbd);
             this.element.append(tab);
         }
     });

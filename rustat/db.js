@@ -33,32 +33,33 @@ function Selector() {
     var self = this;
     this.select = function(finish) {
         $.ajax({
-            url: this.spars[0].id,
+            url: "db/pars/" + this.spars[0].id+".csv",
             dataType: "text",
             success: function(data) {
                 var tab = [];
                 var mas = data.split("\r\n");
-                var ii=0;
+                var ii = 0;
                 for (var i in mas) {
                     if (mas[i] == "")
                         continue;
                     var line = mas[i].split(";");
-                    if(i!=0 && !self.selReg(line[0]))
+                    if (i != 0 && !self.selReg(line[0]))
                         continue;
                     tab[ii] = line;
-                    if(!self.iso)
+                    if (!self.iso)
                         tab[ii][0] = self.findISO(tab[ii][0]);
-                    for(var j in tab[ii]){
-                        if(j==0)continue;
-                        tab[ii][j] = parseFloat(tab[ii][j].replace(",",".").replace(/ /g,""));
+                    for (var j in tab[ii]) {
+                        if (j == 0)
+                            continue;
+                        tab[ii][j] = parseFloat(tab[ii][j].replace(",", ".").replace(/ /g, ""));
                     }
                     ii++;
                 }
-                finish(tab,self.spars[0].text);
+                finish(tab, self.spars[0].text);
             }
         })
     }
-    //read iso
+    //read regs iso codes
     $.ajax({
         url: "db/regs/iso3166.csv",
         dataType: "text",
@@ -72,7 +73,7 @@ function Selector() {
             }
         }
     });
-    //read tree
+    //read reg tree
     $.ajax({
         url: "db/regs/tree.csv",
         dataType: "text",
