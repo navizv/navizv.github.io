@@ -1,0 +1,45 @@
+<br/>ZiMapMaker - HTML5/JavaScript application for coloring different svg 
+maps using data in csv format. The main thought was to use only pure HTML5 
+(without browser plugins like Flash or Silverlight). 
+So, some features are not supported by all browsers
+yet. Most uncommon is support of &lt;input type="color"&gt;, so <b>it's recommended 
+for you to use Google Chrome or Opera (as for June 2013).</b>
+<ul>
+<li>
+Input data. Input you data or load a file with it. Data should be in 
+csv format, default separators are ';' and ',', but you can input yours. 
+Line separator is CRLF (LF is acceptable but not recommended). Data must 
+present some table, first column of which contains country (or some region, 
+e.g. state) names, and other columns contain numeric or decimal data. Some 
+first rows can contain table header. You can specify number of row from which 
+country names start and number of column that contains data for visualization. 
+(NB for programmers - first row/column is 1, not 0! :)). There is a button on 
+this tab that loads a demo data. Another 2 text areas ('Parsed', 'Not parsed') 
+are output-only and contain country/region names that was parsed (and their 
+ISO3166 codes) and that wasn't, so you can edit your data to match parsing
+conditions. System can't understand all of possible variants of country
+names, but it surely understands its 2-character ISO 3166-1 code.
+</li><li>
+Visualization settings. Here you can
+choose coloring method and map. 3 maps are available now - world (countries),
+Russia (federation subjects), USA (states). Application supports 3 coloring
+schemes - block, gradient and category. In block scheme all regions with meaning that is
+in some diapason are paint with the same color. You can choose those colors and
+number of them. In gradient scheme each country has its own color depending on
+its data value. Color is changing little by little from one color to another.
+As for now, there are 3 fixed colors - red(min value),
+yellow, green(max value) between which color changes.
+You can also change data intervals which are paint by the same color by enabling
+checkbox 'Set my scales' (it works only for Block method). 
+Category mode is used when you whant to create map chart with not-number data. 
+Each region has correspondent category and you specify what color should each category 
+be painted with.
+</li><li>
+After you input data and choose map
+and color scheme (or accept default) you can color map by pushing
+'Visualization' button. After that you can set filename and save on your disk
+colored svg image. Remember that all maps have their
+authors and licensed under different licenses, you can read about it in 'About'
+tab.
+</li></ul>
+Hope you enjoy this application!

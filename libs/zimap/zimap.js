@@ -73,7 +73,6 @@ function Zimap(elt, opts, onload) {
     for (var i in opts.settings)
         if (opts.settings[i] != null)
             options.settings[i] = opts.settings[i];
-
     //make ISO library    
     var readISO = function() {
         var isos = options.map.isos;

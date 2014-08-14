@@ -1,7 +1,7 @@
 ﻿<html><meta http-equiv="Content-type: text/html; charset=UTF-8">
     <head>
         <title>
-            Test for RuStat
+            RuStat - Российская статистика
         </title>
         <link rel="stylesheet" href="st.css">
         <link rel="stylesheet" href="/libs/jstree/themes/default/style.min.css" />
@@ -26,7 +26,7 @@
             <input type="button" value="Выбор данных" onclick="show('dbsel', this.value)"/>
             <input type="button" value="Настройки" onclick="show('sets', this.value)"/>
             <input type="button" value="Экспорт" onclick="show('export', this.value)"/>
-            <input type="button" value="Помощь" onclick="show('help', this.value)"/>
+            <input type="button" value="Справка" onclick="show('help', this.value)"/>
         </div><br/>
 
         <div id="main">
@@ -63,23 +63,58 @@
                 Ширина <input id="viswidth" type="number" value="800">
                 <!--Высота <input id="visheight" type="number" value="600"-->
                 <hr>
-                <input id="radTab" type="radio" name="vistype" value="Table"/>
-                <label for="radTab">Таблица</label>
-                <input id="radChart" type="radio" name="vistype" value="Chart"/>
-                <label for="radChart">Диаграмма</label>
-                <input id="radMap" type="radio" name="vistype" value="Map" checked/>
-                <label for="radMap">Картограмма</label>
-                <hr>
-                Здесь будут настройки визуализации, специфичные для выбранной формы.
+                <div id="setsradio">
+                    <input id="radTable" type="radio" name="vistype" value="Table"/>
+                    <label for="radTable">Таблица</label>
+                    <input id="radChart" type="radio" name="vistype" value="Chart"/>
+                    <label for="radChart">Диаграмма</label>
+                    <input id="radMap" type="radio" name="vistype" value="Map" checked/>
+                    <label for="radMap">Картограмма</label>
+                    <hr>
+                    <div id="radTableDiv">
+                        Настройки таблицы отсутствуют. Пока что...
+                    </div>
+                    <div id="radChartDiv">
+                        Тип диаграммы: 
+                        <select id="charttype">
+                            <option value="line" selected>график</option>
+                            <option value="pie">круговая</option>
+                            <!--option value="column">гистограмма</option>
+                            <option value="bar">горизонтальная гистограмма</option-->
+                        </select>
+                    </div>
+                    <div id="radMapDiv">
+                        <!--Карта:<select size="1" name="maps" id="maps">
+                            <option value="russia">Россия - субъекты федерации</option>
+                            <option value="russia2">Россия - федеральные округа</option>
+                            <option value="world3">Мир</option>
+                        </select><br/-->
+                        Раскрашивание:
+                        <input id="radColtypeBlock" type="radio" name="coltype" value="Block">
+                        <label for="radColtypeBlock">Блоками</label>
+                        <input id="radColtypeGradient" type="radio" name="coltype" value="Gradient" checked>
+                        <label for="radColtypeGradient">Непрерывное</label>
+                    </div>
+                </div>
             </div>
 
             <div id="export" class="subwindow">
-                Ссылка: <input id="vislink" type="text" size="50" onclick="this.select();">
+                Ссылка: <input id="vislink" type="text" size="50" onclick="this.select();"><hr>
+                Код<!-- (для вставки в блог или на сайт)-->: <input id="viscode" type="text" size="50" onclick="this.select();">
             </div>
 
             <div id="help" class="subwindow">
-                help
-                <img src="seldb.png"/>
+                <div id="helpradio">
+                    <input id="radHelp" type="radio" name="helpRad" value="Help"/>
+                    <label for="radHelp">Помощь</label>
+                    <input id="radAbout" type="radio" name="helpRad" value="About" checked/>
+                    <label for="radAbout">О программе</label>
+                    <hr>
+                    <div id="radHelpDiv">
+                    </div>
+                    <div id="radAboutDiv">
+                    </div>
+                </div>
             </div>
         </div>
     </body>
@@ -152,17 +187,46 @@
                     });
                     createRegNodes($root, $root, rt, "");
                 }
+
                 var selector;
                 $(function() {
+                    $("#setsradio").ziradio();
+                    $("#helpradio").ziradio();
+                    $.ajax({
+                        url: "help.html",
+                        dataType: "text",
+                        success: function(data) {
+                            $("#radHelpDiv").html(data);
+                        }
+                    });
+                    $.ajax({
+                        url: "about.html",
+                        dataType: "text",
+                        success: function(data) {
+                            $("#radAboutDiv").html(data);
+                        }
+                    });
+                    /*$.ajax({
+                        url: '/libs/zimap/maps/maps.txt',
+                        dataType: 'html',
+                        success: function(data) {
+                            drawMaps(data);
+                        }
+                    });*/
                     var lnk = {};
                     selector = new Selector();
 
                     if (location.search != "") {
                         lnk = linkDecode(location.search.substring(1));
                         //alert(lnk.pars[0]);
-                        $('#rad' + lnk.vistype).attr('checked', true);
+                        $('#rad' + lnk.vistype).attr('checked', true).trigger('change');
                         selector.ps = lnk.pars[0];
                         selector.sregs = lnk.regs;
+                        if (lnk.vistype == "Chart") {
+                            charttype.value = lnk.chartType;
+                        }else if (lnk.vistype == "Map") {
+                            $('#radColtype' + lnk.colType).attr('checked', true).trigger('change');
+                        }
                     } else {
                         selector.ps = "NAS/CHI";
                         selector.sregs = ["RU-SF"];
@@ -244,7 +308,8 @@
                             settings: {
                                 vistype: vistype,
                                 //chartType:charttype.value,
-                                type: "Gradient",
+                                type: $('input[name="coltype"]:checked').val(),
+                                chartType: charttype.value,
                                 showLegend: true
                             }
                         });
@@ -257,10 +322,17 @@
                         //title: title,
                         vistype: vistype
                     };
+                    if (lnk.vistype == "Chart") {
+                        lnk.chartType = charttype.value;
+                    }else if (lnk.vistype == "Map") {
+                        lnk.colType = $('input[name="coltype"]:checked').val();
+                    }
                     $.each(selector.spars, function(i, v) {
                         lnk.pars.push(v.id)
                     });
-                    vislink.value = "http://" + location.host + location.pathname + "?" + linkEncode(lnk);
+                    var str = linkEncode(lnk);
+                    vislink.value = "http://" + location.host + location.pathname + "?" + str;
+                    //location.search = "?"+str;
                 }
     </script>
     <br/><hr/>

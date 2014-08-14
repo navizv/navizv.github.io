@@ -17,7 +17,7 @@
   top: 10px;
   left: 10px;
   z-index: 2;
-  width: 800px;
+  width: 810px;
   height: 30px;
   background: #fc0;
 }
@@ -30,6 +30,9 @@
   z-index: 2;
   width: 800px;
   background: #f1f1f1;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #f1f1f1;
 }
 
 #parcol {
@@ -64,6 +67,10 @@
 }
 
 #radChart {
+  margin-left: 50
+}
+
+#radAbout {
   margin-left: 50
 }
 

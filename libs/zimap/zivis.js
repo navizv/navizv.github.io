@@ -101,15 +101,20 @@
                         renderTo: d,
                         type: "pie"
                     },
+                    title: {
+                        text: this.options.data.title
+                    },
                     series: [{}]
                 });
                 var spn = $("<span></span>").appendTo(this.element);
+                var max = table[0].length - 1
                 $("<div></div>")
                         .slider({
                     min: 1,
-                    max: table[0].length - 1
+                    max: max,
+                    value: max
                 }).on("slide", function(event, ui) {
-                    var cur = ui ? ui.value : 1;
+                    var cur = ui ? ui.value : max;
                     spn.html(table[0][cur]);
                     var dt = new Array(table.length - 1);
                     for (var i = 1; i < table.length; i++) {
@@ -221,6 +226,17 @@
             this.element.children("select").change(function() {
                 divs.hide();
                 elt.children("div#" + this.value).show();
+            }).change();
+        }
+    });
+    
+    $.widget("zid.ziradio", {
+        _create: function() {
+            var elt = this.element;
+            var divs = elt.children("div").hide();
+            this.element.children('input[type="radio"]').change(function() {
+                divs.hide();
+                elt.children("div#" + this.id + "Div").show();
             }).change();
         }
     });
