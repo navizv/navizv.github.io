@@ -156,14 +156,14 @@
                 $(function() {
                     var lnk = {};
                     selector = new Selector();
-                    
+
                     if (location.search != "") {
                         lnk = linkDecode(location.search.substring(1));
                         //alert(lnk.pars[0]);
                         $('#rad' + lnk.vistype).attr('checked', true);
                         selector.ps = lnk.pars[0];
                         selector.sregs = lnk.regs;
-                    }else{
+                    } else {
                         selector.ps = "NAS/CHI";
                         selector.sregs = ["RU-SF"];
                     }
@@ -260,8 +260,7 @@
                     $.each(selector.spars, function(i, v) {
                         lnk.pars.push(v.id)
                     });
-                    var str = location.host + location.pathname + "?" + linkEncode(lnk);
-                    vislink.value = str;
+                    vislink.value = "http://" + location.host + location.pathname + "?" + linkEncode(lnk);
                 }
     </script>
     <br/><hr/>
