@@ -222,6 +222,9 @@
                         $('#rad' + lnk.vistype).attr('checked', true).trigger('change');
                         selector.ps = lnk.pars[0];
                         selector.sregs = lnk.regs;
+                        if(lnk.visWidth != undefined){
+                            //viswidth.value = lnk.visWidth;?? надо ли? мож это только для фрейма
+                        }
                         if (lnk.vistype == "Chart") {
                             if (lnk.chartType != undefined)
                                 charttype.value = lnk.chartType;
@@ -321,7 +324,8 @@
                         pars: [],
                         regs: selector.sregs,
                         //title: title,
-                        vistype: vistype
+                        vistype: vistype,
+                        visWidth: viswidth.value
                     };
                     if (lnk.vistype == "Chart") {
                         lnk.chartType = charttype.value;

@@ -31,7 +31,8 @@
                 var lnk = {
                     chartType: "line",
                     colType: "Gradient",
-                    vistype: "Map"
+                    vistype: "Map",
+                    visWidth: 800,
                 };
                 selector = new Selector();
                 selector.ps = "NAS/CHI";
@@ -49,7 +50,7 @@
                     selector.iso = true;
                 else
                     selector.iso = false;
-                //$("#vis").css({width: viswidth.value});
+                $("#vis").css({width: lnk.visWidth});
                 selector.select(function(result, title) {
                     $("#vis").html("").css({"text-align": "right"});
                     $("<div></div>").appendTo("#vis").zivis(obj = {
