@@ -249,8 +249,8 @@
             desc: -1
         },
         _create: function() {
-    this.element.css({
-    "table-layout": "fixed"});
+            this.element.css({
+                "table-layout": "fixed"});
             var el = this.element.get(0);
             var ths = el.childNodes[1].childNodes[0].childNodes;
             var trs = el.childNodes[2].childNodes;
@@ -272,7 +272,7 @@
                 head[i] = ths[i].innerHTML;
                 var th = $(ths[i]);
                 th.addClass("zitud").addClass("zit")
-                        .css({width: Math.max(th.width(),100)});
+                        .css({width: Math.max(th.width(), 100)});
                 (function(k) {
                     $(ths[k]).click(function() {
                         if (k == curi) {
