@@ -1,0 +1,19 @@
+/* tables */
+th.zit {
+	background-repeat: no-repeat;
+	background-position: center left;
+	cursor: pointer;
+	text-align: left;
+	padding-left: 18px;
+}
+
+th.zitud {
+	background-image: url(bg.gif);
+}
+th.zitdo {
+	background-image: url(asc.gif);
+
+}
+th.zitup {
+	background-image: url(desc.gif);
+}

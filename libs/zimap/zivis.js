@@ -60,7 +60,7 @@
             this.element.attr("align", "center");
             var table = this.options.data.table;
             $("<div></div>").html(this.options.data.title)
-                    .css({"text-align":"center"})
+                    .css({"text-align": "center"})
                     .addClass("title").appendTo(this.element);
             var d = document.createElement("div");
             $(d).appendTo(this.element);
@@ -209,13 +209,14 @@
                 var tr = document.createElement('tr');
                 for (var j = 0; j < table[i].length; j++) {
                     var td = document.createElement('td');
-                    td.innerHTML = ( j>0 & isNaN(table[i][j]) )? "..." : table[i][j];
+                    td.innerHTML = (j > 0 & isNaN(table[i][j])) ? "..." : table[i][j];
                     tr.appendChild(td);
                 }
                 tbbd.appendChild(tr);
             }
             tab.appendChild(tbbd);
             this.element.append(tab);
+            $(tab).zitable();
         }
     });
 
@@ -229,15 +230,117 @@
             }).change();
         }
     });
-    
+
     $.widget("zid.ziradio", {
         _create: function() {
             var elt = this.element;
             var divs = elt.children("div").hide();
+
             this.element.children('input[type="radio"]').change(function() {
                 divs.hide();
                 elt.children("div#" + this.id + "Div").show();
             }).change();
+        }
+    });
+
+    $.widget("zid.zitable", {
+        options: {
+            curi: -1,
+            desc: -1
+        },
+        _create: function() {
+    this.element.css({
+    "table-layout": "fixed"});
+            var el = this.element.get(0);
+            var ths = el.childNodes[1].childNodes[0].childNodes;
+            var trs = el.childNodes[2].childNodes;
+            var tds = [];
+            var tab = [];
+            var curtab = [];
+            for (var i = 0; i < trs.length; i++) {
+                tds[i] = trs[i].childNodes;
+                tab[i] = [];
+                for (var j = 0; j < tds[i].length; j++)
+                    tab[i][j] = tds[i][j].innerHTML;
+                curtab[i] = tab[i];
+            }
+            var head = [];//new Array(ths.length);
+            var curi = this.options.curi;
+            var desc = this.options.desc;
+            var self = this;
+            for (var i = 0; i < ths.length; i++) {
+                head[i] = ths[i].innerHTML;
+                var th = $(ths[i]);
+                th.addClass("zitud").addClass("zit")
+                        .css({width: Math.max(th.width(),100)});
+                (function(k) {
+                    $(ths[k]).click(function() {
+                        if (k == curi) {
+                            desc++;
+                            if (desc == 2)
+                                desc = -1;
+                        } else {
+                            desc = -1;
+                            $(ths[curi]).removeClass("zitup zitdo").
+                                    addClass("zitud");
+                            curi = k;
+                        }
+                        $(ths[curi]).removeClass("zitup zitdo zitud").addClass(
+                                (desc == -1) ? "zitdo" :
+                                (desc == 0) ? "zitup" : "zitud");
+                        //alert(curi+"-"+desc);
+                        if (desc == -1) {
+                            curtab.sort(function(a, b) {
+                                var aa = parseFloat(a[k]);
+                                var bb = parseFloat(b[k]);
+                                if (isNaN(aa) && isNaN(bb)) {
+                                    aa = a[k];
+                                    bb = b[k];
+                                } else if (isNaN(aa) && !isNaN(bb)) {
+                                    return 1;
+                                } else if (!isNaN(aa) && isNaN(bb)) {
+                                    return -1;
+                                }
+                                if (aa == bb)
+                                    return 0;
+                                else if (aa > bb)
+                                    return -1;
+                                else
+                                    return 1;
+                            });
+                        } else if (desc == 0) {
+                            var tmp;
+                            var n = curtab.length;
+                            for (var l = 0; l < n / 2; l++) {
+                                tmp = curtab[l];
+                                curtab[l] = curtab[n - l - 1];
+                                curtab[n - l - 1] = tmp;
+                            }
+                        } else {
+                            var n = curtab.length;
+                            for (var l = 0; l < n; l++) {
+                                curtab[l] = tab[l];
+                            }
+                        }
+                        self._fill(curtab, tds);
+                    });
+                })(i);
+            }
+
+            //alert(tab.length);
+
+            /*var thd = elt.children("thead");
+             
+             this.element.children('input[type="radio"]').change(function() {
+             divs.hide();
+             elt.children("div#" + this.id + "Div").show();
+             }).change();*/
+        },
+        _fill: function(tab, tds) {
+            //alert(tab[1][0]);
+            for (var i = 0; i < tab.length; i++)
+                for (var j = 0; j < tab[i].length; j++)
+                    tds[i][j].innerHTML = tab[i][j];
         }
     });
 })(jQuery)
