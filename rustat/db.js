@@ -31,9 +31,32 @@ function Selector() {
         return false;
     }
     var self = this;
+    this.getParName = function(pid) {
+        var s = pid.lastIndexOf('/');
+        var pn = pid.substr(s + 1);
+        var res = "";
+        $.ajax({
+            url: "db/pars/" + pid.substr(0, s + 1) + 'list.csv',
+            dataType: "text",
+            async: false,
+            success: function(data) {
+                var mas = data.replace(/\r/g, '').split("\n");
+                for (var i in mas) {
+                    if (mas[i] == "")
+                        continue;
+                    var str = mas[i].split(";");
+                    if (str[0] == pn) {
+                        res = str[1];
+                        return;
+                    }
+                }
+            }
+        });
+        return res;
+    }
     this.select = function(finish) {
         $.ajax({
-            url: "db/pars/" + this.spars[0].id+".csv",
+            url: "db/pars/" + this.spars[0].id + ".csv",
             dataType: "text",
             success: function(data) {
                 var tab = [];

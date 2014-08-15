@@ -413,6 +413,7 @@ function Zimap(elt, opts, onload) {
                     //set map
                     var mapObject = document.createElement('object');
                     //alert(element.tagName);
+                    mapObject.width = element.offsetWidth;
                     if (element.tagName != "OBJECT") {
                         mapObject.data = svg;
                         element.appendChild(mapObject);

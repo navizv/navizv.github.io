@@ -1,0 +1,78 @@
+﻿<html>
+    <head>
+        <!--meta http-equiv="Content-type: text/html; charset=UTF-8"-->
+        <title>
+            RuStat - Российская статистика
+        </title>
+        <link rel="stylesheet" href="st.css">
+        <link rel="stylesheet" href="/libs/jstree/themes/default/style.min.css" />
+        <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css"/>
+
+
+        <script src="/libs/js/jquery.min.js"></script>
+        <script src="/libs/js/highcharts.js"></script>
+        <script src="/libs/js/exporting.js"></script>
+       	<script src="/libs/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <!--script src="/libs/js/FileSaver.min.js"></script-->
+        <script src="/libs/zimap/zimap.js"></script>
+        <script src="/libs/zimap/zivis.js"></script>
+        <script src="db.js"></script>
+        <script src="link.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="vis"></div>
+
+
+        <script>
+            var selector;
+            $(function() {
+                var lnk = {
+                    chartType: "line",
+                    colType: "Gradient",
+                    vistype: "Map"
+                };
+                selector = new Selector();
+                selector.ps = "NAS/CHI";
+                selector.sregs = ["RU-SF"];
+
+                if (location.search != "") {
+                    lnk = linkDecode(location.search.substring(1));
+                    //alert(lnk.pars[0]);
+                    $('#rad' + lnk.vistype).attr('checked', true).trigger('change');
+                    selector.ps = lnk.pars[0];
+                    selector.spars[0] = {id: lnk.pars[0], text: selector.getParName(lnk.pars[0])};
+                    selector.sregs = lnk.regs;
+                }
+                if (lnk.vistype == "Map")
+                    selector.iso = true;
+                else
+                    selector.iso = false;
+                //$("#vis").css({width: viswidth.value});
+                selector.select(function(result, title) {
+                    $("#vis").html("").css({"text-align": "right"});
+                    $("<div></div>").appendTo("#vis").zivis(obj = {
+                        data: {
+                            table: result, //[[1, 2, 3], [0, 1, 2]]//,
+                            //rowstnum : 1
+                            title: title
+                        },
+                        settings: {
+                            vistype: lnk.vistype,
+                            type: lnk.colType,
+                            chartType: lnk.chartType,
+                            showLegend: true
+                        }
+                    });
+                    var i = location.pathname.lastIndexOf('/');
+                    $("<a></a>").appendTo("#vis")
+                            .attr("href", "http://" + location.host + location.pathname.substr(0, i + 1) + location.search)
+                            .attr("target","_blank")
+                    
+                            .html("Источник");
+                });
+            });
+        </script>
+    </body>
+</html>
