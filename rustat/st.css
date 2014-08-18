@@ -1,5 +1,10 @@
+.hbutton {
+  font-size: 20px;
+}
+
 #main {
   position: relative;
+  font-size: 20px;
 }
 
 #vis {
@@ -9,6 +14,10 @@
   z-index: 1;
   //height: 600;
   width: 800;
+}
+
+#tooltip {
+  z-index: 1;
 }
 
 #header {
@@ -33,14 +42,17 @@
   border-style: solid;
   border-width: 5px;
   border-color: #f1f1f1;
+  font-size: 20px;
 }
 
 #parcol {
   width: 400px;
+  font-size: 20px;
 }
 
 #regcol {
   width: 400px;
+  font-size: 20px;
 }
 
 #yearcol {
@@ -55,6 +67,7 @@
   background: #ffffff;
   height: 400px;
   overflow: auto;
+font-size: 20px;
 }
 
 .no_checkbox>i.jstree-checkbox
@@ -76,6 +89,6 @@
 
 .title {
   font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
-  font-size:16px;
+  font-size:20px;
   color:#274b6d;fill:#274b6d;
 }

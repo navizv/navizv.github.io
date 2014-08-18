@@ -48,7 +48,7 @@ function Zimap(elt, opts, onload) {
             type: "Block", //"Category","Gradient"
             colors: ['#ccccff', '#6666ff', '#0000ff', '#330099'],
             scales: null,
-            setScales : false,
+            setScales: false,
             map: "russia",
             mapFolder: "/libs/zimap/maps",
             showLegend: true,
@@ -110,14 +110,14 @@ function Zimap(elt, opts, onload) {
         var tab = options.data.table;
         if (tab == null || tab == undefined) {
             var mas = options.data.str.split(options.data.rowsep);
-            tab = new Array(mas.length-options.data.rowstnum);
+            tab = new Array(mas.length - options.data.rowstnum);
             var k = 0;
             for (var i = options.data.rowstnum; i < mas.length; i++) {
                 tab[k] = mas[i].split(options.data.colsep);
                 for (var j = 1; j < tab[k].length; j++) {
-                    var tmp = parseFloat(tab[k][j].replace(',','.'));
-                    if(!isNaN(tmp))
-                        tab[k][j]=tmp;
+                    var tmp = parseFloat(tab[k][j].replace(',', '.'));
+                    if (!isNaN(tmp))
+                        tab[k][j] = tmp;
                 }
                 k++;
             }
@@ -132,7 +132,7 @@ function Zimap(elt, opts, onload) {
 
     var calcScales = function() {
         //Вычисляем шкалу для цветов
-        
+
         var first = true;
         var tab = options.data.table;
         var j = options.data.colnum;
@@ -173,15 +173,15 @@ function Zimap(elt, opts, onload) {
         //Рисуем легенду
         var i = 0;
         var svgd = options.map.svgd;
-        
+
         var el = svgd.getElementById('mylink');
-	el.parentNode.setAttribute("xlink:href","http://navizv.github.io/zimm/index2.html");//?"+encodeURIComponent(JSON.stringify(opts)));
-        if(el)
-            if(options.settings.noLink)
+        el.parentNode.setAttribute("xlink:href", "http://navizv.github.io/zimm/index2.html");//?"+encodeURIComponent(JSON.stringify(opts)));
+        if (el)
+            if (options.settings.noLink)
                 el.style.display = 'none';
             else
                 el.style.display = 'block';
-        
+
         var cury = parseInt(svgd.getElementById('leg0').getAttribute('y'));
         if (cury != cury)
             cury = 100;
@@ -288,7 +288,7 @@ function Zimap(elt, opts, onload) {
         var cn = colors.length;
         var scl = options.settings.scales;
         var tab = options.data.table;
-        
+
         for (var i = 0; i < tab.length; i++) {
             var reg = tab[i][0];
             var c = tab[i][j];
@@ -358,44 +358,71 @@ function Zimap(elt, opts, onload) {
 
     var drawMap = function() {
         var j = options.data.colnum;
-        if(j===null || j=== undefined){
+        if (j === null || j === undefined) {
             return;
         }
         options.map.svgd = options.map.mapObject.contentDocument;
-        
+
         if (options.settings.scales === null ||
-            options.settings.setScales === true){
+                options.settings.setScales === true) {
             calcScales();
         }
         drawLegend();
         colorMap();
+        if (options.settings.tutle)
+            setTutles();//вспл.подсказки
         element.style.opacity = "1";
         //finish();
     }
-    
-    var finish = function (){
-        if(onload!=null)
-            onload();
+
+    var setTutles = function() {
+        var svgd = options.map.svgd;
+        var ts = svgd.getElementsByTagName('title');
+        for (var i = ts.length - 1; i >= 0; i--) {
+            var tl = ts[i];
+            var tu = svgd.createElement('tutle');
+            tu.textContent = tl.textContent;
+            var reg = tl.parentNode;
+            reg.insertBefore(tu, tl);
+            reg.removeChild(tl);
+        }
     }
     
-    
-    this.setColumn = function(j){
+    var setTutlesBack = function() {
+        var svgd = options.map.svgd;
+        var ts = svgd.getElementsByTagName('tutle');
+        for (var i = ts.length - 1; i >= 0; i--) {
+            var tl = ts[i];
+            var tu = svgd.createElement('title');
+            tu.textContent = tl.textContent;
+            var reg = tl.parentNode;
+            reg.insertBefore(tu, tl);
+            reg.removeChild(tl);
+        }
+    }
+
+    var finish = function() {
+        if (onload != null)
+            onload(options);
+    }
+
+
+    this.setColumn = function(j) {
         options.data.colnum = j;
         element.style.opacity = "0.5";
         drawMap();
     }
-    
-    this.parsed = function(){
-        alert("evwr");
+
+    this.parsed = function() {
+        //alert("evwr");
         return options.map.parsed;
     }
-    
-    this.notParsed = function(){
+
+    this.notParsed = function() {
         return options.map.notParsed;
     }
 
     var readMap = function() {
-
         //element.innerHTML = "here will be map";
         var adr = '/libs/zimap/maps/' + options.settings.map;
         var svg = adr + '.svg';
@@ -458,8 +485,8 @@ function zim_format(f) {
     return f;
 }
 
-if(window.zimapfuns){
-    for(var i in window.zimapfuns)
+if (window.zimapfuns) {
+    for (var i in window.zimapfuns)
         window.zimapfuns[i]();
     window.zimapfuns = null;
 }

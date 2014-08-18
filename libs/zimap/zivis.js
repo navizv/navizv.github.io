@@ -59,6 +59,9 @@
         _drawMap: function() {
             this.element.attr("align", "center");
             var table = this.options.data.table;
+            var isie = (/msie|trident/i).test(navigator.userAgent);//$.browser.msie;
+            var tooltip = $('<div id="tooltip" style="position:absolute;opacity:0.8;border:solid;border-color:black;border-width:2;padding:3 3 3 3;display:none;background-color:white;color:black;"></div>')
+                    .appendTo(this.element);
             $("<div></div>").html(this.options.data.title)
                     .css({"text-align": "center"})
                     .addClass("title").appendTo(this.element);
@@ -73,20 +76,52 @@
                 },
                 settings: this.options.settings
             },
-            function() {
+            function(options) {
                 var spn = $("<span></span>").appendTo(self.element);
                 var max = table[0].length - 1
-                $("<div></div>")
+                var slider = $("<div></div>")
                         .slider({
                     min: 1,
                     max: max,
                     value: max
-                }).on("slide", function(event, ui) {
+                }).draggable().on("slide", function(event, ui) {
                     var cur = ui ? ui.value : max;
                     spn.html(table[0][cur]);
                     zimap.setColumn(cur);
                 }).appendTo(self.element)
                         .trigger("slide");
+
+                if (options.settings.tutle) {//всплывающие подсказки
+                    var show_tooltip = function(tit, evt) {
+                        tooltip.html(tit);
+                        tooltip.css({
+                            left: evt.pageX + 5,
+                            top: evt.pageY + 35,
+                            display: "inline"
+                        });
+                    }
+
+                    var hide_tooltip = function() {
+                        tooltip.css({display: "none"});
+                    }
+                    slider.mousedown(hide_tooltip);
+                    if(isie)
+                        $(options.map.svgd).mousedown(hide_tooltip);
+
+                    $(options.map.svgd.getElementsByClassName('region')).mousedown(function(evt) {
+                        var tit = this.getElementsByTagName('tutle')[0].textContent;
+                        show_tooltip(tit, evt);
+                    }).hover(function(evt) {
+                        var tit = this.getElementsByTagName('tutle')[0].textContent;
+                        show_tooltip(tit, evt);
+                    }).mouseout(function() {
+                        //alert(isie);
+                        if (isie) {
+                        } else {
+                            hide_tooltip();
+                        }
+                    });
+                }
             });
         },
         _drawChart: function() {
@@ -113,7 +148,7 @@
                     min: 1,
                     max: max,
                     value: max
-                }).on("slide", function(event, ui) {
+                }).draggable().on("slide", function(event, ui) {
                     var cur = ui ? ui.value : max;
                     spn.html(table[0][cur]);
                     var dt = new Array(table.length - 1);
