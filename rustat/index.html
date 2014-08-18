@@ -86,12 +86,12 @@
                         </select>
                     </div>
                     <div id="radMapDiv">
-                        <!--Карта:<select size="1" name="maps" id="maps">
-                            <option value="russia">Россия - субъекты федерации</option>
-                            <option value="russia2">Россия - федеральные округа</option>
-                            <option value="world3">Мир</option>
-                        </select><br/-->
-                        Раскрашивание:
+                        Карта: <select size="1" name="maps" id="maps">
+                            <option value="russia" selected>Россия - субъекты федерации</option>
+                            <option value="russia_fo">Россия - федеральные округа</option>
+                            <!--option value="world3">Мир</option-->
+                        </select><br/><br/>
+                        Раскрашивание: 
                         <input id="radColtypeBlock" type="radio" name="coltype" value="Block">
                         <label for="radColtypeBlock">Блоками</label>
                         <input id="radColtypeGradient" type="radio" name="coltype" value="Gradient" checked>
@@ -224,6 +224,7 @@
                         $('#rad' + lnk.vistype).attr('checked', true).trigger('change');
                         selector.ps = lnk.pars[0];
                         selector.sregs = lnk.regs;
+                        maps.value = lnk.map || "russia";
                         if(lnk.visWidth != undefined){
                             //viswidth.value = lnk.visWidth;?? надо ли? мож это только для фрейма
                         }
@@ -317,7 +318,8 @@
                                 type: $('input[name="coltype"]:checked').val(),
                                 chartType: charttype.value,
                                 showLegend: true,
-                                tutle:true
+                                tutle:true,
+                                map: maps.value
                             }
                         });
                         $("#vis").css({"opacity": "1"});
@@ -328,7 +330,8 @@
                         regs: selector.sregs,
                         //title: title,
                         vistype: vistype,
-                        visWidth: viswidth.value
+                        visWidth: viswidth.value,
+                        map: maps.value
                     };
                     if (lnk.vistype == "Chart") {
                         lnk.chartType = charttype.value;
