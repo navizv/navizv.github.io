@@ -39,6 +39,50 @@
                 parsed: "",
                 notParsed: "",
                 svgd: null
+            },
+            chart: {}
+        },
+        getType: function() {
+            return this.options.settings.vistype;
+        },
+        getTable: function() {
+            return this.options.data.table;
+        },
+        getSvgd: function() {
+            return this.options.map.svgd;
+        },
+        saveFile: function(s) {
+            var vt = this.options.settings.vistype;
+            if (vt == "Table") {
+                var tab = vr.zivis("getTable");
+                var txt = "";
+                for (var i in tab) {
+                    for (var j in tab[i]) {
+                        txt += (tab[i][j] + ";");
+                    }
+                    txt += "\r\n";
+                }
+                var blob = new Blob(["\ufeff", txt], {type: "text/csv;charset=utf-8"});
+                saveAs(blob, "" + s.name + "." + s.type);//==csv!!
+            } else if (vt == "Map") {
+                var svgd = this.options.map.svgd;
+                if(s.type == "svg") {
+                    var blob = new Blob([xml_to_text(svgd).replace(/tutle/g, "title")], {type: "image/svg+xml;charset=utf-8"});
+                    saveAs(blob, "" + s.name + "." + s.type);
+                }else{
+                    //???
+                }
+            } else if (vt == "Chart") {
+                var type = "";
+                if (s.type == "svg") {
+                    type = "image/svg+xml";
+                } else {
+                    type = "image/png";
+                }
+                this.options.chart.exportChart({
+                    filename: translite(s.name),
+                    type: type
+                });
             }
         },
         _create: function() {
@@ -90,8 +134,8 @@
                     zimap.setColumn(cur);
                 }).appendTo(self.element)
                         .trigger("slide");
-
-                if (options.settings.tutle) {//����������� ���������
+                self.options.map = options.map;
+                if (options.settings.tutle) {//всплывающие подсказки
                     var show_tooltip = function(tit, evt) {
                         tooltip.html(tit);
                         tooltip.css({
@@ -105,7 +149,7 @@
                         tooltip.css({display: "none"});
                     }
                     slider.mousedown(hide_tooltip);
-                    if(isie)
+                    if (isie)
                         $(options.map.svgd).mousedown(hide_tooltip);
 
                     $(options.map.svgd.getElementsByClassName('region')).mousedown(function(evt) {
@@ -141,6 +185,7 @@
                     },
                     series: [{}]
                 });
+                this.options.chart = chart;
                 var spn = $("<span></span>").appendTo(this.element);
                 var max = table[0].length - 1
                 $("<div></div>")
@@ -153,7 +198,11 @@
                     spn.html(table[0][cur]);
                     var dt = new Array(table.length - 1);
                     for (var i = 1; i < table.length; i++) {
-                        dt[i - 1] = [table[i][0], parseFloat(table[i][cur])];
+                        var tmp = parseFloat(table[i][cur]);
+                        if (!isNaN(tmp))
+                            dt[i - 1] = [table[i][0], tmp];
+                        else
+                            dt[i - 1] = [table[i][0], 0];
                     }
                     chart.series[0].setData(dt);
                 })
@@ -176,9 +225,11 @@
                     series[i - 1].data[jj++][1] = parseFloat(table[i][j]);
                 }
             }
-            this.element.highcharts({
+            //this.element.highcharts
+            this.options.chart = new Highcharts.Chart({
                 chart: {
-                    type: this.options.settings.chartType
+                    renderTo: this.element.get(0),
+                    type: "line"//this.options.settings.chartType
                 },
                 title: {
                     text: this.options.data.title
@@ -378,4 +429,17 @@
                     tds[i][j].innerHTML = tab[i][j];
         }
     });
-})(jQuery)
+})(jQuery);
+
+function xml_to_text(svgf) {
+    return svgf.xml ? svgf.xml : (new XMLSerializer()).serializeToString(svgf);
+}
+
+function translite(str){
+    var arr = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'g', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'ы': 'i', 'э': 'e', 'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ж': 'G', 'З': 'Z', '�?': 'I', 'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U', 'Ф': 'F', 'Ы': 'I', 'Э': 'E', 'ё': 'yo', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ь': '', 'ю': 'yu', 'я': 'ya', 'Ё': 'YO', 'Х': 'H', 'Ц': 'TS', 'Ч': 'CH', 'Ш': 'SH', 'Щ': 'SHCH', 'Ъ': '', 'Ь': '',
+        'Ю': 'YU', 'Я': 'YA'};
+    var replacer = function(a) {
+        return arr[a] || a
+    };
+    return str.replace(/[А-яёЁ]/g, replacer)
+}

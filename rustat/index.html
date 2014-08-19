@@ -20,15 +20,20 @@
         <script src="/libs/zimap/zivis.js"></script>
         <script src="db.js"></script>
         <script src="link.js"></script>
+
+        <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script> 
+        <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/StackBlur.js"></script>
+        <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script> 
+
         <style>
         </style>
     </head>
     <body>
         <div id="buttons">
             <button class="hbutton" onclick="show('dbsel', this.innerHTML)">Выбор данных</button>
-            <button class="hbutton" onclick="show('sets', this.value)">Настройки</button>
-            <button class="hbutton" onclick="show('export', this.value)">Экспорт</button>
-            <button class="hbutton" onclick="show('help', this.value)">Справка</button>
+            <button class="hbutton" onclick="show('sets', this.innerHTML)">Настройки</button>
+            <button class="hbutton" onclick="show('export', this.innerHTML)">Экспорт</button>
+            <button class="hbutton" onclick="show('help', this.innerHTML)">Справка</button>
         </div><br/>
 
         <div id="main">
@@ -66,11 +71,11 @@
                 <!--Высота <input id="visheight" type="number" value="600"-->
                 <hr>
                 <div id="setsradio">
-                    <input id="radTable" type="radio" name="vistype" value="Table"/>
+                    <input id="radTable" type="radio" onclick="setVisT(this.value);" name="vistype" value="Table"/>
                     <label for="radTable">Таблица</label>
-                    <input id="radChart" type="radio" name="vistype" value="Chart"/>
+                    <input id="radChart" type="radio" onclick="setVisT(this.value);" name="vistype" value="Chart"/>
                     <label for="radChart">Диаграмма</label>
-                    <input id="radMap" type="radio" name="vistype" value="Map" checked/>
+                    <input id="radMap" type="radio" onclick="setVisT(this.value);" name="vistype" value="Map" checked/>
                     <label for="radMap">Картограмма</label>
                     <hr>
                     <div id="radTableDiv">
@@ -100,9 +105,17 @@
                 </div>
             </div>
 
-            <div id="export" class="subwindow">
-                Ссылка: <input id="vislink" type="text" size="50" onclick="this.select();"><hr>
-                Код<!-- (для вставки в блог или на сайт)-->: <input id="viscode" type="text" size="50" onclick="this.select();">
+            <div id="export" class="subwindow" style="display: inline-block">
+                Ссылка: <input id="vislink" type="text" size="50" onclick="this.select();" readonly><hr>
+                Код<!-- (для вставки в блог или на сайт)-->: <input id="viscode" type="text" size="50" onclick="this.select();" readonly><hr>
+                Файл: <input id="filename" type="text" size="50" value="file"/>
+                <label id="extTabExt">.csv </label>
+                <select size="1" name="expImgExt" id="expImgExt">
+                    <option value="svg" selected>.svg</option>
+                    <option value="png">.png</option>
+                </select>
+                <a id="downloadLnk" download="image.png">
+                    <button onclick="download();">Скачать</button></a>
             </div>
 
             <div id="help" class="subwindow">
@@ -119,8 +132,51 @@
                 </div>
             </div>
         </div>
-
+        <canvas id="zicanvas" width="1200" height="610" style="display: none;"></canvas>
         <script>
+                function setVisT(t) {
+                    if (t == "Table") {
+                        $("#extTabExt").show();
+                        $("#expImgExt").hide();
+                    } else {
+                        $("#expImgExt").show();
+                        $("#extTabExt").hide();
+                    }
+                }
+
+                function download2() {
+                    var type = "csv";
+                    var vt = visres.zivis("getType");
+                    if (vt != "Table") {
+                        type = expImgExt.value;
+                    }
+                    if (vt == "Map" && type == "png") {
+                        var c = $('#zicanvas').html("");
+                        canvg('zicanvas', visres.zivis("getSvgd"));
+                        downloadLnk.download = filename.value + ".png";
+                        if ((/msie|trident/i).test(navigator.userAgent)) {
+                            window.open(c.get(0).toDataURL('image/png'), "");//!!!
+                        } else {
+                            var dt = c.get(0).toDataURL('image/png');
+                            this.href = dt;
+                        }
+                    } else {
+                        return;
+                    }
+                }
+
+                function download() {
+                    var type = "csv";
+                    var vt = visres.zivis("getType");
+                    if (vt != "Table") {
+                        type = expImgExt.value;
+                    }
+                    if (vt == "Map" && type == "png") {
+                        return;
+                    }
+                    visres.zivis("saveFile", {name: filename.value, type: type});
+                }
+
                 function createParNodesFromFile(root, leaf, path) {
                     $.ajax({
                         url: path,
@@ -190,7 +246,9 @@
                 }
 
                 var selector;
+                var visres = {};
                 $(function() {
+                    downloadLnk.addEventListener('click', download2, false);
                     $("#setsradio").ziradio();
                     $("#helpradio").ziradio();
                     $.ajax({
@@ -225,7 +283,7 @@
                         selector.ps = lnk.pars[0];
                         selector.sregs = lnk.regs;
                         maps.value = lnk.map || "russia";
-                        if(lnk.visWidth != undefined){
+                        if (lnk.visWidth != undefined) {
                             //viswidth.value = lnk.visWidth;?? надо ли? мож это только для фрейма
                         }
                         if (lnk.vistype == "Chart") {
@@ -236,6 +294,8 @@
                                 $('#radColtype' + lnk.colType).attr('checked', true).trigger('change');
                         }
                     }
+                    var vistype = $('input[name="vistype"]:checked').val();
+                    setVisT(vistype);
                     var $root = $("#partree").jstree({
                         core: {
                             check_callback: true,
@@ -268,7 +328,7 @@
                         }
                     }
                     $("#vis").css({"opacity": "0.5"});
-                    if(dn=="export")
+                    if (dn == "export")
                         fillCode();
                 }
 
@@ -305,8 +365,9 @@
                         selector.iso = false;
                     $("#vis").css({width: viswidth.value});
                     selector.select(function(result, title) {
+                        filename.value = title;
                         $("#vis").html("");
-                        $("<div></div>").appendTo("#vis").zivis(obj = {
+                        visres = $("<div></div>").appendTo("#vis").zivis({
                             data: {
                                 table: result, //[[1, 2, 3], [0, 1, 2]]//,
                                 //rowstnum : 1
@@ -318,7 +379,7 @@
                                 type: $('input[name="coltype"]:checked').val(),
                                 chartType: charttype.value,
                                 showLegend: true,
-                                tutle:true,
+                                tutle: true,
                                 map: maps.value
                             }
                         });
@@ -345,7 +406,7 @@
                     vislink.value = "http://" + location.host + location.pathname + "?" + str;
                     var tmp = 'iframe';
                     //alert(vis.clientHeight);
-                    viscode.value = '<' + tmp + ' width="' + (20+parseInt(viswidth.value)) +
+                    viscode.value = '<' + tmp + ' width="' + (20 + parseInt(viswidth.value)) +
                             '" height="' + '@' +
                             '" src="http://' + location.host +
                             location.pathname + 'frame.html?' + str +
@@ -355,9 +416,9 @@
 
                 function fillCode() {
                     var i = viscode.value.indexOf('@');
-                    if(i>=0)
-                    viscode.value = viscode.value.substr(0, i) +
-                            (40+$("#vis").height()) + viscode.value.substr(i + 1);
+                    if (i >= 0)
+                        viscode.value = viscode.value.substr(0, i) +
+                                (40 + $("#vis").height()) + viscode.value.substr(i + 1);
                 }
         </script>
         <br/><hr/>
