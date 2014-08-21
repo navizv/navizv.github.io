@@ -66,10 +66,10 @@
                 saveAs(blob, "" + s.name + "." + s.type);//==csv!!
             } else if (vt == "Map") {
                 var svgd = this.options.map.svgd;
-                if(s.type == "svg") {
+                if (s.type == "svg") {
                     var blob = new Blob([xml_to_text(svgd).replace(/tutle/g, "title")], {type: "image/svg+xml;charset=utf-8"});
                     saveAs(blob, "" + s.name + "." + s.type);
-                }else{
+                } else {
                     //???
                 }
             } else if (vt == "Chart") {
@@ -171,20 +171,31 @@
         _drawChart: function() {
             var table = this.options.data.table;
             var series = new Array(table.length - 1);
-            if (this.options.settings.chartType == "pie") {
+            var type = this.options.settings.chartType;
+            var title = this.options.data.title;
+            if (type == "pie" || type == "column") {
                 this.element.attr("align", "center");
                 var d = document.createElement("div");
                 $(d).appendTo(this.element);
-                var chart = new Highcharts.Chart({
+                var obj = {
                     chart: {
                         renderTo: d,
-                        type: "pie"
+                        type: type
                     },
                     title: {
-                        text: this.options.data.title
+                        text: title
                     },
-                    series: [{}]
-                });
+                    series: [{}],
+                    legend: {
+                        enabled: false
+                    }
+                };
+                if (type != "pie") {//column
+                    obj.xAxis = {categories: []};
+                    for (i = 1; i < table.length; i++)
+                        obj.xAxis.categories.push(table[i][0]);
+                }
+                var chart = new Highcharts.Chart(obj);
                 this.options.chart = chart;
                 var spn = $("<span></span>").appendTo(this.element);
                 var max = table[0].length - 1
@@ -199,12 +210,14 @@
                     var dt = new Array(table.length - 1);
                     for (var i = 1; i < table.length; i++) {
                         var tmp = parseFloat(table[i][cur]);
-                        if (!isNaN(tmp))
+                        if (!isNaN(tmp)) {
                             dt[i - 1] = [table[i][0], tmp];
-                        else
+                        } else {
                             dt[i - 1] = [table[i][0], 0];
+                        }
                     }
                     chart.series[0].setData(dt);
+                    chart.series[0].name = title;
                 })
                         .appendTo(this.element)
                         .trigger("slide");
@@ -229,10 +242,10 @@
             this.options.chart = new Highcharts.Chart({
                 chart: {
                     renderTo: this.element.get(0),
-                    type: "line"//this.options.settings.chartType
+                    type: type
                 },
                 title: {
-                    text: this.options.data.title
+                    text: title
                 },
                 yAxis: {
                     title: {
@@ -435,7 +448,7 @@ function xml_to_text(svgf) {
     return svgf.xml ? svgf.xml : (new XMLSerializer()).serializeToString(svgf);
 }
 
-function translite(str){
+function translite(str) {
     var arr = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'g', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'ы': 'i', 'э': 'e', 'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ж': 'G', 'З': 'Z', '�?': 'I', 'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U', 'Ф': 'F', 'Ы': 'I', 'Э': 'E', 'ё': 'yo', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ь': '', 'ю': 'yu', 'я': 'ya', 'Ё': 'YO', 'Х': 'H', 'Ц': 'TS', 'Ч': 'CH', 'Ш': 'SH', 'Щ': 'SHCH', 'Ъ': '', 'Ь': '',
         'Ю': 'YU', 'Я': 'YA'};
     var replacer = function(a) {

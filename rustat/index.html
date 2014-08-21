@@ -86,13 +86,14 @@
                         <select id="charttype">
                             <option value="line" selected>график</option>
                             <option value="pie">круговая</option>
-                            <!--option value="column">гистограмма</option>
-                            <option value="bar">горизонтальная гистограмма</option-->
+                            <option value="column">гистограмма</option>
+                            <!--option value="bar">горизонтальная гистограмма</option-->
                         </select>
                     </div>
                     <div id="radMapDiv">
                         Карта: <select size="1" name="maps" id="maps">
-                            <option value="russia" selected>Россия - субъекты федерации</option>
+                            <option value="auto" selected>Автовыбор</option>
+                            <option value="russia">Россия - субъекты федерации</option>
                             <option value="russia_fo">Россия - федеральные округа</option>
                             <option value="world3">Мир</option>
                         </select><br/><br/>
@@ -352,11 +353,30 @@
                         if (value.children.length == 0)
                             selector.spars.push({id: value.id, text: value.text});
                     });
-                    $.each($("#regtree")
-                            .jstree("get_checked", true)
+                    var simple = []; //simple regs list
+                    var map = maps.value=="auto"? "" : maps.value;
+                    var mas = $("#regtree")
+                            .jstree("get_checked", true);
+                    $.each(mas
                             , function(key, value) {
-                        if (value.children.length == 0)
-                            selector.sregs.push(value.id.split(":")[0]);
+                        if (value.children.length == 0){
+                            var tmp = value.id.split(":");
+                            var c = tmp[0];
+                            var p = tmp[1];
+                            if(maps.value == "auto"){
+                                if(p=="RU-SF")
+                                    map = map || "russia";
+                                else if(p=="RU-FO")
+                                    map = map || "russia_fo";
+                                else if(p=="CN")
+                                    map = map || "world3";
+                            }
+                            selector.sregs.push(c);
+                            if($.inArray(p,simple)<0)
+                                simple.push(c);
+                        }else
+                            if($.inArray(value.id,simple)<0)
+                                simple.push(value.id);
                     });
                     var vistype = $('input[name="vistype"]:checked').val();
                     if (vistype == "Map")
@@ -380,7 +400,7 @@
                                 chartType: charttype.value,
                                 showLegend: true,
                                 tutle: true,
-                                map: maps.value
+                                map: map
                             }
                         });
                         $("#vis").css({"opacity": "1"});
@@ -388,7 +408,7 @@
 
                     var lnk = {
                         pars: [],
-                        regs: selector.sregs,
+                        regs: simple,
                         //title: title,
                         vistype: vistype,
                         visWidth: viswidth.value,
@@ -404,6 +424,9 @@
                     });
                     var str = linkEncode(lnk);
                     vislink.value = "http://" + location.host + location.pathname + "?" + str;
+                    lnk.map = map;
+                    lnk.regs = selector.sregs;
+                    str = linkEncode(lnk);
                     var tmp = 'iframe';
                     //alert(vis.clientHeight);
                     viscode.value = '<' + tmp + ' width="' + (20 + parseInt(viswidth.value)) +
