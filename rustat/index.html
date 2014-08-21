@@ -121,9 +121,9 @@
 
             <div id="help" class="subwindow">
                 <div id="helpradio">
-                    <input id="radHelp" type="radio" name="helpRad" value="Help"/>
+                    <input id="radHelp" type="radio" name="helpRad" value="Help" checked/>
                     <label for="radHelp">Помощь</label>
-                    <input id="radAbout" type="radio" name="helpRad" value="About" checked/>
+                    <input id="radAbout" type="radio" name="helpRad" value="About"/>
                     <label for="radAbout">О программе</label>
                     <hr>
                     <div id="radHelpDiv">
@@ -251,7 +251,6 @@
                 $(function() {
                     downloadLnk.addEventListener('click', download2, false);
                     $("#setsradio").ziradio();
-                    $("#helpradio").ziradio();
                     $.ajax({
                         url: "help.html",
                         dataType: "text",
@@ -266,6 +265,7 @@
                             $("#radAboutDiv").html(data);
                         }
                     });
+                    $("#helpradio").ziradio();
                     /*$.ajax({
                      url: '/libs/zimap/maps/maps.txt',
                      dataType: 'html',

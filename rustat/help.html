@@ -1,45 +1,9 @@
-<br/>ZiMapMaker - HTML5/JavaScript application for coloring different svg 
-maps using data in csv format. The main thought was to use only pure HTML5 
-(without browser plugins like Flash or Silverlight). 
-So, some features are not supported by all browsers
-yet. Most uncommon is support of &lt;input type="color"&gt;, so <b>it's recommended 
-for you to use Google Chrome or Opera (as for June 2013).</b>
+<p>RuStat (Российская статистика) - веб-приложение для просмотра статистических данных о регионах России и странах мира в различных формах визуализации, сохранения полученных изображений, ссылок на них, экспорта для вставки в HTML-код. Все данные взяты из статистических сборников Федеральной службы государственной статистики РФ "Регионы России. Социально-экономические показатели" и "Российский статистический ежегодник", предоставленных на её официальном сайте (<a href="http://www.gks.ru/wps/wcm/connect/rosstat_main/rosstat/ru/statistics/publications/catalog/">ссылка</a>).
+</p><p>Для работы с приложением рекомендуется использовать браузеры последних версий, предпочтительно Google Chrome. В других браузерах некоторые функции могут не работать. Например, сохранение картограммы в файле формата .png может не работать в браузере MS Internet Explorer.
+</p><p>Работу с приложением можно разделить на 3 этапа: 1) выбор интересующих нас данных; 2) настройка визуализации выбранных данных; 3) экспорт полученной визуализации в той или иной форме. При этом на каждом шаге можно возвращаться к предыдущим этапам. 
+</p>
 <ul>
-<li>
-Input data. Input you data or load a file with it. Data should be in 
-csv format, default separators are ';' and ',', but you can input yours. 
-Line separator is CRLF (LF is acceptable but not recommended). Data must 
-present some table, first column of which contains country (or some region, 
-e.g. state) names, and other columns contain numeric or decimal data. Some 
-first rows can contain table header. You can specify number of row from which 
-country names start and number of column that contains data for visualization. 
-(NB for programmers - first row/column is 1, not 0! :)). There is a button on 
-this tab that loads a demo data. Another 2 text areas ('Parsed', 'Not parsed') 
-are output-only and contain country/region names that was parsed (and their 
-ISO3166 codes) and that wasn't, so you can edit your data to match parsing
-conditions. System can't understand all of possible variants of country
-names, but it surely understands its 2-character ISO 3166-1 code.
-</li><li>
-Visualization settings. Here you can
-choose coloring method and map. 3 maps are available now - world (countries),
-Russia (federation subjects), USA (states). Application supports 3 coloring
-schemes - block, gradient and category. In block scheme all regions with meaning that is
-in some diapason are paint with the same color. You can choose those colors and
-number of them. In gradient scheme each country has its own color depending on
-its data value. Color is changing little by little from one color to another.
-As for now, there are 3 fixed colors - red(min value),
-yellow, green(max value) between which color changes.
-You can also change data intervals which are paint by the same color by enabling
-checkbox 'Set my scales' (it works only for Block method). 
-Category mode is used when you whant to create map chart with not-number data. 
-Each region has correspondent category and you specify what color should each category 
-be painted with.
-</li><li>
-After you input data and choose map
-and color scheme (or accept default) you can color map by pushing
-'Visualization' button. After that you can set filename and save on your disk
-colored svg image. Remember that all maps have their
-authors and licensed under different licenses, you can read about it in 'About'
-tab.
-</li></ul>
-Hope you enjoy this application!
+<li>В окне "выбор данных" пользователю предоставляется возможность выбрать один статистический показателей из дерева "Параметры" и набор регионов из дерева "Регионы". При этом будет выбрана вся информация, имеющеяся в текущий момент в базе данных приложения по данному показателю для выбранных регионов за ряд лет. База данных пока что находится в стадии наполнения, многих данных в ней може не быть.
+</li><li>В окне "настройки визуализации" пользователю предоставляется возможность выбрать, в каком виде будут визуализированные выбранные им данные. Возможны 3 основные формы - таблица, диаграмма, картограмма. При выборе той или иной формы появляется возможность её более подробной настройки. Для диаграммы пользователь может выбрать тип (график, круговая или гистограмма). Для картограммы пользователь может выбрать одну из контурных карт (по умолчанию карта определяется автоматически, исходя из выбранных пользователем на первом этапе регионов), а также алгоритм раскраски карты. При блочном алгоритме все регионы, значение выбранного показателя для которых лежит в определённых границах, раскрашиваются в один цвет. При градиентном алгоритме, цвет, которым раскрашивается регион, плавно меняется в зависимости от значения показателя (зависимость линейная). В будущем возможно расширение настроек визуализации.
+</li><li>В окне "экспорт" пользователю предоставляется возможность сохранить результаты проделанной им работы в различных формах. Это либо web-ссылка, перейдя по которой, любой пользователь попадёт на страницу с готовой визуализацией. Либо HTML-код, который пользователь может вставить в код своего сайта или блога (если он поддерживает возможность вставки фреймов), для того, чтоб на его сайте или блоге появилась созданная им визуализация. Либо файл, который пользователь может сохранить у себя на жёстком диске. Таблицы сохраняются в формате .csv (разделитель ";"), который можно просматривать в MS Excel. Карты и визуализации сохраняются в форматах .svg и .png. Формат .svg в данном случае меньшего размера и более высокого качества, а также предоставляет дополнительные возможности интерактивности, однако он может не поддерживаться как популярными обработчиками изображений, так и блогами (для публикации изображений в интернете).
+</li><ul>

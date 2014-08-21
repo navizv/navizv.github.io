@@ -334,11 +334,11 @@
         _create: function() {
             var elt = this.element;
             var divs = elt.children("div").hide();
-
             this.element.children('input[type="radio"]').change(function() {
                 divs.hide();
                 elt.children("div#" + this.id + "Div").show();
-            }).change();
+            });
+            this.element.children('input[type="radio"]:checked').change();
         }
     });
 
