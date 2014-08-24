@@ -5,7 +5,8 @@
         </title>
         <link rel="stylesheet" href="st.css">
         <link rel="stylesheet" href="/libs/jstree/themes/default/style.min.css" />
-        <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css"/>
+        <!--link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css"/-->
+        <link rel="stylesheet" href="css/jquery-ui.css"/>
         <link rel="stylesheet" href="tab/style.css"/>
 
 
@@ -40,30 +41,44 @@
             <div id="vis">
                 <!--img src="map.png"/--></div>
             <div id="header"><div id="headerText"></div>
-                <input type="button" style="position:inherit;top:0px;right:0px;" value="Закрыть" onclick="closee()"/></div>
+                <div id="closeblock"><label for="closebutton">закрыть</label><input type="button" id="closebutton" value="X" onclick="closee()"/></div></div>
 
             <div id="dbsel" class="subwindow">
-                <table id="seltab">
+                <!--table id="seltab">
                     <tr>
-                        <td id="parcol">Параметры<!--input type="button" value="x" class="xbutton"--></td>
-                        <td id="regcol">Регионы<!--input type="button" value="x" class="xbutton"--></td>
-                        <!-- td id="yearcol">Годы<div class="xbutton"><input type="button" value="v" ><input type="button" value="x"></div></td -->
-                    </tr>
-                    <tr id="seltrees">
-                        <td>
-                            <div id="partree" class="seltree">
-                            </div>
-                        </td>
-                        <td>
-                            <div id="regtree" class="seltree">
-                            </div>
-                        </td>
-                        <!--td>
-                            <div id="yeartree" class="seltree">
-                            </div>
-                        </td-->
-                    </tr>
-                </table>
+                        <td id="parcol">Параметры<!--input type="button" value="x" class="xbutton"></td>
+                        <td id="regcol">Регионы<!--input type="button" value="x" class="xbutton"></td>
+                <!-- td id="yearcol">Годы<div class="xbutton"><input type="button" value="v" ><input type="button" value="x"></div></td >
+            </tr>
+            <tr id="seltrees">
+                <td>
+                    <div id="partree" class="seltree">
+                    </div>
+                </td>
+                <td>
+                    <div id="regtree" class="seltree">
+                    </div>
+                </td>
+                <!--td>
+                    <div id="yeartree" class="seltree">
+                    </div>
+                </td>
+            </tr>
+        </table-->
+                <div id="seltabs">
+                    <ul>
+                        <li><a href="#partree">Параметры</a></li>
+                        <li><a href="#regtree">Регионы</a></li>
+                    </ul>
+                    <div id="partree" class="seltree">
+                    </div>
+                    <div id="regtree" class="seltree">
+                    </div>
+                    <!--td>
+                        <div id="yeartree" class="seltree">
+                        </div>
+                    </td-->
+                </div>
             </div>
 
             <div id="sets" class="subwindow">
@@ -72,18 +87,18 @@
                 <hr>
                 <div id="setsradio">
                     <input id="radTable" type="radio" onclick="setVisT(this.value);" name="vistype" value="Table"/>
-                    <label for="radTable">Таблица</label>
+                    <label class="mylabel" for="radTable">Таблица</label>
                     <input id="radChart" type="radio" onclick="setVisT(this.value);" name="vistype" value="Chart"/>
-                    <label for="radChart">Диаграмма</label>
+                    <label class="mylabel" for="radChart">Диаграмма</label>
                     <input id="radMap" type="radio" onclick="setVisT(this.value);" name="vistype" value="Map" checked/>
-                    <label for="radMap">Картограмма</label>
+                    <label class="mylabel" for="radMap">Картограмма</label>
                     <hr>
                     <div id="radTableDiv">
                         Настройки таблицы отсутствуют. Пока что...
                     </div>
                     <div id="radChartDiv">
                         Тип диаграммы: 
-                        <select id="charttype">
+                        <select id="charttype" class="bigselect">
                             <option value="line" selected>график</option>
                             <option value="pie">круговая</option>
                             <option value="column">гистограмма</option>
@@ -91,7 +106,7 @@
                         </select>
                     </div>
                     <div id="radMapDiv">
-                        Карта: <select size="1" name="maps" id="maps">
+                        Карта: <select size="1" name="maps" id="maps" class="bigselect">
                             <option value="auto" selected>Автовыбор</option>
                             <option value="russia">Россия - субъекты федерации</option>
                             <option value="russia_fo">Россия - федеральные округа</option>
@@ -107,8 +122,8 @@
             </div>
 
             <div id="export" class="subwindow" style="display: inline-block">
-                Ссылка: <input id="vislink" type="text" size="50" onclick="this.select();" readonly><hr>
-                Код<!-- (для вставки в блог или на сайт)-->: <input id="viscode" type="text" size="50" onclick="this.select();" readonly><hr>
+                Ссылка: <input id="vislink" type="text" size="50" class="autoselect" readonly><hr>
+                Код<!-- (для вставки в блог или на сайт)-->: <input id="viscode" type="text" size="50" class="autoselect" readonly><hr>
                 Файл: <input id="filename" type="text" size="50" value="file"/>
                 <label id="extTabExt">.csv </label>
                 <select size="1" name="expImgExt" id="expImgExt">
@@ -249,6 +264,19 @@
                 var selector;
                 var visres = {};
                 $(function() {
+                    $("#seltabs").tabs();
+                    $("label").css({cursor: "pointer"}).mouseover(function() {
+                        $(this).css({"text-decoration": "underline"});
+                    }).mouseout(function() {
+                        $(this).css({"text-decoration": "none"});
+                    });
+                    $(".autoselect").click(function() {
+                        this.focus();
+                        this.setSelectionRange(0, 9999);
+                        //this.select();
+                    });
+                    if(navigator.userAgent.match(/iPod|iPhone|iPad/i))
+                        $(".autoselect").removeAttr("readonly");
                     downloadLnk.addEventListener('click', download2, false);
                     $("#setsradio").ziradio();
                     $.ajax({
@@ -354,29 +382,29 @@
                             selector.spars.push({id: value.id, text: value.text});
                     });
                     var simple = []; //simple regs list
-                    var map = maps.value=="auto"? "" : maps.value;
+                    var map = maps.value == "auto" ? "" : maps.value;
                     var mas = $("#regtree")
                             .jstree("get_checked", true);
                     $.each(mas
                             , function(key, value) {
-                        if (value.children.length == 0){
+                        if (value.children.length == 0) {
                             var tmp = value.id.split(":");
                             var c = tmp[0];
                             var p = tmp[1];
-                            if(maps.value == "auto"){
-                                if(p=="RU-SF")
+                            if (maps.value == "auto") {
+                                if (p == "RU-SF")
                                     map = map || "russia";
-                                else if(p=="RU-FO")
+                                else if (p == "RU-FO")
                                     map = map || "russia_fo";
-                                else if(p=="CN")
+                                else if (p == "CN")
                                     map = map || "world3";
                             }
                             selector.sregs.push(c);
-                            if($.inArray(p,simple)<0)
+                            if ($.inArray(p, simple) < 0)
                                 simple.push(c);
-                        }else
-                            if($.inArray(value.id,simple)<0)
-                                simple.push(value.id);
+                        } else
+                        if ($.inArray(value.id, simple) < 0)
+                            simple.push(value.id);
                     });
                     var vistype = $('input[name="vistype"]:checked').val();
                     if (vistype == "Map")

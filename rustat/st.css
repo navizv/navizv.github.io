@@ -1,9 +1,16 @@
-#maps{
-  font-size: 20px;
+.bigselect{
+  font-size: 18px;
+  font-family: Arial, sans-serif;
 }
 
 .hbutton {
   font-size: 16px;
+border-radius: 10px;
+border-width: 3px;
+border-color: #f1f1f1;
+font-family: Arial, sans-serif;
+background: #e1e1e1;
+border-style: outset;
 }
 
 #main {
@@ -30,9 +37,25 @@
   top: 10px;
   left: 10px;
   z-index: 2;
-  width: 810px;
+  width: 799px;
   height: 30px;
-  background: #fc0;
+  background: #935A9E;
+  border-radius: 5px 5px 0 0;
+  vertical-align: middle;
+  color: #ffffff;
+padding: 3px;
+padding-left: 10px;
+font-family: Arial, sans-serif;
+}
+
+#closeblock{
+  position:inherit;
+  top:2px;
+  right:0px;
+  font-size: 12px;
+}
+#closebutton{
+  border-radius: 8px;
 }
 
 .subwindow {
@@ -42,21 +65,23 @@
   left: 10px;
   z-index: 2;
   width: 800px;
-  background: #f1f1f1;
+  background: #e1e1e1;
   border-style: solid;
-  border-width: 5px;
-  border-color: #f1f1f1;
-  font-size: 20px;
+  padding: 5px;
+  border-width: 0px 1px 1px 1px;
+  border-color: #a1a1a1;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
 }
 
 #parcol {
   width: 400px;
-  font-size: 20px;
+  //font-size: 20px;
 }
 
 #regcol {
   width: 400px;
-  font-size: 20px;
+  //font-size: 20px;
 }
 
 #yearcol {
@@ -69,7 +94,7 @@
 
 .seltree {
   background: #ffffff;
-  height: 400px;
+  height: 750px;
   overflow: auto;
 font-size: 20px;
 }

@@ -408,13 +408,14 @@
                                     return 1;
                             });
                         } else if (desc == 0) {
-                            var tmp;
+                            curtab.reverse();
+                            /*var tmp;
                             var n = curtab.length;
                             for (var l = 0; l < n / 2; l++) {
                                 tmp = curtab[l];
                                 curtab[l] = curtab[n - l - 1];
                                 curtab[n - l - 1] = tmp;
-                            }
+                            }*/
                         } else {
                             var n = curtab.length;
                             for (var l = 0; l < n; l++) {
