@@ -195,6 +195,12 @@
                     for (i = 1; i < table.length; i++)
                         obj.xAxis.categories.push(table[i][0]);
                 }
+                if (type == "pie") {
+                    obj.tooltip = {
+                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f})<br/>',
+                        //shared: true
+                    };
+                }
                 var chart = new Highcharts.Chart(obj);
                 this.options.chart = chart;
                 var spn = $("<span></span>").appendTo(this.element);
@@ -272,6 +278,12 @@
             obj.xAxis.tickInterval = sr;
             if (t[0] == "area") {
                 obj.plotOptions = {area: {stacking: t[1]}};
+            }
+            if (t[1] == "percent") {
+                obj.tooltip = {
+                    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f})<br/>',
+                    //shared: true
+                };
             }
             this.options.chart = new Highcharts.Chart(obj);
         },
