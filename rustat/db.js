@@ -9,10 +9,12 @@ function Selector() {
     var regTree = [];
     this.spars = [];
     this.sregs = [];
+    this.sdops = [];
     this.iso = false;
     this.clearSelect = function() {
         this.spars = [];
         this.sregs = [];
+        this.sdops = [];
     }
     this.findISO = function(iso) {
         for (var i in regs) {
@@ -25,6 +27,14 @@ function Selector() {
     this.selReg = function(iso) {
         for (var i in this.sregs) {
             var r = this.sregs[i];
+            if (r == iso)
+                return true;
+        }
+        return false;
+    }
+    this.selDop = function(iso) {
+        for (var i in this.sdops) {
+            var r = this.sdops[i];
             if (r == iso)
                 return true;
         }
@@ -55,6 +65,7 @@ function Selector() {
         return res;
     }
     this.select = function(finish) {
+        var mapa = (this.spars[0].type=="21");
         $.ajax({
             url: "db/pars/" + this.spars[0].id + ".csv",
             dataType: "text",
@@ -66,10 +77,15 @@ function Selector() {
                     if (mas[i] == "")
                         continue;
                     var line = mas[i].split(";");
-                    if (i != 0 && !self.selReg(line[0]))
+                    if(i != 0 &&
+                        (mapa && !self.selReg(line[0]) ||
+                        !mapa && !self.selDop(line[0])))
                         continue;
-                    tab[ii] = line;
-                    if (!self.iso)
+                    if(mapa)
+                        tab[ii] = line;
+                    else
+                        tab[ii] = line.slice(1);
+                    if (mapa && !self.iso)
                         tab[ii][0] = self.findISO(tab[ii][0]);
                     for (var j in tab[ii]) {
                         if (j == 0)
@@ -80,7 +96,43 @@ function Selector() {
                 }
                 finish(tab, self.spars[0].text);
             }
-        })
+        });
+    }
+    this.setPossibleRegs = function(finish) {
+        if (!(this.spars[0] && this.spars[0].type === "22")) {
+            $.ajax({
+                url: "db/pars/" + (this.spars[0] ? this.spars[0].id : this.ps) + ".csv",
+                dataType: "text",
+                async: false,
+                success: function(data) {
+                    var tab = [];
+                    var mas = data.replace(/\r/g, '').split("\n");
+                    for (var i in mas) {
+                        if (i==0||mas[i] == "")
+                            continue;
+                        tab.push(mas[i].split(";")[0]);
+                    }
+                    finish(tab);
+                }
+            });
+        } else {
+            $.ajax({
+                url: "db/pars/" + this.spars[0].id + ".csv",
+                dataType: "text",
+                async: false,
+                success: function(data) {
+                    var tab = [];
+                    var mas = data.replace(/\r/g, '').split("\n");
+                    for (var i in mas) {
+                        if (i==0||mas[i] == "")
+                            continue;
+                        var tmp = mas[i].split(";");
+                        tab.push({id:tmp[0],text:tmp[1]});
+                    }
+                    finish(tab,true);
+                }
+            });
+        }
     }
     //read regs iso codes
     $.ajax({
@@ -128,5 +180,4 @@ function Selector() {
             }
         }
     });
-
 }

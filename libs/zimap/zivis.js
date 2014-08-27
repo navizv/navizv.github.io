@@ -239,10 +239,11 @@
                 }
             }
             //this.element.highcharts
-            this.options.chart = new Highcharts.Chart({
+            var t = type.split("_");
+            var obj = {
                 chart: {
                     renderTo: this.element.get(0),
-                    type: type
+                    type: t[0]
                 },
                 title: {
                     text: title
@@ -253,11 +254,26 @@
                     }
                 },
                 xAxis: {
-                    categories: table[0].slice(1, table[0].length)
+                    categories: table[0].slice(1, table[0].length),
+                    //tickInterval: 10
+                    //tickmarkPlacement: 'on'
                 },
                 series: series
                         //,colors:colors
-            });
+            };
+            var sr = obj.xAxis.categories;
+            sr = sr[sr.length - 1] - sr[0];
+            if (sr > 70)
+                sr = 10;
+            else if (sr > 30)
+                sr = 5;
+            else
+                sr = 1;
+            obj.xAxis.tickInterval = sr;
+            if (t[0] == "area") {
+                obj.plotOptions = {area: {stacking: t[1]}};
+            }
+            this.options.chart = new Highcharts.Chart(obj);
         },
         _prepareData: function() {
             var mas = this.options.data.str.split(this.options.data.rowsep);
@@ -410,12 +426,12 @@
                         } else if (desc == 0) {
                             curtab.reverse();
                             /*var tmp;
-                            var n = curtab.length;
-                            for (var l = 0; l < n / 2; l++) {
-                                tmp = curtab[l];
-                                curtab[l] = curtab[n - l - 1];
-                                curtab[n - l - 1] = tmp;
-                            }*/
+                             var n = curtab.length;
+                             for (var l = 0; l < n / 2; l++) {
+                             tmp = curtab[l];
+                             curtab[l] = curtab[n - l - 1];
+                             curtab[n - l - 1] = tmp;
+                             }*/
                         } else {
                             var n = curtab.length;
                             for (var l = 0; l < n; l++) {

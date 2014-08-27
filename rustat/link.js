@@ -4,7 +4,7 @@ function linkEncode(obj){
         if(str!="")
             str+="&";
         //v-massive???
-        if(f=="pars"||f=="regs")
+        if(f=="pars"||f=="regs"||f=="dops")
             v = v.join("_").replace(/\//g,"\*");
         str+=f+"="+encodeURIComponent(v);
     });
@@ -16,7 +16,7 @@ function linkDecode(str){
     $.each(str.split("&"), function (i,v){
         var p = v.split("=");
         obj[p[0]] = decodeURIComponent(p[1]);
-        if(p[0]=="pars"||p[0]=="regs")
+        if(p[0]=="pars"||p[0]=="regs"||p[0]=="dops")
             obj[p[0]] = obj[p[0]].replace(/\*/g,"\/").split("_");
     });
     return obj;

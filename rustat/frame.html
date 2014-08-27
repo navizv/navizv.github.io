@@ -1,4 +1,4 @@
-<html>
+﻿<html>
     <head>
         <!--meta http-equiv="Content-type: text/html; charset=UTF-8"-->
         <title>
@@ -44,8 +44,9 @@
                     //alert(lnk.pars[0]);
                     $('#rad' + lnk.vistype).attr('checked', true).trigger('change');
                     selector.ps = lnk.pars[0];
-                    selector.spars[0] = {id: lnk.pars[0], text: selector.getParName(lnk.pars[0])};
+                    selector.spars[0] = {id: lnk.pars[0], text: selector.getParName(lnk.pars[0]),type:lnk.regs?"21":"22"};
                     selector.sregs = lnk.regs;
+                    selector.sdops = lnk.dops;
                 }
                 if (lnk.vistype == "Map")
                     selector.iso = true;
@@ -74,7 +75,7 @@
                             .attr("href", "http://" + location.host + location.pathname.substr(0, i + 1) + location.search)
                             .attr("target","_blank")
                     
-                            .html("Источник");
+                            .html("�?сточник");
                 });
             });
         </script>

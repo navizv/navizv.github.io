@@ -145,7 +145,7 @@ function Zimap(elt, opts, onload) {
             if (el == undefined || el == null)
                 continue;
             var cur = c;
-            if (cur == NaN)
+            if (isNaN(cur))
                 continue;
             if (first) {
                 max = min = cur;

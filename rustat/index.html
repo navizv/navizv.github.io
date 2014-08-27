@@ -68,11 +68,14 @@
                 <div id="seltabs">
                     <ul>
                         <li><a href="#partree">Параметры</a></li>
-                        <li><a href="#regtree">Регионы</a></li>
+                        <li><a href="#regtree" class="regtab">Регионы</a></li>
+                        <li><a href="#doptree" class="doptab">Дополнительно</a></li>
                     </ul>
                     <div id="partree" class="seltree">
                     </div>
-                    <div id="regtree" class="seltree">
+                    <div id="regtree" class="seltree regtab">
+                    </div>
+                    <div id="doptree" class="seltree doptab">
                     </div>
                     <!--td>
                         <div id="yeartree" class="seltree">
@@ -102,6 +105,8 @@
                             <option value="line" selected>график</option>
                             <option value="pie">круговая</option>
                             <option value="column">гистограмма</option>
+                            <option value="area_normal">слои</option>
+                            <option value="area_percent">слои, %</option>
                             <!--option value="bar">горизонтальная гистограмма</option-->
                         </select>
                     </div>
@@ -150,6 +155,149 @@
         </div>
         <canvas id="zicanvas" width="1200" height="610" style="display: none;"></canvas>
         <script>
+                var selector;
+                var visres = {};
+                $(function() {
+                    //HTML interface changes
+                    $("#seltabs").tabs();
+                    $("label").css({cursor: "pointer"}).mouseover(function() {
+                        $(this).css({"text-decoration": "underline"});
+                    }).mouseout(function() {
+                        $(this).css({"text-decoration": "none"});
+                    });
+                    $(".autoselect").click(function() {
+                        this.focus();
+                        this.setSelectionRange(0, 9999);
+                        //this.select();
+                    });
+                    if (navigator.userAgent.match(/iPod|iPhone|iPad/i))
+                        $(".autoselect").removeAttr("readonly"); //иначе не выделяет
+                    downloadLnk.addEventListener('click', download2, false);
+                    $("#setsradio").ziradio();
+                    $.ajax({
+                        url: "help.html",
+                        dataType: "text",
+                        success: function(data) {
+                            $("#radHelpDiv").html(data);
+                        }
+                    });
+                    $.ajax({
+                        url: "about.html",
+                        dataType: "text",
+                        success: function(data) {
+                            $("#radAboutDiv").html(data);
+                        }
+                    });
+                    $("#helpradio").ziradio();
+                    $(".doptab").hide();
+                    //Query string parsing
+                    var lnk = {};
+                    selector = new Selector();
+                    selector.ps = "NAS/CHI";
+                    selector.sregs = ["RU-SF"];
+                    if (location.search != "") {
+                        lnk = linkDecode(location.search.substring(1));
+                        $('#rad' + lnk.vistype).attr('checked', true).trigger('change');
+                        selector.ps = lnk.pars[0];
+                        selector.sregs = lnk.regs || selector.sregs;
+                        selector.sdops = lnk.dops;
+                        maps.value = lnk.map || "russia";
+                        if (lnk.visWidth != undefined) {
+                            //viswidth.value = lnk.visWidth;?? надо ли? мож это только для фрейма
+                        }
+                        if (lnk.vistype == "Chart") {
+                            if (lnk.chartType != undefined)
+                                charttype.value = lnk.chartType;
+                        } else if (lnk.vistype == "Map") {
+                            if (lnk.colType != undefined)
+                                $('#radColtype' + lnk.colType).attr('checked', true).trigger('change');
+                        }
+                    }
+                    var vistype = $('input[name="vistype"]:checked').val();
+                    setVisT(vistype);
+                    //Set trees
+                    createRegTree(selector.getTree());
+                    $("#doptree").jstree({
+                        core: {
+                            check_callback: true
+                        },
+                        plugins: ["checkbox"]
+                    });
+                    var root = $("#partree").jstree({
+                        core: {
+                            check_callback: true,
+                            multiple: false
+                        },
+                        checkbox: {
+                            three_state: false//,
+                                    //tie_selection: false
+                        },
+                        plugins: ["checkbox"]
+                    }).on("changed.jstree", function(e, data) {
+                        selector.spars[0] = {id: data.node.id, text: data.node.text, type: data.node.a_attr.type};
+                        setTimeout(function() {
+                            selector.setPossibleRegs(changeRegTree)
+                        }, 0);
+                    });
+                    createParNodes(root, root, "db/pars/");
+                    //$("#partree li").not(".jstree-leaf").each(function() {
+                    //$("a ins.jtree-chechbox", this).first().hide();
+                    //$("a", this).first().click(function tog(e) {
+                    $(".no_checkbox").click(function tog(e) {//чтоб при клике узел разворачивался (если без чекбокса)
+                        var id = $(this).parent().attr("id");
+                        $("#partree").jstree("toggle_node", "#" + id);
+                        //alert("hi");
+                        e.stopPropagation();
+                        e.preventDefault();
+                        setTimeout(function() { //нехорошо, но как лучше?
+                            var t = $("#" + id).children("a")[0];
+                            //alert($(t));
+                            $(t).off("click").on("click", tog);
+                        }, 100);
+                    });
+                    //});
+                    
+                    //selector.setPossibleRegs(changeRegTree);
+
+                    apply();
+                });
+
+                function changeRegTree(rlist, p) {
+                    if (!p) {
+                        $(".doptab").hide();
+                        $(".regtab").show();
+                        var root = $("#regtree");
+                        var r = root.jstree(true);
+                        $.each($("#regtree>ul").children("li"), function() {
+                            r.delete_node(this.id);
+                        });
+                        //root.jstree(true).delete_node(["RU", "RU-SF", "RU-FO", "CN"]);
+                        var rt = selector.getTree();
+                        createRegNodes(root, root, rt, "", rlist);
+                    } else {
+                        $(".doptab").show();
+                        $(".regtab").hide();
+                        var root = $("#doptree");
+                        var r = root.jstree(true);
+                        $.each($("#doptree>ul").children("li"), function() {
+                            r.delete_node(this.id);
+                        });
+                        var b = 0;
+                        for (var d in rlist) {
+                            var k = rlist[d];
+                            var s = $.inArray(k.id, selector.sdops) >= 0;
+                            if(s)
+                                b++;
+                        }
+                        for (var d in rlist) {
+                            var k = rlist[d];
+                            var s = b==0 || $.inArray(k.id, selector.sdops) >= 0;
+                            r.create_node(root, {id: k.id, text: k.text, state: {selected: s}});
+                        }
+                        
+                    }
+                }
+
                 function setVisT(t) {
                     if (t == "Table") {
                         $("#extTabExt").show();
@@ -223,126 +371,64 @@
                                 var str = mas[i].split(";");
                                 var leafId;
                                 var id = path.substring(8) + str[0];
-                                if (str[2] != "11")
-                                    leafId = root.jstree(true).create_node(leaf, {id: id, text: str[1], state: {selected: id == selector.ps}});
+                                if (str[2] != "11") {
+                                    leafId = root.jstree(true).create_node(leaf, {id: id, text: str[1], state: {selected: id == selector.ps}, a_attr: {
+                                            type: str[2]
+                                        }});
+                                    if (id == selector.ps) {
+                                        selector.spars[0] = {id: id, text: str[1], type: str[2]};
+                                        selector.setPossibleRegs(changeRegTree);
+                                    }
+                                    //$(document.getElementById(leafId)).trigger("changed.jstree");
+                                }
                                 if (str[2] == "11") {
                                     leafId = root.jstree(true).create_node(leaf, {id: id, text: str[1], state: {selected: id == selector.ps}, a_attr: {
                                             class: "no_checkbox"
                                         }});
                                     createParNodes(root, root.jstree(true).get_node(leafId), path + str[0] + "/");
-                                } else if (str[2] == "22") {
-                                    createParNodesFromFile(root, root.jstree(true).get_node(leafId), path + str[0] + ".csv");
+                                } else if (str[2] == "22") {//!!reserve
+                                    //createParNodesFromFile(root, root.jstree(true).get_node(leafId), path + str[0] + ".csv");
                                 }
                             }
                         }
                     });
                 }
-                function createRegNodes(root, leaf, list, id) {
+                function createRegNodes(root, leaf, list, id, f) {
+                    var res = 0;
                     for (var i in  list) {
                         var cur = list[i];
                         cur.id = cur.code + id;
                         cur.state = {
                             selected: $.inArray(cur.code, selector.sregs) >= 0
                         };
-                        var leafId = root.jstree(true).create_node(leaf, cur);
-                        if (cur.leaves != undefined) {
-                            createRegNodes(root, root.jstree(true).get_node(leafId), cur.leaves, ":" + cur.id);
+                        //alert(root.jstree);
+                        if (cur.leaves == undefined && f && ($.inArray(cur.code, f) < 0)) {
+                            //alert(cur.code);
+                            continue;
                         }
+                        var g = root.jstree(true);
+                        var leafId = g.create_node(leaf, cur);
+                        if (cur.leaves != undefined) {
+                            var c = createRegNodes(root, g.get_node(leafId), cur.leaves, ":" + cur.id, f);
+                            if (c <= 1 && cur.id != "RU") {
+                                g.delete_node(leafId);
+                                continue;
+                            }
+                        }
+                        res++;
                     }
+                    return res;
                 }
 
-                function createRegTree(rt) {
-                    var $root = $("#regtree").jstree({
+                function createRegTree(rt, filter) {
+                    var root = $("#regtree").jstree({
                         core: {
                             check_callback: true
                         },
                         plugins: ["checkbox"]
                     });
-                    createRegNodes($root, $root, rt, "");
+                    createRegNodes(root, root, rt, "", filter);
                 }
-
-                var selector;
-                var visres = {};
-                $(function() {
-                    $("#seltabs").tabs();
-                    $("label").css({cursor: "pointer"}).mouseover(function() {
-                        $(this).css({"text-decoration": "underline"});
-                    }).mouseout(function() {
-                        $(this).css({"text-decoration": "none"});
-                    });
-                    $(".autoselect").click(function() {
-                        this.focus();
-                        this.setSelectionRange(0, 9999);
-                        //this.select();
-                    });
-                    if(navigator.userAgent.match(/iPod|iPhone|iPad/i))
-                        $(".autoselect").removeAttr("readonly");
-                    downloadLnk.addEventListener('click', download2, false);
-                    $("#setsradio").ziradio();
-                    $.ajax({
-                        url: "help.html",
-                        dataType: "text",
-                        success: function(data) {
-                            $("#radHelpDiv").html(data);
-                        }
-                    });
-                    $.ajax({
-                        url: "about.html",
-                        dataType: "text",
-                        success: function(data) {
-                            $("#radAboutDiv").html(data);
-                        }
-                    });
-                    $("#helpradio").ziradio();
-                    /*$.ajax({
-                     url: '/libs/zimap/maps/maps.txt',
-                     dataType: 'html',
-                     success: function(data) {
-                     drawMaps(data);
-                     }
-                     });*/
-                    var lnk = {};
-                    selector = new Selector();
-                    selector.ps = "NAS/CHI";
-                    selector.sregs = ["RU-SF"];
-                    if (location.search != "") {
-                        lnk = linkDecode(location.search.substring(1));
-                        //alert(lnk.pars[0]);
-                        $('#rad' + lnk.vistype).attr('checked', true).trigger('change');
-                        selector.ps = lnk.pars[0];
-                        selector.sregs = lnk.regs;
-                        maps.value = lnk.map || "russia";
-                        if (lnk.visWidth != undefined) {
-                            //viswidth.value = lnk.visWidth;?? надо ли? мож это только для фрейма
-                        }
-                        if (lnk.vistype == "Chart") {
-                            if (lnk.chartType != undefined)
-                                charttype.value = lnk.chartType;
-                        } else if (lnk.vistype == "Map") {
-                            if (lnk.colType != undefined)
-                                $('#radColtype' + lnk.colType).attr('checked', true).trigger('change');
-                        }
-                    }
-                    var vistype = $('input[name="vistype"]:checked').val();
-                    setVisT(vistype);
-                    var $root = $("#partree").jstree({
-                        core: {
-                            check_callback: true,
-                            multiple: false
-                        },
-                        checkbox: {
-                            three_state: false
-                        },
-                        plugins: ["checkbox"]
-                    });
-                    createParNodes($root, $root, "db/pars/");
-
-
-                    //alert(selector.getRegs()[1][1]);
-                    createRegTree(selector.getTree());
-                    apply();
-                });
-
 
                 function show(dn, ht) {
                     headerText.innerHTML = ht;
@@ -370,46 +456,60 @@
                         }
                     }
                     apply();
-
                 }
 
                 function apply() {
-                    selector.clearSelect();
+                    selector.spars = [];
                     $.each($("#partree")
                             .jstree("get_checked", true)
                             , function(key, value) {
-                        if (value.children.length == 0)
-                            selector.spars.push({id: value.id, text: value.text});
+                        //if (value.children.length == 0){
+                        selector.spars.push({id: value.id, text: value.text, type: value.a_attr.type});
+                        //}
                     });
                     var simple = []; //simple regs list
                     var map = maps.value == "auto" ? "" : maps.value;
-                    var mas = $("#regtree")
-                            .jstree("get_checked", true);
-                    $.each(mas
-                            , function(key, value) {
-                        if (value.children.length == 0) {
-                            var tmp = value.id.split(":");
-                            var c = tmp[0];
-                            var p = tmp[1];
-                            if (maps.value == "auto") {
-                                if (p == "RU-SF")
-                                    map = map || "russia";
-                                else if (p == "RU-FO")
-                                    map = map || "russia_fo";
-                                else if (p == "CN")
-                                    map = map || "world3";
-                            }
-                            selector.sregs.push(c);
-                            if ($.inArray(p, simple) < 0)
-                                simple.push(c);
-                        } else
-                        if ($.inArray(value.id, simple) < 0)
-                            simple.push(value.id);
-                    });
+                    var mapa = (selector.spars[0].type == "21");
+                    if (mapa) {
+                        selector.sregs = [];
+                        var mas = $("#regtree")
+                                .jstree("get_checked", true);
+                        $.each(mas
+                                , function(key, value) {
+                            if (value.children.length == 0) {
+                                var tmp = value.id.split(":");
+                                var c = tmp[0];
+                                var p = tmp[1];
+                                if (maps.value == "auto") {
+                                    if (p == "RU-SF")
+                                        map = map || "russia";
+                                    else if (p == "RU-FO")
+                                        map = map || "russia_fo";
+                                    else if (p == "CN")
+                                        map = map || "world3";
+                                }
+                                selector.sregs.push(c);
+                                if ($.inArray(p, simple) < 0)
+                                    simple.push(c);
+                            } else
+                            if ($.inArray(value.id, simple) < 0)
+                                simple.push(value.id);
+                        });
+                        map = map || "russia";
+                    } else {
+                        selector.sdops = [];
+                        $.each($("#doptree").jstree("get_checked", true), function(k, v) {
+                            selector.sdops.push(v.id);
+                        });
+                    }
                     var vistype = $('input[name="vistype"]:checked').val();
-                    if (vistype == "Map")
+                    if (vistype == "Map") {
                         selector.iso = true;
-                    else
+                        if (!mapa) {
+                            //$('#radChart').attr("checked","true");
+                            vistype = "Chart";
+                        }
+                    } else
                         selector.iso = false;
                     $("#vis").css({width: viswidth.value});
                     selector.select(function(result, title) {
@@ -436,15 +536,19 @@
 
                     var lnk = {
                         pars: [],
-                        regs: simple,
                         //title: title,
                         vistype: vistype,
                         visWidth: viswidth.value,
-                        map: maps.value
                     };
+                    if (mapa)
+                        lnk.regs = simple;
+                    else
+                        lnk.dops = selector.sdops;
+
                     if (lnk.vistype == "Chart") {
                         lnk.chartType = charttype.value;
                     } else if (lnk.vistype == "Map") {
+                        lnk.map = maps.value;
                         lnk.colType = $('input[name="coltype"]:checked').val();
                     }
                     $.each(selector.spars, function(i, v) {
@@ -452,8 +556,11 @@
                     });
                     var str = linkEncode(lnk);
                     vislink.value = "http://" + location.host + location.pathname + "?" + str;
-                    lnk.map = map;
-                    lnk.regs = selector.sregs;
+                    if (lnk.vistype == "Map") {
+                        lnk.map = map;
+                    }
+                    if (mapa)
+                        lnk.regs = selector.sregs;
                     str = linkEncode(lnk);
                     var tmp = 'iframe';
                     //alert(vis.clientHeight);
