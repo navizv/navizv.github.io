@@ -67,16 +67,20 @@
         </table-->
                 <div id="seltabs">
                     <ul>
-                        <li><a href="#partree">Параметры</a></li>
-                        <li><a href="#regtree" class="regtab">Регионы</a></li>
-                        <li><a href="#doptree" class="doptab">Дополнительно</a></li>
+                        <li><a href="#partab" class="partab">Параметры</a></li>
+                        <li><a href="#regtab" class="regtab">Регионы</a></li>
+                        <li><a href="#doptab" class="doptab">Дополнительно</a></li>
                     </ul>
-                    <div id="partree" class="seltree">
+                    <div id="partab" class="seltree partab">
+                        <div id="partree" class="seltree partab">
+                        </div>
                     </div>
+                    <div id="regtab" class="seltree regtab">
                     <div id="regtree" class="seltree regtab">
-                    </div>
+                    </div></div>
+                    <div id="doptab" class="seltree doptab">
                     <div id="doptree" class="seltree doptab">
-                    </div>
+                    </div></div>
                     <!--td>
                         <div id="yeartree" class="seltree">
                         </div>
@@ -201,7 +205,7 @@
                         selector.ps = lnk.pars[0];
                         selector.sregs = lnk.regs || selector.sregs;
                         selector.sdops = lnk.dops;
-                        maps.value = lnk.map || "russia";
+                        maps.value = lnk.map || "auto";
                         if (lnk.visWidth != undefined) {
                             //viswidth.value = lnk.visWidth;?? надо ли? мож это только для фрейма
                         }
@@ -244,15 +248,25 @@
                     //$("a ins.jtree-chechbox", this).first().hide();
                     //$("a", this).first().click(function tog(e) {
                     $(".no_checkbox").click(function tog(e) {//чтоб при клике узел разворачивался (если без чекбокса)
-                        var id = $(this).parent().attr("id");
-                        $("#partree").jstree("toggle_node", "#" + id);
+                        var self = $(this);
+                        var id = self.parent().attr("id");
+                        //alert(id);
+                        root.jstree("toggle_node", root.jstree(true).get_node(id));//"#" + id);
                         //alert("hi");
                         e.stopPropagation();
                         e.preventDefault();
+                        
                         setTimeout(function() { //нехорошо, но как лучше?
-                            var t = $("#" + id).children("a")[0];
+                            //var t = $("#" + id).children("a")[0];
                             //alert($(t));
-                            $(t).off("click").on("click", tog);
+                            //$(t).off("click").on("click", tog);
+                            $(".no_checkbox").off("click").on("click", tog);
+                                    //.addClass("qq");//("click", tog);
+                            /*var m = $("#" + id).children("ul")[0].childNodes;
+                            for(var k in m){
+                                var li = $(m[k]);
+                                
+                            }*/
                         }, 100);
                     });
                     //});
@@ -266,6 +280,7 @@
                     if (!p) {
                         $(".doptab").hide();
                         $(".regtab").show();
+                        $("#regtab").hide();
                         var root = $("#regtree");
                         var r = root.jstree(true);
                         $.each($("#regtree>ul").children("li"), function() {
@@ -277,6 +292,7 @@
                     } else {
                         $(".doptab").show();
                         $(".regtab").hide();
+                        $("#doptab").hide();
                         var root = $("#doptree");
                         var r = root.jstree(true);
                         $.each($("#doptree>ul").children("li"), function() {
