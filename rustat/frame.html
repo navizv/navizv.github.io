@@ -47,6 +47,8 @@
                     selector.spars[0] = {id: lnk.pars[0], text: selector.getParName(lnk.pars[0]),type:lnk.regs?"21":"22"};
                     selector.sregs = lnk.regs;
                     selector.sdops = lnk.dops;
+                    if(lnk.ys)
+                            selector.syears =  lnk.ys.split("_");
                 }
                 if (lnk.vistype == "Map")
                     selector.iso = true;
@@ -75,7 +77,7 @@
                             .attr("href", "http://" + location.host + location.pathname.substr(0, i + 1) + location.search)
                             .attr("target","_blank")
                     
-                            .html("�?сточник");
+                            .html("Источник");
                 });
             });
         </script>

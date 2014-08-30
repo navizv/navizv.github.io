@@ -70,21 +70,28 @@
                         <li><a href="#partab" class="partab">Параметры</a></li>
                         <li><a href="#regtab" class="regtab">Регионы</a></li>
                         <li><a href="#doptab" class="doptab">Дополнительно</a></li>
+                        <li><a href="#yeartab" class="yeartab">Годы</a></li>
                     </ul>
                     <div id="partab" class="seltree partab">
                         <div id="partree" class="seltree partab">
                         </div>
                     </div>
                     <div id="regtab" class="seltree regtab">
-                    <div id="regtree" class="seltree regtab">
-                    </div></div>
+                        <div id="regtree" class="seltree regtab">
+                        </div></div>
                     <div id="doptab" class="seltree doptab">
-                    <div id="doptree" class="seltree doptab">
-                    </div></div>
-                    <!--td>
-                        <div id="yeartree" class="seltree">
-                        </div>
-                    </td-->
+                        <div id="doptree" class="seltree doptab">
+                        </div></div>
+
+                    <div id="yeartab" class="seltree yeartab">
+                        <input type="radio" id="yearall" name="yearsel" value="all" checked/>
+                        <label class="mylabel" for="yearall">Все доступные</label><br/>
+                        <input type="radio" id="yearfrto" name="yearsel" value="frto"/>
+                        <label class="mylabel" for="yearfrto">C 
+                            <input type="number" id="yearfr" value="1990" min="0" max="9999"/> по 
+                            <input type="number" id="yearto" value="2013" min="0" max="9999"/>
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -194,6 +201,7 @@
                     });
                     $("#helpradio").ziradio();
                     $(".doptab").hide();
+                    yearto.value = new Date().getFullYear();
                     //Query string parsing
                     var lnk = {};
                     selector = new Selector();
@@ -205,6 +213,12 @@
                         selector.ps = lnk.pars[0];
                         selector.sregs = lnk.regs || selector.sregs;
                         selector.sdops = lnk.dops;
+                        if (lnk.ys) {
+                            selector.syears = lnk.ys.split("_");
+                            $('#yearfrto').attr('checked', true);
+                            yearfr.value = selector.syears[0];
+                            yearto.value = selector.syears[1];
+                        }
                         maps.value = lnk.map || "auto";
                         if (lnk.visWidth != undefined) {
                             //viswidth.value = lnk.visWidth;?? надо ли? мож это только для фрейма
@@ -255,22 +269,22 @@
                         //alert("hi");
                         e.stopPropagation();
                         e.preventDefault();
-                        
+
                         setTimeout(function() { //нехорошо, но как лучше?
                             //var t = $("#" + id).children("a")[0];
                             //alert($(t));
                             //$(t).off("click").on("click", tog);
                             $(".no_checkbox").off("click").on("click", tog);
-                                    //.addClass("qq");//("click", tog);
+                            //.addClass("qq");//("click", tog);
                             /*var m = $("#" + id).children("ul")[0].childNodes;
-                            for(var k in m){
-                                var li = $(m[k]);
-                                
-                            }*/
+                             for(var k in m){
+                             var li = $(m[k]);
+                             
+                             }*/
                         }, 100);
                     });
                     //});
-                    
+
                     //selector.setPossibleRegs(changeRegTree);
 
                     apply();
@@ -302,15 +316,15 @@
                         for (var d in rlist) {
                             var k = rlist[d];
                             var s = $.inArray(k.id, selector.sdops) >= 0;
-                            if(s)
+                            if (s)
                                 b++;
                         }
                         for (var d in rlist) {
                             var k = rlist[d];
-                            var s = b==0 || $.inArray(k.id, selector.sdops) >= 0;
+                            var s = b == 0 || $.inArray(k.id, selector.sdops) >= 0;
                             r.create_node(root, {id: k.id, text: k.text, state: {selected: s}});
                         }
-                        
+
                     }
                 }
 
@@ -527,6 +541,12 @@
                         }
                     } else
                         selector.iso = false;
+                    var years = ($('input[name="yearsel"]:checked').val() == "frto");
+                    selector.syears = [];
+                    if (years) {
+                        selector.syears[0] = yearfr.value;
+                        selector.syears[1] = yearto.value;
+                    }
                     $("#vis").css({width: viswidth.value});
                     selector.select(function(result, title) {
                         filename.value = title;
@@ -556,6 +576,8 @@
                         vistype: vistype,
                         visWidth: viswidth.value,
                     };
+                    if (years)
+                        lnk.ys = yearfr.value + "_" + yearto.value;
                     if (mapa)
                         lnk.regs = simple;
                     else

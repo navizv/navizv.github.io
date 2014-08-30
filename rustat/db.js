@@ -10,11 +10,13 @@ function Selector() {
     this.spars = [];
     this.sregs = [];
     this.sdops = [];
+    this.syears = [];
     this.iso = false;
     this.clearSelect = function() {
         this.spars = [];
         this.sregs = [];
         this.sdops = [];
+        this.syears = [];
     }
     this.findISO = function(iso) {
         for (var i in regs) {
@@ -73,6 +75,7 @@ function Selector() {
                 var tab = [];
                 var mas = data.replace(/\r/g, '').split("\n");
                 var ii = 0;
+                var ys = [];
                 for (var i in mas) {
                     if (mas[i] == "")
                         continue;
@@ -81,16 +84,34 @@ function Selector() {
                         (mapa && !self.selReg(line[0]) ||
                         !mapa && !self.selDop(line[0])))
                         continue;
-                    if(mapa)
-                        tab[ii] = line;
-                    else
-                        tab[ii] = line.slice(1);
+                    if(!mapa)
+                        line = line.slice(1);
+                    tab[ii] = [];
                     if (mapa && !self.iso)
-                        tab[ii][0] = self.findISO(tab[ii][0]);
-                    for (var j in tab[ii]) {
+                        tab[ii][0] = self.findISO(line[0]);
+                    else
+                        tab[ii][0] = line[0];
+                    if(i == 0 && self.syears[0]){
+                        for(var j in line){
+                            if(j==0)continue;
+                            if(!ys[0] && parseInt(line[j]) >= self.syears[0])
+                                ys[0] = j;
+                            if(!ys[1] && line[j] > self.syears[1])
+                                ys[1] = j-1;
+                        }
+                        if(!ys[1])ys[1] = j;
+                        //alert(ys);
+                        ys[1] = parseInt(ys[1]);
+                        ys[0] = parseInt(ys[0]);
+                    }
+                    var jj = 1;
+                    for (var j in line) {
                         if (j == 0)
                             continue;
-                        tab[ii][j] = parseFloat(tab[ii][j].replace(",", ".").replace(/ /g, ""));
+                        if(self.syears[0] && ((j<ys[0]) || (j>ys[1]))){
+                            continue;
+                        }
+                        tab[ii][jj++] = parseFloat(line[j].replace(",", ".").replace(/ /g, ""));
                     }
                     ii++;
                 }
