@@ -482,6 +482,7 @@ function zim_format(f) {
             f = f.slice(0, k) + ' ' + f.slice(k, f.length);
         }
     }
+    f = f.replace(/\./g,',');
     return f;
 }
 
