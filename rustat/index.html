@@ -16,7 +16,6 @@
         <link rel="stylesheet" href="css/jquery-ui.css"/>
         <link rel="stylesheet" href="tab/style.css"/>
 
-
         <script src="/libs/js/jquery.min.js"></script>
         <script src="/libs/jstree/jstree.min.js"></script>
         <script src="/libs/js/highcharts.js"></script>
@@ -647,6 +646,7 @@
                     location.pathname + 'frame.html?' + str +
                     '" frameborder="0"></' + tmp + '>';
                 //location.search = "?"+str;
+		$("#plusoshare").attr("data-url",vislink.value);
             }
 
             function fillCode() {
@@ -673,7 +673,7 @@
     h.appendChild(s);
   }})();</script>
 
-<div class="pluso" data-background="#ebebeb" data-options="medium,square,line,horizontal,counter,theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,livejournal,google,blogger,moimir,email,print" data-url="http://navizv.github.io/rustat/"></div>
+<div id="plusoshare" class="pluso" data-background="#ebebeb" data-options="medium,square,line,horizontal,counter,theme=04" data-services="vkontakte,odnoklassniki,facebook,twitter,livejournal,google,blogger,moimir,email,print" data-url="http://navizv.github.io/rustat/"></div>
     <script>
         if (location.href.split('/')[2] != '127.0.0.1') {
             (function(i, s, o, g, r, a, m) {
