@@ -654,8 +654,8 @@ YaShareInstance = new Ya.share({
 //		$("#plusoshare").attr("data-url",vislink.value);
 var st = document.title + ': ' + title;
 YaShareInstance.updateShareLink(vislink.value,st);
-$("#metatitle").attr('content',st);
-
+$("#metatitle").remove();
+$('head').append( '<meta id="metatitle" property="og:title" content='+st+'>' );
 		});
             }
 
