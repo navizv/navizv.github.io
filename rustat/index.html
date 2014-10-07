@@ -468,27 +468,36 @@ YaShareInstance = new Ya.share({
             }
             function createRegNodes(root, leaf, list, id, f) {
                 var res = 0;
+                var g = root.jstree(true);
+                var fakeId;
+                if(list.length > 0){
+                    fakeId = g.create_node(leaf, {id:"fake"+id,selected:false});
+                }
                 for (var i in  list) {
                     var cur = list[i];
                     cur.id = cur.code + id;
                     cur.state = {
                         selected: $.inArray(cur.code, selector.sregs) >= 0
                     };
-                    //alert(root.jstree);
                     if (cur.leaves == undefined && f && ($.inArray(cur.code, f) < 0)) {
                         //alert(cur.code);
                         continue;
                     }
-                    var g = root.jstree(true);
                     var leafId = g.create_node(leaf, cur);
                     if (cur.leaves != undefined) {
+                        //alert(cur.id+"-"+$("#regtree").jstree("get_checked", true));
                         var c = createRegNodes(root, g.get_node(leafId), cur.leaves, ":" + cur.id, f);
                         if (c <= 1 && cur.id != "RU") {
                             g.delete_node(leafId);
                             continue;
                         }
+                        //alert(cur.id+"-"+$("#regtree").jstree("get_checked", true));
                     }
                     res++;
+                }
+                if(list.length > 0){
+                    g.delete_node(fakeId);
+                    //alert(":"+$("#regtree").jstree("get_checked", true));
                 }
                 return res;
             }
@@ -500,7 +509,10 @@ YaShareInstance = new Ya.share({
                     },
                     plugins: ["checkbox"]
                 });
-                createRegNodes(root, root, rt, "", filter);
+                //alert(filter);
+                //alert($("#regtree").jstree("get_checked", true));
+                //createRegNodes(root, root, rt, "", filter);
+                //alert($("#regtree").jstree("get_checked", true));
             }
 
             function show(dn, ht) {
