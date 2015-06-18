@@ -139,7 +139,7 @@ function Zimap(elt, opts, onload) {
         var svgd = options.map.svgd;
         for (var i = 0; i < tab.length; i++) {
             var c = tab[i][j];
-            if (c == '' || tab[i][0] == '')
+            if (c === '' || tab[i][0] === '')
                 continue;
             var el = svgd.getElementById(tab[i][0]);
             if (el == undefined || el == null)
@@ -292,7 +292,7 @@ function Zimap(elt, opts, onload) {
         for (var i = 0; i < tab.length; i++) {
             var reg = tab[i][0];
             var c = tab[i][j];
-            if (c == '' || reg == '')
+            if (c === '' || reg === '')
                 continue;
             var cur = c;
             if (opts.coltype == 'Category') {
