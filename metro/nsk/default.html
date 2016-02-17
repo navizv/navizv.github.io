@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Nsk.Metro</title>
+
+    <!-- WinJS references -->
+    <!--link href="//Microsoft.WinJS.2.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script-->
+
+    <!-- Nsk.Metro81 references -->
+    <script src="../Scripts/jquery-1.8.0.js"></script>
+    <!--script src="Scripts/jquery.mobile-1.4.5.js"></script-->
+    <!--link href="css/default.css" rel="stylesheet" /-->
+    <script src="js/default.js"></script>
+
+
+    <style>
+        #DZERZHINSKY_LINE circle {
+            fill: green;
+            stroke: white;
+            stroke-width: 2;
+        }
+
+        #LENIN_LINE circle {
+            fill: red;
+            stroke: white;
+            stroke-width: 2;
+        }
+
+        #DZERZHINSKY_LINE line {
+            stroke: green;
+            stroke-width: 5;
+        }
+
+        #LENIN_LINE line {
+            stroke: red;
+            stroke-width: 5;
+        }
+
+        #LENIN_LINE text {
+            font-size: 16px;
+            fill: red;
+        }
+
+        #DZERZHINSKY_LINE text {
+            font-size: 16px;
+            fill: green;
+        }
+
+        #OB line {
+            stroke: blue;
+            stroke-width: 5;
+            opacity: 0.2;
+        }
+
+        #TIME_TEXT {
+            font-size: 20px;
+            visibility: hidden;
+        }
+
+        body {
+            display: flex;
+        }
+
+        #map{
+             position: absolute;
+             top: 0px;
+            width: 100%;
+            height:100%;
+            display:block;
+            text-align:center;
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0px;
+            text-align: center;
+            // display:none;
+            width: 100%;
+        }
+
+        #ftable {
+            margin: 0 auto;
+            font-size:25px;
+        }
+    </style>
+</head>
+<body class="win-type-body">
+    <div id="map">
+            <svg id="METROMAP" width="100%" height="100%" viewBox="50 0 450 450">
+                <!--rect x="0" y="0" width="500" height="400" fill="white" stroke="white" /-->
+                <g id="OB">
+                    <line x1="120" y1="0" x2="100" y2="130" />
+                    <line x1="250" y1="350" x2="100" y2="130" />
+                    <text x="60" y="20" font-size="16" fill="blue">р. Обь</text>
+                </g>
+                <text id="TIME_TEXT" x="400" y="20">~? мин</text>
+                <g id="DZERZHINSKY_LINE">
+                    <line id="PLGM_SIBI" x1="155" y1="160" x2="215" y2="150" />
+                    <line id="SIBI_POKR" x1="215" y1="150" x2="255" y2="150" />
+                    <line id="POKR_BERR" x1="255" y1="150" x2="295" y2="180" />
+                    <line id="BERR_ZOLN" x1="295" y1="180" x2="335" y2="210" />
+
+                    <circle id="PLGM" cx="155" cy="160" r="8" />
+                    <circle id="SIBI" cx="215" cy="150" r="8" />
+                    <circle id="POKR" cx="255" cy="150" r="8" />
+                    <circle id="BERR" cx="295" cy="180" r="8" />
+                    <circle id="ZOLN" cx="335" cy="210" r="8" />
+
+                    <text data-name="PLGM" x="65" y="170">пл. Гарина-</text>
+                    <text data-name="PLGM" x="65" y="186">Михайловского</text>
+                    <text data-name="SIBI" x="210" y="140">Сибирская</text>
+                    <text data-name="POKR" x="270" y="155">Маршала Покрышкина</text>
+                    <text data-name="BERR" x="310" y="185">Берёзовая роща</text>
+                    <text data-name="ZOLN" x="345" y="215">Золотая нива</text>
+                </g>
+                <g id="LENIN_LINE">
+                    <line id="ZAEL_GAGA" x1="200" y1="50" x2="200" y2="100" />
+                    <line id="GAGA_KRPR" x1="200" y1="100" x2="200" y2="150" />
+                    <line id="KRPR_PLEN" x1="200" y1="150" x2="200" y2="200" />
+                    <line id="PLEN_OKTB" x1="200" y1="200" x2="230" y2="225" />
+                    <line id="OKTB_RECH" x1="230" y1="225" x2="220" y2="270" />
+                    <line id="RECH_STUD" x1="220" y1="270" x2="170" y2="300" />
+                    <line id="STUD_MARX" x1="170" y1="300" x2="130" y2="320" />
+
+                    <circle id="ZAEL" cx="200" cy="50" r="8" />
+                    <circle id="GAGA" cx="200" cy="100" r="8" />
+                    <circle id="KRPR" cx="200" cy="150" r="8" />
+                    <circle id="PLEN" cx="200" cy="200" r="8" />
+                    <circle id="OKTB" cx="230" cy="225" r="8" />
+                    <circle id="RECH" cx="220" cy="270" r="8" />
+                    <circle id="STUD" cx="170" cy="300" r="8" />
+                    <circle id="MARX" cx="130" cy="320" r="8" />
+                    <text data-name="ZAEL" x="210" y="55">Заельцовская</text>
+                    <text data-name="GAGA" x="210" y="105">Гагаринская</text>
+                    <text data-name="KRPR" x="65" y="140">Красный проспект</text>
+                    <text data-name="PLEN" x="210" y="205">пл. Ленина</text>
+                    <text data-name="OKTB" x="240" y="230">Октябрьская</text>
+                    <text data-name="RECH" x="230" y="275">Речной вокзал</text>
+                    <text data-name="STUD" x="180" y="310">Студенческая</text>
+                    <text data-name="MARX" x="135" y="335">пл. Маркса</text>
+                </g>
+            </svg>
+    </div>
+    <div id="footer">
+<table border="0" id="ftable" width="100%">
+            <tr><td>*Время может отличаться от фактического
+                </td></tr>
+            <tr>
+                <td>
+        <table border="1" id="ftable" width="100%">
+            <tr>
+                <td align="center" width="190" id="from" style="font-weight:bold"
+                    data-id=""></td>
+                <td width="20" style="font-weight:bold;color:black">&rarr;</td>
+                <td align="center" width="190" id="to" style="font-weight:bold"
+                    data-id=""></td>
+            </tr>
+            <tr>
+                <td colspan="3" id="reset" align="center" style="color:black">
+                    Очистить
+                    <!--button value="Очистить" id="reset">Очистить</button-->
+                </td>
+            </tr>
+        </table>
+		</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

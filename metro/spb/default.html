@@ -1,0 +1,671 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Nsk.Metro</title>
+
+    <!-- WinJS references -->
+    <!--link href="//Microsoft.WinJS.2.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script-->
+
+    <!-- Nsk.Metro81 references -->
+    <script src="../Scripts/jquery-1.8.0.js"></script>
+    <!--script src="Scripts/jquery.mobile-1.4.5.js"></script-->
+    <!--link href="css/default.css" rel="stylesheet" /-->
+    <script src="spb.js"></script>
+    <script src="js/default.js"></script>
+
+
+    <style>
+        #METROMAP  circle {
+            stroke: white;
+            stroke-width: 2;
+        }
+
+        #METROMAP  line {
+            stroke-width: 5;
+        }
+
+        #METROMAP  text {
+            font-size: 16px;
+        }
+
+        #KIRVYB_LINE * {
+            fill: red;
+        }
+
+        #KIRVYB_LINE line {
+            stroke: red;
+        }
+
+        #MOSPET_LINE * {
+            fill: blue;
+        }
+
+        #MOSPET_LINE line {
+            stroke: blue;
+        }
+
+        #NEVVASO_LINE * {
+            fill: green;
+        }
+
+        #NEVVASO_LINE line {
+            stroke: green;
+        }
+
+        #PRAVOB_LINE * {
+            fill: orange;
+        }
+
+        #PRAVOB_LINE line {
+            stroke: orange;
+        }
+
+        #FRUPRIM_LINE * {
+            fill: darkmagenta;
+        }
+
+        #FRUPRIM_LINE line {
+            stroke: darkmagenta;
+        }
+
+        #TIME_TEXT {
+            font-size: 20px;
+            visibility: hidden;
+        }
+
+        body {
+            display: flex;
+        }
+
+        #map{
+             position: absolute;
+             top: 0px;
+            width: 100%;
+            height:100%;
+            display:block;
+            text-align:center;
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0px;
+            text-align: center;
+            width: 100%;
+	    // display:none;
+        }
+
+        #ftable {
+            margin: 0 auto;
+            font-size:25px;
+        }
+    </style>
+</head>
+<body class="win-type-body">
+    <div id="map">
+            <svg id="METROMAP" width="100%" height="100%" viewBox="-10 -20 720 750">
+                <!--rect x="0" y="0" width="500" height="400" fill="white" stroke="white" /-->
+  <text
+     id="TIME_TEXT"
+     x="600"
+     y="20"
+     style="font-size:20px;visibility:hidden">~? мин</text>
+
+
+                    
+                <g id="FRUPRIM_LINE">
+                        <line id="KMDPR_STDER" />
+                        <circle id="KMDPR"
+                                cx="250"
+                                cy="40"
+                                r="8" />
+                        <text data-name="KMDPR"
+x="135" y="35">Комендантский</text>
+                        <text data-name="KMDPR"
+x="180" y="45">проспект</text>
+
+                        <line id="STDER_KREST" />
+                        <circle id="STDER"
+                                cx="250"
+                                cy="65"
+                                r="8" />
+                        <text data-name="STDER"
+x="193" y="65">Старая</text>
+                        <text data-name="STDER"
+x="187" y="75">деревня</text>
+
+                        <line id="KREST_CHKAL" />
+                        <circle id="KREST"
+                                cx="250"
+                                cy="90"
+                                r="8" />
+                        <text data-name="KREST"
+x="155" y="95">Крестовский</text>
+                        <text data-name="KREST"
+x="197" y="105">остров</text>
+
+
+                        <line id="CHKAL_SPORT" />
+                        <circle id="CHKAL"
+                                cx="250"
+                                cy="115"
+                                r="8" />
+                        <text data-name="CHKAL"
+x="162" y="120">Чкаловская</text>
+
+                        <line id="SPORT_ADMI" />
+                        <circle id="SPORT"
+                                cx="250"
+                                cy="140"
+                                r="8" />
+                        <text data-name="SPORT"
+x="160" y="143">Спортивная</text>
+
+                        <line id="ADMI_SADO" />
+                        <circle id="ADMI"
+                                cx="250"
+                                cy="200"
+                                r="8" />
+                        <text data-name="ADMI"
+x="127" y="203">Адмиралтейская</text>
+
+                        <line id="SADO_ZVEN" />
+                        <circle id="SADO"
+                                cx="250"
+                                cy="276"
+                                r="8" />
+                        <text data-name="SADO"
+x="190" y="295">Садовая</text>
+
+                        <line id="ZVEN_OBVK" />
+                        <circle id="ZVEN"
+                                cx="250"
+                                cy="336"
+                                r="8" />
+                        <text data-name="ZVEN"
+x="258" y="346">Звенигородская</text>
+
+                        <line id="OBVK_VOLK" />
+                        <circle id="OBVK"
+                                cx="250"
+                                cy="420"
+                                r="8" />
+                        <text data-name="OBVK">Обводный канал</text>
+
+                        <line id="VOLK_BUHA" />
+                        <circle id="VOLK"
+                                cx="250"
+                                cy="445"
+                                r="8" />
+                        <text data-name="VOLK">Волковская</text>
+
+                        <line id="BUHA_MEZH" />
+                        <circle id="BUHA"
+                                cx="250"
+                                cy="470"
+                                r="8" />
+                        <text data-name="BUHA">Бухарестская</text>
+
+
+                        <circle id="MEZH"
+                                cx="250"
+                                cy="495"
+                                r="8" />
+                        <text data-name="MEZH">Международная</text>
+
+
+                    </g>
+                <g id="MOSPET_LINE">
+                    <line id="PARN_PRPRS" />
+                    <circle id="PARN"
+                            cx="334"
+                            cy="-10"
+                            r="8" />
+                    <text data-name="PARN">Парнас</text>
+
+                    <line id="PRPRS_OZER" />
+                    <circle id="PRPRS"
+                            cx="334"
+                            cy="15"
+                            r="8" />
+                    <text data-name="PRPRS"
+x="342" y="15">Проспект</text>
+                    <text data-name="PRPRS"
+x="342" y="28">Просвещения</text>
+
+                    <line id="OZER_UDEL" />
+                    <circle id="OZER"
+                            cx="334"
+                            cy="40"
+                            r="8" />
+                    <text data-name="OZER">Озерки</text>
+
+                    <line id="UDEL_PION" />
+                    <circle id="UDEL"
+                            cx="334"
+                            cy="65"
+                            r="8" />
+                    <text data-name="UDEL">Удельная</text>
+
+                    <line id="PION_CREC" />
+                    <circle id="PION"
+                            cx="334"
+                            cy="90"
+                            r="8" />
+                    <text data-name="PION">Пионерская</text>
+
+                    <line id="CREC_PTRG" />
+                    <circle id="CREC"
+                            cx="334"
+                            cy="115"
+                            r="8" />
+                    <text data-name="CREC"
+x="342" y="115">Черная</text>
+                    <text data-name="CREC"
+x="342" y="125">речка</text>
+
+                    <line id="PTRG_GORK" />
+                    <circle id="PTRG"
+                            cx="334"
+                            cy="140"
+                            r="8" />
+                    <text data-name="PTRG"
+x="342" y="140">Петроград-</text>
+                    <text data-name="PTRG"
+x="342" y="150">ская</text>
+
+                    <line id="GORK_NEPR" />
+                    <circle id="GORK"
+                            cx="334"
+                            cy="165"
+                            r="8" />
+                    <text data-name="GORK">Горьковская</text>
+
+                    <line id="NEPR_SENN" />
+                    <circle id="NEPR"
+                            cx="334"
+                            cy="225"
+                            r="8" />
+                    <text data-name="NEPR"
+x="330" y="245">Невский</text>
+                    <text data-name="NEPR"
+x="330" y="255">проспект</text>
+
+                    <path id="SENN_TECH2" d="M 250 260 L 130 310 L 130 386" stroke="blue" stroke-width="5" fill-opacity="0" />
+                    <circle id="SENN"
+                            cx="250"
+                            cy="260"
+                            r="8" />
+                    <text data-name="SENN"
+x="190" y="260">Сенная</text>
+
+                    <line id="TECH2_FRUN" />
+                    <circle id="TECH2"
+                            cx="130"
+                            cy="386"
+                            r="8" />
+                    <text data-name="TECH2"
+x="138" y="396">Технологический институт-2</text>
+
+                    <line id="FRUN_MOSV" />
+                    <circle id="FRUN"
+                            cx="130"
+                            cy="420"
+                            r="8" />
+                    <text data-name="FRUN">Фрунзенская</text>
+
+                    <line id="MOSV_ELEK" />
+                    <circle id="MOSV"
+                            cx="130"
+                            cy="445"
+                            r="8" />
+                    <text data-name="MOSV"
+x="138" y="445">Московские</text>
+                    <text data-name="MOSV"
+x="138" y="455">ворота</text>
+
+                    <line id="ELEK_PARK" />
+                    <circle id="ELEK"
+                            cx="130"
+                            cy="470"
+                            r="8" />
+                    <text data-name="ELEK">Электросила</text>
+
+                    <line id="PARK_MOSK" />
+                    <circle id="PARK"
+                            cx="130"
+                            cy="495"
+                            r="8" />
+                    <text data-name="PARK">Парк Победы</text>
+
+                    <line id="MOSK_ZVEZ" />
+                    <circle id="MOSK"
+                            cx="130"
+                            cy="520"
+                            r="8" />
+                    <text data-name="MOSK">Московская</text>
+
+                    <line id="ZVEZ_KUPC" />
+                    <circle id="ZVEZ"
+                            cx="130"
+                            cy="545"
+                            r="8" />
+                    <text data-name="ZVEZ">Звездная</text>
+
+                    <circle id="KUPC"
+                            cx="130"
+                            cy="570"
+                            r="8" />
+                    <text data-name="KUPC">Купчино</text>
+                </g>
+                <g id="NEVVASO_LINE">
+                    <line id="PRIM_VASIL" />
+                    <circle id="PRIM"
+                            cx="130"
+                            cy="87.67"
+                            r="8" />
+                    <text data-name="PRIM"
+x="37" y="90">Приморская</text>
+
+                    <line id="VASIL_GDVR" />
+                    <circle id="VASIL"
+                            cx="130"
+                            cy="112.67"
+                            r="8" />
+                    <text data-name="VASIL"
+x="-1" y="115">Василеостровская</text>
+
+                    <line id="GDVR_MAYA" />
+                    <circle id="GDVR"
+                            cx="334"
+                            cy="209"
+                            r="8" />
+                    <text data-name="GDVR"
+x="342" y="200">Гостиный</text>
+                    <text data-name="GDVR"
+x="342" y="210">двор</text>
+
+                    <line id="MAYA_PLNEV1" />
+                    <circle id="MAYA"
+                            cx="442"
+                            cy="256"
+                            r="8" />
+                    <text data-name="MAYA">Маяковская</text>
+
+                    <line id="PLNEV1_ELIZ" />
+                    <circle id="PLNEV1"
+                            cx="442"
+                            cy="336"
+                            r="8" />
+                    <text data-name="PLNEV1">пл.Александра Невского-1</text>
+
+                    <line id="ELIZ_LOMO" />
+                    <circle id="ELIZ"
+                            cx="442"
+                            cy="420"
+                            r="8" />
+                    <text data-name="ELIZ">Елизаровская</text>
+
+                    <line id="LOMO_PROL" />
+                    <circle id="LOMO"
+                            cx="442"
+                            cy="445"
+                            r="8" />
+                    <text data-name="LOMO">Ломоносовская</text>
+
+                    <line id="PROL_OBUH" />
+                    <circle id="PROL"
+                            cx="442"
+                            cy="470"
+                            r="8" />
+                    <text data-name="PROL">Пролетарская</text>
+
+                    <line id="OBUH_RYBA" />
+                    <circle id="OBUH"
+                            cx="442"
+                            cy="495"
+                            r="8" />
+                    <text data-name="OBUH">Обухово</text>
+
+
+                    <circle id="RYBA"
+                            cx="442"
+                            cy="520"
+                            r="8" />
+                    <text data-name="RYBA">Рыбацкое</text>
+                </g>
+                <g id="PRAVOB_LINE">
+                    <line id="SPAS_DOST" />
+                    <circle id="SPAS"
+                            cx="263.8"
+                            cy="267.85"
+                            r="8" />
+                    <text data-name="SPAS">Спасская</text>
+
+                    <line id="DOST_LIGO" />
+                    <circle id="DOST"
+                            cx="334"
+                            cy="301"
+                            r="8" />
+                    <text data-name="DOST"
+x="342" y="302">Достоевская</text>
+
+                    <line id="LIGO_PLNEV2" />
+                    <circle id="LIGO"
+                            cx="377.2"
+                            cy="321.4"
+                            r="8" />
+                    <text data-name="LIGO"
+x="385" y="322">Лиговский проспект</text>
+
+                    <line id="PLNEV2_NOVC" />
+                    <circle id="PLNEV2"
+                            cx="442"
+                            cy="352"
+                            r="8" />
+                    <text data-name="PLNEV2">пл.Александра Невского-2</text>
+
+                    <line id="NOVC_LADO" />
+                    <circle id="NOVC"
+                            cx="586"
+                            cy="420"
+                            r="8" />
+                    <text data-name="NOVC">Новочеркасская</text>
+
+                    <line id="LADO_PRBL" />
+                    <circle id="LADO"
+                            cx="586"
+                            cy="445"
+                            r="8" />
+                    <text data-name="LADO">Ладожская</text>
+
+                    <line id="PRBL_ULDB" />
+                    <circle id="PRBL"
+                            cx="586"
+                            cy="470"
+                            r="8" />
+                    <text data-name="PRBL">пр.Большевиков</text>
+
+                    <circle id="ULDB"
+                            cx="586"
+                            cy="495"
+                            r="8" />
+                    <text data-name="ULDB">ул.Дыбенко</text>
+
+                </g>
+                <g id="KIRVYB_LINE">
+                    <line id="DVKN_GRPR" />
+                    <circle id="DVKN"
+                            cx="442"
+                            cy="15"
+                            r="8" />
+                    <text data-name="DVKN">Девяткино</text>
+
+                    <line id="GRPR_AKAD" />
+                    <circle id="GRPR"
+                            cx="442"
+                            cy="40"
+                            r="8" />
+                    <text data-name="GRPR">Гражданский проспект</text>
+
+                    <line id="AKAD_POLY" />
+                    <circle id="AKAD"
+                            cx="442"
+                            cy="65"
+                            r="8" />
+                    <text data-name="AKAD">Академическая</text>
+
+                    <line id="POLY_PLMUZ" />
+                    <circle id="POLY"
+                            cx="442"
+                            cy="90"
+                            r="8" />
+                    <text data-name="POLY">Политехническая</text>
+
+                    <line id="PLMUZ_LESN" />
+                    <circle id="PLMUZ"
+                            cx="442"
+                            cy="115"
+                            r="8" />
+                    <text data-name="PLMUZ">Площадь Мужества</text>
+
+                    <line id="LESN_VYBR" />
+                    <circle id="LESN"
+                            cx="442"
+                            cy="140"
+                            r="8" />
+                    <text data-name="LESN">Лесная</text>
+
+                    <line id="VYBR_PLEN" />
+                    <circle id="VYBR"
+                            cx="442"
+                            cy="165"
+                            r="8" />
+                    <text data-name="VYBR">Выборгская</text>
+
+                    <line id="PLEN_CHERN" />
+                    <circle id="PLEN"
+                            cx="442"
+                            cy="190"
+                            r="8" />
+                    <text data-name="PLEN">Площадь Ленина</text>
+
+                    <line id="CHERN_PLVST" />
+                    <circle id="CHERN"
+                            cx="442"
+                            cy="215"
+                            r="8" />
+                    <text data-name="CHERN">Чернышевская</text>
+
+
+                    <line id="PLVST_VLAD" />
+                    <circle id="PLVST"
+                            cx="442"
+                            cy="240"
+                            r="8" />
+                    <text data-name="PLVST">Площадь Восстания</text>
+
+                    <line id="VLAD_PUSH" />
+                    <circle id="VLAD"
+                            cx="334"
+                            cy="285"
+                            r="8" />
+                    <text data-name="VLAD"
+x="350" y="290">Владимирская</text>
+
+                    <line id="PUSH_TECH" />
+                    <circle id="PUSH"
+                            cx="250"
+                            cy="320"
+                            r="8" />
+                    <text data-name="PUSH"
+x="258" y="330">Пушкинская</text>
+
+                    <line id="TECH_BALT" />
+                    <circle id="TECH"
+                            cx="130"
+                            cy="370"
+                            r="8" />
+                    <text data-name="TECH"
+x="138" y="380">Технологический институт-1</text>
+
+                    <line id="BALT_NARV" />
+                    <circle id="BALT"
+                            cx="10"
+                            cy="420"
+                            r="8" />
+                    <text data-name="BALT"
+x="18" y="430">Балтийская</text>
+
+
+                    <line id="NARV_KIRZ" />
+                    <circle id="NARV"
+                            cx="10"
+                            cy="445"
+                            r="8" />
+                    <text data-name="NARV">Нарвская</text>
+
+                    <line id="KIRZ_AVTO" />
+                    <circle id="KIRZ"
+                            cx="10"
+                            cy="470"
+                            r="8" />
+                    <text data-name="KIRZ"
+x="18" y="470">Кировский</text>
+                    <text data-name="KIRZ"
+x="18" y="480">завод</text>
+
+                    <line id="AVTO_LENPR" />
+                    <circle id="AVTO"
+                            cx="10"
+                            cy="495"
+                            r="8" />
+                    <text data-name="AVTO">Автово</text>
+
+                    <line id="LENPR_PRVET" />
+                    <circle id="LENPR"
+                            cx="10"
+                            cy="520"
+                            r="8" />
+                    <text data-name="LENPR"
+x="18" y="520">Лениниский</text>
+                    <text data-name="LENPR"
+x="18" y="530">проспект</text>
+
+                    <circle id="PRVET"
+                            cx="10"
+                            cy="545"
+                            r="8" />
+                    <text data-name="PRVET">пр.Ветеранов</text>
+
+
+                </g>
+</svg>
+    </div>
+    <div id="footer">
+<table border="0" id="ftable" width="100%">
+            <tr><td>*Время может отличаться от фактического
+                </td></tr>
+            <tr>
+                <td>
+        <table border="1" id="ftable" width="100%">
+            <tr>
+                <td align="center" width="190" id="from" style="font-weight:bold" data-id=""></td>
+                <td width="20" style="font-weight:bold;color:black">&rarr;</td>
+                <td align="center" width="190" id="to" style="font-weight:bold" data-id=""></td>
+            </tr>
+            <tr>
+                <td colspan="3" id="reset" align="center" style="color:black">
+                    Очистить
+                    <!--button value="Очистить" id="reset">Очистить</button-->
+                </td>
+            </tr>
+        </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
