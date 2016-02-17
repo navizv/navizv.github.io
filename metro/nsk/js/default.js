@@ -89,7 +89,7 @@ var l = [["ZAEL", "GAGA", "KRPR", "PLEN", "OKTB", "RECH", "STUD", "MARX"],
 var per = ["KRPR", "SIBI"];
 var time = 0
 function find_way(s1, s2) {
-    $("#METROMAP line,circle,text").css({ "opacity": "0.1" });
+    $("#METROMAP line,circle,text,path").css({ "opacity": "0.1" });
     time = 2;//время ожидания
     var n1 = l[0].indexOf(s1);
     var n2 = l[0].indexOf(s2);
@@ -133,7 +133,7 @@ function reset_selection() {
     $("#from").html("").attr("data-id", "");
     $("#to").html("").attr("data-id", "").css({"color":"black"});
     $("#METROMAP line,circle,text").css({ "opacity": "1" });
-    $("#OB line").css({ "opacity": "0.2" });
+    $("#OB path").css({ "opacity": "0.2" });
     $("#TIME_TEXT").css({ "visibility": "hidden" });
     $("#METROMAP text").css({ "text-decoration": "none" });
 }
