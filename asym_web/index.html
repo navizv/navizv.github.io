@@ -13,8 +13,10 @@
 <!-- button onclick="repaintMap()">Визуализировать</button -->
 <button onclick="play(0)">Воспроизвести</button>
 Раскрашивание:
-<input type="radio" name="coltype" value="Block" checked onchange="ctSel(this)">Блоками
-<input type="radio" name="coltype" value="Gradient" onchange="ctSel(this)">Непрерывное
+<input id="radblock" type="radio" name="coltype" value="Block" checked onchange="ctSel(this)">
+<label for="radblock">Блоками</label>
+<input id="radgrad" type="radio" name="coltype" value="Gradient" onchange="ctSel(this)">
+<label for="radgrad">Непрерывное</label>
 
 </div>
 <div width='1000' height='500' id='mapdiv'>
