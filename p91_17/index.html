@@ -252,7 +252,7 @@
 			zero: $("#zero").prop('checked') ? 1 : 0
 		};
 		var str = linkEncode(lnk);
-		link.value = "http://" + location.host + location.pathname + "?" + str;
+		link.value = location.protocol + "//" + location.host + location.pathname + "?" + str;
 		var st = '' + obj.series[0].name;
 		try{
 			YaShareInstance.updateShareLink(link.value,st);
