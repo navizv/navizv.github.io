@@ -1,14 +1,14 @@
 ﻿<html><meta http-equiv="Content-type: text/html; charset=UTF-8">
-<meta property="og:image" content="http://navizv.github.io/p91/img.png" />
+<meta property="og:image" content="http://navizv.github.io/preg19/img.png" />
 <meta property="og:image:width" content="120" />
 <meta property="og:image:height" content="100" />
-<meta property="og:title" content="Социально-экономические показатели Российской Федерации в 1991-2016 гг.">
-<meta property="og:description" content="Социально-экономические показатели Российской Федерации в 1991-2016 гг." />
-<meta property="og:url" content="http://navizv.github.io/p91/" />
+<meta property="og:title" content="Социально-экономические показатели регионов Российской Федерации">
+<meta property="og:description" content="Социально-экономические показатели регионов Российской Федерации" />
+<meta property="og:url" content="http://navizv.github.io/preg19/" />
 <meta property="og:locale" content="ru_RU" />
     <head>
         <title>
-            Социально-экономические показатели Российской Федерации в 1991-2016 гг.
+            Социально-экономические показатели регионов Российской Федерации
         </title>
 
         <script src="../libs/js/jquery.min.js"></script>
@@ -30,15 +30,17 @@
 <div id="chartContainer"  style="height: 500px;width: 1000px;"></div>
 </td></tr>
 </table>
-<input type="checkbox" id="zero" name="zero" value="zero" /><label for="zero">Начало вертикальной оси в нуле</label><br/>
+<!--input type="checkbox" id="zero" name="zero" value="zero" /><label for="zero">Начало вертикальной оси в нуле</label><br/-->
 Ссылка: <input id="link" type="text" size="50" class="autoselect" readonly="" value=""/>
+<br/>
+HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" readonly="" value=""/>
 <br/>
 <br/>
 <div id="ya_share"></div>
 <br/>
 <hr/>
 
-Источник данных: <a href="http://www.gks.ru/wps/wcm/connect/rosstat_main/rosstat/ru/statistics/publications/catalog/doc_1135087342078" target="_blank">Росстат, приложение к Российскому статистическому ежегоднику</a>
+Источник данных: <a href="http://www.gks.ru/wps/wcm/connect/rosstat_main/rosstat/ru/statistics/publications/catalog/4890740049342bcf8657de3fbd401489" target="_blank">Росстат, приложение к сборнику «Регионы России. Социально-экономические показатели»</a>
 <script>
 	var YaShareInstance;
 	try{
@@ -74,17 +76,25 @@
 	
 	$.ajax({//заполняем вып.список оглавлением
         type: "GET",
-        url: "data/sod.csv",
+        url: "data/Содержание.csv",
         dataType: "text",
         success: function(sod) {
 			var lines = sod.split(/\r\n|\n/);
+			var zrzc = 1;
 			for(i in lines){
 				var line = lines[i].split(';');
 				var zid = line[0];
 				var znm = line[1];
-				$('#sod').append($("<option></option>")
-                    .attr("value",zid)
-                    .text(znm)); 
+				var zrz = line[2];
+				//alert(Number.parseInt(zrz.slice(0,2)));
+				//alert(Number.parseInt(zrz.slice(0,2)) == zrzc);
+				if((zrz!=undefined)&&(Number.parseInt(zrz.slice(0,2)) == zrzc)){
+				//alert("qq!!");
+					$('#sod').append($("<option></option>")
+						.attr("value",zrzc)
+						.text(zrz)); 
+					zrzc++;
+				}
 			}
 			
 			if (location.search != "") {
@@ -104,28 +114,30 @@
 	});
 	
 	function fillPars(){ //заполняем параметры
+	//return;
 		tab = [];
 		$('#pars').html("");
 		rzd = $( "#sod" ).val();
 		$.ajax({//заполняем вып.список оглавлением
 			type: "GET",
-			url: "data/" + rzd + ".csv",
+			url: "data/Раздел " + rzd + ".csv",
 			dataType: "text",
 			success: function(sod) {
 				var lines = sod.split(/\r\n|\n/);
 				for(i in lines){
-					if(i < 3)continue;
+					//if(i < 3)continue;
 					
 					var line = lines[i].split(';');
 					var zid = i;
 					var znm = line[0];
-					if(znm.charAt(0) == '\"')
-						znm = znm.slice(1);
-						
+					//if(znm.charAt(0) == '\"')
+						//znm = znm.slice(1);
+					if(znm=="")
+						continue;
 					var opt = $("<option></option>")
-						.attr("value",zid)
-						.attr("title",znm)
-						.text(znm);
+						.attr("value",znm)
+						.attr("title",line[1])
+						.text(znm + " " + line[1]);
 					$('#pars').append(opt); 
 					tab[i] = [];
 					var empty = true;
@@ -134,11 +146,11 @@
 						if(tab[i][j]!="" && j != 0)
 							empty = false;
 					}
-					if(empty)
+					/*if(empty)
 						opt.css('font-style', 'italic').css('font-weight', 'bold');
 					else if(parseInt(i)<lines.length-1 && lines[parseInt(i)+1] != undefined && lines[parseInt(i)+1].slice(0,12) == "в том числе:")
 						opt.css('font-weight', 'bold');
-					
+					*/
 					if($.inArray(i,pars) >= 0)
 						opt.attr('selected','selected');
 				}
@@ -157,6 +169,8 @@
 	});
 	
 	function makeChart(){ //строим диаграмму
+	$("#chartContainer").html("<iframe src=\"frm.htm\"/ style=\"height: 450px;width: 800px;\">");
+	return;
 		var obj = {
 			chart: {
 				renderTo: document.getElementById("chartContainer"),
