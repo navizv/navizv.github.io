@@ -260,8 +260,11 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 	
 		var chart = new Highcharts.Chart(obj);*/
 		pars = [];
+		var shname = "";
 		$("#pars > option:selected").each(function() {
 			pars.push($(this).attr("value"));
+			if(shname=="")
+				shname = $(this).attr("title");
 		});
 		
 		var lnk = {
@@ -274,7 +277,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		$("#chartContainer").html(iframe);
 		exportHTML.value = iframe;
 		link.value = location.protocol + "//" + location.host + location.pathname + "?" + str;
-		var st = '' + obj.series[0].name;
+		var st = shname;
 		try{
 			YaShareInstance.updateShareLink(link.value,st);
 		}catch{}
