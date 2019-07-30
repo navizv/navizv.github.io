@@ -71,7 +71,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
                 });
 	
 	var rzd = "r01";
-	var pars = ["3"];
+	var pars = ["1.1."];
 	var tab = [];
 	
 	$.ajax({//заполняем вып.список оглавлением
@@ -259,7 +259,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		}
 	
 		var chart = new Highcharts.Chart(obj);*/
-		
+		pars = [];
 		$("#pars > option:selected").each(function() {
 			pars.push($(this).attr("value"));
 		});
