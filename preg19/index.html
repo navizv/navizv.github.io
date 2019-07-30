@@ -24,7 +24,7 @@
 </select>
 	<table border="1">
 <tr><td valign="top">
-<select multiple id="pars" name="pars" style="width: 400px;overflow-x: scroll" size="30">
+<select id="pars" name="pars" style="width: 400px;overflow-x: scroll" size="30">
 </select>
 </td><td>
 <div id="chartContainer"  style="height: 500px;width: 1000px;"></div>
@@ -259,6 +259,10 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		}
 	
 		var chart = new Highcharts.Chart(obj);*/
+		
+		$("#pars > option:selected").each(function() {
+			pars.push((this).value());
+		});
 		
 		var lnk = {
 			rzd: rzd,
