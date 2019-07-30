@@ -148,13 +148,13 @@
 					
 					for(j in line){
 						if(first){
-							jm = j+1;
+							jm = 1 + j;
 						}
 						if(!first && j>=jm){
 							break;
 						}
 						if(first && j > 0 && line[j]==""){
-							jm = j;
+							jm = 0 + j;
 							break;
 						}
 						
