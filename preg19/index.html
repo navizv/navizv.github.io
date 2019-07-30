@@ -130,10 +130,13 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 					var line = lines[i].split(';');
 					var zid = i;
 					var znm = line[0];
+					
 					//if(znm.charAt(0) == '\"')
 						//znm = znm.slice(1);
 					if(znm=="")
 						continue;
+					if(line[1]=="")
+						line[1]=line[2];
 					var opt = $("<option></option>")
 						.attr("value",znm)
 						.attr("title",line[1])
