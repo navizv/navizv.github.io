@@ -169,9 +169,9 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 	});
 	
 	function makeChart(){ //строим диаграмму
-	$("#chartContainer").html("<iframe src=\"frm.htm\"/ style=\"height: 450px;width: 800px;\">");
+	
 	return;
-		var obj = {
+		/*var obj = {
 			chart: {
 				renderTo: document.getElementById("chartContainer"),
 				type: "line"
@@ -258,7 +258,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 			obj.legend.enabled = false;
 		}
 	
-		var chart = new Highcharts.Chart(obj);
+		var chart = new Highcharts.Chart(obj);*/
 		
 		var lnk = {
 			rzd: rzd,
@@ -266,6 +266,9 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 			zero: $("#zero").prop('checked') ? 1 : 0
 		};
 		var str = linkEncode(lnk);
+		var iframe = "<iframe src=\"frm.htm?" + str + "\"/ style=\"height: 450px;width: 800px;\"></iframe>"
+		$("#chartContainer").html(iframe);
+		exportHTML.value = iframe;
 		link.value = "http://" + location.host + location.pathname + "?" + str;
 		var st = '' + obj.series[0].name;
 		try{
