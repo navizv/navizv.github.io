@@ -261,7 +261,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		var chart = new Highcharts.Chart(obj);*/
 		
 		$("#pars > option:selected").each(function() {
-			pars.push((this).value());
+			pars.push($(this).value());
 		});
 		
 		var lnk = {
