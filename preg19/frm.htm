@@ -144,7 +144,12 @@
 					//if(znm.charAt(0) == '\"')
 						//znm = znm.slice(1);
 					if(znm!="" && first){
-						title = title + znm + "<br/>"
+						title = title + znm;
+						for(j in line){
+							if(j!=0)
+								title = title + "; " + line[j];
+						}
+						title = title + "<br/>";
 						continue;
 					}
 					
@@ -189,7 +194,7 @@
 		
 	function drawMap(str){
 		$("#container").zivis({"data":{"str": str,"colsep":"\t","rowsep":"\n","colnum":1,"rowstnum":1,"title":"","transpose":false},"settings":{"vistype":"Map","chartType":"line","type":"Gradient","showLegend":true,"noDataColor":"#808080"}});
-		$("#container .uislider").style({width,"95%"});
+		$("#container .uislider").style({width:"95%"});
 	}
 		
 	function linkEncode(obj){
