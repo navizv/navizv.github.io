@@ -30,7 +30,7 @@
 <div id="chartContainer"  style="height: 500px;width: 1000px;"></div>
 </td></tr>
 </table>
-<!--input type="checkbox" id="zero" name="zero" value="zero" /><label for="zero">Начало вертикальной оси в нуле</label><br/-->
+<input type="checkbox" id="obr" name="obr" value="obr" /><label for="obr">Обратить цвета</label><br/>
 Ссылка: <input id="link" type="text" size="50" class="autoselect" readonly="" value=""/>
 <br/>
 HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" readonly="" value=""/>
@@ -101,8 +101,8 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 				var lnk = linkDecode(location.search.substring(1));
 				$('#sod option[value=\"'+lnk.rzd+'\"]').attr('selected','selected');
 				pars = lnk.pars;
-				if(lnk.zero == 1)
-					$('#zero').prop('checked', true);
+				if(lnk.obr == 1)
+					$('#obr').prop('checked', true);
 			}
 			fillPars();
 		}
@@ -274,7 +274,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		var lnk = {
 			rzd: rzd,
 			pars: pars,
-			zero: $("#zero").prop('checked') ? 1 : 0
+			obr: $("#obr").prop('checked') ? 1 : 0
 		};
 		var str = linkEncode(lnk);
 		var iframe = "<iframe src=\"" + location.protocol + "//" + location.host + location.pathname+  "frm.htm?" + str + "\"/ style=\"height: 450px;width: 800px;\"></iframe>"
