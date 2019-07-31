@@ -219,10 +219,11 @@
 				"oppositCol" : lnk.obr==1
 			}
 		});
-		//$( "#container" ).load(
-		setTimeout(function() {
+		$( "#container" ).load(
+		//setTimeout(
+			function() {
 			$("#container .ui-slider").css("width","95%");
-		}, 10000);//);
+		});//, 10000);//);
 	}
 		
 	function linkEncode(obj){
