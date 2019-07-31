@@ -143,15 +143,19 @@
 					var znm = line[0];
 					//if(znm.charAt(0) == '\"')
 						//znm = znm.slice(1);
+					
 					if(znm!="" && first){
-						title = title + znm;
+						var tlin = znm;
 						for(j in line){
 							if(line[j] == "" || line[j] == " ")
 								break;
 							if(j!=0)
-								title = title + "; " + line[j];
+								tlin = tlin + "; " + line[j];
 						}
-						title = title + "<br/>";
+						if(tlin[0] == "\""){
+							tlin.slice(1,tlin.length-2);
+						}
+						title = title + tlin + "<br/>";
 						continue;
 					}
 					
