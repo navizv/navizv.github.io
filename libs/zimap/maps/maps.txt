@@ -1,4 +1,8 @@
 World;world3
 Russian Federation;russia
+Russian Federation with Crimea;russia_kr
+Russian Federation FO (2014);russia_fo
+Russian Federation FO (2015);russia_fo_kr
+Russian Federation FO (2016);russia_fo_kr2
 Russian Federation2;russia2
 USA;usa
