@@ -155,7 +155,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 					else if(parseInt(i)<lines.length-1 && lines[parseInt(i)+1] != undefined && lines[parseInt(i)+1].slice(0,12) == "в том числе:")
 						opt.css('font-weight', 'bold');
 					*/
-					if($.inArray(i,pars) >= 0)
+					if($.inArray(znm,pars) >= 0)
 						opt.attr('selected','selected');
 				}
 				if(pars.length > 0)
