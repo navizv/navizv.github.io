@@ -124,7 +124,7 @@
 				lnk = linkDecode(location.search.substring(1));
 				var pars = lnk.pars;
 				
-			
+			pars[0] = $.trim(pars[0] );
 	for(var ti=0;ti<2;ti++){		
 	$.ajax({//заполняем вып.список оглавлением
 			type: "GET",
