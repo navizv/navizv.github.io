@@ -118,6 +118,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		tab = [];
 		$('#pars').html("");
 		rzd = $( "#sod" ).val();
+		$.trim(rzd);
 		$.ajax({//заполняем вып.список оглавлением
 			type: "GET",
 			url: "data/Раздел " + rzd + ".csv",
