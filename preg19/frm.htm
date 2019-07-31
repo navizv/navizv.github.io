@@ -28,6 +28,7 @@
         <div id="container"></div>
 	<script>
 		var lnk = {};
+		var tutley = 0;
 	$(function(){
 		
 		/*var obj = {
@@ -136,6 +137,7 @@
 				var str = "";
 				var jm = 0;
 				var title = "";
+				tutley = 0;
 				for(i in lines){
 					//if(i < 3)continue;
 					
@@ -157,6 +159,7 @@
 							tlin = tlin.slice(1,tlin.length-1);
 						}
 						title = title + tlin + "<br/>";
+						tutley++;
 						continue;
 					}
 					
@@ -221,7 +224,7 @@
 				"showLegend":true,
 				"noDataColor":"#808080",
 				"oppositCol" : lnk.obr==1,
-				tutley: 80,
+				tutley: 18*tutley,
 				tutlex: 15
 			}
 		});
