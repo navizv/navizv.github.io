@@ -217,9 +217,10 @@
 				"noDataColor":"#808080"
 			}
 		});
-		$( "#container" ).load(function() {
+		//$( "#container" ).load(
+		setTimeout(function() {
 			$("#container .uislider").css({width:"95%"});
-		});
+		}, 10000);//);
 	}
 		
 	function linkEncode(obj){
