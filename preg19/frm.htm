@@ -213,7 +213,9 @@
 				"noDataColor":"#808080"
 			}
 		});
-		$("#container .uislider").css({width:"95%"});
+		$( "#container" ).load(function() {
+			$("#container .uislider").css({width:"95%"});
+		});
 	}
 		
 	function linkEncode(obj){
