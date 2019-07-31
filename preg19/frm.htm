@@ -27,6 +27,7 @@
 	<div id="chartTitle"></div><br/>
         <div id="container"></div>
 	<script>
+		var lnk = {};
 	$(function(){
 		
 		/*var obj = {
@@ -120,7 +121,7 @@
 		
 	//alert("qq:" + $(location).attr('search').slice(1));
 	if (location.search != "") {
-				var lnk = linkDecode(location.search.substring(1));
+				lnk = linkDecode(location.search.substring(1));
 				var pars = lnk.pars;
 				
 			
@@ -214,7 +215,8 @@
 				"chartType":"line",
 				"type":"Gradient",
 				"showLegend":true,
-				"noDataColor":"#808080"
+				"noDataColor":"#808080",
+				"oppositCol" : lnk.obr==1
 			}
 		});
 		//$( "#container" ).load(
