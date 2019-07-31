@@ -129,7 +129,7 @@
                     min: 1,
                     max: max,
                     value: max
-                }).draggable().on("slide", function(event, ui) {
+                }).css("width","95%").draggable().on("slide", function(event, ui) {
                     var cur = ui ? ui.value : max;
                     spn.html(table[0][cur]);
                     zimap.setColumn(cur);
