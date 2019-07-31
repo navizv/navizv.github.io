@@ -188,9 +188,8 @@
 		});
 		
 	function drawMap(str){
-		$("#container").zivis({"data":{"str": str
-					       //
-		,"colsep":"\t","rowsep":"\n","colnum":1,"rowstnum":1,"title":"","transpose":false},"settings":{"vistype":"Map","chartType":"line","type":"Gradient","showLegend":true,"noDataColor":"#808080"}});
+		$("#container").zivis({"data":{"str": str,"colsep":"\t","rowsep":"\n","colnum":1,"rowstnum":1,"title":"","transpose":false},"settings":{"vistype":"Map","chartType":"line","type":"Gradient","showLegend":true,"noDataColor":"#808080"}});
+		$("#container .uislider").style({width,"95%"});
 	}
 		
 	function linkEncode(obj){
