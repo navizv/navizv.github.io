@@ -125,10 +125,10 @@
 				var pars = lnk.pars;
 				
 			
-			
+	for(var ti=0;ti<2;ti++){		
 	$.ajax({//заполняем вып.список оглавлением
 			type: "GET",
-			url: "data/" + pars[0] + ".csv",
+			url: ti==0?"data/" + pars[0] + ".csv":"data/" + pars[0] + "csv",
 			dataType: "text",
 			success: function(sod) {
 				var lines = sod.split(/\r\n|\n/);
@@ -198,6 +198,7 @@
 		}else return;
 		
 		});
+	}
 		
 	function drawMap(str){
 		$("#container").zivis({
