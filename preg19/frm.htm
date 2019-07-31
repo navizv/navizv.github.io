@@ -146,6 +146,8 @@
 					if(znm!="" && first){
 						title = title + znm;
 						for(j in line){
+							if(line[j] == "" || line[j] == " ")
+								break;
 							if(j!=0)
 								title = title + "; " + line[j];
 						}
