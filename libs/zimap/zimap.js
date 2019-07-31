@@ -53,7 +53,8 @@ function Zimap(elt, opts, onload) {
             mapFolder: "/libs/zimap/maps",
             showLegend: true,
             noDataColor: '#808080',
-            noLink: false
+            noLink: false,
+			         oppositCol : false
         },
         map: {
             isos: "",
@@ -81,6 +82,9 @@ function Zimap(elt, opts, onload) {
             options.map.isolib[i] = rs[i].split(';');
         }
     };
+    if(options.settings.oppositCol){
+		    options.settings.colors = ['#330099', '#0000ff', '#6666ff', '#ccccff'];
+	   }
 
     var findISO = function(reg) {
         reg = reg.toUpperCase();
@@ -131,7 +135,7 @@ function Zimap(elt, opts, onload) {
     };
 
     var calcScales = function() {
-        //Вычисляем шкалу для цветов
+        //Г‚Г»Г·ГЁГ±Г«ГїГҐГ¬ ГёГЄГ Г«Гі Г¤Г«Гї Г¶ГўГҐГІГ®Гў
 
         var first = true;
         var tab = options.data.table;
@@ -170,7 +174,7 @@ function Zimap(elt, opts, onload) {
     }
 
     var drawLegend = function() {
-        //Рисуем легенду
+        //ГђГЁГ±ГіГҐГ¬ Г«ГҐГЈГҐГ­Г¤Гі
         var i = 0;
         var svgd = options.map.svgd;
 
@@ -268,7 +272,7 @@ function Zimap(elt, opts, onload) {
 
     var colorMap = function() {
         var j = options.data.colnum;
-        //Чистим старые данные и цвета регионов
+        //Г—ГЁГ±ГІГЁГ¬ Г±ГІГ Г°Г»ГҐ Г¤Г Г­Г­Г»ГҐ ГЁ Г¶ГўГҐГІГ  Г°ГҐГЈГЁГ®Г­Г®Гў
         var ndc = options.settings.noDataColor;
         var svgd = options.map.svgd;
         var regs = svgd.getElementsByClassName('region');
@@ -283,11 +287,18 @@ function Zimap(elt, opts, onload) {
             }
             tit.textContent = tit.textContent.split(':')[0];
         }
-        //бежим по данным, вычисляем цвета и раскрашиваем
+        //ГЎГҐГ¦ГЁГ¬ ГЇГ® Г¤Г Г­Г­Г»Г¬, ГўГ»Г·ГЁГ±Г«ГїГҐГ¬ Г¶ГўГҐГІГ  ГЁ Г°Г Г±ГЄГ°Г ГёГЁГўГ ГҐГ¬
         var colors = options.settings.colors;
         var cn = colors.length;
         var scl = options.settings.scales;
         var tab = options.data.table;
+     if(options.settings.oppositCol){
+			var grad = svgd.getElementById("grad1");
+			grad.setAttribute("x1","0%");
+			grad.setAttribute("y1","100%");
+			grad.setAttribute("x2","0%");
+			grad.setAttribute("y2","0%");
+		}
 
         for (var i = 0; i < tab.length; i++) {
             var reg = tab[i][0];
@@ -305,6 +316,8 @@ function Zimap(elt, opts, onload) {
             if (el != null) {
                 if (options.settings.type == 'Gradient') {
                     var pr = (cur - min) / (max - min);
+                    if(options.settings.oppositCol)
+						                  pr = (max - cur) / (max - min);
                     var strcol;
                     if (pr <= 0.5) {
                         var col = Math.round(2 * pr * 255);
@@ -346,7 +359,7 @@ function Zimap(elt, opts, onload) {
                     if (tit == undefined || tit == null)
                         continue;
                 }
-                //параллельно - дописываем данные в тайтлы, чтоб всплывали
+                //ГЇГ Г°Г Г«Г«ГҐГ«ГјГ­Г® - Г¤Г®ГЇГЁГ±Г»ГўГ ГҐГ¬ Г¤Г Г­Г­Г»ГҐ Гў ГІГ Г©ГІГ«Г», Г·ГІГ®ГЎ ГўГ±ГЇГ«Г»ГўГ Г«ГЁ
                 if (options.settings.type == 'Category') {
                     tit.textContent = tit.textContent + ': ' + cur;
                 } else {
@@ -370,7 +383,7 @@ function Zimap(elt, opts, onload) {
         drawLegend();
         colorMap();
         if (options.settings.tutle)
-            setTutles();//вспл.подсказки
+            setTutles();//ГўГ±ГЇГ«.ГЇГ®Г¤Г±ГЄГ Г§ГЄГЁ
         element.style.opacity = "1";
         //finish();
     }

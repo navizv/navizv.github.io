@@ -31,7 +31,8 @@
                 map: "russia",
                 mapFolder: "/libs/zimap/maps",
                 showLegend: true,
-                noDataColor: '#808080'
+                noDataColor: '#808080',
+				            oppositCol : false
             },
             map: {
                 isos: "",
@@ -128,14 +129,14 @@
                     min: 1,
                     max: max,
                     value: max
-                }).draggable().on("slide", function(event, ui) {
+                }).css("width","95%").draggable().on("slide", function(event, ui) {
                     var cur = ui ? ui.value : max;
                     spn.html(table[0][cur]);
                     zimap.setColumn(cur);
                 }).appendTo(self.element)
                         .trigger("slide");
                 self.options.map = options.map;
-                if (options.settings.tutle) {//всплывающие подсказки
+                if (options.settings.tutle) {//Ð²ÑÐ¿Ð»Ñ‹Ð²Ð°ÑŽÑ‰Ð¸Ðµ Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÐ¸
                     var show_tooltip = function(tit, evt) {
                         tooltip.html(tit);
                         tooltip.css({
@@ -478,10 +479,10 @@ function xml_to_text(svgf) {
 }
 
 function translite(str) {
-    var arr = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'g', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'ы': 'i', 'э': 'e', 'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ж': 'G', 'З': 'Z', '�?': 'I', 'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U', 'Ф': 'F', 'Ы': 'I', 'Э': 'E', 'ё': 'yo', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ь': '', 'ю': 'yu', 'я': 'ya', 'Ё': 'YO', 'Х': 'H', 'Ц': 'TS', 'Ч': 'CH', 'Ш': 'SH', 'Щ': 'SHCH', 'Ъ': '', 'Ь': '',
-        'Ю': 'YU', 'Я': 'YA'};
+    var arr = {'Ð°': 'a', 'Ð±': 'b', 'Ð²': 'v', 'Ð³': 'g', 'Ð´': 'd', 'Ðµ': 'e', 'Ð¶': 'g', 'Ð·': 'z', 'Ð¸': 'i', 'Ð¹': 'y', 'Ðº': 'k', 'Ð»': 'l', 'Ð¼': 'm', 'Ð½': 'n', 'Ð¾': 'o', 'Ð¿': 'p', 'Ñ€': 'r', 'Ñ': 's', 'Ñ‚': 't', 'Ñƒ': 'u', 'Ñ„': 'f', 'Ñ‹': 'i', 'Ñ': 'e', 'Ð': 'A', 'Ð‘': 'B', 'Ð’': 'V', 'Ð“': 'G', 'Ð”': 'D', 'Ð•': 'E', 'Ð–': 'G', 'Ð—': 'Z', 'Ð?': 'I', 'Ð™': 'Y', 'Ðš': 'K', 'Ð›': 'L', 'Ðœ': 'M', 'Ð': 'N', 'Ðž': 'O', 'ÐŸ': 'P', 'Ð ': 'R', 'Ð¡': 'S', 'Ð¢': 'T', 'Ð£': 'U', 'Ð¤': 'F', 'Ð«': 'I', 'Ð­': 'E', 'Ñ‘': 'yo', 'Ñ…': 'h', 'Ñ†': 'ts', 'Ñ‡': 'ch', 'Ñˆ': 'sh', 'Ñ‰': 'shch', 'ÑŠ': '', 'ÑŒ': '', 'ÑŽ': 'yu', 'Ñ': 'ya', 'Ð': 'YO', 'Ð¥': 'H', 'Ð¦': 'TS', 'Ð§': 'CH', 'Ð¨': 'SH', 'Ð©': 'SHCH', 'Ðª': '', 'Ð¬': '',
+        'Ð®': 'YU', 'Ð¯': 'YA'};
     var replacer = function(a) {
         return arr[a] || a
     };
-    return str.replace(/[А-яёЁ]/g, replacer)
+    return str.replace(/[Ð-ÑÑ‘Ð]/g, replacer)
 }

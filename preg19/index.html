@@ -1,10 +1,10 @@
 ﻿<html><meta http-equiv="Content-type: text/html; charset=UTF-8">
-<meta property="og:image" content="http://navizv.github.io/preg19/img.png" />
+<meta property="og:image" content="https://navizv.github.io/preg19/img.png" />
 <meta property="og:image:width" content="120" />
 <meta property="og:image:height" content="100" />
 <meta property="og:title" content="Социально-экономические показатели регионов Российской Федерации">
 <meta property="og:description" content="Социально-экономические показатели регионов Российской Федерации" />
-<meta property="og:url" content="http://navizv.github.io/preg19/" />
+<meta property="og:url" content="https://navizv.github.io/preg19/" />
 <meta property="og:locale" content="ru_RU" />
     <head>
         <title>
@@ -24,13 +24,13 @@
 </select>
 	<table border="1">
 <tr><td valign="top">
-<select multiple id="pars" name="pars" style="width: 400px;overflow-x: scroll" size="30">
+<select id="pars" name="pars" style="width: 400px;overflow-x: scroll" size="33">
 </select>
 </td><td>
-<div id="chartContainer"  style="height: 500px;width: 1000px;"></div>
+<div id="chartContainer"  style="height: 550px;width: 820px;"></div>
 </td></tr>
 </table>
-<!--input type="checkbox" id="zero" name="zero" value="zero" /><label for="zero">Начало вертикальной оси в нуле</label><br/-->
+<input type="checkbox" id="obr" name="obr" value="obr" /><label for="obr">Обратить цвета</label><br/>
 Ссылка: <input id="link" type="text" size="50" class="autoselect" readonly="" value=""/>
 <br/>
 HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" readonly="" value=""/>
@@ -71,7 +71,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
                 });
 	
 	var rzd = "r01";
-	var pars = ["3"];
+	var pars = ["1.1."];
 	var tab = [];
 	
 	$.ajax({//заполняем вып.список оглавлением
@@ -101,8 +101,8 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 				var lnk = linkDecode(location.search.substring(1));
 				$('#sod option[value=\"'+lnk.rzd+'\"]').attr('selected','selected');
 				pars = lnk.pars;
-				if(lnk.zero == 1)
-					$('#zero').prop('checked', true);
+				if(lnk.obr == 1)
+					$('#obr').prop('checked', true);
 			}
 			fillPars();
 		}
@@ -118,6 +118,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		tab = [];
 		$('#pars').html("");
 		rzd = $( "#sod" ).val();
+		$.trim(rzd);
 		$.ajax({//заполняем вып.список оглавлением
 			type: "GET",
 			url: "data/Раздел " + rzd + ".csv",
@@ -130,10 +131,13 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 					var line = lines[i].split(';');
 					var zid = i;
 					var znm = line[0];
+					
 					//if(znm.charAt(0) == '\"')
 						//znm = znm.slice(1);
 					if(znm=="")
 						continue;
+					if(line[1]=="")
+						line[1]=line[2];
 					var opt = $("<option></option>")
 						.attr("value",znm)
 						.attr("title",line[1])
@@ -164,14 +168,14 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		makeChart();
 	});
 	
-	$("#zero").change(function() {
+	$("#obr").change(function() {
 		makeChart();
 	});
 	
 	function makeChart(){ //строим диаграмму
-	$("#chartContainer").html("<iframe src=\"frm.htm\"/ style=\"height: 450px;width: 800px;\">");
-	return;
-		var obj = {
+	
+	//return;
+		/*var obj = {
 			chart: {
 				renderTo: document.getElementById("chartContainer"),
 				type: "line"
@@ -258,16 +262,26 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 			obj.legend.enabled = false;
 		}
 	
-		var chart = new Highcharts.Chart(obj);
+		var chart = new Highcharts.Chart(obj);*/
+		pars = [];
+		var shname = "";
+		$("#pars > option:selected").each(function() {
+			pars.push($(this).attr("value"));
+			if(shname=="")
+				shname = $(this).attr("title");
+		});
 		
 		var lnk = {
 			rzd: rzd,
 			pars: pars,
-			zero: $("#zero").prop('checked') ? 1 : 0
+			obr: $("#obr").prop('checked') ? 1 : 0
 		};
 		var str = linkEncode(lnk);
-		link.value = "http://" + location.host + location.pathname + "?" + str;
-		var st = '' + obj.series[0].name;
+		var iframe = "<iframe src=\"" + location.protocol + "//" + location.host + location.pathname+  "frm.htm?" + str + "\"/ style=\"height: 550px;width: 800px;\"></iframe>"
+		$("#chartContainer").html(iframe);
+		exportHTML.value = iframe;
+		link.value = location.protocol + "//" + location.host + location.pathname + "?" + str;
+		var st = shname;
 		try{
 			YaShareInstance.updateShareLink(link.value,st);
 		}catch{}
