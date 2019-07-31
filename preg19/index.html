@@ -24,10 +24,10 @@
 </select>
 	<table border="1">
 <tr><td valign="top">
-<select id="pars" name="pars" style="width: 400px;overflow-x: scroll" size="33">
+<select id="pars" name="pars" style="width: 400px;overflow-x: scroll" size="42">
 </select>
 </td><td>
-<div id="chartContainer"  style="height: 550px;width: 820px;"></div>
+<div id="chartContainer"  style="height: 700px;width: 820px;"></div>
 </td></tr>
 </table>
 <input type="checkbox" id="obr" name="obr" value="obr" /><label for="obr">Обратить цвета</label><br/>
@@ -277,7 +277,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 			obr: $("#obr").prop('checked') ? 1 : 0
 		};
 		var str = linkEncode(lnk);
-		var iframe = "<iframe src=\"" + location.protocol + "//" + location.host + location.pathname+  "frm.htm?" + str + "\"/ style=\"height: 550px;width: 800px;\"></iframe>"
+		var iframe = "<iframe src=\"" + location.protocol + "//" + location.host + location.pathname+  "frm.htm?" + str + "\"/ style=\"height: 700px;width: 800px;\"></iframe>"
 		$("#chartContainer").html(iframe);
 		exportHTML.value = iframe;
 		link.value = location.protocol + "//" + location.host + location.pathname + "?" + str;
