@@ -95,7 +95,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 	var tab = [];
 	var lnk = {};
 	
-	$("#visdiv").ziselector();
+	
 	
 	var regs = []
 	if (location.search != ""){
@@ -103,6 +103,8 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		regs = lnk.regs;
 		$('option[value="'+lnk.vt+'"]').attr('selected','selected');
 	}
+	
+	$("#visdiv").ziselector();
 	
 	$('#regs').html("");
 	$.ajax({//заполняем список регионов
