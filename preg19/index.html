@@ -238,8 +238,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		}else if(lnk.vt == "Chart"){
 			lnk.regs = [];
 			$("#regs > option:selected").each(function() {
-					lnk.regs.push($(this).attr("value"));
-				}
+				lnk.regs.push($(this).attr("value"));
 			});
 		} 
 		var str = linkEncode(lnk);
