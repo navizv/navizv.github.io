@@ -191,95 +191,6 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 	
 	function makeChart(){ //строим диаграмму
 	
-	//return;
-		/*var obj = {
-			chart: {
-				renderTo: document.getElementById("chartContainer"),
-				type: "line"
-			},
-			title: {
-				text: "Социально-экономические показатели Российской Федерации в 1991-2016 гг.",
-				style: {
-					width: "950px"   
-				}
-			},
-			series: [],
-			legend: {
-				//layout: 'vertical',
-				//align: 'bottom',
-				//verticalAlign: 'middle'
-		//		width: 600
-				//align: 'right',
-        verticalAlign: 'bottom',
-        layout: 'vertical',
-        itemStyle: {
-            width: "950px"   
-        }
-			},
-			yAxis: {
-				title: {
-					text: '',
-					
-				},
-				//type: 'logarithmic'
-				//minorTickInterval: 0.1
-			}
-		};
-		obj.xAxis = {categories: []};
-		if($("#zero").prop('checked'))
-			obj.yAxis.min = 0;
-		else
-			obj.yAxis.min = undefined;
-        for (i = 1991; i <= 2016; i++)
-            obj.xAxis.categories.push(i);
-	
-		pars = [];
-		
-		$("#pars > option:selected").each(function() {
-			var series = {
-				name: $(this).text(),
-				data: []
-			};
-			var i = $(this).val();
-			var flagFilled = false;
-			for(j in tab[i]){
-				if(j == 0 || j > 26)
-					continue;
-				var str = tab[i][j].replace(',','.');
-				while(str.length > 2 && str[str.length-1] == ')' && '0123456789'.indexOf(str[str.length-2]) !== -1){
-				//избавляемся от сносок в значениях (в рыболовстве, например, такое есть)
-					str = str.substring(0,str.length-2);
-					if(str[str.length-1] == ',')
-						str = str.substring(0,str.length-1);
-				}
-				var c = parseFloat(str);
-				if(isNaN(c))
-					c = null;
-				else
-					flagFilled = true;
-				series.data.push(c);
-			}
-			if(!flagFilled){
-				series.lineWidth = 0;
-				series.color = '#FFFFFF';
-			}else{
-				//var sn = series.name.indexOf(')')
-				//if(sn > 1 && '0123456789'.indexOf(series.name[sn-1]) !== -1){
-					//series.name = series.name.slice(0,sn-1) + '<font color="red">' + series.name.slice(sn-1,sn+1) + '</font>' 
-					//+ series.name.slice(sn+2,series.name.length);
-				//}
-			}
-			
-			obj.series.push(series);
-			pars.push(i);
-		});
-		
-		if(pars.length == 1){
-			obj.title.text = tab[pars[0]][0];
-			obj.legend.enabled = false;
-		}
-	
-		var chart = new Highcharts.Chart(obj);*/
 		pars = [];
 		var shname = "";
 		$("#pars > option:selected").each(function() {
@@ -295,7 +206,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 			vt: vistype.value
 		};
 		if(lnk.vt == "Map"){
-			lnk.obr = $("#obr").prop('checked') ? 1 : 0,
+			lnk.obr = $("#obr").prop('checked') ? 1 : 0;
 		}
 		var str = linkEncode(lnk);
 		var iframe = "<iframe src=\"" + location.protocol + "//" + location.host + location.pathname+  "frm.htm?" + str + "\"/ style=\"height: 700px;width: 800px;\"></iframe>"
