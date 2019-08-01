@@ -30,7 +30,21 @@
 <div id="chartContainer"  style="height: 700px;width: 820px;"></div>
 </td></tr>
 </table>
-<input type="checkbox" id="obr" name="obr" value="obr" /><label for="obr">Обратить цвета</label><br/>
+ <div id="visdiv" class="pages" style="display: inline;">
+<select id="vistype">
+	<option value="Table">Таблица</option>
+        <option value="Chart">Диаграмма</option>
+        <option value="Map" selected>Карта</option>
+</select>
+	    <div id="Map">
+<input type="checkbox" id="obr" name="obr" value="obr" /><label for="obr">Обратить цвета</label>
+		    </div>
+	    <div id="Chart">
+		    kyy</div>
+	                    <div id="Table">
+                    No options for table
+                </div></div>
+	    <br/>
 Ссылка: <input id="link" type="text" size="50" class="autoselect" readonly="" value=""/>
 <br/>
 HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" readonly="" value=""/>
@@ -73,6 +87,9 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 	var rzd = "r01";
 	var pars = ["1.1."];
 	var tab = [];
+	
+	$("#visdiv").ziselector();
+
 	
 	$.ajax({//заполняем вып.список оглавлением
         type: "GET",
@@ -274,8 +291,12 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		var lnk = {
 			rzd: rzd,
 			pars: pars,
-			obr: $("#obr").prop('checked') ? 1 : 0
+			//obr: $("#obr").prop('checked') ? 1 : 0,
+			vt: vistype.value
 		};
+		if(lnk.vt == "Map"){
+			lnk.obr = $("#obr").prop('checked') ? 1 : 0,
+		}
 		var str = linkEncode(lnk);
 		var iframe = "<iframe src=\"" + location.protocol + "//" + location.host + location.pathname+  "frm.htm?" + str + "\"/ style=\"height: 700px;width: 800px;\"></iframe>"
 		$("#chartContainer").html(iframe);
