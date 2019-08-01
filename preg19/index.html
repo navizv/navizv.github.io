@@ -45,7 +45,7 @@
 <input type="checkbox" id="obr" name="obr" value="obr" /><label for="obr">Обратить цвета</label>
 		    </div>
 	    <div id="Chart">
-		    <select id="regs" name="regs" size="10">
+		    <select multiple id="regs" name="regs" size="10">
 </select></div>
 	                    <div id="Table">
                     No options for table
@@ -93,9 +93,40 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 	var rzd = "r01";
 	var pars = ["1.1."];
 	var tab = [];
+	var lnk = {};
 	
 	$("#visdiv").ziselector();
-
+	
+	var regs = []
+	if (location.search != ""){
+		lnk = linkDecode(location.search.substring(1));
+		regs = lnk.regs;
+	}
+	
+	$('#regs').html("");
+	$.ajax({//заполняем список регионов
+        	type: "GET",
+        	url: "data/regs.csv",
+        	dataType: "text",
+        	success: function(sod) {
+			var lines = sod.split(/\r\n|\n/);
+			for(i in lines){
+				var regn = lines[i].replace("p","р").replace("o","о").replace("e","е").replace(/\s+/g, ' ');
+				var opt = $("<option></option>")
+						.attr("value",regn)
+						.attr("title",regn)
+						.text(regn);
+				$('#regs').append(opt); 
+				if(regn=='в том числе')
+					opt.css('font-style', 'italic');//.css('font-weight', 'bold');
+				/*else if(parseInt(i)<lines.length-1 && lines[parseInt(i)+1] != undefined && lines[parseInt(i)+1].slice(0,12) == "в том числе:")
+					opt.css('font-weight', 'bold');
+				*/
+				if($.inArray(regn,regs) >= 0)
+					opt.attr('selected','selected');
+			}
+		}
+	});
 	
 	$.ajax({//заполняем вып.список оглавлением
         type: "GET",
@@ -121,7 +152,7 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 			}
 			
 			if (location.search != "") {
-				var lnk = linkDecode(location.search.substring(1));
+				//var lnk = linkDecode(location.search.substring(1));
 				$('#sod option[value=\"'+lnk.rzd+'\"]').attr('selected','selected');
 				pars = lnk.pars;
 				if(lnk.obr == 1)
@@ -137,8 +168,6 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 	});
 	
 	function fillPars(){ //заполняем параметры
-	//return;
-		tab = [];
 		$('#pars').html("");
 		rzd = $( "#sod" ).val();
 		$.trim(rzd);
@@ -166,13 +195,6 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 						.attr("title",line[1])
 						.text(znm + " " + line[1]);
 					$('#pars').append(opt); 
-					tab[i] = [];
-					var empty = true;
-					for(j in line){
-						tab[i][j] = line[j];
-						if(tab[i][j]!="" && j != 0)
-							empty = false;
-					}
 					/*if(empty)
 						opt.css('font-style', 'italic').css('font-weight', 'bold');
 					else if(parseInt(i)<lines.length-1 && lines[parseInt(i)+1] != undefined && lines[parseInt(i)+1].slice(0,12) == "в том числе:")
@@ -213,7 +235,13 @@ HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" rea
 		};
 		if(lnk.vt == "Map"){
 			lnk.obr = $("#obr").prop('checked') ? 1 : 0;
-		}
+		}else if(lnk.vt == "Chart"){
+			lnk.regs = [];
+			$("#regs > option:selected").each(function() {
+					lnk.regs.push($(this).attr("value"));
+				}
+			});
+		} 
 		var str = linkEncode(lnk);
 		var iframe = "<iframe src=\"" + location.protocol + "//" + location.host + location.pathname+  "frm.htm?" + str + "\"/ style=\"height: 700px;width: 800px;\"></iframe>"
 		$("#chartContainer").html(iframe);
