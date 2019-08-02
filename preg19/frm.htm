@@ -25,7 +25,8 @@
     </head>
     <body>
 	<div id="chartTitle"></div><br/>
-        <div id="container"></div>
+        <div id="container"></div><br/>
+        <div id="footer"></div>
 	<script>
 		var lnk = {};
 		var tutley = 0;
@@ -187,8 +188,15 @@
 								str = str + "\n" + tmps;
 							else
 								str = tmps;
-						}else
-							str = str + "\t" + line[j];
+						}else{
+							var strt = line[j];
+							while(strt.length > 2 && strt[strt.length-1] == ')' && '0123456789'.indexOf(strt[strt.length-2]) !== -1){
+								//избавляемся от сносок в значениях (в рыболовстве, например, такое есть)
+								strt = strt.substring(0,strt.length-2);
+								if(strt[strt.length-1] == ',')
+									strt = strt.substring(0,str.length-1);
+							}
+							str = str + "\t" + strt;}
 						
 					}
 					first = false;
