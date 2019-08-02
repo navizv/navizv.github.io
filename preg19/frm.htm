@@ -181,14 +181,14 @@
 						
 						if(j==0){
 							var tmps = line[j].replace("p","р").replace("o","о").replace("e","е").replace(/\s+/g, ' ');
-							if(!first && lnk.vt=="Chart" && !($.inArray(tmps,lnk.regs) >= 0))
-								break;
-							if(!first && tmps == "")
-								break;
 							if(tmps.length > 2 && tmps[1] == ')' && '0123456789'.indexOf(tmps[0]) !== -1){
 								footer = (footer=="")? tmps : '<br/>'+tmps;
 								break;
 							}
+							if(!first && lnk.vt=="Chart" && !($.inArray(tmps,lnk.regs) >= 0))
+								break;
+							if(!first && tmps == "")
+								break;
 							if(!first)
 								str = str + "\n" + tmps;
 							else
