@@ -294,7 +294,7 @@ Copyright (c) 2019 <a href="fb.com/Navizv">Зайцев И.Д.</a><br/>
 			var p = v.split("=");
 			obj[p[0]] = decodeURIComponent(p[1]);
 			if(p[0]=="pars"||p[0]=="regs"||p[0]=="dops")
-				obj[p[0]] = obj[p[0]].replace(/\*/g,"\/").split("_");
+				obj[p[0]] = obj[p[0]].replace(/\*/g,"\/").replace('+',' ').split("_");
 		});
 		return obj;
 	}
