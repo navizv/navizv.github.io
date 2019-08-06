@@ -272,6 +272,7 @@ Copyright (c) 2019 <a href="fb.com/Navizv">Зайцев И.Д.</a><br/>
 		exportHTML.value = iframe;
 		link.value = location.protocol + "//" + location.host + location.pathname + "?" + str;
 		window.history.pushState("", "", location.pathname + "?" + str);//'/newpage');
+		window.document.title = shname;
 		var st = shname;
 		try{
 			YaShareInstance.updateShareLink(link.value,st);
