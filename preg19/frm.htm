@@ -133,6 +133,10 @@
 			url: ti==0?"data/" + pars[0] + ".csv":"data/" + pars[0] + "csv",
 			dataType: "text",
 			error: function (jqXHR, exception) {},
+            		statusCode: { 404: function() {
+                   //alert("page not found");
+               }
+            },
 			success: function(sod) {
 				var lines = sod.split(/\r\n|\n/);
 				var first = true;
