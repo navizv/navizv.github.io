@@ -1,4 +1,4 @@
-/* zimap.js - javascript library for making a svg
+﻿/* zimap.js - javascript library for making a svg
  map chart.
  2013-09-16
  
@@ -50,11 +50,11 @@ function Zimap(elt, opts, onload) {
             scales: null,
             setScales: false,
             map: "russia",
-            mapFolder: "/libs/zimap/maps",
+            mapFolder: "../libs/zimap/maps",
             showLegend: true,
             noDataColor: '#808080',
             noLink: false,
-			         oppositCol : false
+			oppositCol : false
         },
         map: {
             isos: "",
@@ -79,32 +79,43 @@ function Zimap(elt, opts, onload) {
         var isos = options.map.isos;
         var rs = splitRows(isos);
         for (var i in rs) {
+if(rs[i].length < 3)
+	continue;
             options.map.isolib[i] = rs[i].split(';');
         }
     };
-    if(options.settings.oppositCol){
-		    options.settings.colors = ['#330099', '#0000ff', '#6666ff', '#ccccff'];
-	   }
+	if(options.settings.oppositCol){
+		options.settings.colors = ['#330099', '#0000ff', '#6666ff', '#ccccff'];
+	}
 
     var findISO = function(reg) {
         reg = reg.toUpperCase();
         var ilib = options.map.isolib;
+//alert("w1");
         for (var i in ilib) {
+//alert("w2");
             var r = ilib[i];
             for (var j in r) {
+//alert("w3_"+r);
+if(j=="includes")
+	continue;
                 if (j == 0) {
                     if (reg == r[j]) {
+//alert("w4");
                         options.map.parsed += reg + ';' + r[0] + '\r\n';
                         return reg;
                     }
                 } else {
+//alert("w5_"+reg+"_"+j+"_"+r[j]);
                     if (reg.search(new RegExp(r[j], 'i')) >= 0) {
+//alert("w7");
                         options.map.parsed += reg + ';' + r[0] + '\r\n';
                         return r[0];
                     }
                 }
             }
         }
+//alert("w6");
         options.map.notParsed += reg + '\r\n';
         return reg;
     }
@@ -117,8 +128,12 @@ function Zimap(elt, opts, onload) {
             tab = new Array(mas.length - options.data.rowstnum);
             var k = 0;
             for (var i = options.data.rowstnum; i < mas.length; i++) {
+if(mas[i].length < 3)
+	continue;
                 tab[k] = mas[i].split(options.data.colsep);
                 for (var j = 1; j < tab[k].length; j++) {
+if(tab[k][j].length < 3)
+	continue;
                     var tmp = parseFloat(tab[k][j].replace(',', '.'));
                     if (!isNaN(tmp))
                         tab[k][j] = tmp;
@@ -132,10 +147,11 @@ function Zimap(elt, opts, onload) {
             reg = findISO(reg);
             options.data.table[i][0] = reg;
         }
+//alert("p4");
     };
 
     var calcScales = function() {
-        //Âû÷èñëÿåì øêàëó äëÿ öâåòîâ
+        //��������� ����� ��� ������
 
         var first = true;
         var tab = options.data.table;
@@ -174,21 +190,27 @@ function Zimap(elt, opts, onload) {
     }
 
     var drawLegend = function() {
-        //Ðèñóåì ëåãåíäó
+        //������ �������
         var i = 0;
         var svgd = options.map.svgd;
 
         var el = svgd.getElementById('mylink');
-        el.parentNode.setAttribute("xlink:href", "http://navizv.github.io/zimm/index2.html");//?"+encodeURIComponent(JSON.stringify(opts)));
-        if (el)
+        //el.parentNode.setAttribute("xlink:href", "http://app.ieie.su/~zaycev/pav_web/");//?"+encodeURIComponent(JSON.stringify(opts)));
+		el.parentNode.setAttribute("xlink:href", "http://navizv.github.io/zimm/index2.html");//?"+encodeURIComponent(JSON.stringify(opts)));
+        if (el){
             if (options.settings.noLink)
                 el.style.display = 'none';
             else
                 el.style.display = 'block';
+	//el.innerHTML = "ПК Пависэр-М, http://app.ieie.su/~zaycev";
+	}	
 
         var cury = parseInt(svgd.getElementById('leg0').getAttribute('y'));
         if (cury != cury)
             cury = 100;
+		var xcoord = parseInt(svgd.getElementById('leg0').getAttribute('x'));
+        if (xcoord != xcoord)
+            xcoord = 1100;
         var colors = options.settings.colors;
         var cn = colors.length;
         var scl = options.settings.scales;
@@ -205,47 +227,47 @@ function Zimap(elt, opts, onload) {
         if (options.settings.showLegend) {
             if (options.settings.type == 'Gradient') {
                 var rec = svgd.getElementById('leg0');
-                rec.setAttribute('x', '1100');
+                rec.setAttribute('x', xcoord);
                 rec.setAttribute('y', cury);
                 rec.setAttribute('width', '30');
                 rec.setAttribute('height', '300');
                 rec.setAttribute('fill', 'url(#grad1)');
                 for (i = 0; i < cn; i++) {
                     var rec = svgd.getElementById('leg' + (i + 1));
-                    rec.setAttribute('x', '1100');
+                    rec.setAttribute('x', xcoord);
                     rec.setAttribute('y', cury);
                     rec.setAttribute('width', '30');
                     rec.setAttribute('height', h);
                     rec.setAttribute('style', "fill:none;stroke:black;");
 
                     var txt = svgd.getElementById('tcol' + i);
-                    txt.setAttribute('x', '1135');
+                    txt.setAttribute('x', xcoord + 35);
                     txt.setAttribute('y', cury + 5);
                     txt.textContent = ziformat(scl[cn - i]);
                     cury += h;
                 }
                 var txt = svgd.getElementById('tcol' + i);
-                txt.setAttribute('x', '1135');
+                txt.setAttribute('x', xcoord + 35);
                 txt.setAttribute('y', cury + 5);
                 txt.textContent = ziformat(scl[cn - i]);
                 cury += 75;
             } else if (options.settings.type == 'Block') {
                 for (i = 0; i < cn; i++) {
                     var rec = svgd.getElementById('leg' + i);
-                    rec.setAttribute('x', '1100');
+                    rec.setAttribute('x', xcoord);
                     rec.setAttribute('y', cury);
                     rec.setAttribute('width', '30');
                     rec.setAttribute('height', h);
                     rec.setAttribute('fill', colors[cn - i - 1]);
 
                     var txt = svgd.getElementById('tcol' + i);
-                    txt.setAttribute('x', '1135');
+                    txt.setAttribute('x', xcoord + 35);
                     txt.setAttribute('y', cury + 5);
                     txt.textContent = ziformat(scl[cn - i]);
                     cury += h;
                 }
                 var txt = svgd.getElementById('tcol' + i);
-                txt.setAttribute('x', '1135');
+                txt.setAttribute('x', xcoord + 35);
                 txt.setAttribute('y', cury + 5);
                 txt.textContent = ziformat(scl[cn - i]);
                 cury += 75;
@@ -254,14 +276,14 @@ function Zimap(elt, opts, onload) {
                     h = 45;
                 for (i = 0; i < cn; i++) {
                     var rec = svgd.getElementById('leg' + i);
-                    rec.setAttribute('x', '1100');
+                    rec.setAttribute('x', xcoord);
                     rec.setAttribute('y', cury);
                     rec.setAttribute('width', '30');
                     rec.setAttribute('height', h);
                     rec.setAttribute('fill', colors[cn - i - 1]);
 
                     var txt = svgd.getElementById('tcol' + i);
-                    txt.setAttribute('x', '1135');
+                    txt.setAttribute('x', xcoord + 35);
                     txt.setAttribute('y', cury + 5 + h / 2);
                     txt.textContent = scl[cn - i - 1];
                     cury += h;
@@ -272,7 +294,7 @@ function Zimap(elt, opts, onload) {
 
     var colorMap = function() {
         var j = options.data.colnum;
-        //×èñòèì ñòàðûå äàííûå è öâåòà ðåãèîíîâ
+        //������ ������ ������ � ����� ��������
         var ndc = options.settings.noDataColor;
         var svgd = options.map.svgd;
         var regs = svgd.getElementsByClassName('region');
@@ -287,12 +309,12 @@ function Zimap(elt, opts, onload) {
             }
             tit.textContent = tit.textContent.split(':')[0];
         }
-        //áåæèì ïî äàííûì, âû÷èñëÿåì öâåòà è ðàñêðàøèâàåì
+        //����� �� ������, ��������� ����� � ������������
         var colors = options.settings.colors;
         var cn = colors.length;
         var scl = options.settings.scales;
         var tab = options.data.table;
-     if(options.settings.oppositCol){
+		if(options.settings.oppositCol){
 			var grad = svgd.getElementById("grad1");
 			grad.setAttribute("x1","0%");
 			grad.setAttribute("y1","100%");
@@ -316,8 +338,8 @@ function Zimap(elt, opts, onload) {
             if (el != null) {
                 if (options.settings.type == 'Gradient') {
                     var pr = (cur - min) / (max - min);
-                    if(options.settings.oppositCol)
-						                  pr = (max - cur) / (max - min);
+					if(options.settings.oppositCol)
+						pr = (max - cur) / (max - min);
                     var strcol;
                     if (pr <= 0.5) {
                         var col = Math.round(2 * pr * 255);
@@ -359,7 +381,7 @@ function Zimap(elt, opts, onload) {
                     if (tit == undefined || tit == null)
                         continue;
                 }
-                //ïàðàëëåëüíî - äîïèñûâàåì äàííûå â òàéòëû, ÷òîá âñïëûâàëè
+                //����������� - ���������� ������ � ������, ���� ���������
                 if (options.settings.type == 'Category') {
                     tit.textContent = tit.textContent + ': ' + cur;
                 } else {
@@ -383,7 +405,7 @@ function Zimap(elt, opts, onload) {
         drawLegend();
         colorMap();
         if (options.settings.tutle)
-            setTutles();//âñïë.ïîäñêàçêè
+            setTutles();//����.���������
         element.style.opacity = "1";
         //finish();
     }
@@ -436,8 +458,9 @@ function Zimap(elt, opts, onload) {
     }
 
     var readMap = function() {
+
         //element.innerHTML = "here will be map";
-        var adr = '/libs/zimap/maps/' + options.settings.map;
+        var adr = '../libs/zimap/maps/' + options.settings.map;
         var svg = adr + '.svg';
         var csv = adr + '.csv';
 
@@ -450,6 +473,7 @@ function Zimap(elt, opts, onload) {
                     options.map.isos = xmlhttp.responseText;
                     readISO();
                     parseData();
+//alert("mapred5");
                     //set map
                     var mapObject = document.createElement('object');
                     //alert(element.tagName);

@@ -32,14 +32,15 @@
                 mapFolder: "/libs/zimap/maps",
                 showLegend: true,
                 noDataColor: '#808080',
-				            oppositCol : false
+				oppositCol : false
             },
             map: {
                 isos: "",
                 isolib: [],
                 parsed: "",
                 notParsed: "",
-                svgd: null
+                svgd: null,
+				cur: 1
             },
             chart: {}
         },
@@ -49,13 +50,16 @@
         getTable: function() {
             return this.options.data.table;
         },
+		getCurCol: function() {
+            return this.options.map.cur;
+        },
         getSvgd: function() {
             return this.options.map.svgd;
         },
         saveFile: function(s) {
             var vt = this.options.settings.vistype;
             if (vt == "Table") {
-                var tab = vr.zivis("getTable");
+                var tab = this.options.data.table;//vr.zivis("getTable");
                 var txt = "";
                 for (var i in tab) {
                     for (var j in tab[i]) {
@@ -68,7 +72,7 @@
             } else if (vt == "Map") {
                 var svgd = this.options.map.svgd;
                 if (s.type == "svg") {
-                    var blob = new Blob([xml_to_text(svgd).replace(/tutle/g, "title")], {type: "image/svg+xml;charset=utf-8"});
+                    var blob = new Blob([xml_to_text(svgd).replace(/tutle/g, "title").replace(/ xmlns=\"\"/g, "")], {type: "image/svg+xml;charset=utf-8"});
                     saveAs(blob, "" + s.name + "." + s.type);
                 } else {
                     //???
@@ -133,10 +137,11 @@
                     var cur = ui ? ui.value : max;
                     spn.html(table[0][cur]);
                     zimap.setColumn(cur);
+					self.options.map.cur = cur;
                 }).appendTo(self.element)
                         .trigger("slide");
                 self.options.map = options.map;
-                if (options.settings.tutle) {//Ð²ÑÐ¿Ð»Ñ‹Ð²Ð°ÑŽÑ‰Ð¸Ðµ Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÐ¸
+                if (options.settings.tutle) {//всплывающие подсказки
                     var show_tooltip = function(tit, evt) {
                         tooltip.html(tit);
                         tooltip.css({
@@ -479,10 +484,10 @@ function xml_to_text(svgf) {
 }
 
 function translite(str) {
-    var arr = {'Ð°': 'a', 'Ð±': 'b', 'Ð²': 'v', 'Ð³': 'g', 'Ð´': 'd', 'Ðµ': 'e', 'Ð¶': 'g', 'Ð·': 'z', 'Ð¸': 'i', 'Ð¹': 'y', 'Ðº': 'k', 'Ð»': 'l', 'Ð¼': 'm', 'Ð½': 'n', 'Ð¾': 'o', 'Ð¿': 'p', 'Ñ€': 'r', 'Ñ': 's', 'Ñ‚': 't', 'Ñƒ': 'u', 'Ñ„': 'f', 'Ñ‹': 'i', 'Ñ': 'e', 'Ð': 'A', 'Ð‘': 'B', 'Ð’': 'V', 'Ð“': 'G', 'Ð”': 'D', 'Ð•': 'E', 'Ð–': 'G', 'Ð—': 'Z', 'Ð?': 'I', 'Ð™': 'Y', 'Ðš': 'K', 'Ð›': 'L', 'Ðœ': 'M', 'Ð': 'N', 'Ðž': 'O', 'ÐŸ': 'P', 'Ð ': 'R', 'Ð¡': 'S', 'Ð¢': 'T', 'Ð£': 'U', 'Ð¤': 'F', 'Ð«': 'I', 'Ð­': 'E', 'Ñ‘': 'yo', 'Ñ…': 'h', 'Ñ†': 'ts', 'Ñ‡': 'ch', 'Ñˆ': 'sh', 'Ñ‰': 'shch', 'ÑŠ': '', 'ÑŒ': '', 'ÑŽ': 'yu', 'Ñ': 'ya', 'Ð': 'YO', 'Ð¥': 'H', 'Ð¦': 'TS', 'Ð§': 'CH', 'Ð¨': 'SH', 'Ð©': 'SHCH', 'Ðª': '', 'Ð¬': '',
-        'Ð®': 'YU', 'Ð¯': 'YA'};
+    var arr = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'g', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'ы': 'i', 'э': 'e', 'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ж': 'G', 'З': 'Z', 'И': 'I', 'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U', 'Ф': 'F', 'Ы': 'I', 'Э': 'E', 'ё': 'yo', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ь': '', 'ю': 'yu', 'я': 'ya', 'Ё': 'YO', 'Х': 'H', 'Ц': 'TS', 'Ч': 'CH', 'Ш': 'SH', 'Щ': 'SHCH', 'Ъ': '', 'Ь': '',
+        'Ю': 'YU', 'Я': 'YA'};
     var replacer = function(a) {
         return arr[a] || a
     };
-    return str.replace(/[Ð-ÑÑ‘Ð]/g, replacer)
+    return str.replace(/[А-яёЁ]/g, replacer)
 }
