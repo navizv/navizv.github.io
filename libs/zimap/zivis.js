@@ -145,8 +145,8 @@
                     var show_tooltip = function(tit, evt) {
                         tooltip.html(tit);
                         tooltip.css({
-                            left: evt.screenX,/*pageX + (options.settings.tutlex?options.settings.tutlex:5),*/
-                            top: evt.screenY,/*pageY + (options.settings.tutley?options.settings.tutley:35),*/
+                            left: evt.offsetX,/*pageX + (options.settings.tutlex?options.settings.tutlex:5),*/
+                            top: evt.offsetY,/*pageY + (options.settings.tutley?options.settings.tutley:35),*/
                             display: "inline"
                         });
                     }
