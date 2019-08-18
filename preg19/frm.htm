@@ -270,7 +270,7 @@
 				"showLegend":true,
 				"noDataColor":"#808080",
 				"oppositCol" : lnk.obr==1,
-				tutley: $("#chartTitle").height()+25,//18*tutley,
+				tutley: function(){return $("#chartTitle").height()+25;}(),//18*tutley,
 				tutlex: 15
 			}
 		});
