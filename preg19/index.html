@@ -55,7 +55,8 @@
 	                    <div id="Table">
                     No options for table
                 </div></div>
-	    <br/>
+		<input type="checkbox" id="dush" name="dush" value="dush" /><label for="dush">Разделить на численность населения</label><br/>
+		<br/>
 Ссылка: <input id="link" type="text" size="50" class="autoselect" readonly="" value=""/>
 <br/>
 HTML-код: <input id="exportHTML" type="text" size="50" class="autoselect" readonly="" value=""/>
@@ -173,6 +174,8 @@ Copyright (c) 2019 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><br/>
 					$('#obr').prop('checked', true);
 				if(lnk.okr == 1)
 					$('#okr').prop('checked', true);
+				if(lnk.dush == 1)
+					$('#dush').prop('checked', true);
 				
 			}
 			fillPars();
@@ -238,6 +241,9 @@ Copyright (c) 2019 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><br/>
 		makeChart();
 	});
 	
+	$("#dush").change(function() {
+		makeChart();
+	});
 	
 	$("#regs").change(function() {
 		makeChart();
@@ -266,7 +272,8 @@ Copyright (c) 2019 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><br/>
 			pars: pars,
 			//obr: $("#obr").prop('checked') ? 1 : 0,
 			vt: vistype.value,
-			mapa: mapa.value
+			mapa: mapa.value,
+			dush: $("#dush").prop('checked') ? 1 : 0
 		};
 		if(lnk.vt == "Map"){
 			lnk.obr = $("#obr").prop('checked') ? 1 : 0;
