@@ -253,6 +253,7 @@
 		};
 		var str = linkEncode(lnk);
 		link.value = location.protocol + "//" + location.host + location.pathname + "?" + str;
+		window.history.pushState("", "", location.pathname + "?" + str);//'/newpage');
 		var st = '' + obj.series[0].name;
 		try{
 			YaShareInstance.updateShareLink(link.value,st);
