@@ -71,7 +71,9 @@ function doit(){
 				var dt = mas[2].split('.');
 				var d = new Date(dt[2],dt[1]-1,dt[0]);
 				if(d < curDate)
-					$(svgd.getElementById(mas[0])).css({stroke:"green"});
+					$(svgd.getElementById(mas[0])).css({stroke:"#00a600"});
+				else
+					$(svgd.getElementById(mas[0])).css({stroke:"gray"});
                 $(svgd.getElementById(mas[0])).mousedown(function(evt) {
 					var t = tab[this.id][1] + "<br/> Ожидаемая дата открытия: " + tab[this.id][2];
                     show_tooltip(t, evt);
