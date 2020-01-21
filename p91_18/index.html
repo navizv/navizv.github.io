@@ -1,0 +1,296 @@
+﻿<html><meta http-equiv="Content-type: text/html; charset=UTF-8">
+<meta property="og:image" content="http://navizv.github.io/p91_17/img.png" />
+<meta property="og:image:width" content="120" />
+<meta property="og:image:height" content="100" />
+<meta property="og:title" content="Социально-экономические показатели Российской Федерации в 1991-2018 гг.">
+<meta property="og:description" content="Социально-экономические показатели Российской Федерации в 1991-2018 гг." />
+<meta property="og:url" content="http://navizv.github.io/p91_17/" />
+<meta property="og:locale" content="ru_RU" />
+    <head>
+        <title>
+            Социально-экономические показатели Российской Федерации в 1991-2018 гг.
+        </title>
+
+        <script src="../libs/js/jquery.min.js"></script>
+        <script src="../libs/js/highcharts.js"></script>
+		<script src="../libs/js/exporting.js"></script>
+        <script type="text/javascript" src="https://yastatic.net/share/share.js" charset="utf-8"></script> 
+
+        <style>
+        </style>
+    </head>
+    <body>
+	<select name="sod" id="sod">
+</select>
+	<table border="1">
+<tr><td valign="top">
+<select multiple id="pars" name="pars" style="width: 400px;overflow-x: scroll" size="30">
+</select>
+</td><td>
+<div id="chartContainer"  style="height: 500px;width: 1000px;"></div>
+</td></tr>
+</table>
+<input type="checkbox" id="zero" name="zero" value="zero" /><label for="zero">Начало вертикальной оси в нуле</label><br/>
+Ссылка: <input id="link" type="text" size="50" class="autoselect" readonly="" value=""/>
+<br/>
+<br/>
+<div id="ya_share"></div>
+<br/>
+<hr/>
+
+Источник данных: <a href="https://www.gks.ru/folder/210/document/13396" target="_blank">Росстат, приложение к Российскому статистическому ежегоднику</a>
+<script>
+	var YaShareInstance;
+	try{
+		YaShareInstance	= new Ya.share({
+            element: 'ya_share',
+		image: "http://navizv.github.io/rustat/pre.png"});
+	}catch{}
+	Highcharts.setOptions({
+                    lang: {
+                        loading: 'Загрузка...',
+                        months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                        weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+                        shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+                        exportButtonTitle: "Экспорт",
+                        printButtonTitle: "Печать",
+                        rangeSelectorFrom: "С",
+                        rangeSelectorTo: "По",
+                        rangeSelectorZoom: "Период",
+                        downloadPNG: 'Скачать PNG',
+                        downloadJPEG: 'Скачать JPEG',
+                        downloadPDF: 'Скачать PDF',
+                        downloadSVG: 'Скачать SVG',
+                        printChart: 'Распечатать диаграмму',
+                        thousandsSep: " ",
+                        decimalPoint: ',',
+                        numericSymbols: [" тыс."," млн."," млрд."," трлн."," квдр."," квнт."]
+                    }
+                });
+	
+	var rzd = "r01";
+	var pars = ["3"];
+	var tab = [];
+	
+	$.ajax({//заполняем вып.список оглавлением
+        type: "GET",
+        url: "data/Содержание.csv",
+        dataType: "text",
+        success: function(sod) {
+			var lines = sod.split(/\r\n|\n/);
+			for(i in lines){
+				var line = lines[i].split(';');
+				var zid = line[0];
+				var znm = line[1];
+				$('#sod').append($("<option></option>")
+                    .attr("value",zid)
+                    .text(znm)); 
+			}
+			
+			if (location.search != "") {
+				var lnk = linkDecode(location.search.substring(1));
+				$('#sod option[value=\"'+lnk.rzd+'\"]').attr('selected','selected');
+				pars = lnk.pars;
+				if(lnk.zero == 1)
+					$('#zero').prop('checked', true);
+			}
+			fillPars();
+		}
+    });
+	
+	$("#sod").change(function() {
+		pars = [];
+		fillPars();
+	});
+	
+	function fillPars(){ //заполняем параметры
+		tab = [];
+		$('#pars').html("");
+		rzd = $( "#sod" ).val();
+		$.ajax({//заполняем вып.список оглавлением
+			type: "GET",
+			url: "data/" + rzd + ".csv",
+			dataType: "text",
+			success: function(sod) {
+				var lines = sod.split(/\r\n|\n/);
+				for(i in lines){
+					if(i < 3)continue;
+					
+					var line = lines[i].split(';');
+					var zid = i;
+					var znm = line[0];
+					if(znm.charAt(0) == '\"')
+						znm = znm.slice(1);
+						
+					var opt = $("<option></option>")
+						.attr("value",zid)
+						.attr("title",znm)
+						.text(znm);
+					$('#pars').append(opt); 
+					tab[i] = [];
+					var empty = true;
+					for(j in line){
+						tab[i][j] = line[j];
+						if(tab[i][j]!="" && j != 0)
+							empty = false;
+					}
+					if(empty)
+						opt.css('font-style', 'italic').css('font-weight', 'bold');
+					else if(parseInt(i)<lines.length-1 && lines[parseInt(i)+1] != undefined && lines[parseInt(i)+1].slice(0,12) == "в том числе:")
+						opt.css('font-weight', 'bold');
+					
+					if($.inArray(i,pars) >= 0)
+						opt.attr('selected','selected');
+				}
+				if(pars.length > 0)
+					makeChart();
+			}
+		});
+	}
+	
+	$("#pars").change(function() {
+		makeChart();
+	});
+	
+	$("#zero").change(function() {
+		makeChart();
+	});
+	
+	function makeChart(){ //строим диаграмму
+		var obj = {
+			chart: {
+				renderTo: document.getElementById("chartContainer"),
+				type: "line"
+			},
+			title: {
+				text: "Социально-экономические показатели Российской Федерации в 1991-2018 гг.",
+				style: {
+					width: "950px"   
+				}
+			},
+			series: [],
+			legend: {
+				//layout: 'vertical',
+				//align: 'bottom',
+				//verticalAlign: 'middle'
+		//		width: 600
+				//align: 'right',
+        verticalAlign: 'bottom',
+        layout: 'vertical',
+        itemStyle: {
+            width: "950px"   
+        }
+			},
+			yAxis: {
+				title: {
+					text: '',
+					
+				},
+				//type: 'logarithmic'
+				//minorTickInterval: 0.1
+			}
+		};
+		obj.xAxis = {categories: []};
+		if($("#zero").prop('checked'))
+			obj.yAxis.min = 0;
+		else
+			obj.yAxis.min = undefined;
+        for (i = 1991; i <= 2018; i++)
+            obj.xAxis.categories.push(i);
+	
+		pars = [];
+		
+		$("#pars > option:selected").each(function() {
+			var series = {
+				name: $(this).text(),
+				data: []
+			};
+			var i = $(this).val();
+			var flagFilled = false;
+			for(j in tab[i]){
+				if(j == 0 || j > 28)
+					continue;
+				var str = tab[i][j].replace(',','.');
+				while(str.length > 2 && str[str.length-1] == ')' && '0123456789'.indexOf(str[str.length-2]) !== -1){
+				//избавляемся от сносок в значениях (в рыболовстве, например, такое есть)
+					str = str.substring(0,str.length-2);
+					if(str[str.length-1] == ',')
+						str = str.substring(0,str.length-1);
+				}
+				var c = parseFloat(str);
+				if(isNaN(c))
+					c = null;
+				else
+					flagFilled = true;
+				series.data.push(c);
+			}
+			if(!flagFilled){
+				series.lineWidth = 0;
+				series.color = '#FFFFFF';
+			}else{
+				//var sn = series.name.indexOf(')')
+				//if(sn > 1 && '0123456789'.indexOf(series.name[sn-1]) !== -1){
+					//series.name = series.name.slice(0,sn-1) + '<font color="red">' + series.name.slice(sn-1,sn+1) + '</font>' 
+					//+ series.name.slice(sn+2,series.name.length);
+				//}
+			}
+			
+			obj.series.push(series);
+			pars.push(i);
+		});
+		
+		if(pars.length == 1){
+			obj.title.text = tab[pars[0]][0];
+			obj.legend.enabled = false;
+		}
+	
+		var chart = new Highcharts.Chart(obj);
+		
+		var lnk = {
+			rzd: rzd,
+			pars: pars,
+			zero: $("#zero").prop('checked') ? 1 : 0
+		};
+		var str = linkEncode(lnk);
+		link.value = location.protocol + "//" + location.host + location.pathname + "?" + str;
+		window.history.pushState("", "", location.pathname + "?" + str);//'/newpage');
+		var st = '' + obj.series[0].name;
+		try{
+			YaShareInstance.updateShareLink(link.value,st);
+		}catch{}
+	}
+	
+
+	$(".autoselect").click(function() {
+        this.focus();
+        this.setSelectionRange(0, 9999);
+    });
+    if (navigator.userAgent.match(/iPod|iPhone|iPad/i))
+        $(".autoselect").removeAttr("readonly"); //иначе не выделяет
+		
+	function linkEncode(obj){
+		var str = "";
+		$.each(obj,function (f,v){
+			if(str!="")
+				str+="&";
+			//v-massive???
+			if(f=="pars"||f=="regs"||f=="dops")
+				v = v.join("_").replace(/\//g,"\*");
+			str+=f+"="+encodeURIComponent(v);
+		});
+		return str;
+	}
+
+	function linkDecode(str){
+		var obj = {};
+		$.each(str.split("&"), function (i,v){
+			var p = v.split("=");
+			obj[p[0]] = decodeURIComponent(p[1]);
+			if(p[0]=="pars"||p[0]=="regs"||p[0]=="dops")
+				obj[p[0]] = obj[p[0]].replace(/\*/g,"\/").split("_");
+		});
+		return obj;
+	}
+</script>
+</body>
+</html>
