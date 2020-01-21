@@ -1,0 +1,335 @@
+﻿<html><meta http-equiv="Content-type: text/html; charset=UTF-8">
+    <head>
+        <title>
+            
+        </title>
+<link rel="stylesheet" href="/libs/jstree/themes/default/style.min.css" />
+<link rel="stylesheet" href="css/jquery-ui.css"/>
+        <script src="../libs/js/jquery.min.js"></script>
+        <script src="../libs/jstree/jstree.min.js"></script>
+        <script src="../libs/js/highcharts.js"></script>
+        <script src="../libs/js/exporting.js"></script>
+       	<script src="../libs/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="../libs/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="../libs/zimap/zimap.js"></script>
+        <script src="../libs/zimap/zivis.js"></script>
+		
+
+        <!--script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script> 
+        <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/StackBlur.js"></script>
+        <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script--> 
+	<!--script type="text/javascript" src="https://yastatic.net/share/share.js" charset="utf-8"></script--> 
+
+        <style>
+        </style>
+    </head>
+    <body>
+	<div id="chartTitle"></div><br/>
+    <div id="container"></div><br/>
+    <div id="footer"></div>
+	<script>
+		var lnk = {};
+		var tutley = 0;
+		var dush = {};
+		$(function(){
+			if (location.search != "") {
+				lnk = linkDecode(location.search.substring(1));
+				var pars = lnk.pars;
+				pars[0] = $.trim(pars[0] );
+				if(lnk.dush==1){
+					readDush();
+				}
+	for(var ti=0;ti<2;ti++){		
+	$.ajax({//заполняем данные
+			type: "GET",
+			url: ti==0?"data/" + pars[0] + ".csv":"data/" + pars[0] + "csv",
+			dataType: "text",
+			error: function (jqXHR, exception) {},
+            		statusCode: { 404: function() {
+                   //alert("page not found");
+               }
+            },
+			success: function(sod) {
+				var lines = sod.split(/\r\n|\n/);
+				var first = true;
+				var str = "";
+				var jm = 999999;
+				var title = "";
+				var ztitle = "";
+				var footer = "";
+				var fpart =  "";
+				var years = [];
+				var tmps;
+				tutley = 0;
+				for(i in lines){
+					//if(i < 3)continue;
+					
+					var line = lines[i].split(';');
+					var zid = i;
+					var znm = line[0];
+					//if(znm.charAt(0) == '\"')
+						//znm = znm.slice(1);
+					
+					if(znm!="" && first){
+						var tlin = znm;
+						for(j in line){
+							if(line[j] == "" || line[j] == " ")
+								break;
+							if(j!=0)
+								tlin = tlin + "; " + line[j];
+						}
+						if(tlin[0] == "\""){
+							tlin = tlin.slice(1,tlin.length-1);
+						}
+						if(tlin.includes(pars[0])){
+							ztitle = tlin;
+						}
+						title = title + tlin + "<br/>";
+						tutley++;
+						continue;
+					}
+					
+					
+					for(j in line){
+						//if(first){
+						//	jm = 1 + j;
+						//}
+						if(!first && j == jm){
+							break;
+						}
+						if(first && j > 0 && line[j]==""){
+							jm = j;
+							break;
+						}
+						
+						if(j==0){
+							tmps = line[j];
+							if(tmps[0]=="\""){
+								tmps = tmps.slice(1);//.replace(/\n/g, ' ').replace(/\r/g, ' ');
+								fpart = tmps;
+								break;
+							}
+							if(fpart!=""){
+								tmps = tmps.slice(0,tmps.length-1);
+								tmps = fpart + ' ' +tmps;
+								fpart = ""
+							}
+							tmps = tmps.replace(/p/gi,"р").replace(/o/gi,"о").replace(/e/gi,"е").replace(/–/gi,"-")
+								.replace(/x/gi,"х").replace(/c/gi,"с").replace(/\s+/g, ' ').trim();
+							if(tmps.length > 2 && tmps[1] == ')' && '0123456789'.indexOf(tmps[0]) !== -1){
+								footer = (footer=="")? tmps : footer + '<br/>' + tmps;
+								break;
+							}
+							if(!first && lnk.vt=="Chart" && !($.inArray(tmps,lnk.regs) >= 0))
+								break;
+							if(!first && lnk.vt=="Map"){
+								if(lnk.okr==1){
+									if(tmps=="Архангельская область без автономного округа" || tmps=="Тюменская область без автономных округов")
+										break;
+								}else{
+									if(tmps=="Архангельская область" || tmps=="Тюменская область")
+										break;
+								}
+							}
+							if(!first && tmps == "")
+								break;
+							if(!first)
+								str = str + "\n" + tmps;
+							else
+								str = tmps;
+							while(tmps.length > 2 && tmps[tmps.length-1] == ')' && '0123456789'.indexOf(tmps[tmps.length-2]) !== -1){
+								//избавляемся от сносок в значениях (в рыболовстве, например, такое есть)
+								tmps = tmps.substring(0,tmps.length-2);
+								if(tmps[tmps.length-1] == ',')
+									tmps = tmps.substring(0,tmps.length-1);
+							}
+						}else{
+							var strt = line[j];
+							while(strt.length > 2 && strt[strt.length-1] == ')' && '0123456789'.indexOf(strt[strt.length-2]) !== -1){
+								//избавляемся от сносок в значениях (в рыболовстве, например, такое есть)
+								strt = strt.substring(0,strt.length-2);
+								if(strt[strt.length-1] == ',')
+									strt = strt.substring(0,strt.length-1);
+							}
+							if(first){
+								years[j] = strt;
+							}else if(lnk.dush==1){
+								if(dush[tmps]!=undefined){
+									strt = parseFloat(strt) / parseFloat(dush[tmps][years[j]]);
+									strt = strt.toFixed(5);
+								}else
+									strt = undefined;
+							}
+							str = str + "\t" + strt;
+							
+						}
+						
+					}
+					first = false;
+				}
+				str = str + "\n";
+				$("#footer").html(footer);
+				if(lnk.dush==1){
+					title = title + "<i><b>(Показатель разделён на среднегодовую численность населения, тыс.чел.)</b></i><br/>";
+				}
+				$("#chartTitle").html(title);
+				window.document.title = ztitle;
+				drawMap(str);
+			}
+		});
+		}
+		}else return;
+		
+		});
+	
+		
+	function drawMap(str){
+		$("#container").zivis({
+			"data":{
+				"str": str,
+				"colsep":"\t",
+				"rowsep":"\n",
+				"colnum":1,
+				"rowstnum":1,
+				"title":"",
+				"transpose":false
+			},
+			"settings":{
+				"vistype":lnk.vt,
+				map: (lnk.mapa=="fo") ? "russia_fo_kr2" : "russia_kr_names",
+				tutle:true,
+				"chartType":"line",
+				"type":"Gradient",
+				"showLegend":true,
+				"noDataColor":"#808080",
+				"oppositCol" : lnk.obr==1,
+				tutley: function(){return $("#chartTitle").height()+25;}(),//18*tutley,
+				tutlex: 15
+			}
+		});
+	}
+	
+	function readDush(){
+	$.ajax({//заполняем данные
+			type: "GET",
+			url: "data/1.2..csv",
+			dataType: "text",
+			error: function (jqXHR, exception) {},
+            		statusCode: { 404: function() {
+                   //alert("page not found");
+               }
+            },
+			async: false,
+			success: function(sod) {
+				var lines = sod.split(/\r\n|\n/);
+				var first = true;
+				var str = "";
+				var jm = 999999;
+				var title = "";
+				var ztitle = "";
+				var footer = "";
+				var fpart =  "";
+				var tmps;
+				var years = [];
+				for(i in lines){
+					//if(i < 3)continue;
+					
+					var line = lines[i].split(';');
+					var zid = i;
+					var znm = line[0];
+					
+					if(znm!="" && first)
+						continue;
+						
+					for(j in line){
+						if(!first && j == jm){
+							break;
+						}
+						if(first && j > 0 && line[j]==""){
+							jm = j;
+							break;
+						}
+						
+						if(j==0){
+							tmps = line[j];
+							if(tmps[0]=="\""){
+								tmps = tmps.slice(1);//.replace(/\n/g, ' ').replace(/\r/g, ' ');
+								fpart = tmps;
+								break;
+							}
+							if(fpart!=""){
+								tmps = tmps.slice(0,tmps.length-1);
+								tmps = fpart + ' ' +tmps;
+								fpart = ""
+							}
+							tmps = tmps.replace(/p/gi,"р").replace(/o/gi,"о").replace(/e/gi,"е").replace(/–/gi,"-")
+								.replace(/x/gi,"х").replace(/c/gi,"с").replace(/\s+/g, ' ').trim();
+							if(tmps.length > 2 && tmps[1] == ')' && '0123456789'.indexOf(tmps[0]) !== -1){
+								break;
+							}
+							if(!first && lnk.vt=="Chart" && !($.inArray(tmps,lnk.regs) >= 0))
+								break;
+							if(!first && lnk.vt=="Map"){
+								if(lnk.okr==1){
+									if(tmps=="Архангельская область без автономного округа" || tmps=="Тюменская область без автономных округов")
+										break;
+								}else{
+									if(tmps=="Архангельская область" || tmps=="Тюменская область")
+										break;
+								}
+							}
+							if(!first && tmps == "")
+								break;
+							if(!first)
+								str = str + "\n" + tmps;
+							else
+								str = tmps;
+							dush[tmps] = [];
+						}else{
+							var strt = line[j];
+							while(strt.length > 2 && strt[strt.length-1] == ')' && '0123456789'.indexOf(strt[strt.length-2]) !== -1){
+								//избавляемся от сносок в значениях (в рыболовстве, например, такое есть)
+								strt = strt.substring(0,strt.length-2);
+								if(strt[strt.length-1] == ',')
+									strt = strt.substring(0,str.length-1);
+							}
+							//str = str + "\t" + strt;
+							if(first){
+								years[j] = strt;
+							}else{
+								dush[tmps][years[j]] = strt;
+							}
+						}
+						
+					}
+					first = false;
+				}
+				}
+		});
+	}
+		
+	function linkEncode(obj){
+		var str = "";
+		$.each(obj,function (f,v){
+			if(str!="")
+				str+="&";
+			//v-massive???
+			if(f=="pars"||f=="regs"||f=="dops")
+				v = v.join("_").replace(/\//g,"\*");
+			str+=f+"="+encodeURIComponent(v);
+		});
+		return str;
+	}
+	function linkDecode(str){
+		var obj = {};
+		$.each(str.split("&"), function (i,v){
+			var p = v.split("=");
+			obj[p[0]] = decodeURIComponent(p[1]);
+			if(p[0]=="pars"||p[0]=="regs"||p[0]=="dops")
+				obj[p[0]] = obj[p[0]].replace(/\*/g,"\/").split("_");
+		});
+		return obj;
+	}
+		</script>
+		</body>
+		</html>
