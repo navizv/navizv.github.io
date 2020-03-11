@@ -1,0 +1,172 @@
+﻿<html><meta http-equiv="Content-type: text/html; charset=UTF-8">
+    <head>
+        <title>
+            
+        </title>
+<link rel="stylesheet" href="/libs/jstree/themes/default/style.min.css" />
+<link rel="stylesheet" href="css/jquery-ui.css"/>
+        <script src="../libs/js/jquery.min.js"></script>
+        <script src="../libs/jstree/jstree.min.js"></script>
+        <script src="../libs/js/highcharts.js"></script>
+        <script src="../libs/js/exporting.js"></script>
+       	<script src="../libs/js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="../libs/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="../libs/zimap/zimap.js"></script>
+        <script src="../libs/zimap/zivis.js"></script>
+		
+
+        <!--script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script> 
+        <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/StackBlur.js"></script>
+        <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script--> 
+	<!--script type="text/javascript" src="https://yastatic.net/share/share.js" charset="utf-8"></script--> 
+
+        <style>
+        </style>
+    </head>
+    <body>
+	<div id="chartTitle"></div><br/>
+    <div id="container"></div><br/>
+    <div id="footer"></div>
+	<script>
+		var lnk = {};
+		var tutley = 0;
+		var dush = {};
+		var par = "";
+		$(function(){
+			if (location.search != "") {
+				lnk = linkDecode(location.search.substring(1));
+				par = lnk.par;
+	$.ajax({//заполняем данные
+			type: "GET",
+			url: "data/" + par + ".csv",
+			dataType: "text",
+			error: function (jqXHR, exception) {},
+            		statusCode: { 404: function() {
+                   //alert("page not found");
+               }
+            },
+			success: function(sod) {
+				var lines = sod.split(/\r\n|\n/);
+				var first = true;
+				var str = "";
+				var jm = 999999;
+				var title = "";
+				var footer = "";
+				var fpart =  "";
+				var conm = [];
+				var tmps;
+				
+				for(i in lines){
+					var line = lines[i].split(';');
+					
+					if(line[0]!=lnk.coun){
+						continue;
+					}
+					
+					for(j in line){
+						conm.push(line[j]);
+					}
+				}
+				
+				
+				for(i in lines){
+					var line = lines[i].split(';');
+
+					var znm = line[0];
+					
+					if(znm!="" && first){
+						title = znm;
+					}
+					
+					for(j in line){
+						if(j==0){
+							tmps = line[j];
+							if(!first)
+								str = str + "\n" + tmps;
+							else
+								str = tmps;
+						}else{
+							var strt = line[j];
+							if(!first)
+								strt = Math.round(parseFloat(line[j])/parseFloat(conm[j])*10000)/100;
+							str = str + "\t" + strt;
+						}
+						
+					}
+					first = false;
+				}
+				str = str + "\n";
+				$("#chartTitle").html(title+"<br/>Compared to " + lnk.coun);
+				window.document.title = title;
+				drawMap(str);
+			}
+		});
+		}else return;
+		
+		});
+	
+		
+	function drawMap(str){
+		$("#container").zivis({
+			"data":{
+				"str": str,
+				"colsep":"\t",
+				"rowsep":"\n",
+				"colnum":1,
+				"rowstnum":1,
+				"title":"",
+				"transpose":false
+			},
+			"settings":{
+				"vistype":"Map",
+				map: "world3",
+				tutle:true,
+				"chartType":"line",
+				"type":"Block",
+				scales:[-10000000000,100-lnk.dif,100-(-lnk.dif),10000000000],
+				colors:lnk.obr==1?["#0044a8","#aa81ff","#ff5556"]:["#ff5556","#aa81ff","#0044a8"],
+				"showLegend":true,
+				"noDataColor":"#808080",
+				tutley: function(){return $("#chartTitle").height()+25;}(),//18*tutley,
+				tutlex: 15,
+				onLoad: function(){
+					var svgd = document.getElementsByTagName('object')[0].contentDocument;
+					svgd.getElementById("tcol0").textContent = "more";
+					svgd.getElementById("tcol1").textContent = "same ±"+lnk.dif+"%";
+					svgd.getElementById("tcol2").textContent = "less";
+					svgd.getElementById("tcol3").textContent = "";
+					svgd.getElementById("tcol0").setAttribute("y",150);
+					svgd.getElementById("tcol1").setAttribute("y",250);
+					svgd.getElementById("tcol2").setAttribute("y",350);
+					svgd.getElementById("mylink").textContent = "Countries comparator, https://navizv.github.io/councom";
+					svgd.getElementById("mylink").parentNode.setAttribute("xlink:href","https://navizv.github.io/councom");
+				}
+			}
+		});
+	}
+		
+	function linkEncode(obj){
+		var str = "";
+		$.each(obj,function (f,v){
+			if(str!="")
+				str+="&";
+			//v-massive???
+			if(f=="pars"||f=="regs"||f=="dops")
+				v = v.join("_").replace(/\//g,"\*");
+			str+=f+"="+encodeURIComponent(v);
+		});
+		return str;
+	}
+	function linkDecode(str){
+		var obj = {};
+		$.each(str.split("&"), function (i,v){
+			var p = v.split("=");
+			obj[p[0]] = decodeURIComponent(p[1]);
+			if(p[0]=="pars"||p[0]=="regs"||p[0]=="dops")
+				obj[p[0]] = obj[p[0]].replace(/\*/g,"\/").split("_");
+		});
+		return obj;
+	}
+		</script>
+		</body>
+		</html>

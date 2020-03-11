@@ -48,8 +48,8 @@ CX;Christmas Island
 CC;Cocos (Keeling) Islands
 CO;Colombia
 KM;Comoros
-CG;^Congo$;Congo, REPUBLIC OF THE
-CD;Congo, the Democratic Republic of the; Congo;Congo, DEMOCRATIC REPUBLIC OF THE
+CG;^Congo$;Congo, REPUBLIC OF THE;Congo, Republic of 
+CD;Congo, the Democratic Republic of the; Congo;Congo, DEMOCRATIC REPUBLIC OF THE;Congo, Dem. Rep. of the
 CK;Cook Islands
 CR;Costa Rica
 CI;C?te d'Ivoire
@@ -211,7 +211,7 @@ LK;Sri Lanka
 SD;Sudan
 SR;Suriname
 SJ;Svalbard and Jan Mayen
-SZ;Swaziland
+SZ;Swaziland;Eswatini
 SE;Sweden
 CH;Switzerland
 SY;Syria

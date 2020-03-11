@@ -32,8 +32,7 @@
                 mapFolder: "/libs/zimap/maps",
                 showLegend: true,
                 noDataColor: '#808080',
-				oppositCol : false,
-				onLoad: null
+				oppositCol : false
             },
             map: {
                 isos: "",
@@ -139,11 +138,6 @@
                     spn.html(table[0][cur]);
                     zimap.setColumn(cur);
 					self.options.map.cur = cur;
-					
-					if(options.settings.onLoad!=null)
-						options.settings.onLoad();
-					
-					
                 }).appendTo(self.element)
                         .trigger("slide");
                 self.options.map = options.map;
@@ -178,8 +172,6 @@
                         }
                     });
                 }
-				if(options.settings.onLoad!=null)
-					options.settings.onLoad();
             });
         },
         _drawChart: function() {
