@@ -2130,4 +2130,29 @@
          y="294.3273"
          style="stroke-width:0.26458332">Грузия</tspan></text>
   </g>
+  
+  <rect id="leg0" y="200" width="0" height="0"/>
+<rect id="leg1" width="0" height="0"/>
+<rect id="leg2" width="0" height="0"/>
+<rect id="leg3" width="0" height="0"/>
+<rect id="leg4" width="0" height="0"/>
+<rect id="leg5" width="0" height="0"/>
+<rect id="leg6" width="0" height="0"/>
+<rect id="leg7" width="0" height="0"/>
+<rect id="leg8" width="0" height="0"/>
+<rect id="leg9" width="0" height="0"/>
+<text style="font-size:20px" id="tcol0"></text>
+<text style="font-size:20px" id="tcol1"></text>
+<text style="font-size:20px" id="tcol2"></text>
+<text style="font-size:20px" id="tcol3"></text>
+<text style="font-size:20px" id="tcol4"></text>
+<text style="font-size:20px" id="tcol5"></text>
+<text style="font-size:20px" id="tcol6"></text>
+<text style="font-size:20px" id="tcol7"></text>
+<text style="font-size:20px" id="tcol8"></text>
+<text style="font-size:20px" id="tcol9"></text>
+<a xlink:href="http://navizv.github.io/zimm/" target="new">
+<text style="font-size:15px;fill:blue;text-decoration:underline" id="mylink" x="950" y="600">http://navizv.github.io/zimm/</text>
+</a>
+
 </svg>
