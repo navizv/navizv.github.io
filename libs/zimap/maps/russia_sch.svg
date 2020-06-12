@@ -932,7 +932,11 @@
        d="m 50,157 v -18 h 15 l -10e-7,18 z"
        id="path5091"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-NGR">
+      <title
+         id="title6214">Новгородская область</title>
+    </path>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -1096,7 +1100,11 @@
        d="m 121,212 v -17 h 7 v 17 z"
        id="path5153"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-UD">
+      <title
+         id="title6212">Удмуртия</title>
+	</path>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -1176,7 +1184,11 @@
        d="m 50,139 v -19 h 63.5 v 29 H 77.999999 v 13 h -13 v -23 z"
        id="path5183"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccc" />
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:label="RU-VLG">
+      <title
+         id="title6216">Вологодская область</title>
+    </path>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
