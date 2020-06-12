@@ -1,0 +1,2133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="RUS.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5291">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop5287" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop5289" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5291"
+       id="linearGradient5293"
+       x1="167.86771"
+       y1="172"
+       x2="184.13229"
+       y2="172"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="208.58593"
+     inkscape:cy="94.534918"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-87)">
+    <path
+       style="fill:#eaeaea;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 23,297 v -9 h 79 v -54 h 194.00001 v 63 z"
+       id="path5521"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#eaeaea;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 0,89.000005 H 23 V 297 H 0 Z"
+       id="path5519"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 23,129 h 27 v 21 H 23 v -5 h 21 v -8 h -9 v -1.5 H 23 Z"
+       id="RU-LEN"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:label="RU-LEN">
+      <title
+         id="title4727">Ленинградская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="M 23,129 H 50 V 109 H 23 Z"
+       id="RU-KR"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KR">
+      <title
+         id="title4725">Карелия</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="M 23,109 H 50 V 89.000005 H 23 Z"
+       id="RU-MUR"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-MUR">
+      <title
+         id="title4723">Мурманская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 23,150 h 27 v 17 H 23 Z"
+       id="RU-PSK"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-PSK">
+      <title
+         id="title4731">Псковская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 23,167 h 27 v 17 H 23 Z"
+       id="RU-SMO"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-SMO">
+      <title
+         id="title4735">Смоленская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 23,184 h 27 v 16 H 23 Z"
+       id="RU-BRY"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-BRY">
+      <title
+         id="title4739">Брянская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 23,200 h 27 v 24 h -5 v -7 H 23 Z"
+       id="RU-KRS"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-KRS">
+      <title
+         id="title4743">Курская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 23,217 h 21.999999 v 15 H 23 Z"
+       id="RU-BEL"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-BEL">
+      <title
+         id="title4747">Белгородская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="M 44.999999,224 H 50 v 26 H 23 v -18 h 21.999999 z"
+       id="RU-VOR"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-VOR">
+      <title
+         id="title4751">Воронежская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 23,250 h 27 v 17 H 23 Z"
+       id="RU-ROS"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-ROS">
+      <title
+         id="title4755">Ростовская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 23,267 h 27 v 21 H 36 V 274 H 23 Z"
+       id="RU-KDA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-KDA">
+      <title
+         id="title4759">Краснодарский край</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 23,274 h 12.999999 v 14 H 29 v -7 h -6 z"
+       id="RU-KM"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-KM">
+      <title
+         id="title4973">Республика Крым</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 23,281 h 6 v 7 h -6 z"
+       id="RU-SEV"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-SEV">
+      <title
+         id="title4765">Севастополь</title>
+    </path>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 34.999998,137 44,137 v 8 h -9 l -2e-6,-8.5"
+       id="RU-SPE"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-SPE">
+      <title
+         id="title4771">Санкт-Петербург</title>
+    </path>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 23,135.5 12,0 -2e-6,9.5 H 23 v -9.5"
+       id="RU-KGD"
+       inkscape:connector-curvature="0"
+       inkscape:label="RU-KGD"
+       sodipodi:nodetypes="ccccc">
+      <title
+         id="title4775">Калининградская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="31.404167"
+       y="100.156"
+       id="text4811"><tspan
+         sodipodi:role="line"
+         id="tspan4809"
+         x="31.404167"
+         y="100.156"
+         style="stroke-width:0.26458332">МУР</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="24.179783"
+       y="142.00467"
+       id="text4815"><tspan
+         sodipodi:role="line"
+         id="tspan4813"
+         x="24.179783"
+         y="142.00467"
+         style="stroke-width:0.26458332">КГД</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="36.45924"
+       y="142.46094"
+       id="text4819"><tspan
+         sodipodi:role="line"
+         id="tspan4817"
+         x="36.45924"
+         y="142.46094"
+         style="stroke-width:0.26458332">СП</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="38.608139"
+       y="134.59909"
+       id="text4823"><tspan
+         sodipodi:role="line"
+         id="tspan4821"
+         x="38.608139"
+         y="134.59909"
+         style="stroke-width:0.26458332">ЛО</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="30.735994"
+       y="121.00303"
+       id="text4827"><tspan
+         sodipodi:role="line"
+         id="tspan4825"
+         x="30.735994"
+         y="121.00303"
+         style="stroke-width:0.26458332">КАР</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="29.666916"
+       y="160.29164"
+       id="text4831"><tspan
+         sodipodi:role="line"
+         id="tspan4829"
+         x="29.666916"
+         y="160.29164"
+         style="stroke-width:0.26458332">ПСК</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="29.132378"
+       y="176.99599"
+       id="text4835"><tspan
+         sodipodi:role="line"
+         id="tspan4833"
+         x="29.132378"
+         y="176.99599"
+         style="stroke-width:0.26458332">СМО</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="29.132378"
+       y="193.38721"
+       id="text4839"><tspan
+         sodipodi:role="line"
+         id="tspan4837"
+         x="29.132378"
+         y="193.38721"
+         style="stroke-width:0.26458332">БРЯ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="29.288942"
+       y="209.80135"
+       id="text4843"><tspan
+         sodipodi:role="line"
+         id="tspan4841"
+         x="29.288942"
+         y="209.80135"
+         style="stroke-width:0.26458332">КУР</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.786825"
+       y="226.32063"
+       id="text4847"><tspan
+         sodipodi:role="line"
+         id="tspan4845"
+         x="28.786825"
+         y="226.32063"
+         style="stroke-width:0.26458332">БЕЛ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="28.196934"
+       y="243.1452"
+       id="text4851"><tspan
+         sodipodi:role="line"
+         id="tspan4849"
+         x="28.196934"
+         y="243.1452"
+         style="stroke-width:0.26458332">ВОР</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="27.79603"
+       y="259.84955"
+       id="text4855"><tspan
+         sodipodi:role="line"
+         id="tspan4853"
+         x="27.79603"
+         y="259.84955"
+         style="stroke-width:0.26458332">РОС</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="37.737251"
+       y="274.26727"
+       id="text4859"><tspan
+         sodipodi:role="line"
+         id="tspan4857"
+         x="37.737251"
+         y="274.26727"
+         style="stroke-width:0.26458332">КРА</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="24.598244"
+       y="286.13449"
+       id="text4863"><tspan
+         sodipodi:role="line"
+         id="tspan4861"
+         x="24.598244"
+         y="286.13449"
+         style="stroke-width:0.26458332">С</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="24.202711"
+       y="279.66367"
+       id="text4867"><tspan
+         sodipodi:role="line"
+         id="tspan4865"
+         x="24.202711"
+         y="279.66367"
+         style="stroke-width:0.26458332">КРЫ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26100206px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 37.399207,278.24466 H 49 v 5.87993 H 37.399634 Z"
+       id="RU-AD"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-AD">
+      <title
+         id="title4881">Адыгея</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="37.603619"
+       y="282.78827"
+       id="text4877"><tspan
+         sodipodi:role="line"
+         id="tspan4875"
+         x="37.603619"
+         y="282.78827"
+         style="stroke-width:0.26458332">АДЫ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 50,255 v 7 h 52 v -7 z"
+       id="RU-KL"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KL">
+      <title
+         id="title4885">Калмыкия</title>
+    </path>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50,262 v 9 h 41 v -9 z"
+       id="RU-STA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-STA">
+      <title
+         id="title4889">Ставропольский край</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 50,271 v 17 h 9 v -17 z"
+       id="RU-KC"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KC">
+      <title
+         id="title4893">Карачаево-Черкесия</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 59,271 v 17 h 9 v -17 z"
+       id="RU-KB"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KB">
+      <title
+         id="title4897">Кабардино-Балкария</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 67.999998,271 v 17 H 78 v -17.08035 z"
+       id="RU-SE"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-SE">
+      <title
+         id="title4903">Северная Осетия</title>
+    </path>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 77.999999,288 H 87 v -9 h -9 z"
+       id="RU-IN"
+       inkscape:connector-curvature="0"
+       inkscape:label="RU-IN"
+       sodipodi:nodetypes="ccccc">
+      <title
+         id="title4907">Ингушетия</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 77.999999,270.91965 13,0.0804 V 288 L 87,288 v -9 h -9.000001 z"
+       id="RU-CE"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-CE">
+      <title
+         id="title4911">Чечня</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="M 90.999999,262 H 102 v 26 l -11.000003,0 z"
+       id="RU-DA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-DA">
+      <title
+         id="title4915">Дагестан</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 102,255 -11,0 v -8 h 11 z"
+       id="RU-AST"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-AST">
+      <title
+         id="title4919">Астраханская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 90.999999,255 v -8 H 102 v -5 H 50 v 13 z"
+       id="RU-VGG"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-VGG">
+      <title
+         id="title4923">Волгоградская область</title>
+    </path>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50,234 v 8 h 52 v -8 z"
+       id="RU-SAR"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-SAR">
+      <title
+         id="title4927">Саратовская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="65.20089"
+       y="239.54762"
+       id="text4931"><tspan
+         sodipodi:role="line"
+         id="tspan4929"
+         x="65.20089"
+         y="239.54762"
+         style="stroke-width:0.26458332">САР</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="65.578873"
+       y="250.88689"
+       id="text4935"><tspan
+         sodipodi:role="line"
+         id="tspan4933"
+         x="65.578873"
+         y="250.88689"
+         style="stroke-width:0.26458332">ВГГ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="92.557762"
+       y="252.84285"
+       id="text4939"><tspan
+         sodipodi:role="line"
+         id="tspan4937"
+         x="92.557762"
+         y="252.84285"
+         style="stroke-width:0.26458332">АС</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="65.011909"
+       y="260.14734"
+       id="text4943"><tspan
+         sodipodi:role="line"
+         id="tspan4941"
+         x="65.011909"
+         y="260.14734"
+         style="stroke-width:0.26458332">КМК</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="65.20089"
+       y="268.08484"
+       id="text4947"><tspan
+         sodipodi:role="line"
+         id="tspan4945"
+         x="65.20089"
+         y="268.08484"
+         style="stroke-width:0.26458332">СТА</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="92.332771"
+       y="275.96698"
+       id="text4951"><tspan
+         sodipodi:role="line"
+         id="tspan4949"
+         x="92.332771"
+         y="275.96698"
+         style="stroke-width:0.26458332">ДА</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="79.511902"
+       y="277.11011"
+       id="text4955"><tspan
+         sodipodi:role="line"
+         id="tspan4953"
+         x="79.511902"
+         y="277.11011"
+         style="stroke-width:0.26458332">ЧЕЧ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="78.566963"
+       y="286.11011"
+       id="text4959"><tspan
+         sodipodi:role="line"
+         id="tspan4957"
+         x="78.566963"
+         y="286.11011"
+         style="stroke-width:0.26458332">ИН</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="69.16964"
+       y="281.69196"
+       id="text4963"><tspan
+         sodipodi:role="line"
+         id="tspan4961"
+         x="69.16964"
+         y="281.69196"
+         style="stroke-width:0.26458332">СО</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="59.909225"
+       y="281.88098"
+       id="text4967"><tspan
+         sodipodi:role="line"
+         id="tspan4965"
+         x="59.909225"
+         y="281.88098"
+         style="stroke-width:0.26458332">КБ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="51.026787"
+       y="281.88098"
+       id="text4971"><tspan
+         sodipodi:role="line"
+         id="tspan4969"
+         x="51.026787"
+         y="281.88098"
+         style="stroke-width:0.26458332">КЧ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50,207 v 20 h 27 v -20 z"
+       id="RU-LIP"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-LIP">
+      <title
+         id="title4977">Липецкая область</title>
+    </path>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50,234 v -7 h 27 v -20 h 6 v 27 z"
+       id="RU-TAM"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-TAM">
+      <title
+         id="title4981">Тамбовская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 83,207 v 27 l 8,0 v -27 z"
+       id="RU-PNZ"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-PNZ">
+      <title
+         id="title4985">Пензенская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="55.751492"
+       y="217.24702"
+       id="text4989"><tspan
+         sodipodi:role="line"
+         id="tspan4987"
+         x="55.751492"
+         y="217.24702"
+         style="stroke-width:0.26458332">ЛИП</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="58.869789"
+       y="232.83855"
+       id="text4993"><tspan
+         sodipodi:role="line"
+         id="tspan4991"
+         x="58.869789"
+         y="232.83855"
+         style="stroke-width:0.26458332">ТАМ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="83.816216"
+       y="224.0506"
+       id="text4997"><tspan
+         sodipodi:role="line"
+         id="tspan4995"
+         x="83.816216"
+         y="224.0506"
+         style="stroke-width:0.26458332">ПЕ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 91,212 -1.34e-4,22 H 98 v -27 h -2 v 5 z"
+       id="RU-ULY"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-ULY">
+      <title
+         id="title5025">Ульяновская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="91.37574"
+       y="223.95612"
+       id="text5007"><tspan
+         sodipodi:role="line"
+         id="tspan5005"
+         x="91.37574"
+         y="223.95612"
+         style="stroke-width:0.26458332">УЛ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50,207 v -15 h 13 v 15 z"
+       id="RU-ORL"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-ORL">
+      <title
+         id="title5011">Орловская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="50.932289"
+       y="201.18304"
+       id="text5015"><tspan
+         sodipodi:role="line"
+         id="tspan5013"
+         x="50.932289"
+         y="201.18304"
+         style="stroke-width:0.26458332">ОРЛ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 63,192 v 15 l 11,0 v -15 z"
+       id="RU-TUL"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-TUL">
+      <title
+         id="title5023">Тульская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="63.5"
+       y="201.37202"
+       id="text5021"><tspan
+         sodipodi:role="line"
+         id="tspan5019"
+         x="63.5"
+         y="201.37202"
+         style="stroke-width:0.26458332">ТУЛ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 73.999999,192 v 15 h 17 v -15 z"
+       id="RU-RYA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-RYA">
+      <title
+         id="title5029">Рязанская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="78.146576"
+       y="201.18304"
+       id="text5033"><tspan
+         sodipodi:role="line"
+         id="tspan5031"
+         x="78.146576"
+         y="201.18304"
+         style="stroke-width:0.26458332">РЯЗ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 91,195 -10e-7,17 H 96 v -17 z"
+       id="RU-MO"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-MO">
+      <title
+         id="title5037">Мордовия</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="91.340172"
+       y="205.69609"
+       id="text5041"><tspan
+         sodipodi:role="line"
+         id="tspan5039"
+         x="91.340172"
+         y="205.69609"
+         style="stroke-width:0.26458332">М</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 90.999997,192 78,192 v -25 l 13,0 z"
+       id="RU-VLA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-VLA">
+      <title
+         id="title5045">Владимирская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="79.941963"
+       y="181.71727"
+       id="text5049"><tspan
+         sodipodi:role="line"
+         id="tspan5047"
+         x="79.941963"
+         y="181.71727"
+         style="stroke-width:0.26458332">ВЛА</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 50,192 v -12 h 15 v 12 z"
+       id="RU-KLU"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KLU">
+      <title
+         id="title5053">Калужская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="51.404758"
+       y="188.42635"
+       id="text5057"><tspan
+         sodipodi:role="line"
+         id="tspan5055"
+         x="51.404758"
+         y="188.42635"
+         style="stroke-width:0.26458332">КЛЖ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 64.999999,180 v 7 H 72 v -7 z"
+       id="RU-MOW"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-MOW">
+      <title
+         id="title5069">Москва</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="66.051338"
+       y="185.21355"
+       id="text5073"><tspan
+         sodipodi:role="line"
+         id="tspan5071"
+         x="66.051338"
+         y="185.21355"
+         style="stroke-width:0.26458332">М</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 50,157 v 15 h 15 v -15 z"
+       id="RU-TVE"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-TVE">
+      <title
+         id="title5077">Тверская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="52.456844"
+       y="165.96057"
+       id="text5081"><tspan
+         sodipodi:role="line"
+         id="tspan5079"
+         x="52.456844"
+         y="165.96057"
+         style="stroke-width:0.26458332">ТВЕ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 50,172 v 8 h 21.999998 v 7 h -6.999999 v 5 h 13 V 167 H 65 l -5e-6,5 z"
+       id="RU-MOS"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:label="RU-MOS">
+      <title
+         id="title5085">Московская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="64.917412"
+       y="177.27605"
+       id="text5089"><tspan
+         sodipodi:role="line"
+         id="tspan5087"
+         x="64.917412"
+         y="177.27605"
+         style="stroke-width:0.26458332">МОС</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50,157 v -18 h 15 l -10e-7,18 z"
+       id="path5091"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="51.700893"
+       y="149.811"
+       id="text5095"><tspan
+         sodipodi:role="line"
+         id="tspan5093"
+         x="51.700893"
+         y="149.811"
+         style="stroke-width:0.26458332">НОВ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 64.999999,167 v -5 H 78 v -13 h 13 l -10e-7,18 z"
+       id="RU-YAR"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-YAR">
+      <title
+         id="title5099">Ярославская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="79.511902"
+       y="159.73215"
+       id="text5103"><tspan
+         sodipodi:role="line"
+         id="tspan5101"
+         x="79.511902"
+         y="159.73215"
+         style="stroke-width:0.26458332">ЯРО</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 102,234 v -12 h 28 v 12 z"
+       id="RU-ORE"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-ORE">
+      <title
+         id="title5107">Оренбургская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="109.99107"
+       y="229.72025"
+       id="text5111"><tspan
+         sodipodi:role="line"
+         id="tspan5109"
+         x="109.99107"
+         y="229.72025"
+         style="stroke-width:0.26458332">ОРЕ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 97.999999,234 98,212 l 12,0 v 10 l -8,0 v 12 z"
+       id="RU-SAM"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-SAM">
+      <title
+         id="title5115">Самарская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="98.598213"
+       y="219.16518"
+       id="text5119"><tspan
+         sodipodi:role="line"
+         id="tspan5117"
+         x="98.598213"
+         y="219.16518"
+         style="stroke-width:0.26458332">САМ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 97.999999,207 v 5 H 110 v 10 l 11,0 v -15 z"
+       id="RU-TA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-TA">
+      <title
+         id="title5123">Татарстан</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="110.93601"
+       y="215.35713"
+       id="text5127"><tspan
+         sodipodi:role="line"
+         id="tspan5125"
+         x="110.93601"
+         y="215.35713"
+         style="stroke-width:0.26458332">ТАТ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 96,195 v 12 h 9 v -12 z"
+       id="RU-CU"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-CU">
+      <title
+         id="title5131">Чувашия</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="97.208939"
+       y="202.47794"
+       id="text5135"><tspan
+         sodipodi:role="line"
+         id="tspan5133"
+         x="97.208939"
+         y="202.47794"
+         style="stroke-width:0.26458332">ЧУ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 105,195 v 12 h 8.5 v -12 z"
+       id="RU-ME"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-ME">
+      <title
+         id="title5139">Марий Эл</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="105.52917"
+       y="202.73982"
+       id="text5143"><tspan
+         sodipodi:role="line"
+         id="tspan5141"
+         x="105.52917"
+         y="202.73982"
+         style="stroke-width:0.26458332">МЭ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 121,222 h 9 v -10 h -9 z"
+       id="RU-BA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-BA">
+      <title
+         id="title5147">Башкортостан</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="122.05832"
+       y="218.29588"
+       id="text5151"><tspan
+         sodipodi:role="line"
+         id="tspan5149"
+         x="122.05832"
+         y="218.29588"
+         style="stroke-width:0.26458332">БА</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 121,212 v -17 h 7 v 17 z"
+       id="path5153"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="122.88987"
+       y="205.43683"
+       id="text5157"><tspan
+         sodipodi:role="line"
+         id="tspan5155"
+         x="122.88987"
+         y="205.43683"
+         style="stroke-width:0.26458332">У</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 121,195 v -46 h 9 v 63 h -2 v -17 z"
+       id="RU-PER"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-PER">
+      <title
+         id="title5161">Пермский край</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="121.82172"
+       y="177.74852"
+       id="text5165"><tspan
+         sodipodi:role="line"
+         id="tspan5163"
+         x="121.82172"
+         y="177.74852"
+         style="stroke-width:0.26458332">ПЕ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 90.999999,149 v 25 H 105 v -25 z"
+       id="RU-IVA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-IVA">
+      <title
+         id="title5169">Ивановская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="92.906548"
+       y="163.57442"
+       id="text5173"><tspan
+         sodipodi:role="line"
+         id="tspan5171"
+         x="92.906548"
+         y="163.57442"
+         style="stroke-width:0.26458332">ИВА</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 105,149 v 25 H 90.999997 l 2e-6,21 H 113.5 v -46 z"
+       id="RU-NIZ"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-NIZ">
+      <title
+         id="title5177">Нижегородская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="95.816971"
+       y="188.89882"
+       id="text5181"><tspan
+         sodipodi:role="line"
+         id="tspan5179"
+         x="95.816971"
+         y="188.89882"
+         style="stroke-width:0.26458332">НИЖ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 50,139 v -19 h 63.5 v 29 H 77.999999 v 13 h -13 v -23 z"
+       id="path5183"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="75.406258"
+       y="135.41518"
+       id="text5187"><tspan
+         sodipodi:role="line"
+         id="tspan5185"
+         x="75.406258"
+         y="135.41518"
+         style="stroke-width:0.26458332">ВОЛ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 113.5,120 v 87 h 7.5 v -87 z"
+       id="RU-KIR"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KIR">
+      <title
+         id="title5191">Кировская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="113.56293"
+       y="168.67709"
+       id="text5195"><tspan
+         sodipodi:role="line"
+         id="tspan5193"
+         x="113.56293"
+         y="168.67709"
+         style="stroke-width:0.26458332">КИ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 130,234 v -17 h 11 v 17 z"
+       id="RU-CHE"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-CHE">
+      <title
+         id="title5199">Челябинская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="132.03114"
+       y="227.77719"
+       id="text5203"><tspan
+         sodipodi:role="line"
+         id="tspan5201"
+         x="132.03114"
+         y="227.77719"
+         style="stroke-width:0.26458332">ЧЕ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 141,217 v 17 h 11 v -17 z"
+       id="RU-KGN"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KGN">
+      <title
+         id="title5207">Курганская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="143.26186"
+       y="227.77719"
+       id="text5211"><tspan
+         sodipodi:role="line"
+         id="tspan5209"
+         x="143.26186"
+         y="227.77719"
+         style="stroke-width:0.26458332">КУ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 130,149 v 68 h 22 v -68 z"
+       id="RU-SVE"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-SVE">
+      <title
+         id="title5215">Свердловская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="135.50565"
+       y="177.79779"
+       id="text5219"><tspan
+         sodipodi:role="line"
+         id="tspan5217"
+         x="135.50565"
+         y="177.79779"
+         style="stroke-width:0.26458332">СВЕ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 121,120 v 29 h 31 v -29 z"
+       id="RU-KO"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KO">
+      <title
+         id="title5223">Республика Коми</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="130.96207"
+       y="135.83647"
+       id="text5227"><tspan
+         sodipodi:role="line"
+         id="tspan5225"
+         x="130.96207"
+         y="135.83647"
+         style="stroke-width:0.26458332">КОМ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="M 50,89.000005 V 120 H 152 V 89.000005 Z"
+       id="RU-ARK2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-ARK2">
+      <title
+         id="title5231">Архангельская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="86.328056"
+       y="105.63503"
+       id="text5235"><tspan
+         sodipodi:role="line"
+         id="tspan5233"
+         x="86.328056"
+         y="105.63503"
+         style="stroke-width:0.26458332">АРХ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 152,89.000005 V 234 h 16 V 89.000005 Z"
+       id="RU-TYU"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-TYU">
+      <title
+         id="title5239">Тюменская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="154.28989"
+       y="218.00298"
+       id="text5243"><tspan
+         sodipodi:role="line"
+         id="tspan5241"
+         x="154.28989"
+         y="218.00298"
+         style="stroke-width:0.26458332">ТЮМ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 168,234 v -39 h 16 v 39 l -14.28869,-0.12202 z"
+       id="RU-OMS"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:label="RU-OMS">
+      <title
+         id="title5295">Омская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 184,234 v -60 h 11 v 60 z"
+       id="RU-NVS"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-NVS">
+      <title
+         id="title5249">Новосибирская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 195,174 v 60 h 11 v -60 z"
+       id="RU-ALT"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-ALT">
+      <title
+         id="title5253">Алтайский край</title>
+    </path>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 206,174 v 60 h 11 v -60 z"
+       id="RU-AL"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-AL">
+      <title
+         id="title5257">Республика Алтай</title>
+    </path>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 168,149 v 46 h 16 v -46 z"
+       id="RU-TOM"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-TOM">
+      <title
+         id="title5261"
+         style="fill-opacity:1;fill:url(#linearGradient5293)">Томская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="170.08928"
+       y="177.18155"
+       id="text5265"><tspan
+         sodipodi:role="line"
+         id="tspan5263"
+         x="170.08928"
+         y="177.18155"
+         style="stroke-width:0.26458332">ТОМ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="171.03423"
+       y="220.27083"
+       id="text5269"><tspan
+         sodipodi:role="line"
+         id="tspan5267"
+         x="171.03423"
+         y="220.27083"
+         style="stroke-width:0.26458332">ОМС</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="185.5863"
+       y="220.08185"
+       id="text5273"><tspan
+         sodipodi:role="line"
+         id="tspan5271"
+         x="185.5863"
+         y="220.08185"
+         style="stroke-width:0.26458332">НС</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="197.30359"
+       y="220.08185"
+       id="text5277"><tspan
+         sodipodi:role="line"
+         id="tspan5275"
+         x="197.30359"
+         y="220.08185"
+         style="stroke-width:0.26458332">АК</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="208.0759"
+       y="220.27086"
+       id="text5281"><tspan
+         sodipodi:role="line"
+         id="tspan5279"
+         x="208.0759"
+         y="220.27086"
+         style="stroke-width:0.26458332">РА</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 184,149 v 25 h 33 v -25 z"
+       id="RU-KEM"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KEM">
+      <title
+         id="title5285">Кемеровская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="194.84673"
+       y="163.19643"
+       id="text5299"><tspan
+         sodipodi:role="line"
+         id="tspan5297"
+         x="194.84673"
+         y="163.19643"
+         style="stroke-width:0.26458332">КЕМ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 217,149 v 46 h 11 v -46 z"
+       id="RU-KK"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KK">
+      <title
+         id="title5303">Хакасия</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="219.45685"
+       y="176.83482"
+       id="text5307"><tspan
+         sodipodi:role="line"
+         id="tspan5305"
+         x="219.45685"
+         y="176.83482"
+         style="stroke-width:0.26458332">ХА</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 217,195 h 18 v 39 l -18,0 z"
+       id="RU-TY"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-TY">
+      <title
+         id="title5311">Тыва</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="219.98215"
+       y="220.27084"
+       id="text5315"><tspan
+         sodipodi:role="line"
+         id="tspan5313"
+         x="219.98215"
+         y="220.27084"
+         style="stroke-width:0.26458332">ТЫВ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 168,89.000005 V 149 h 60 v 46 h 7 V 89.000005 Z"
+       id="RU-KYA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-KYA">
+      <title
+         id="title5319">Красноярский край</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="196.4431"
+       y="118.46396"
+       id="text5323"><tspan
+         sodipodi:role="line"
+         id="tspan5321"
+         x="196.4431"
+         y="118.46396"
+         style="stroke-width:0.26458332">КРА</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 235,234 v -17 h 10 v 17 l -10,0"
+       id="RU-BU"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-BU">
+      <title
+         id="title5327">Бурятия</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="235"
+       y="234"
+       id="text5331"><tspan
+         sodipodi:role="line"
+         id="tspan5329"
+         x="235"
+         y="238.50591"
+         style="stroke-width:0.26458332" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="236.57118"
+       y="227.77719"
+       id="text5335"><tspan
+         sodipodi:role="line"
+         id="tspan5333"
+         x="236.57118"
+         y="227.77719"
+         style="stroke-width:0.26458332">БУ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 235,217 v -43 h 10 v 43 z"
+       id="RU-IRK"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-IRK">
+      <title
+         id="title5339">Иркутская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="236.53354"
+       y="195.70486"
+       id="text5343"><tspan
+         sodipodi:role="line"
+         id="tspan5341"
+         x="236.53354"
+         y="195.70486"
+         style="stroke-width:0.26458332">ИР</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="m 245,174 v 60 l 12,0 v -60 z"
+       id="RU-ZAB"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-ZAB">
+      <title
+         id="title5347">Забайкальский край</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="246.15523"
+       y="205.86108"
+       id="text5351"><tspan
+         sodipodi:role="line"
+         id="tspan5349"
+         x="246.15523"
+         y="205.86108"
+         style="stroke-width:0.26458332">ЗАБ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 257,174 v 60 h 12 v -60 z"
+       id="RU-AMU"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-AMU">
+      <title
+         id="title5355">Амурская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="257.64783"
+       y="205.86108"
+       id="text5359"><tspan
+         sodipodi:role="line"
+         id="tspan5357"
+         x="257.64783"
+         y="205.86108"
+         style="stroke-width:0.26458332">АМУ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 235,89.000005 V 174 h 33.99999 V 89.000005 Z"
+       id="RU-SA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-SA">
+      <title
+         id="title5363">Якутия</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="246.4225"
+       y="134.23286"
+       id="text5367"><tspan
+         sodipodi:role="line"
+         id="tspan5365"
+         x="246.4225"
+         y="134.23286"
+         style="stroke-width:0.26458332">ЯКУ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="M 268.99999,234 V 217 H 277 v 17 z"
+       id="RU-YEV"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-YEV">
+      <title
+         id="title5371">Еврейская автономная область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="269.53455"
+       y="227.8528"
+       id="text5375"><tspan
+         sodipodi:role="line"
+         id="tspan5373"
+         x="269.53455"
+         y="227.8528"
+         style="stroke-width:0.26458332">ЕВ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 268.99999,217 V 149 H 283 v 85 l -6.00001,0 v -17 z"
+       id="RU-KHA"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-KHA">
+      <title
+         id="title5379">Хабаровский край</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="271.01129"
+       y="176.46146"
+       id="text5383"><tspan
+         sodipodi:role="line"
+         id="tspan5381"
+         x="271.01129"
+         y="176.46146"
+         style="stroke-width:0.26458332">ХАБ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0"
+       d="M 268.99999,149 V 120 H 283 v 29 z"
+       id="RU-MAG"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-MAG">
+      <title
+         id="title5387">Магаданская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="270.20947"
+       y="137.17282"
+       id="text5391"><tspan
+         sodipodi:role="line"
+         id="tspan5389"
+         x="270.20947"
+         y="137.17282"
+         style="stroke-width:0.26458332">МАГ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 283,234 v -39 h 12.9 l 0.1,39 z"
+       id="RU-PRI"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-PRI">
+      <title
+         id="title5395">Приморский край</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="283.84024"
+       y="217.08641"
+       id="text5399"><tspan
+         sodipodi:role="line"
+         id="tspan5397"
+         x="283.84024"
+         y="217.08641"
+         style="stroke-width:0.26458332">ПРИ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 283,195 v -56 h 13 v 56 z"
+       id="RU-SAK"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-SAK">
+      <title
+         id="title5403">Сахалинская область</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="284.36942"
+       y="169.77971"
+       id="text5407"><tspan
+         sodipodi:role="line"
+         id="tspan5405"
+         x="284.36942"
+         y="169.77971"
+         style="stroke-width:0.26458332">СХЛ</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 283,139 v -31 h 13 v 31 z"
+       id="RU-KAM"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KAM">
+      <title
+         id="title5411">Камчатский край</title>
+    </path>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 268.99999,89.000005 V 120 H 283 v -12 h 13 V 89.000005 Z"
+       id="RU-CHU"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       inkscape:label="RU-CHU">
+      <title
+         id="title5415">Чукотский автономный округ</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="273.95126"
+       y="99.487823"
+       id="text5419"><tspan
+         sodipodi:role="line"
+         id="tspan5417"
+         x="273.95126"
+         y="99.487823"
+         style="stroke-width:0.26458332">ЧУК</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="283.30573"
+       y="126.74931"
+       id="text5423"><tspan
+         sodipodi:role="line"
+         id="tspan5421"
+         x="283.30573"
+         y="126.74931"
+         style="stroke-width:0.26458332">КАМ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0;stroke-miterlimit:4;stroke-dasharray:3.17999985,3.17999985;stroke-dashoffset:0"
+       d="m 130,89.000005 22,0 V 120 l -22,0 z"
+       id="RU-NEN"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-NEN">
+      <title
+         id="title5427">Ненецкий автономный округ</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="135.77292"
+       y="105.10049"
+       id="text5431"><tspan
+         sodipodi:role="line"
+         id="tspan5429"
+         x="135.77292"
+         y="105.10049"
+         style="stroke-width:0.26458332">НЕН</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:3.17999985,3.17999985;stroke-dashoffset:0;fill-opacity:0"
+       d="M 50,89.000005 V 120 h 80 V 89.000005 Z"
+       id="RU-ARK"
+       inkscape:connector-curvature="0"
+       inkscape:label="RU-ARK">
+      <title
+         id="title5447">Архангельская область</title>
+    </path>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:3.17999985,3.17999985;stroke-dashoffset:0"
+       d="m 152,129 v 58 h 16 v -58 z"
+       id="RU-KHM"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:label="RU-KHM">
+      <title
+         id="title5451">Ханты-Мансийский автономный округ — Югра</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="156.48215"
+       y="157.71577"
+       id="text5455"><tspan
+         sodipodi:role="line"
+         id="tspan5453"
+         x="156.48215"
+         y="157.71577"
+         style="stroke-width:0.26458332">ХМ</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0;stroke-miterlimit:4;stroke-dasharray:3.17999985,3.17999985;stroke-dashoffset:0"
+       d="M 152,89.000005 V 129 h 16 V 89.000005 Z"
+       id="RU-YAN"
+       inkscape:connector-curvature="0"
+       inkscape:label="RU-YAN">
+      <title
+         id="title5459">Ямало-Ненецкий автономный округ</title>
+    </path>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="156.10417"
+       y="111.98067"
+       id="text5463"><tspan
+         sodipodi:role="line"
+         id="tspan5461"
+         x="156.10417"
+         y="111.98067"
+         style="stroke-width:0.26458332">ЯН</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0;stroke-miterlimit:4;stroke-dasharray:3.17999985,3.17999985;stroke-dashoffset:0"
+       d="m 152,187 h 16 v 47 h -16 z"
+       id="path5465"
+       inkscape:connector-curvature="0"
+       inkscape:label="RU-TYU">
+      <title
+         id="title5467">Тюменская область</title>
+    </path>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 102,234 v 54 H 23 V 89.000005 H 296.00001 L 296,234 Z"
+       id="path5469"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 0,89.000005 H 296.00001 L 296,297 v 0"
+       id="path5471"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 283,139 v 56 h 13.00001 V 139 H 283"
+       id="path5473"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 50,89.000005 V 109 v 5"
+       id="path5475"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 22.985179,260.91862 23.000001,274 23,276"
+       id="path5477"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 23,279 v 18"
+       id="path5481"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 23,288 18,0"
+       id="path5485"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 23,274 h 12.999999 l -0.05225,1.81889"
+       id="path5489"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 35.999999,288 v -9.97614"
+       id="path5491"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 102,252 v 36 h 31 v 9"
+       id="path5493"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 96,288 v 9"
+       id="path5495"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 209,234 v 63"
+       id="path5497"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 214,234 v 23 h 36 v -22.80834"
+       id="path5499"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 288,234 v 63"
+       id="path5501"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 23,194 H 0"
+       id="path5503"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 23,163 H 0"
+       id="path5505"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 23,154 H 0"
+       id="path5507"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 23,140.5 H -3.6666667e-8"
+       id="path5509"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 23,98.000005 H 0"
+       id="path5511"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0000e1;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 0,134 h 17 l 6,2 h 12 v 9 H 23 l -6,2 H 0"
+       id="path5515"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.93888855px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="0.52916664"
+       y="94.825005"
+       id="text5525"><tspan
+         sodipodi:role="line"
+         id="tspan5523"
+         x="0.52916664"
+         y="94.825005"
+         style="font-size:4.23333311px;stroke-width:0.26458332">Норвегия</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="0.52916664"
+       y="138.38336"
+       id="text5529"><tspan
+         sodipodi:role="line"
+         id="tspan5527"
+         x="0.52916664"
+         y="138.38336"
+         style="stroke-width:0.26458332">Польша</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="4.7624998"
+       y="145.41252"
+       id="text5533"><tspan
+         sodipodi:role="line"
+         id="tspan5531"
+         x="4.7624998"
+         y="145.41252"
+         style="stroke-width:0.26458332">Литва</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="1.5875"
+       y="151.88336"
+       id="text5537"><tspan
+         sodipodi:role="line"
+         id="tspan5535"
+         x="1.5875"
+         y="151.88336"
+         style="stroke-width:0.26458332">Эстония</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="3.7041664"
+       y="159.82504"
+       id="text5541"><tspan
+         sodipodi:role="line"
+         id="tspan5539"
+         x="3.7041664"
+         y="159.82504"
+         style="stroke-width:0.26458332">Латвия</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="0.54528385"
+       y="179.91443"
+       id="text5545"><tspan
+         sodipodi:role="line"
+         id="tspan5543"
+         x="0.54528385"
+         y="179.91443"
+         style="stroke-width:0.26458332">Беларусь</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="2.6512058"
+       y="243.00618"
+       id="text5549"><tspan
+         sodipodi:role="line"
+         id="tspan5547"
+         x="2.6512058"
+         y="243.00618"
+         style="stroke-width:0.26458332">Украина</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="99.70417"
+       y="294.8833"
+       id="text5561"><tspan
+         sodipodi:role="line"
+         id="tspan5559"
+         x="99.70417"
+         y="294.8833"
+         style="stroke-width:0.26458332">Азербайджан</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="142.17123"
+       y="242.45012"
+       id="text5565"><tspan
+         sodipodi:role="line"
+         id="tspan5563"
+         x="142.17123"
+         y="242.45012"
+         style="stroke-width:0.26458332">Казахстан</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="220.24084"
+       y="242.47702"
+       id="text5569"><tspan
+         sodipodi:role="line"
+         id="tspan5567"
+         x="220.24084"
+         y="242.47702"
+         style="stroke-width:0.26458332">Монголия</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="262.94495"
+       y="241.99089"
+       id="text5573"><tspan
+         sodipodi:role="line"
+         id="tspan5571"
+         x="262.94495"
+         y="241.99089"
+         style="stroke-width:0.26458332">Китай</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-262.46793"
+       y="293.27884"
+       id="text5577"
+       transform="rotate(-90)"><tspan
+         sodipodi:role="line"
+         id="tspan5575"
+         x="-262.46793"
+         y="293.27884"
+         style="stroke-width:0.26458332">Сев. Корея</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="56.126602"
+       y="294.3273"
+       id="text5581"><tspan
+         sodipodi:role="line"
+         id="tspan5579"
+         x="56.126602"
+         y="294.3273"
+         style="stroke-width:0.26458332">Грузия</tspan></text>
+  </g>
+</svg>
