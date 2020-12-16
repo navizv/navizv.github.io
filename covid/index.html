@@ -1,48 +1,111 @@
-<html>
+﻿<html><meta http-equiv="Content-type: text/html; charset=UTF-8">
 <head><title>Covid RF</title>
- <script src="../libs/js/jquery.min.js"></script>
- <script src="../libs/js/highcharts.js"></script>
+ <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="../libs/js/jquery.min.js"></script>
 </head>
 <body>
+<div id="container">Число смертей</div>
+<div id="all"></div></body>
 <script>
-Highcharts.chart('container', {
+var rfser = [];
+var rfsers = [];
+var names = [];
+$.ajax({//заполняем вып.список оглавлением
+			type: "GET",
+			url: "sm-06.csv",
+			dataType: "text",
+			success: function(sod) {
+				var lines = sod.split(/\r\n|\n/);
+				var s = 0;
+				for(i in lines){
+					if(i<4 || i> 200)
+						continue;
+					var y = 2006;
+					var m = 1;
+					var line = lines[i].split(';');
+					var zid = i;
+					var znm = line[0];
+					names.push(znm);
+					//if(znm.charAt(0) == '\"')
+					//	znm = znm.slice(1);
+					//$("#all").append("<div>"+znm+"</div>");
+					$("#all").append("<div id=cont"+s+"></div>");
+					s++;
+					var serie = {data:[]};
+						for(j in line){
+							if(j==0)
+								continue;
+							
+							if(y==2020)
+								serie.color = "#000000";
+							else{
+							var c = ((2020-y)*6+100).toString(16);
+								serie.color = "#"+c+c+"ff";
+								}
+							serie.name = ""+y;
+							serie.data.push(parseInt(line[j].replace(/\s/g, '')))
+							m++;
+							if(m==13){
+								m = 1;
+								y++;
+								rfser.push(serie);
+								serie = {data:[]};
+							}
+						}
+						if(m!=1)
+							rfser.push(serie);
+						rfsers.push(rfser);
+						rfser = [];
+					}
+					
+					
+					makeChart();
+				
+			}
+		});
+	function makeChart(){
+	console.log("kyky");
+	console.log(rfser);
+	var s = 0;
+	for(var q in rfsers){
+Highcharts.chart('cont'+s, {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Monthly Average Rainfall'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: names[s]//'Число смертей'
     },
     xAxis: {
         categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
+            'Янв',
+            'Фев',
+            'Мар',
+            'Апр',
+            'Май',
+            'Июн',
+            'Июл',
+            'Авг',
+            'Сен',
+            'Окт',
+            'Ноя',
+            'Дек'
         ],
         crosshair: true
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Rainfall (mm)'
+            text: 'человек'
         }
     },
     tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
+        //headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        //pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        //    '<td style="padding:0"><b>{point.y:.1f} тыс.чел&nbsp</b></td></tr>',
+        //footerFormat: '</table>',
         shared: true,
         useHTML: true
     },
@@ -52,7 +115,7 @@ Highcharts.chart('container', {
             borderWidth: 0
         }
     },
-    series: [{
+    series: rfsers[s]/*[{
         name: 'Tokyo',
         data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 
@@ -68,8 +131,10 @@ Highcharts.chart('container', {
         name: 'Berlin',
         data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
 
-    }]
+    }]*/
 });
+s++;
+}
+}
 </script>
-<div id="container"></div></body>
 </html>
