@@ -8,8 +8,6 @@
 </head>
 <body>
 <div id="container">Число смертей</div>
-<select id="regions" onchange="makeChart(this.options[this.selectedIndex].value)"></select>
-<div id="cont">Число смертей</div>
 <div id="all"></div></body>
 <script>
 var rfser = [];
@@ -34,7 +32,6 @@ $.ajax({//заполняем вып.список оглавлением
 					//if(znm.charAt(0) == '\"')
 					//	znm = znm.slice(1);
 					//$("#all").append("<div>"+znm+"</div>");
-					$("#regions").append("<option value="+s+">"+znm+"</option>");
 					$("#all").append("<div id=cont"+s+"></div>");
 					s++;
 					var serie = {data:[]};
@@ -65,16 +62,16 @@ $.ajax({//заполняем вып.список оглавлением
 					}
 					
 					
-					makeChart(0);
+					makeChart();
 				
 			}
 		});
-	function makeChart(s){
-	//console.log("kyky");
-	//console.log(rfser);
-	//var s = 0;
-	//for(var q in rfsers){
-Highcharts.chart('cont', {
+	function makeChart(){
+	console.log("kyky");
+	console.log(rfser);
+	var s = 0;
+	for(var q in rfsers){
+Highcharts.chart('cont'+s, {
     chart: {
         type: 'column'
     },
@@ -136,8 +133,8 @@ Highcharts.chart('cont', {
 
     }]*/
 });
-//s++;
-//}
+s++;
+}
 }
 </script>
 </html>
