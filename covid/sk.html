@@ -7,16 +7,16 @@
 <script src="../libs/js/jquery.min.js"></script>
 </head>
 <body>
-Число смертей по месяцам 
-<select id="regions" onchange="makeChart(this.options[this.selectedIndex].value)"></select>
+Число смертей скользящей суммой за последние 12 месяцев 
+<select id="regions" onchange="makeChart(this.options[this.selectedIndex].value)"></select><br>
+<label><input type="checkbox" onchange="makeChart()" id="perc">В % от апреля 2020</label><br>
 <div id="cont"></div>
 <div id="all"></div>
-См. также <a href="./sk.html">Число смертей скользящей суммой за последние 12 месяцев</a><br/><hr/>
+См. также <a href="./">Число смертей по месяцам</a><br/><hr/>
         <footer>
             (c) 2020 <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.</a> (<a href="http://fb.com/Navizv">facebook</a>, <a href="/main/">home page</a>)<br/>
             Источник данных - <a href="https://www.fedstat.ru/indicator/33556">ЕМИСС, число зарегистрированных умерших (оперативные данные)</a><br/>
-	</footer>
-</body>
+	</footer></body>
 <script>
 var rfser = [];
 var rfsers = [];
@@ -43,25 +43,29 @@ $.ajax({//заполняем вып.список оглавлением
 					$("#regions").append("<option value="+s+">"+znm+"</option>");
 					$("#all").append("<div id=cont"+s+"></div>");
 					s++;
-					var serie = {data:[]};
+					var serie = {name:znm,data:[]};//,pointStart: Date.UTC(2006, 11, 1),pointInterval: 'month'};
 						for(j in line){
-							if(j==0)
+							if(j<12)
 								continue;
 							
-							if(y==2020)
+							/*if(y==2020)
 								serie.color = "#000000";
 							else{
 							var c = ((2020-y)*6+100).toString(16);
 								serie.color = "#"+c+c+"ff";
-								}
-							serie.name = ""+y;
-							serie.data.push(parseInt(line[j].replace(/\s/g, '')))
+								}*/
+							//serie.name = ""+y;
+							var sks = 0;
+							for(var k = j-11;k<=j;k++){
+								sks+=parseInt(line[k].replace(/\s/g, ''));
+							}
+							serie.data.push([Date.UTC(2006, j-1, 1),sks]);
 							m++;
 							if(m==13){
 								m = 1;
 								y++;
-								rfser.push(serie);
-								serie = {data:[]};
+							//	rfser.push(serie);
+							//	serie = {data:[]};
 							}
 						}
 						if(m!=1)
@@ -76,38 +80,37 @@ $.ajax({//заполняем вып.список оглавлением
 			}
 		});
 	function makeChart(s){
-	//console.log("kyky");
-	//console.log(rfser);
+	if(s==undefined){
+		var el = document.getElementById("regions");
+		s = el.options[el.selectedIndex].value
+	}
+	console.log("kyky");
+	console.log(rfsers[s]);
 	//var s = 0;
 	//for(var q in rfsers){
+	var tmpser = [];
+	tmpser.push({name:rfsers[s][0].name, data:rfsers[s][0].data});
+	var perc = document.getElementById("perc").checked;
+	if(perc){
+		var sto = rfsers[s][0].data[160][1];
+		tmpser[0].data = [];
+		for(var i in rfsers[s][0].data)
+			tmpser[0].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/sto*100]);
+	}
 Highcharts.chart('cont', {
-    chart: {
-        type: 'column'
-    },
     title: {
         text: names[s]//'Число смертей'
     },
     xAxis: {
-        categories: [
-            'Янв',
-            'Фев',
-            'Мар',
-            'Апр',
-            'Май',
-            'Июн',
-            'Июл',
-            'Авг',
-            'Сен',
-            'Окт',
-            'Ноя',
-            'Дек'
-        ],
-        crosshair: true
+        type: 'datetime',
+		gridLineWidth: 1,
+        labels: {
+            overflow: 'justify'
+        }
     },
     yAxis: {
-        min: 0,
         title: {
-            text: 'человек'
+            text: perc? '% от апреля 2020':'человек'
         }
     },
     tooltip: {
@@ -118,13 +121,14 @@ Highcharts.chart('cont', {
         shared: true,
         useHTML: true
     },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: rfsers[s]/*[{
+	legend:{ enabled:false },
+   /* plotOptions: {
+	line:{
+        pointInterval: 3600000*24*30.5,
+        pointStart: Date.UTC(2006, 12, 1, 0, 0, 0)
+		}
+    },*/
+    series: tmpser/*[{
         name: 'Tokyo',
         data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 
