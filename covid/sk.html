@@ -7,10 +7,10 @@
 <script src="../libs/js/jquery.min.js"></script>
 </head>
 <body>
-Число смертей скользящей суммой за последние 12 месяцев 
-<select id="regions" onchange="makeChart(this.options[this.selectedIndex].value)"></select><br>
+Число смертей скользящей суммой за последние 12 месяцев <br>
+<select multiple size=8 id="regions" onchange="makeChart()"></select><br>
 <label><input type="checkbox" onchange="makeChart()" id="perc">В % от апреля 2020</label><br>
-<div id="cont"></div>
+<div style="max-width:1000px;" id="cont"></div>
 <div id="all"></div>
 См. также <a href="./">Число смертей по месяцам</a><br/><hr/>
         <footer>
@@ -44,7 +44,7 @@ $.ajax({//заполняем вып.список оглавлением
 					//$("#all").append("<div>"+znm+"</div>");
 					if(znm.includes("федеральный округ"))
 						znm = "--------"+znm;
-					$("#regions").append("<option value="+s+">"+znm+"</option>");
+					var k = $("#regions").append("<option value="+s+">"+znm+"</option>");
 					$("#all").append("<div id=cont"+s+"></div>");
 					s++;
 					var serie = {name:znm,data:[]};//,pointStart: Date.UTC(2006, 11, 1),pointInterval: 'month'};
@@ -78,32 +78,43 @@ $.ajax({//заполняем вып.список оглавлением
 						rfser = [];
 					}
 					
-					
+					document.getElementById("regions").options[0].selected=true;
 					makeChart(0);
 				
 			}
 		});
 	function makeChart(s){
+	var ss = [];
 	if(s==undefined){
 		var el = document.getElementById("regions");
-		s = el.options[el.selectedIndex].value
-	}
-	console.log("kyky");
-	console.log(rfsers[s]);
+		//s = el.options[el.selectedIndex].value
+		for (var n = 0; n < el.options.length; n++)
+			if (el.options[n].selected==true)
+				ss.push(n);
+	}else
+		ss=[s];
+	//console.log("kyky");
+	//console.log(rfsers[s]);
 	//var s = 0;
 	//for(var q in rfsers){
 	var tmpser = [];
-	tmpser.push({name:rfsers[s][0].name, data:rfsers[s][0].data});
-	var perc = document.getElementById("perc").checked;
-	if(perc){
-		var sto = rfsers[s][0].data[160][1];
-		tmpser[0].data = [];
-		for(var i in rfsers[s][0].data)
-			tmpser[0].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/sto*100]);
+	for(var k in ss){
+		s = ss[k];
+		tmpser.push({name:rfsers[s][0].name, data:rfsers[s][0].data});
+		var perc = document.getElementById("perc").checked;
+		if(perc){
+			var sto = rfsers[s][0].data[160][1];
+			tmpser[k].data = [];
+			for(var i in rfsers[s][0].data)
+				tmpser[k].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/sto*100]);
+		}
 	}
 Highcharts.chart('cont', {
+	chart: {
+		//width:"1000"
+    },
     title: {
-        text: names[s]//'Число смертей'
+        text: 'Число смертей скользящей суммой за последние 12 месяцев' + (perc ? ', % от апреля 2020':'')
     },
     xAxis: {
         type: 'datetime',
@@ -123,9 +134,10 @@ Highcharts.chart('cont', {
         //    '<td style="padding:0"><b>{point.y:.1f} тыс.чел&nbsp</b></td></tr>',
         //footerFormat: '</table>',
         shared: true,
-        useHTML: true
+        useHTML: true,
+		valueDecimals: perc?2:0
     },
-	legend:{ enabled:false },
+	//legend:{ enabled:false },
    /* plotOptions: {
 	line:{
         pointInterval: 3600000*24*30.5,
