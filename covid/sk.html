@@ -9,13 +9,17 @@
 <body>
 Число смертей скользящей суммой за последние 12 месяцев <br>
 <select multiple size=8 id="regions" onchange="makeChart()"></select><br>
-<label><input type="checkbox" onchange="makeChart()" id="perc">В % от апреля 2020</label><br>
+<label><input type="checkbox" onchange="makeChart()" id="perc">В % от марта 2020</label><br>
 <div style="max-width:1000px;" id="cont"></div>
 <div id="all"></div>
 См. также <a href="./">Число смертей по месяцам</a><br/><hr/>
         <footer>
             (c) 2020 <a href="mailto:zaycev.ivan@gmail.com">Зайцев И.</a> (<a href="http://fb.com/Navizv">facebook</a>, <a href="/main/">home page</a>)<br/>
-            Источник данных - <a href="https://www.fedstat.ru/indicator/33556">ЕМИСС, число зарегистрированных умерших (оперативные данные)</a><br/>
+            Источник данных - <a href="https://www.fedstat.ru/indicator/33556">Россия - ЕМИСС, число зарегистрированных умерших (оперативные данные)</a><br/>
+			Другие страны: <a href="http://data.un.org/Data.aspx?q=deaths+by+month&d=POP&f=tableCode%3A65">Беларусь - данные ООН</a>, 
+			<a href="https://www.cdc.gov/nchs/nvss/vsrr/provisional-tables.htm">США</a>, 
+			<a href="https://osp.stat.gov.lt/statistiniu-rodikliu-analize#/">Литва</a>, 
+			<a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/monthlyfiguresondeathsregisteredbyareaofusualresidence">Англия</a><br/>
 	</footer></body>
 <script>
 var rfser = [];
@@ -104,7 +108,7 @@ $.ajax({//заполняем вып.список оглавлением
 		tmpser.push({name:rfsers[s][0].name, data:rfsers[s][0].data});
 		var perc = document.getElementById("perc").checked;
 		if(perc){
-			var sto = rfsers[s][0].data[160][1];
+			var sto = rfsers[s][0].data[159][1];
 			tmpser[k].data = [];
 			for(var i in rfsers[s][0].data)
 				tmpser[k].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/sto*100]);
@@ -115,7 +119,7 @@ Highcharts.chart('cont', {
 		//width:"1000"
     },
     title: {
-        text: 'Число смертей скользящей суммой за последние 12 месяцев' + (perc ? ', % от апреля 2020':'')
+        text: 'Число смертей скользящей суммой за последние 12 месяцев' + (perc ? ', % от марта 2020':'')
     },
     xAxis: {
         type: 'datetime',
@@ -126,7 +130,7 @@ Highcharts.chart('cont', {
     },
     yAxis: {
         title: {
-            text: perc? '% от апреля 2020':'человек'
+            text: perc? '% от марта 2020':'человек'
         }
     },
     tooltip: {
