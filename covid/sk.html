@@ -42,12 +42,13 @@ $.ajax({//заполняем вып.список оглавлением
 					//if(znm.charAt(0) == '\"')
 					//	znm = znm.slice(1);
 					//$("#all").append("<div>"+znm+"</div>");
+					var serie = {name:znm,data:[]};
 					if(znm.includes("федеральный округ"))
 						znm = "--------"+znm;
 					var k = $("#regions").append("<option value="+s+">"+znm+"</option>");
 					$("#all").append("<div id=cont"+s+"></div>");
 					s++;
-					var serie = {name:znm,data:[]};//,pointStart: Date.UTC(2006, 11, 1),pointInterval: 'month'};
+					//,pointStart: Date.UTC(2006, 11, 1),pointInterval: 'month'};
 						for(j in line){
 							if(j<12)
 								continue;
