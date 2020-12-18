@@ -42,6 +42,8 @@ $.ajax({//заполняем вып.список оглавлением
 					//if(znm.charAt(0) == '\"')
 					//	znm = znm.slice(1);
 					//$("#all").append("<div>"+znm+"</div>");
+					if(znm.includes("федеральный округ"))
+						znm = "--------"+znm;
 					$("#regions").append("<option value="+s+">"+znm+"</option>");
 					$("#all").append("<div id=cont"+s+"></div>");
 					s++;
