@@ -88,10 +88,14 @@ $.ajax({//заполняем вып.список оглавлением
 					
 					if (location.search != "") {
 						var lnk = linkDecode(location.search.substring(1));
-						for(var r in lnk.regs)
-							$('#regions option[value=\"'+lnk.regs[r]+'\"]').attr('selected','selected');
-						if(lnk.perc)
-							$('#perc').prop('checked', true);
+						if(lnk.reg!=undefined){
+							for(var r in lnk.regs)
+								$('#regions option[value=\"'+lnk.regs[r]+'\"]').attr('selected','selected');
+							if(lnk.perc)
+								$('#perc').prop('checked', true);
+						}
+						else
+							document.getElementById("regions").options[0].selected=true;
 					}
 					else
 						document.getElementById("regions").options[0].selected=true;

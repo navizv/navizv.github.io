@@ -89,8 +89,10 @@ $.ajax({//заполняем вып.список оглавлением
 					var s = 1;
 					if (location.search != "") {
 						var lnk = linkDecode(location.search.substring(1));
-						$('#regions option[value=\"'+lnk.reg+'\"]').attr('selected','selected');
-						s = lnk.reg;
+						if(lnk.reg!=undefined){
+							$('#regions option[value=\"'+lnk.reg+'\"]').attr('selected','selected');
+							s = lnk.reg;
+						}
 					}
 					makeChart(s);
 			}
