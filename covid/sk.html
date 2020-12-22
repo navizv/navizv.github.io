@@ -88,7 +88,7 @@ $.ajax({//заполняем вып.список оглавлением
 					
 					if (location.search != "") {
 						var lnk = linkDecode(location.search.substring(1));
-						if(lnk.reg!=undefined){
+						if(lnk.regs!=undefined){
 							for(var r in lnk.regs)
 								$('#regions option[value=\"'+lnk.regs[r]+'\"]').attr('selected','selected');
 							if(lnk.perc)
