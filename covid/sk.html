@@ -39,19 +39,20 @@ $.ajax({//заполняем вып.список оглавлением
 					var y = 2006;
 					var m = 1;
 					var line = lines[i].split(';');
-					if(line.length == 0)
+					if(line.length < 2)
 						continue;
 					var zid = i;
-					var znm = line[0];
-					names.push(znm);
+					var znm = line[1];
+					var id = line[0];
+					names[id] = znm;//names.push(znm);
 					//if(znm.charAt(0) == '\"')
 					//	znm = znm.slice(1);
 					//$("#all").append("<div>"+znm+"</div>");
 					var serie = {name:znm,data:[]};
 					if(znm.includes("федеральный округ"))
 						znm = "--------"+znm;
-					var k = $("#regions").append("<option value="+s+">"+znm+"</option>");
-					$("#all").append("<div id=cont"+s+"></div>");
+					var k = $("#regions").append("<option value="+id+">"+znm+"</option>");
+					//$("#all").append("<div id=cont"+s+"></div>");
 					s++;
 					//,pointStart: Date.UTC(2006, 11, 1),pointInterval: 'month'};
 						for(j in line){
@@ -80,12 +81,21 @@ $.ajax({//заполняем вып.список оглавлением
 						}
 						//if(m!=1)
 							rfser.push(serie);
-						rfsers.push(rfser);
+						rfsers[id] = rfser;//rfsers.push(rfser);
 						rfser = [];
 					}
 					
-					document.getElementById("regions").options[0].selected=true;
-					makeChart(0);
+					
+					if (location.search != "") {
+						var lnk = linkDecode(location.search.substring(1));
+						for(var r in lnk.regs)
+							$('#regions option[value=\"'+lnk.regs[r]+'\"]').attr('selected','selected');
+						if(lnk.perc)
+							$('#perc').prop('checked', true);
+					}
+					else
+						document.getElementById("regions").options[0].selected=true;
+					makeChart();
 				
 			}
 		});
@@ -96,7 +106,7 @@ $.ajax({//заполняем вып.список оглавлением
 		//s = el.options[el.selectedIndex].value
 		for (var n = 0; n < el.options.length; n++)
 			if (el.options[n].selected==true)
-				ss.push(n);
+				ss.push(el.options[n].value);
 	}else
 		ss=[s];
 	//console.log("kyky");
@@ -115,6 +125,12 @@ $.ajax({//заполняем вып.список оглавлением
 				tmpser[k].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/sto*100]);
 		}
 	}
+	var lnk = {
+			regs: ss,
+			perc: perc
+		};
+		var str = linkEncode(lnk);
+		window.history.pushState("", "", location.pathname + "?" + str);//'/newpage');
 Highcharts.chart('cont', {
 	chart: {
 		//width:"1000"
@@ -150,26 +166,31 @@ Highcharts.chart('cont', {
         pointStart: Date.UTC(2006, 12, 1, 0, 0, 0)
 		}
     },*/
-    series: tmpser/*[{
-        name: 'Tokyo',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-
-    }, {
-        name: 'New York',
-        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
-
-    }, {
-        name: 'London',
-        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
-
-    }, {
-        name: 'Berlin',
-        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
-
-    }]*/
+    series: tmpser
 });
-//s++;
-//}
 }
+	function linkEncode(obj){
+		var str = "";
+		$.each(obj,function (f,v){
+			if(str!="")
+				str+="&";
+			//v-massive???
+			if(f=="pars"||f=="regs"||f=="dops")
+				v = v.join("_").replace(/\//g,"\*");
+			str+=f+"="+encodeURIComponent(v);
+		});
+		return str;
+	}
+
+	function linkDecode(str){
+		var obj = {};
+		$.each(str.split("&"), function (i,v){
+			var p = v.split("=");
+			obj[p[0]] = decodeURIComponent(p[1]);
+			if(p[0]=="pars"||p[0]=="regs"||p[0]=="dops")
+				obj[p[0]] = obj[p[0]].replace(/\*/g,"\/").split("_");
+		});
+		return obj;
+	}
 </script>
 </html>
