@@ -13,7 +13,8 @@
 </head>
 <body>
 Число смертей по месяцам 
-<select id="regions" onchange="makeChart(this.options[this.selectedIndex].value)"></select>
+<select id="regions" onchange="makeChart(this.options[this.selectedIndex].value)"></select><br>
+<label><input type="checkbox" onchange="makeChart()" id="perc">в % от 2019</label><br>
 <div id="cont"></div>
 <div id="all"></div>
 См. также <a href="./sk.html">Число смертей скользящей суммой за последние 12 месяцев</a><br/><hr/>
@@ -95,21 +96,48 @@ $.ajax({//заполняем вып.список оглавлением
 						if(lnk.reg!=undefined){
 							$('#regions option[value=\"'+lnk.reg+'\"]').attr('selected','selected');
 							s = lnk.reg;
+							if(lnk.perc)
+								$('#perc').prop('checked', true);
 						}
 					}
 					makeChart(s);
 			}
 		});
 	function makeChart(s){
+		if(s==undefined){
+			var el = document.getElementById("regions");
+			s = el.options[el.selectedIndex].value;
+			/*for (var n = 0; n < el.options.length; n++)
+				if (el.options[n].selected==true){
+					ss.push(el.options[n].value);*/
+		}
+		var perc = document.getElementById("perc").checked;
 		var lnk = {
-			reg: s
+			reg: s,
+			perc: perc
 		};
 		var str = linkEncode(lnk);
 		window.history.pushState("", "", location.pathname + "?" + str);//'/newpage');
-	//console.log("kyky");
-	//console.log(rfser);
+	console.log("kyky");
+	console.log(rfsers[s]);
 	//var s = 0;
 	//for(var q in rfsers){
+	
+	if(perc){
+		var newSer = [];
+		for(var i in rfsers[s]){
+			if(rfsers[s][i].name=="2019"){
+				var etalon = rfsers[s][i].data;
+				break;
+			}
+		}
+		for(var i in rfsers[s]){
+			var row = {name:rfsers[s][i].name, color:rfsers[s][i].color, data:[]};
+			for(var j in rfsers[s][i].data)
+				row.data.push(rfsers[s][i].data[j]/etalon[j]*100);
+			newSer.push(row);
+		}
+	}
 Highcharts.chart('cont', {
     chart: {
         type: 'column'
@@ -137,7 +165,7 @@ Highcharts.chart('cont', {
     yAxis: {
         min: 0,
         title: {
-            text: 'человек'
+            text: perc?'% от соотв. месяца 2019 г.':'человек'
         }
     },
     tooltip: {
@@ -146,7 +174,8 @@ Highcharts.chart('cont', {
         //    '<td style="padding:0"><b>{point.y:.1f} тыс.чел&nbsp</b></td></tr>',
         //footerFormat: '</table>',
         shared: true,
-        useHTML: true
+        useHTML: true,
+		valueDecimals: perc?2:0
     },
     plotOptions: {
         column: {
@@ -154,7 +183,7 @@ Highcharts.chart('cont', {
             borderWidth: 0
         }
     },
-    series: rfsers[s]
+    series: perc?newSer:rfsers[s]
 });
 }
 
