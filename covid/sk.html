@@ -94,7 +94,7 @@ $.ajax({//заполняем вып.список оглавлением
 						if(lnk.regs!=undefined){
 							for(var r in lnk.regs)
 								$('#regions option[value=\"'+lnk.regs[r]+'\"]').attr('selected','selected');
-							if(lnk.perc)
+							if(lnk.perc && lnk.perc!="false")
 								$('#perc').prop('checked', true);
 						}
 						else
