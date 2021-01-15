@@ -126,7 +126,7 @@ $.ajax({//заполняем вып.список оглавлением
 		tmpser.push({name:rfsers[s][0].name, data:rfsers[s][0].data});
 		var perc = document.getElementById("perc").checked;
 		if(perc){
-			var sto = rfsers[s][0].data[160][1];
+			var sto = rfsers[s][0].data[148][1];
 			tmpser[k].data = [];
 			for(var i in rfsers[s][0].data)
 				tmpser[k].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/sto*100]);
