@@ -136,7 +136,7 @@ $.ajax({//заполняем вып.список оглавлением
 		tmpser.push({name:rfsers[s][0].name, data:rfsers[s][0].data});
 		var perc = document.getElementById("perc").checked;
 		if(perc){
-			var sto = rfsers[s][0].data[160][1];
+			var sto = rfsers[s][0].data[157][1];
 			tmpser[k].data = [];
 			for(var i in rfsers[s][0].data)
 				tmpser[k].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/sto*100]);
@@ -153,7 +153,7 @@ Highcharts.chart('cont', {
 		//width:"1000"
     },
     title: {
-        text: 'Число смертей скользящей суммой за последние 12 месяцев' + (perc ? ', % от марта 2020':'')
+        text: 'Число смертей скользящей суммой за последние 12 месяцев' + (perc ? ', % от декабря 2019':'')
     },
     xAxis: {
         type: 'datetime',
@@ -164,7 +164,7 @@ Highcharts.chart('cont', {
     },
     yAxis: {
         title: {
-            text: perc? '% от марта 2020':'человек'
+            text: perc? '% от декабря 2019':'человек'
         }
     },
     tooltip: {
