@@ -159,6 +159,7 @@ Highcharts.chart('cont', {
     xAxis: {
         type: 'datetime',
 		gridLineWidth: 1,
+		tickInterval: "year",
         labels: {
             overflow: 'justify'
         }
@@ -177,8 +178,18 @@ Highcharts.chart('cont', {
         useHTML: true,
 		valueDecimals: perc?2:0
     },
+	/*plotOptions: {
+		series : {
+			lineWidth: 1,
+			marker: {
+				enabled: true,
+				radius: 3,
+				symbol: "circle"
+			}
+		}
+	},
 	//legend:{ enabled:false },
-   /* plotOptions: {
+    plotOptions: {
 	line:{
         pointInterval: 3600000*24*30.5,
         pointStart: Date.UTC(2006, 12, 1, 0, 0, 0)
