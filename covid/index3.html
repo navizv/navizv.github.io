@@ -1,0 +1,188 @@
+﻿<html><meta http-equiv="Content-type: text/html; charset=UTF-8">
+<head><title>Covid RF</title>
+ <script src="https://code.highcharts.com/highcharts.js"></script>
+ <script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="../libs/js/jquery.min.js"></script>
+</head>
+<body>
+<!--div id="container">Число смертей</div-->
+<div id="all"></div></body>
+<script>
+var rfser = [];
+var rfsers = [];
+var names = [];
+$.ajax({//заполняем вып.список оглавлением
+			type: "GET",
+			url: "sm-06.csv",
+			dataType: "text",
+			success: function(sod) {
+				var lines = sod.split(/\r\n|\n/);
+				var s = 0;
+				for(i in lines){
+					if(i<4 || i> 200)
+						continue;
+					var y = 2006;
+					var m = 1;
+					var line = lines[i].split(';');
+					if(line.length < 2)
+						continue;
+					var zid = i;
+					var znm = line[1];
+					var id = line[0];
+					names.push(znm);
+					//if(znm.charAt(0) == '\"')
+					//	znm = znm.slice(1);
+					//$("#all").append("<div>"+znm+"</div>");
+					$("#all").append("<div><div class='regname'>"+znm+"</div><div class='chart' id=cont"+s+"></div></div>");
+					s++;
+					//if(s>10)break;
+					var serie = {data:[]};
+						for(j in line){
+							if(j<=1)
+								continue;
+							
+							if(y==2020)
+								serie.color = "#ee0000";
+							else if(y==2021)
+								serie.color = "#990000";
+							else{
+							var c = ((2020-y)*6+150).toString(16);
+								serie.color = "#"+c+c+"ff";
+								}
+							serie.name = ""+y;
+							serie.data.push(parseInt(line[j].replace(/\s/g, '')))
+							m++;
+							if(m==13){
+								m = 1;
+								y++;
+								rfser.push(serie);
+								serie = {data:[]};
+							}
+						}
+						if(m!=1)
+							rfser.push(serie);
+						rfsers.push(rfser);
+						rfser = [];
+					}
+					
+					
+					makeChart();
+				
+			}
+		});
+	function makeChart(){
+	console.log("kyky");
+	console.log(rfser);
+	var s = 0;
+	for(var q in rfsers){
+	if(true){
+		var newSer = [];
+		for(var i in rfsers[s]){
+			if(rfsers[s][i].name=="2019"){
+				var etalon = rfsers[s][i].data;
+				break;
+			}
+		}
+		var sum = 0;
+		for(var i in etalon)
+			sum += etalon[i];
+		var etalon2 = etalon.map(x=>sum/12);
+		for(var i in rfsers[s]){
+			var row = {name:rfsers[s][i].name, color:rfsers[s][i].color, data:[]};
+			for(var j in rfsers[s][i].data)
+				row.data.push(Math.round(rfsers[s][i].data[j]/etalon2[j]*10000)/100);
+			newSer.push(row);
+		}
+	}
+Highcharts.chart('cont'+s, {
+    chart: {
+		polar: true,
+        type: 'line'
+    },
+    title: {
+        text: ''//names[s]//'Число смертей'
+    },
+	legend: {
+		enabled: false
+	},
+    xAxis: {
+        categories: [
+            'Янв',
+            'Фев',
+            'Мар',
+            'Апр',
+            'Май',
+            'Июн',
+            'Июл',
+            'Авг',
+            'Сен',
+            'Окт',
+            'Ноя',
+            'Дек'
+        ],
+        crosshair: true,
+		labels: {
+			enabled: false
+		}
+    },
+    yAxis: {
+        min: 0,
+		max: 240,
+		tickInterval: 120,
+        title: {
+            //text: 'человек'
+        },
+		labels: {
+			enabled: false
+		}
+    },
+    tooltip: {
+        //headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        //pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        //    '<td style="padding:0"><b>{point.y:.1f} тыс.чел&nbsp</b></td></tr>',
+        //footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: newSer/*rfsers[s]/*[{
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+    }, {
+        name: 'New York',
+        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+
+    }, {
+        name: 'London',
+        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+    }, {
+        name: 'Berlin',
+        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+
+    }]*/
+});
+s++;
+}
+}
+</script>
+<style>
+.chart{
+	width: 250px;
+	height: 300px;
+}
+#all{
+	display: flex;
+	flex-wrap: wrap;
+}
+</style>
+</html>
