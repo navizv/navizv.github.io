@@ -17,19 +17,32 @@
 <script src="../libs/js/jquery.min.js"></script>
 </head>
 <body>
-Число смертей скользящей суммой за последние 12 месяцев <br>
+Число смертей скользящей суммой за последние <select id="months" onchange="getData()"> <option value="12" checked>12 месяцев</option><option value="24" checked>24 месяца</option> </select><br>
+(для выделения нескольких регионов/стран зажимайте славишу Ctrl) <br>
 <select multiple size=8 id="regions" onchange="makeChart()"></select><br>
-<label><input type="checkbox" onchange="makeChart()" id="perc">в % от декабря 2019</label><br>
+<label><input type="checkbox" onchange="makeChart()" id="perc">в % от декабря 2019</label>, <label><input type="checkbox" onchange="makeChart()" id="dots">точки на графиках</label><br>
 <div style="max-width:1000px;" id="cont"></div>
 <div id="all"></div>
-См. также <a href="./">Число смертей по месяцам</a>, <a href="./sk2.html">Число смертей скользящей суммой за последние 24 месяца</a>, <a href="./map_ru20.svg">Карта по регионам России за 2020-й</a><br/><hr/>
+См. также <a href="./">Число смертей по месяцам</a>, <a href="./map_ru20.svg">Карта по регионам России за 2020-й</a><br/><hr/>
         <iframe src="footer.html" onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()" hidden="true"></iframe>
 		</body>
 <script>
 var rfser = [];
 var rfsers = [];
 var names = [];
-$.ajax({//заполняем вып.список оглавлением
+getData();
+function getData(){
+	var isNew = $("#regions").text() == "";
+					var e = document.getElementById("months");
+ rfser = [];
+ rfsers = [];
+ names = [];
+ if (location.search != ""){
+	var lnk = linkDecode(location.search.substring(1));
+	if(lnk.months && isNew)
+		e.value = lnk.months;
+	}
+ $.ajax({//заполняем вып.список оглавлением
 			type: "GET",
 			url: "sm-06.csv",
 			dataType: "text",
@@ -54,12 +67,14 @@ $.ajax({//заполняем вып.список оглавлением
 					var serie = {name:znm,data:[]};
 					if(znm.includes("федеральный округ"))
 						znm = "--------"+znm;
-					var k = $("#regions").append("<option value="+id+">"+znm+"</option>");
+					if(isNew)
+						$("#regions").append("<option value="+id+">"+znm+"</option>");
 					//$("#all").append("<div id=cont"+s+"></div>");
 					s++;
 					//,pointStart: Date.UTC(2006, 11, 1),pointInterval: 'month'};
+					var shift = parseInt(e.value) - 1;
 						for(j in line){
-							if(j<12)
+							if(j<parseInt(e.value))//12)
 								continue;
 							
 							/*if(y==2020)
@@ -70,7 +85,9 @@ $.ajax({//заполняем вып.список оглавлением
 								}*/
 							//serie.name = ""+y;
 							var sks = 0;
-							for(var k = j-11;k<=j;k++){
+							
+							
+							for(var k = j-shift;k<=j;k++){
 								sks+=parseInt(line[k].replace(/\s/g, ''));
 							}
 							serie.data.push([Date.UTC(2006, j-2, 1),sks]);
@@ -94,11 +111,15 @@ $.ajax({//заполняем вып.список оглавлением
 						if(lnk.regs!=undefined){
 							for(var r in lnk.regs)
 								$('#regions option[value=\"'+lnk.regs[r]+'\"]').attr('selected','selected');
-							if(lnk.perc && lnk.perc!="false")
-								$('#perc').prop('checked', true);
 						}
 						else
 							document.getElementById("regions").options[0].selected=true;
+						if(lnk.perc && lnk.perc!="false")
+							$('#perc').prop('checked', true);
+						if(lnk.dots && lnk.dots!="false")
+							$('#dots').prop('checked', true);
+						if(lnk.months && isNew)
+							e.value = lnk.months;
 					}
 					else
 						document.getElementById("regions").options[0].selected=true;
@@ -106,8 +127,11 @@ $.ajax({//заполняем вып.список оглавлением
 				
 			}
 		});
+		}
 	function makeChart(s){
 	var ss = [];
+	var e = document.getElementById("months");
+	
 	if(s==undefined){
 		var el = document.getElementById("regions");
 		//s = el.options[el.selectedIndex].value
@@ -126,7 +150,7 @@ $.ajax({//заполняем вып.список оглавлением
 		tmpser.push({name:rfsers[s][0].name, data:rfsers[s][0].data});
 		var perc = document.getElementById("perc").checked;
 		if(perc){
-			var sto = rfsers[s][0].data[157][1];
+			var sto = rfsers[s][0].data[169-parseInt(e.value)][1];
 			tmpser[k].data = [];
 			for(var i in rfsers[s][0].data)
 				tmpser[k].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/sto*100]);
@@ -134,7 +158,8 @@ $.ajax({//заполняем вып.список оглавлением
 	}
 	var lnk = {
 			regs: ss,
-			perc: perc
+			perc: perc,
+			months: e.value
 		};
 		var str = linkEncode(lnk);
 		window.history.pushState("", "", location.pathname + "?" + str);//'/newpage');
@@ -143,7 +168,7 @@ Highcharts.chart('cont', {
 		//width:"1000"
     },
     title: {
-        text: 'Число смертей скользящей суммой за последние 12 месяцев' + (perc ? ', % от декабря 2019':'')
+        text: 'Число смертей скользящей суммой за последние ' + e.options[e.selectedIndex].text + (perc ? ', % от декабря 2019':'')
     },
     xAxis: {
         type: 'datetime',
@@ -167,7 +192,7 @@ Highcharts.chart('cont', {
         useHTML: true,
 		valueDecimals: perc?2:0
     },
-	/*plotOptions: {
+	plotOptions: !document.getElementById("dots").checked? {}:{
 		series : {
 			lineWidth: 1,
 			marker: {
@@ -177,7 +202,7 @@ Highcharts.chart('cont', {
 			}
 		}
 	},
-	//legend:{ enabled:false },
+	/*//legend:{ enabled:false },
     plotOptions: {
 	line:{
         pointInterval: 3600000*24*30.5,
