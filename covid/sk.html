@@ -159,7 +159,8 @@ function getData(){
 	var lnk = {
 			regs: ss,
 			perc: perc,
-			months: e.value
+			months: e.value,
+			dots: document.getElementById("dots").checked
 		};
 		var str = linkEncode(lnk);
 		window.history.pushState("", "", location.pathname + "?" + str);//'/newpage');
