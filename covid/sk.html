@@ -18,7 +18,7 @@
 </head>
 <body>
 Число смертей скользящей суммой за последние <select id="months" onchange="getData()"> <option value="12" checked>12 месяцев</option><option value="24" checked>24 месяца</option> </select><br>
-(для выделения нескольких регионов/стран зажимайте славишу Ctrl) <br>
+(для выделения нескольких регионов/стран зажимайте клавишу Ctrl) <br>
 <select multiple size=8 id="regions" onchange="makeChart()"></select><br>
 <label><input type="checkbox" onchange="makeChart()" id="perc">в % от декабря 2019</label>, <label><input type="checkbox" onchange="makeChart()" id="dots">точки на графиках</label><br>
 <div style="max-width:1000px;" id="cont"></div>
