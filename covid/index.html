@@ -24,7 +24,8 @@
 <body>
 Число смертей по месяцам 
 <select id="regions" onchange="makeChart(this.options[this.selectedIndex].value)"></select><br>
-<label><input type="checkbox" onchange="makeChart()" id="perc">в % от 2019</label><br>
+<label><input type="checkbox" onchange="makeChart()" id="perc">в % от 2019</label>
+<label><input type="checkbox" onchange="makeChart()" id="graph">график</label><br>
 <div id="cont"></div>
 <div id="all"></div>
 См. также <a href="./sk.html">Число смертей скользящей суммой за последние 12 месяцев (24 месяца)</a>, <a href="./map_ru20.svg">Карта по регионам России за 2020-й</a><br/><hr/>
@@ -41,7 +42,6 @@ $.ajax({//заполняем вып.список оглавлением
 			success: function(sod) {
 				var lines = sod.split(/\r\n|\n/);
 				var s = 0;
-				
 				for(i in lines){
 					if(i<4 || i> 200)
 						continue;
@@ -99,6 +99,8 @@ $.ajax({//заполняем вып.список оглавлением
 							s = lnk.reg;
 							if(lnk.perc && lnk.perc!="false")
 								$('#perc').prop('checked', true);
+							if(lnk.graph && lnk.graph!="false")
+								$('#graph').prop('checked', true);
 						}
 					}
 					makeChart(s);
@@ -113,9 +115,11 @@ $.ajax({//заполняем вып.список оглавлением
 					ss.push(el.options[n].value);*/
 		}
 		var perc = document.getElementById("perc").checked;
+		var graph = document.getElementById("graph").checked;
 		var lnk = {
 			reg: s,
-			perc: perc
+			perc: perc,
+			graph: graph
 		};
 		var str = linkEncode(lnk);
 		window.history.pushState("", "", location.pathname + "?" + str);//'/newpage');
@@ -139,15 +143,28 @@ $.ajax({//заполняем вып.список оглавлением
 			newSer.push(row);
 		}
 	}
-Highcharts.chart('cont', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Число смертей, '+names[s]//'Число смертей'
-    },
-    xAxis: {
-        categories: [
+	if(graph){
+	var sers = perc?newSer:rfsers[s];
+		var gSer = [];
+		var gx = [];
+		var m = 0;
+		var row = {name:"Число смертей", color:"blue", data:[]};
+		for(var i in sers){
+			for(var j in sers[i].data)
+				row.data.push([Date.UTC(2006, m++, 1),sers[i].data[j]]);
+			//newSer.push(row);
+		}
+		gSer.push(row);
+		console.log("gSer",gSer);
+	}
+	var xAxis = graph?{crosshair: true,
+		type: 'datetime',
+		gridLineWidth: 1,
+		tickInterval: "year",
+        labels: {
+            overflow: 'justify'
+        }}:
+	{categories: [
             'Янв',
             'Фев',
             'Мар',
@@ -160,9 +177,18 @@ Highcharts.chart('cont', {
             'Окт',
             'Ноя',
             'Дек'
-        ],
-        crosshair: true
+        ],crosshair: true};
+Highcharts.chart('cont', {
+    chart: {
+        type: graph?'line':'column'
     },
+    title: {
+        text: 'Число смертей, '+names[s]//'Число смертей'
+    },
+    xAxis: xAxis,
+	legend:{
+		enabled: !graph
+	},
     yAxis: {
         min: 0,
         title: {
@@ -184,7 +210,7 @@ Highcharts.chart('cont', {
             borderWidth: 0
         }
     },
-    series: perc?newSer:rfsers[s]
+    series: graph?gSer:perc?newSer:rfsers[s]
 });
 }
 
