@@ -6,10 +6,31 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="../libs/js/jquery.min.js"></script>
+<style>
+.regname{
+	height: 40px;
+	width: 250px;
+	word-wrap: break-word;
+	text-align: center;
+}
+.chart{
+	width: 250px;
+	height: 300px;
+}
+#all{
+	display: flex;
+	flex-wrap: wrap;
+}
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+</style>
 </head>
 <body>
 <!--div id="container">Число смертей</div-->
-<label><input type="checkbox" onchange="makeChart()" id="polar">polar</label></br>
+<h3>Число умерших в каждом месяце</h3>
+<label><input type="checkbox" onchange="makeChart()" id="polar">polar</label><br/>
 <div id="all"></div></body>
 <script>
 var rfser = [];
@@ -37,6 +58,8 @@ $.ajax({//заполняем вып.список оглавлением
 					//if(znm.charAt(0) == '\"')
 					//	znm = znm.slice(1);
 					//$("#all").append("<div>"+znm+"</div>");
+					if(znm.includes("федеральный округ"))
+						$("#all").append("<div class='break'></div>");
 					$("#all").append("<div><div class='regname'>"+znm+"</div><div class='chart' id=cont"+s+"></div></div>");
 					s++;
 					//if(s>10)break;
@@ -137,10 +160,10 @@ Highcharts.chart('cont'+s, {
     },
     yAxis: {
         min: 0,
-		max: 240,
-		tickInterval: 120,
+		max: 250,
+		tickInterval: 50,
         title: {
-            //text: 'человек'
+            text: '% от среднемесячного за 2019'
         },
 		labels: {
 			enabled: false
@@ -206,14 +229,4 @@ s++;
 		return obj;
 	}
 </script>
-<style>
-.chart{
-	width: 250px;
-	height: 300px;
-}
-#all{
-	display: flex;
-	flex-wrap: wrap;
-}
-</style>
 </html>
