@@ -20,7 +20,7 @@
 Число смертей скользящей суммой за последние <select id="months" onchange="getData()"> <option value="12" checked>12 месяцев</option><option value="24" checked>24 месяца</option> </select><br>
 (для выделения нескольких регионов/стран зажимайте клавишу Ctrl) <br>
 <select multiple size=8 id="regions" onchange="makeChart()"></select><br>
-<label><input type="checkbox" onchange="makeChart()" id="perc">в % от декабря 2019</label>, <label><input type="checkbox" onchange="makeChart()" id="dots">точки на графиках</label><br>
+<label><input type="radio" onchange="makeChart()" name="perc" value="false" id="perc_false" checked>абсолютные значения</label>, <label><input type="radio" onchange="makeChart()" name="perc" value="true" id="perc_true">в % от декабря 2019</label>, <label><input type="radio" onchange="makeChart()" name="perc" value="trend" id="perc_trend">в % тренда 12.2016-12.2019</label>, <label><input type="checkbox" onchange="makeChart()" id="dots">точки на графиках</label><br>
 <div style="max-width:1000px;" id="cont"></div>
 <div id="all"></div>
 См. также <a href="./">Число смертей по месяцам</a>, <a href="./map_ru20.svg">Карта по регионам России за 2020-й</a>, <a href="./2021_1819_1.svg">2020-2021-й</a><br/>
@@ -116,7 +116,7 @@ function getData(){
 						else
 							document.getElementById("regions").options[0].selected=true;
 						if(lnk.perc && lnk.perc!="false")
-							$('#perc').prop('checked', true);
+							$('#perc_'+lnk.perc).prop('checked', true);
 						if(lnk.dots && lnk.dots!="false")
 							$('#dots').prop('checked', true);
 						if(lnk.months && isNew)
@@ -149,17 +149,53 @@ function getData(){
 	for(var k in ss){
 		s = ss[k];
 		tmpser.push({name:rfsers[s][0].name, data:rfsers[s][0].data});
-		var perc = document.getElementById("perc").checked;
+		var perc = document.getElementById("perc_true").checked;
 		if(perc){
 			var sto = rfsers[s][0].data[169-parseInt(e.value)][1];
 			tmpser[k].data = [];
 			for(var i in rfsers[s][0].data)
 				tmpser[k].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/sto*100]);
 		}
+		var perc2 = document.getElementById("perc_trend").checked;
+		if(perc2){
+			//var sto = rfsers[s][0].data[169-parseInt(e.value)][1];
+			var fst = 0;
+			var xm = 0;
+			var ym = 0;
+			var xys = 0;
+			var x2s = 0;
+			var cnt = 0;
+			for(var i in rfsers[s][0].data)
+				if(rfsers[s][0].data[i][1]>0 && i <= 169-parseInt(e.value) && i >= 169-parseInt(e.value)-36){
+					//fst = i;
+					//break;
+					cnt++;
+					xm += 1*i;
+					ym += 1*rfsers[s][0].data[i][1];
+					xys += i*rfsers[s][0].data[i][1];
+					x2s += i*i;
+				}
+			console.log(cnt);
+			console.log(xm);
+			xm /= cnt;
+			ym /= cnt;
+			console.log(xm);
+			var cf = (xys-cnt*xm*ym)/(x2s-cnt*xm*xm);
+			var y0 =  ym-cf*xm;
+			
+			//var sto1 = rfsers[s][0].data[fst][1];
+			//console.log(sto1);
+			//var dx = 169-parseInt(e.value)-fst;
+			//var coeff = (sto-sto1)/dx;
+			tmpser[k].data = [];
+			
+			for(var i in rfsers[s][0].data)
+				tmpser[k].data.push([rfsers[s][0].data[i][0], rfsers[s][0].data[i][1]/(y0+cf*i)*100]);//(sto1+coeff*(i-fst))*100]);
+		}
 	}
 	var lnk = {
 			regs: ss,
-			perc: perc,
+			perc: document.querySelector('input[name="perc"]:checked').value,
 			months: e.value,
 			dots: document.getElementById("dots").checked
 		};
@@ -182,7 +218,7 @@ Highcharts.chart('cont', {
     },
     yAxis: {
         title: {
-            text: perc? '% от декабря 2019':'человек'
+            text: perc2?"в % тренда 12.2016-12.2019":perc? '% от декабря 2019':'человек'
         }
     },
     tooltip: {
