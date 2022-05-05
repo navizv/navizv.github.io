@@ -165,7 +165,10 @@ if(opts.showLegend){
         rec.setAttribute('y',cury);
         rec.setAttribute('width','30');
         rec.setAttribute('height','300');
-        rec.setAttribute('fill','url(#grad1)');
+		if(opts.revertColors)
+			rec.setAttribute('fill','url(#grad2)');
+		else
+			rec.setAttribute('fill','url(#grad1)');
         for(i = 0; i < cn; i++){
             var rec = svgd.getElementById('leg'+(i+1));
             rec.setAttribute('x','1100');
@@ -258,6 +261,8 @@ cur = c;
         if(el != null){
             if(opts.coltype=='Gradient'){
                 var pr = (cur-min)/(max-min);
+				if(opts.revertColors)
+					pr = 1 - pr;
                 var strcol;
                 if(pr<=0.5){
                     var col = Math.round(2*pr*255);

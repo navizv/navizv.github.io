@@ -103,9 +103,10 @@ US-IL;9;7;10</textarea>
         </table>
       </div>
     </td><td valign="top">
-<input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales<br/>
-<input type="checkbox" id="showLeg" name="showLeg" checked/>Show legend<br/>
-<input type="checkbox" id="nolink" name="nolink" checked/>Hide link<br/>
+<label><input type="checkbox" id="scales" name="scales" value="" onchange="setscales()"/>Set my scales</label><br/>
+<label><input type="checkbox" id="showLeg" name="showLeg" checked/>Show legend</label><br/>
+<label><input type="checkbox" id="nolink" name="nolink"/>Hide link</label><br/>
+<label><input type="checkbox" id="revert" name="revert"/>Revert colors (for gradient)</label><br/>
 Map:<br/>
 	<select size="1" name="maps" id="maps" onchange="mapSel()"></select><br/>
 Color for 'no data':
@@ -345,7 +346,8 @@ if(!scales.checked)
     coltype : coltype.value,
     showLegend : showLeg.checked,
     noDataColor : noDataColor.value,
-    noLink : nolink.checked
+    noLink : nolink.checked,
+    revertColors : revert.checked
   }
 	
   zimap_draw_x(data,svgd,colors,j,colsep.value,parseInt(rownum.value)-1,options,isos,scs);

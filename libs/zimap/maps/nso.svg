@@ -14,6 +14,11 @@
       <stop offset="50%" style="stop-color:rgb(255,255,0);stop-opacity:1"/>
       <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1"/>
     </linearGradient>
+	<linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(255,0,0);stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:rgb(255,255,0);stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:rgb(0,255,0);stop-opacity:1"/>
+    </linearGradient>
 </defs>
   <sodipodi:namedview bordercolor="#666666" borderlayer="true" borderopacity="1" gridtolerance="10" guidetolerance="10" id="namedview827" inkscape:current-layer="layer1" inkscape:cx="405.39731" inkscape:cy="338.58305" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="1059" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="-6" inkscape:window-y="-6" inkscape:zoom="1" objecttolerance="10" pagecolor="#ffffff" showgrid="false"/>
   <g id="layer1" inkscape:groupmode="layer" inkscape:label="Layer">
