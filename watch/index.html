@@ -1,0 +1,54 @@
+<svg viewBox="0 0 120 120" version="1.1" id="cb"
+  xmlns="http://www.w3.org/2000/svg">
+<style>
+    .number {
+      font: 6px sans-serif;
+	fill: white;
+    }
+
+</style>
+  <circle cx="24" cy="24" r="20"/>
+  <text x="20" y="11" class="number" id="aaa">12</text>
+  <text x="22" y="11" class="number" id="aaa">1</text>
+  <text x="22" y="11" class="number" id="aaa">2</text>
+  <text x="22" y="11" class="number" id="aaa">3</text>
+  <text x="22" y="11" class="number" id="aaa">4</text>
+  <text x="22" y="11" class="number" id="aaa">5</text>
+  <text x="22" y="11" class="number" id="aaa">6</text>
+  <text x="22" y="11" class="number" id="aaa">7</text>
+  <text x="22" y="11" class="number" id="aaa">8</text>
+  <text x="22" y="11" class="number" id="aaa">9</text>
+  <text x="20" y="11" class="number" id="aaa">10</text>
+  <text x="20" y="11" class="number" id="aaa">11</text>
+  <rect x="23.4" y="14" width="1.2" height="10" id="ch" style="fill: white;"/>
+  <rect x="23.7" y="12" width="0.6" height="12" id="mi" style="fill: white;"/>
+  <rect x="23.9" y="11" width="0.2" height="13" id="se" style="fill: red;"/>
+</svg>
+<script>
+rotateNumbers();
+setInterval(setStrelki,1000);
+
+function rotateNumbers(){
+var cs = document.querySelectorAll(".number");
+for(var i =0; i < cs.length; i++) {
+	//console.log(cs[i]);
+	console.log(cs[i].getAttribute("x"));
+var deg = i*360/12;
+	console.log(deg);
+rotateMe(cs[i], deg);
+}
+}
+
+function setStrelki(){
+var dt = new Date();
+var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
+rotateMe(document.querySelector("#ch"), secs*360/(60*60*12));
+rotateMe(document.querySelector("#mi"), secs*360/(60*60));
+rotateMe(document.querySelector("#se"), secs*360/(60));
+}
+
+function rotateMe (el, deg){
+	var attrValue = "rotate("+deg+", 24, 24)";
+    el.setAttribute('transform', attrValue);
+}
+</script>
