@@ -57,8 +57,11 @@ rotateMe(cs[i], deg);
 
 function rotateTzs(){
 var cs = document.querySelectorAll(".tz");
+var dt = new Date();
+var ofs = dt.getTimezoneOffset();
+//alert(ofs);
 for(var i =0; i < cs.length; i++) {
-var deg = i*360/12;
+var deg = i*360/12 + (300+ofs)*360/(12*60);
 rotateMe(cs[i], deg);
 }
 }
