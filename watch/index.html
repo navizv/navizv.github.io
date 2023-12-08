@@ -54,6 +54,8 @@ rotateTzs();
 createTicks();
 setStrelki();
 setInterval(setStrelki,1000);
+if(window.location.search == "?demo")
+	document.body.style.background = "#ddd";
 function rotateNumbers(){
 var cs = document.querySelectorAll(".number");
 for(var i =0; i < cs.length; i++) {
@@ -78,6 +80,8 @@ rotateMe(cs[i], deg);
 function setStrelki(){
 var dt = new Date();
 var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
+if(window.location.search == "?demo")
+	secs = 32+10*60+10*60*60;
 rotateMe(document.querySelector("#ch"), secs*360/(60*60*12));
 rotateMe(document.querySelector("#tzs"), secs*360/(60*60*12));
 rotateMe(document.querySelector("#mi"), secs*360/(60*60));
