@@ -89,7 +89,6 @@ function createTicks(){
  for(var i = 1; i < 60; i++) {
  var nri = ri.cloneNode(true);
  rotateMe(nri, i*360/(60));
- console.log(i%5);
  if(i%5 != 0)
 	nri.setAttribute("height",0.2);
  ri.parentNode.insertBefore(nri, ri.nextSibling);
