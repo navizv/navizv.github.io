@@ -18,17 +18,18 @@
 </style>
   <circle cx="24" cy="24" r="20"/>
   <text x="21" y="11" class="number">12</text>
-  <text x="23" y="11" class="number">1</text>
-  <text x="23" y="11" class="number">2</text>
-  <text x="23" y="11" class="number">3</text>
-  <text x="23" y="11" class="number">4</text>
-  <text x="23" y="11" class="number">5</text>
-  <text x="23" y="11" class="number">6</text>
-  <text x="23" y="11" class="number">7</text>
-  <text x="23" y="11" class="number">8</text>
-  <text x="23" y="11" class="number">9</text>
+  <text x="22.5" y="11" class="number">1</text>
+  <text x="22.7" y="11" class="number">2</text>
+  <text x="22.6" y="11" class="number">3</text>
+  <text x="22.7" y="11" class="number">4</text>
+  <text x="22.7" y="11" class="number">5</text>
+  <text x="22.6" y="11" class="number">6</text>
+  <text x="22.7" y="11" class="number">7</text>
+  <text x="22.7" y="11" class="number">8</text>
+  <text x="22.6" y="11" class="number">9</text>
   <text x="21" y="11" class="number">10</text>
   <text x="21" y="11" class="number">11</text>
+  <rect x="23.95" y="10.3" width="0.1" height="0.7" id="ri" style="fill: white;"/>
 <g id="tzs">
   <g class="tz"><text x="22.8" y="14">ЕК</text><circle cx="24" cy="12" r="0.2"/></g>
   <g class="tz"><text x="22.6" y="14">ОМ</text><circle cx="24" cy="12" r="0.2"/></g>
@@ -50,13 +51,14 @@
 <script>
 rotateNumbers();
 rotateTzs();
+createTicks();
 setStrelki();
 setInterval(setStrelki,1000);
 function rotateNumbers(){
 var cs = document.querySelectorAll(".number");
 for(var i =0; i < cs.length; i++) {
 var deg = i*360/12;
-cs[i].setAttribute("y",10);
+cs[i].setAttribute("y",9.5);
 rotateMe(cs[i], deg);
 }
 }
@@ -82,7 +84,19 @@ rotateMe(document.querySelector("#mi"), secs*360/(60*60));
 rotateMe(document.querySelector("#se"), secs*360/(60));
 }
 
-function rotateMe (el, deg){
+function createTicks(){
+ var ri = document.getElementById("ri");
+ for(var i = 1; i < 60; i++) {
+ var nri = ri.cloneNode(true);
+ rotateMe(nri, i*360/(60));
+ console.log(i%5);
+ if(i%5 != 0)
+	nri.setAttribute("height",0.2);
+ ri.parentNode.insertBefore(nri, ri.nextSibling);
+ }
+}
+
+function rotateMe(el, deg){
 	var attrValue = "rotate("+deg+", 24, 24)";
     el.setAttribute('transform', attrValue);
 }
