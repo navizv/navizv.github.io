@@ -63,14 +63,15 @@
   <rect x="23.9" y="11" width="0.2" height="14" id="se" style="fill: red;"/>
 </svg>
 <script>
+//isDSTUS(new Date());
 rotateNumbers();
 rotateTzs();
 createTicks();
 setStrelki();
 setInterval(setStrelki,1000);
-if(window.location.search == "?demo")
+if(window.location.search.includes("demo"))
 	document.body.style.background = "#ddd";
-if(window.location.search != "?eus")
+if(!window.location.search.includes("eus"))
 	document.querySelector("#eus").setAttribute("visibility", "hidden");
 function rotateNumbers(){
 var cs = document.querySelectorAll(".number");
@@ -81,16 +82,59 @@ rotateMe(cs[i], deg);
 }
 }
 
+function isDSTEU(d){
+	var m = d.getMonth();
+	if(m>=10 || m<=1)
+		return false;
+	if(m>=3 && m<=8)
+		return true;
+	if(m==2)
+		if(d.getDate() - d.getDay() + 7 > 31)
+			return true;
+		else
+			return false;
+	if(m==9)
+		if(d.getDate() - d.getDay() + 7 > 31)
+			return false;
+		else
+			return true;		
+}
+
+function isDSTUS(d){
+	var m = d.getMonth();
+	if(m>=11 || m<=1)
+		return false;
+	if(m>=3 && m<=9)
+		return true;
+	if(m==2)
+		if(d.getDate() - d.getDay() > 7)
+			return true;
+		else
+			return false;
+	if(m==10)
+		if(d.getDate() - d.getDay() > 0)
+			return false;
+		else
+			return true;		
+}
+
 function rotateTzs(){
 var cs = document.querySelectorAll(".tz");
 var dt = new Date();
+//dt.setMonth(10)
+//dt.setDate(3)
 var ofs = dt.getTimezoneOffset();
 //alert(ofs);
 for(var i =0; i < cs.length; i++) {
 var j = i;
 if(i>=12) {
 	j = 21 - i;
-	if(i>=15) j-=4;
+	if(i>=15) {
+		j-=4;
+		if(isDSTUS(dt))
+			j++;
+	}else if(isDSTEU(dt))
+		j++;
 }
 var deg = j*360/12 + (300+ofs)*360/(12*60);
 rotateMe(cs[i], deg);
@@ -101,7 +145,7 @@ rotateMe(cs[i], deg);
 function setStrelki(){
 var dt = new Date();
 var secs = dt.getSeconds() + (60 * dt.getMinutes()) + (60 * 60 * dt.getHours());
-if(window.location.search == "?demo")
+if(window.location.search.includes("demo"))
 	secs = 32+10*60+10*60*60;
 rotateMe(document.querySelector("#ch"), secs*360/(60*60*12));
 rotateMe(document.querySelector("#tzs"), secs*360/(60*60*12));
