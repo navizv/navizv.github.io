@@ -4,7 +4,7 @@
     background-color: #333;
    } 
 </style>
-<svg viewBox="0 0 120 120" version="1.1" id="cb"
+<svg viewBox="0 0 120 80" version="1.1" id="cb"
   xmlns="http://www.w3.org/2000/svg">
 <style>
     .number {
@@ -43,6 +43,15 @@
   <g class="tz"><text x="22.8" y="14">КЛ</text><circle cx="24" cy="12" r="0.2"/></g>
   <g class="tz"><text x="22.6" y="14">МС</text><circle cx="24" cy="12" r="0.2"/></g>
   <g class="tz"><text x="22.6" y="14">СМ</text><circle cx="24" cy="12" r="0.2"/></g>
+  <g id="eus">
+  <g class="tz"><text x="22.6" y="17">CE</text><circle cx="24" cy="12" r="0.2"/></g>
+  <g class="tz"><text x="22.6" y="17">UK</text><circle cx="24" cy="12" r="0.2"/></g>
+  <g class="tz"><text x="22.8" y="17">NY</text><circle cx="24" cy="12" r="0.2"/></g>
+  <g class="tz"><text x="22.6" y="17">CH</text><circle cx="24" cy="12" r="0.2"/></g>
+  <g class="tz"><text x="22.8" y="17">DE</text><circle cx="24" cy="12" r="0.2"/></g>
+  <g class="tz"><text x="22.9" y="17">LA</text><circle cx="24" cy="12" r="0.2"/></g>
+  </g>
+  
 </g>
   <rect x="23.4" y="15.2" width="1.2" height="8.8" id="ch" style="fill: white;"/>
   <rect x="23.7" y="12" width="0.6" height="12" id="mi" style="fill: white;"/>
@@ -56,6 +65,8 @@ setStrelki();
 setInterval(setStrelki,1000);
 if(window.location.search == "?demo")
 	document.body.style.background = "#ddd";
+if(window.location.search != "?eus")
+	document.querySelector("#eus").setAttribute("visibility", "hidden");
 function rotateNumbers(){
 var cs = document.querySelectorAll(".number");
 for(var i =0; i < cs.length; i++) {
@@ -71,7 +82,14 @@ var dt = new Date();
 var ofs = dt.getTimezoneOffset();
 //alert(ofs);
 for(var i =0; i < cs.length; i++) {
-var deg = i*360/12 + (300+ofs)*360/(12*60);
+var j = i;
+if(i>=12) {
+	j = 20 - i;
+	if(i>=14) j-=4;
+	
+}
+var deg = j*360/12 + (300+ofs)*360/(12*60);
+
 rotateMe(cs[i], deg);
 }
 }
