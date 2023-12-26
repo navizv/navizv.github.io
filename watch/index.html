@@ -48,6 +48,7 @@
   <g class="tz"><text x="22.6" y="14">МС</text><circle cx="24" cy="12" r="0.2"/></g>
   <g class="tz"><text x="22.6" y="14">СМ</text><circle cx="24" cy="12" r="0.2"/></g>
   <g id="eus">
+  <g class="tz"><text x="22.7" y="17">EE</text></g>
   <g class="tz"><text x="22.6" y="17">CE</text></g>
   <g class="tz"><text x="22.6" y="17">UK</text></g>
   <g class="tz"><text x="22.8" y="17">NY</text></g>
@@ -88,8 +89,8 @@ var ofs = dt.getTimezoneOffset();
 for(var i =0; i < cs.length; i++) {
 var j = i;
 if(i>=12) {
-	j = 20 - i;
-	if(i>=14) j-=4;
+	j = 21 - i;
+	if(i>=15) j-=4;
 }
 var deg = j*360/12 + (300+ofs)*360/(12*60);
 rotateMe(cs[i], deg);
