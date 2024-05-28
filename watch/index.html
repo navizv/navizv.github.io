@@ -21,18 +21,32 @@
     }
 </style>
   <circle cx="24" cy="24" r="20"/>
-  <text x="21" y="11" class="number">12</text>
-  <text x="22.5" y="11" class="number">1</text>
-  <text x="22.7" y="11" class="number">2</text>
-  <text x="22.6" y="11" class="number">3</text>
-  <text x="22.7" y="11" class="number">4</text>
-  <text x="22.7" y="11" class="number">5</text>
-  <text x="22.6" y="11" class="number">6</text>
-  <text x="22.7" y="11" class="number">7</text>
-  <text x="22.7" y="11" class="number">8</text>
-  <text x="22.6" y="11" class="number">9</text>
-  <text x="21" y="11" class="number">10</text>
-  <text x="21" y="11" class="number">11</text>
+  <text x="22.7" y="11" class="number amh">0</text>
+  <text x="22.5" y="11" class="number amh">1</text>
+  <text x="22.7" y="11" class="number amh">2</text>
+  <text x="22.6" y="11" class="number amh">3</text>
+  <text x="22.7" y="11" class="number amh">4</text>
+  <text x="22.7" y="11" class="number amh">5</text>
+  <text x="22.6" y="11" class="number amh">6</text>
+  <text x="22.7" y="11" class="number amh">7</text>
+  <text x="22.7" y="11" class="number amh">8</text>
+  <text x="22.6" y="11" class="number amh">9</text>
+  <text x="21" y="11" class="number amh">10</text>
+  <text x="21" y="11" class="number amh">11</text>
+  
+  <text x="21" y="11" class="number pmh">12</text>
+  <text x="21.0" y="11" class="number pmh">13</text>
+  <text x="21.2" y="11" class="number pmh">14</text>
+  <text x="21.1" y="11" class="number pmh">15</text>
+  <text x="21.2" y="11" class="number pmh">16</text>
+  <text x="21.2" y="11" class="number pmh">17</text>
+  <text x="21.1" y="11" class="number pmh">18</text>
+  <text x="21.2" y="11" class="number pmh">19</text>
+  <text x="21.2" y="11" class="number pmh">20</text>
+  <text x="21.1" y="11" class="number pmh">21</text>
+  <text x="21" y="11" class="number pmh">22</text>
+  <text x="21" y="11" class="number pmh">23</text>
+  
   <rect x="23.95" y="10.3" width="0.1" height="0.7" id="ri" style="fill: gray;"/>
 <g id="tzs">
   <g class="tz"><text x="22.8" y="14">ЕК</text><circle cx="24" cy="12" r="0.2"/></g>
@@ -73,12 +87,19 @@ if(window.location.search.includes("demo"))
 	document.body.style.background = "#ddd";
 if(!window.location.search.includes("eus"))
 	document.querySelector("#eus").setAttribute("visibility", "hidden");
+
 function rotateNumbers(){
 var cs = document.querySelectorAll(".number");
 for(var i =0; i < cs.length; i++) {
 var deg = i*360/12;
 cs[i].setAttribute("y",9.5);
 rotateMe(cs[i], deg);
+
+if(!window.location.search.includes("24")){
+	if(!(i>0 && i<13))
+		cs[i].setAttribute("visibility", "hidden");
+}
+		
 }
 }
 
@@ -151,6 +172,17 @@ rotateMe(document.querySelector("#ch"), secs*360/(60*60*12));
 rotateMe(document.querySelector("#tzs"), secs*360/(60*60*12));
 rotateMe(document.querySelector("#mi"), secs*360/(60*60));
 rotateMe(document.querySelector("#se"), secs*360/(60));
+
+if(window.location.search.includes("24")){
+var cs = document.querySelectorAll(".number");
+var hr = dt.getHours();
+var ofs = (300+dt.getTimezoneOffset())/60 - 3;
+var zero = hr+ofs;
+for(var i =0; i < cs.length; i++) {
+	if(i<zero || i>=12+zero)
+		cs[i].setAttribute("visibility", "hidden");
+}
+}
 }
 
 function createTicks(){
