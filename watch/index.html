@@ -179,7 +179,7 @@ var hr = dt.getHours();
 var ofs = (300+dt.getTimezoneOffset())/60 - 3;
 var zero = hr+ofs;
 for(var i =0; i < cs.length; i++) {
-	if(i<zero && i>=zero-12 || (i>=zero+12 && i<zero+24))
+	if(i<zero && i>=zero-12 || i>=zero+12 && i<zero+24)
 		cs[i].setAttribute("visibility", "hidden");
 	else
 		cs[i].setAttribute("visibility", "visible");
