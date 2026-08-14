@@ -2,13 +2,13 @@
 <meta property="og:image" content="http://navizv.github.io/p91_18/img.png" />
 <meta property="og:image:width" content="120" />
 <meta property="og:image:height" content="100" />
-<meta property="og:title" content="Социально-экономические показатели Российской Федерации в 1991-2018 гг.">
-<meta property="og:description" content="Социально-экономические показатели Российской Федерации в 1991-2018 гг." />
+<meta property="og:title" content="Социально-экономические показатели Российской Федерации в 1991-2024 гг.">
+<meta property="og:description" content="Социально-экономические показатели Российской Федерации в 1991-2024 гг." />
 <meta property="og:url" content="http://navizv.github.io/p91_18/" />
 <meta property="og:locale" content="ru_RU" />
     <head>
         <title>
-            Социально-экономические показатели Российской Федерации в 1991-2018 гг.
+            Социально-экономические показатели Российской Федерации в 1991-2024 гг.
         </title>
 
         <script src="../libs/js/jquery.min.js"></script>
@@ -164,7 +164,7 @@ Copyright (c) 2019-2026 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><b
 				type: "line"
 			},
 			title: {
-				text: "Социально-экономические показатели Российской Федерации в 1991-2018 гг.",
+				text: "Социально-экономические показатели Российской Федерации в 1991-2024 гг.",
 				style: {
 					width: "950px"   
 				}
@@ -191,13 +191,13 @@ Copyright (c) 2019-2026 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><b
 				//minorTickInterval: 0.1
 			}
 		};
-		obj.xAxis = {categories: []};
+//		obj.xAxis = {categories: []};
 		if($("#zero").prop('checked'))
 			obj.yAxis.min = 0;
 		else
 			obj.yAxis.min = undefined;
-        for (i = 1991; i <= 2024; i++)
-            obj.xAxis.categories.push(i);
+//        for (i = 1991; i <= 2024; i++)
+//            obj.xAxis.categories.push(i);
 	
 		pars = [];
 		
@@ -221,9 +221,11 @@ Copyright (c) 2019-2026 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><b
 				var c = parseFloat(str);
 				if(isNaN(c))
 					c = null;
-				else
+				else {
 					flagFilled = true;
-				series.data.push(c);
+					data.push([1991+j, c]);
+				}
+			
 			}
 			if(!flagFilled){
 				series.lineWidth = 0;
