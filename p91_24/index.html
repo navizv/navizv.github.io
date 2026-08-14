@@ -192,7 +192,13 @@ Copyright (c) 2019-2026 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><b
 			},
 			xAxis: {
 			        type: 'linear', // Treats the X-axis as numbers
-			        allowDecimals: false // Optional: prevents decimal steps like 1.5 if not needed
+			        allowDecimals: false, // Optional: prevents decimal steps like 1.5 if not needed
+				labels: {
+					formatter: function () {
+				        	// Returns the raw numeric value without Highcharts locale formatting
+				        	return this.value; 
+			        	}
+			    	}
 			}
 		};
 //		obj.xAxis = {categories: []};
