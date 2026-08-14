@@ -196,7 +196,7 @@ Copyright (c) 2019-2026 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><b
 			obj.yAxis.min = 0;
 		else
 			obj.yAxis.min = undefined;
-        for (i = 1991; i <= 2018; i++)
+        for (i = 1991; i <= 2024; i++)
             obj.xAxis.categories.push(i);
 	
 		pars = [];
@@ -209,9 +209,9 @@ Copyright (c) 2019-2026 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><b
 			var i = $(this).val();
 			var flagFilled = false;
 			for(j in tab[i]){
-				if(j == 0 || j > 28)
+				if(j == 0 || j > 34)
 					continue;
-				var str = tab[i][j].replace(',','.');
+				var str = tab[i][j].replace(',','.').replace(' ','');
 				while(str.length > 2 && str[str.length-1] == ')' && '0123456789'.indexOf(str[str.length-2]) !== -1){
 				//избавляемся от сносок в значениях (в рыболовстве, например, такое есть)
 					str = str.substring(0,str.length-2);
