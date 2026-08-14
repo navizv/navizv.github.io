@@ -221,7 +221,7 @@ Copyright (c) 2019-2026 <a href="http://fb.com/Navizv">Зайцев И.Д.</a><b
 			for(j in tab[i]){
 				if(j == 0 || j > 34)
 					continue;
-				var str = tab[i][j].replace(',','.').replace(' ','');
+				var str = tab[i][j].replaceAll(',','.').replaceAll(' ','');
 				while(str.length > 2 && str[str.length-1] == ')' && '0123456789'.indexOf(str[str.length-2]) !== -1){
 				//избавляемся от сносок в значениях (в рыболовстве, например, такое есть)
 					str = str.substring(0,str.length-2);
